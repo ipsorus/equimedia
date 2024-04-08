@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'portal/includes/slider.html' %}
+<!-- Content
+============================================= -->
+<section id="content">
+    <div class="content-wrap py-0">
+        {% include 'portal/includes/news.html' %}
+
+        <div class="clear"></div>
+
+        {% include 'portal/includes/events.html' %}
+
+        {% include 'portal/includes/gallery.html' %}
+
+        {% include 'portal/includes/blogs.html' %}
+        <div class="clear"></div>
+    </div>
+</section><!-- #content end -->
+{% endblock %}

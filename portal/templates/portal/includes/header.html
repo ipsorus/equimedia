@@ -1,0 +1,42 @@
+{% load static %}
+<!-- Header
+============================================= -->
+<header id="header" class="dark transparent-header floating-header" data-sticky-shrink="false" data-sticky-class="not-dark">
+	<div id="header-wrap">
+		<div class="container-fluid">
+			<div class="header-row justify-content-lg-between">
+
+				<!-- Logo
+				============================================= -->
+				<div id="logo" class="me-lg-0">
+					<a href="">
+						<img class="logo-default" srcset="{% static 'portal/images/logo.png' %}, {% static 'portal/images/logo@2x.png 2x' %}" src="{% static 'portal/images/logo@2x.png' %}" alt="Canvas Logo">
+						<img class="logo-dark" srcset="{% static 'portal/images/logo-dark.png' %}, {% static 'portal/images/logo-dark@2x.png 2x' %}" src="{% static 'portal/images/logo-dark@2x.png' %}" alt="Canvas Logo">
+					</a>
+				</div><!-- #logo end -->
+
+				<div class="header-misc">
+
+					<!-- Top Login
+					============================================= -->
+					<div id="top-account" class="px-4">
+						<a href="#modal-register" data-lightbox="inline"><i class="i-style rounded-circle i-light bi-person"></i></a>
+					</div><!-- #top-search end -->
+				</div>
+
+				<div class="primary-menu-trigger">
+					<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+						<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+					</button>
+				</div>
+
+				{% include 'portal/includes/menu.html' %}
+
+			</div>
+
+		</div>
+
+	</div>
+	<div class="header-wrap-clone"></div>
+
+</header><!-- #header end -->
