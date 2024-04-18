@@ -25,7 +25,9 @@
 	<!-- Plugins/Components CSS -->
 	<link rel="stylesheet" href="{% static 'portal/css/calendar.css' %}">
 	<link rel="stylesheet" href="{% static 'portal/css/swiper.css' %}">
+
 	<link rel="stylesheet" href="{% static 'portal/css/news.css' %}">
+
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="{% static 'portal/css/custom.css' %}">
@@ -137,13 +139,47 @@
 </style>
 
 </head>
-<body class="stretched">
+<body class="stretched side-push-panel">
 <!-- Document Wrapper
 ============================================= -->
+<div id="side-panel">
+		<div id="side-panel-trigger-close" class="side-panel-trigger"><a href="#"><i class="bi-x-lg"></i></a></div>
+
+		<div class="side-panel-wrap">
+			<div class="widget">
+
+				<div class="line"></div>
+
+				<h4 class="fw-normal">Existing Account?</h4>
+
+				<form id="login-form" name="row mb-0" class="mb-0" action="#" method="post">
+
+					<div class="col-12 form-group">
+						<label for="login-form-username" class="fw-normal">Логин:</label>
+						<input type="text" id="login-form-username" name="login-form-username" value="" class="form-control">
+					</div>
+
+					<div class="col-12 form-group">
+						<label for="login-form-password" class="fw-normal">Пароль:</label>
+						<input type="password" id="login-form-password" name="login-form-password" value="" class="form-control">
+					</div>
+
+					<div class="col-12 form-group">
+						<div class="d-flex justify-content-between">
+							<button class="button button-rounded fw-normal m-0" id="login-form-submit" name="login-form-submit" value="login">Login</button>
+							<a href="#">Forgot Password?</a>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
 	<div id="wrapper">
 <!--		&lt;!&ndash; Top Bar-->
 <!--		============================================= &ndash;&gt;-->
-<!--		<div id="top-bar" class="py-3 border-0" style="background: var(&#45;&#45;cnvs-color2);">-->
+<!--		<div id="top-bar" class="transparent-topbar border-bottom-0 py-3 border-0" style="background: var(&#45;&#45;cnvs-color2);">-->
 <!--			<div class="container text-center color">-->
 <!--				<div style="font-size: .9375rem;">Get 20% off* your First Order &amp; Free Shipping Upto $99</div>-->
 <!--			</div>-->

@@ -1,18 +1,18 @@
 {% load static %}
 <!-- Header
 ============================================= -->
-<header id="header" class="transparent-header dark header-size-md" data-sticky-class="not-dark" data-sticky-offset="full" data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
+<header id="header" class="full-header transparent-header dark header-size-md" data-sticky-class="not-dark" data-sticky-offset="full" data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
 	<div class="container">
-		<div class="header-row">
+		<div class="header-row justify-content-lg-between">
 		</div>
 	</div>
 	<div id="header-wrap">
 		<div class="container px-0">
-			<div class="header-row">
+			<div class="header-row justify-content-lg-between">
 
 				<!-- Logo
 				============================================= -->
-				<div id="logo">
+				<div id="logo" class="me-lg-0 border-end-0" style="padding-left: 20px;">
 					<a href="">
 						<img class="logo-default" srcset="{% static 'portal/images/logo.png' %}, {% static 'portal/images/logo@2x.png 2x' %}" src="{% static 'portal/images/logo@2x.png' %}" alt="Canvas Logo">
 						<img class="logo-dark" srcset="{% static 'portal/images/logo-dark.png' %}, {% static 'portal/images/logo-dark@2x.png 2x' %}" src="{% static 'portal/images/logo-dark@2x.png' %}" alt="Canvas Logo">
@@ -25,6 +25,7 @@
 					============================================= -->
 					<div id="top-account" class="px-4">
 						<a href="#modal-register" data-lightbox="inline"><i class="i-style rounded-circle i-light bi-person"></i></a>
+<!--						<a href="#" class="side-panel-trigger"><i class="i-style rounded-circle i-light bi-person"></i></a>-->
 					</div><!-- #top-login end -->
 				</div>
 
