@@ -3,19 +3,14 @@
 -----------------------------------------------------------------*/
 
 :root {
+	--cnvs-themecolor: #BF9456;
+	--cnvs-themecolor-rgb: 191, 148, 86;
+	--cnvs-secondary-color: #E9C46A;
+	--cnvs-secondary-color-rgb: 233, 196, 106;
 
-	--cnvs-body-font: 'Karla', sans-serif;
-	--cnvs-primary-font: 'Karla', sans-serif;
-	--cnvs-header-height: 70px;
-	--cnvs-sticky-header-height: 70px;
-	--cnvs-menu-gap: 30px;
-	--cnvs-themecolor: var(--bs-primary);
-	--cnvs-themecolor-rgb: var(--bs-primary-rgb);
-}
-
-* {
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
+	--cnvs-body-font: 'PT Sans', sans-serif;
+	--cnvs-primary-font: 'PT Sans Caption', sans-serif;
+	--cnvs-secondary-font: 'PT Serif', serif;
 }
 
 #header {
@@ -29,17 +24,17 @@
 	--cnvs-primary-menu-submenu-tt:	none;
 }
 
-.is-expanded-menu .mega-menu-style-2 .mega-menu-title > .menu-link {
-	font-size: calc(var(--cnvs-primary-menu-submenu-font-size) * 0.9);
-}
-
 #header {
-	--cnvs-primary-menu-font-size: 16px;
-	--cnvs-primary-menu-font-weight: 700;
-	--cnvs-primary-menu-tt: none;
-	--cnvs-primary-menu-ls: 1px;
+	--cnvs-primary-menu-font: var(--cnvs-body-font);
+	--cnvs-primary-menu-submenu-bg: var(--cnvs-themecolor);
+	--cnvs-primary-menu-submenu-width: 240px;
+	--cnvs-primary-menu-submenu-hover-bg: transparent;
 }
 
+* {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
 /* Custom Header Size
 -----------------------------------------------------------------*/
 
@@ -55,11 +50,6 @@
 }
 
 .dark .header-misc a {
-	color: rgba(255,255,255,0.9);
-}
-
-.dark .menu-item:hover > .menu-link,
-.dark .menu-item.current > .menu-link {
 	color: rgba(255,255,255,0.9);
 }
 
@@ -153,49 +143,7 @@ body.modal-open { overflow-y: auto; }
 -----------------------------------------------------------------*/
 @media (min-width: 992px) {
 
-	#header.transparent-header.floating-header {
-		--cnvs-header-floating-top-offset: 15px;
-	}
 
-	#header.transparent-header.floating-header #header-wrap {
-		position: fixed;
-		top: 15px;
-		margin-top: 0;
-		box-shadow: none;
-		z-index: 199;
-		border-bottom: 0;
-	}
-
-	#header.transparent-header.floating-header .container-fluid,
-	#header.sticky-header.transparent-header.floating-header .container-fluid {
-		width: calc(100% - 30px);
-		width: calc(100% - var(--cnvs-menu-gap));
-		padding: 0 30px;
-		padding: 0 var(--cnvs-menu-gap);
-		background-color: transparent !important;
-		transition: all .8s cubic-bezier(.19,1,.22,1);
-	}
-
-	#header.hover-light.transparent-header.floating-header .container-fluid,
-	#header.sticky-header.transparent-header.floating-header .container-fluid {
-		background-color: #FFF !important;
-		box-shadow: 0 0 10px rgba(0,0,0,0.1);
-	}
-
-	.floating-header .mega-menu-content {
-		border: 0;
-		width: calc(100% - 30px) !important;
-		width: calc(100% - var(--cnvs-menu-gap) ) !important;
-		margin: 0;
-	}
-
-	.menu-link {
-		letter-spacing: 0;
-	}
-
-	.menu-container:hover > .menu-item:not(:hover):not(.active) > .menu-link { color: #BBB; }
-
-	#header.sticky-header #header-wrap { background-color: transparent; }
 
 	#top-account a {
 		position: relative;
@@ -203,23 +151,10 @@ body.modal-open { overflow-y: auto; }
 		z-index: 11;
 	}
 
-	.header-overlay::after {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		background-color: rgba(0, 0, 0, 0.5);
-		z-index: 1;
-		transition: background-color .3s cubic-bezier(.19,1,.22,1);
-	}
 
 	.card-img-overlay.bg { background-color: rgba(0, 0, 0, 0.4); }
 
-	.container-fluid {
-		padding-right: 75px;
-		padding-left: 75px;
-	}
+
 
 }
 
@@ -371,3 +306,35 @@ body.modal-open { overflow-y: auto; }
 }
 
 .fc-body { background: url('images/world-map.png') no-repeat center center/ contain; }
+
+
+.animated-border-link > *,
+.main-primary-menu .menu-container>.menu-item>.menu-link div {
+    position: relative;
+}
+
+.animated-border-link >*::after,
+.main-primary-menu .menu-container>.menu-item>.menu-link div::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transition: transform .3s;
+    transform-origin: 100% 50%;
+    transform: scaleX(0);
+}
+
+.animated-border-link:hover>*::after,
+.main-primary-menu .menu-container>.menu-item:hover>.menu-link div::after,
+.main-primary-menu .menu-container>.menu-item.current>.menu-link div::after {
+    transform: scaleX(1);
+    transform-origin: 0% 50%;
+}
+
+.border-radius {
+  --bs-card-border-radius: 0 !important;
+  border-radius: 0 !important;
+}

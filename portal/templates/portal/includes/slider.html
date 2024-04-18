@@ -1,7 +1,9 @@
 {% load static %}
 <!-- Hero Section
 ============================================= -->
-<section id="slider" class="slider-element slider-parallax swiper_wrapper min-vh-100 customjs include-header dark" data-loop="true">
+<div id="home" class="page-section" style="position:absolute;top:0;left:0;width:100%;height:200px;z-index:-2;"></div>
+<section id="slider" class="page-section min-vh-60 min-vh-md-100 slider-element slider-parallax swiper_wrapper min-vh-100 customjs include-header dark" data-loop="true">
+    <div class="slider-inner">
     <div class="swiper swiper-parent">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -14,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide-bg" style="background-image: linear-gradient(rgba(0,0,0,.3), rgba(24, 80, 121, 0.45)), url('{% static 'portal/images/2222.jpg' %}'); background-size: cover;"></div>
+                <div class="swiper-slide-bg" style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{% static 'portal/images/2222.jpg' %}'); background-size: cover;"></div>
             </div>
             <div class="swiper-slide dark">
                 <div class="container">
@@ -54,8 +56,9 @@
         <div class="swiper-pagination center-right"></div>
         <!-- Slider Mouse Icon
         ============================================= -->
-        <a href="#" class="scroll-down d-none d-lg-block" data-scrollto="#content" data-offset="80">
+        <a href="#" class="scroll-down d-none d-lg-block" data-scrollto="#content" data-offset="40">
             <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
         </a>
     </div>
+        </div>
 </section>

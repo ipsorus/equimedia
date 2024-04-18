@@ -2,135 +2,231 @@
 
 <!-- Latest News Grid Section
 ============================================= -->
-<div id="section-news" class="section bg-contrast-200 my-0" >
+<div id="section-news" class="section bg-contrast-0 my-0" >
     <div class="container">
         <div class="col-lg-12">
             <div class="fancy-title title-border">
                 <h4>Последние новости</h4>
             </div>
         </div>
-        <div class="row g-4 col-mb-10 my-10">
-            <div class="col-lg-4 py-0">
-                 <div class="entry">
-                    <article class="entry">
-                        <div class="grid-inner">
-                            <div class="entry-image mb-2">
-                                <div class="h-100 min-vh-50" style="background: url('{% static 'portal/images/1111.jpg' %}') no-repeat center center / cover;"></div>
-                            </div>
-                            <div style='color: #000000; padding: 33px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
-                                <div class="entry-title title-sm text-transform-none">
-                                    <h3><a href="/blog-single.html">Заголовок самой свежей новости в большом блоке #1</a></h3>
-                                </div>
-                                <div class="entry-content">
-                                    <p>Краткое содержание самой свежей новости из большого блока с ограничением количества слов + еще слово</p>
-                                </div>
-                                <div class="entry-meta">
-                                <ul>
-                                    <li><i class="uil uil-schedule"></i> 07.04.2024</li>
-                                    <li><a href="/blog-single.html#comments"><i class="uil uil-comments-alt"></i> 1</a></li>
-                                </ul>
-                                </div>
+        <div class="row g-4 justify-content-between">
+            <div class="col-lg-6 py-0">
+                 <div class="row posts-md col-mb-0 h-100">
+                     <div class="col-md-12">
+                        <div class="card border-0 h-100 h-shadow h-translatey-sm all-ts">
+                            <div class="h-100 min-vh-50 mb-2" style="background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.2)), url('{% static 'portal/images/1111.jpg' %}') no-repeat top center / cover;"></div>
+                            <div class="card-body p-3" style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
+                                <h3 class="card-title h2 fw-bold mb-2 align-content-end">Заголовок самой свежей новости #1 и еще немного текста</h3>
+                                <p class="card-text mb-auto">Краткое содержание самой свежей новости, несколько дополнительных слов для того, чтобы было больше текста в карточке</p>
                             </div>
                         </div>
-                    </article>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <div class="row posts-md col-mb-30">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card border-0 dark shadow-sm h-shadow shadow-ts p-3" style="background: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.4)), url('{% static 'portal/images/2222.jpg' %}') no-repeat top center / cover;">
-                            <div class="card-body">
-                                <h6 class="fw-normal text-uppercase ls-2 text-white-50 mb-2">Category</h6>
-                                <h3 class="card-title h2 fw-bold mb-4 text-white">Card Overlay Dark</h3>
-                                <p class="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, est blanditiis id aut enim consequuntur. Voluptates error dicta assumenda voluptatem!</p>
-                                <a href="#"><i class="bi-arrow-right h4 icon-stacked text-center rounded-circle bg-white text-dark"></i></a>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="card border-0 h-shadow h-translatey-sm all-ts">
+                            <div class="min-vh-25 mb-2" style="background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.2)), url('{% static 'portal/images/2222.jpg' %}') no-repeat top center / cover;"></div>
+                            <div class="card-body" style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="entry col-md-6">
-                        <article class="entry">
-                            <div class="grid-inner">
-                                <div class="entry-image mb-2">
-                                    <div class="h-40 min-vh-25" style="background: url('{% static 'portal/images/2222.jpg' %}') no-repeat center center / cover;"></div>
-                                </div>
-                                <div style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
-                                <div class="entry-title title-sm text-transform-none">
-                                    <h3><a href="/blog-single.html">Заголовок новости и еще несколько слов для объема #1</a></h3>
-                                </div>
-                                <div class="entry-meta">
-                                    <ul>
-                                        <li><i class="uil uil-schedule"></i> 07.04.2024</li>
-                                        <li><a href="/blog-single.html#comments"><i class="uil uil-comments-alt"></i> 2</a></li>
-                                    </ul>
-                                </div>
-
-                                </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="card border-0 h-shadow h-translatey-sm all-ts">
+                            <div class="min-vh-25 mb-2" style="background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.2)), url('{% static 'portal/images/3333.jpg' %}') no-repeat top center / cover;"></div>
+                            <div class="card-body" style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             </div>
-                        </article>
+                        </div>
                     </div>
-
-                    <div class="entry col-md-6">
-                        <article class="entry">
-                            <div class="grid-inner">
-                                <div class="entry-image mb-2">
-                                    <div class="h-40 min-vh-25" style="background: url('{% static 'portal/images/2222.jpg' %}') no-repeat center center / cover;"></div>
-                                </div>
-                                <div style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
-                                    <div class="entry-title title-sm text-transform-none">
-                                        <h3><a href="/blog-single.html">Заголовок новости и еще несколько слов для объема #2</a></h3>
-                                    </div>
-                                    <div class="entry-meta">
-                                        <ul>
-                                            <li><i class="uil uil-schedule"></i> 07.04.2024</li>
-                                            <li><a href="/blog-single.html#comments"><i class="uil uil-comments-alt"></i> 3</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="card border-0 h-shadow h-translatey-sm all-ts">
+                            <div class="min-vh-25 mb-2" style="background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.2)), url('{% static 'portal/images/4444.jpg' %}') no-repeat top center / cover;"></div>
+                            <div class="card-body" style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             </div>
-                        </article>
+                        </div>
                     </div>
-                    <div class="entry col-md-6">
-                        <article class="entry">
-                            <div class="grid-inner">
-                                <div class="entry-image mb-2">
-                                    <div class="h-25 min-vh-25" style="background: url('{% static 'portal/images/2222.jpg' %}') no-repeat center center / cover;"></div>
-                                </div>
-                                <div style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
-                                    <div class="entry-title title-sm text-transform-none">
-                                        <h3><a href="/blog-single.html">Заголовок новости и еще несколько слов для объема #3</a></h3>
-                                    </div>
-                                    <div class="entry-meta">
-                                        <ul>
-                                            <li><i class="uil uil-schedule"></i> 07.04.2024</li>
-                                            <li><a href="/blog-single.html#comments"><i class="uil uil-comments-alt"></i> 3</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="card border-0 h-shadow h-translatey-sm all-ts">
+                            <div class="min-vh-25 mb-2" style="background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.2)), url('{% static 'portal/images/5555.jpg' %}') no-repeat top center / cover;"></div>
+                            <div class="card-body" style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             </div>
-                        </article>
-                    </div>
-                    <div class="entry col-md-6">
-                        <article class="entry">
-                            <div class="grid-inner">
-                                <div class="entry-image mb-2">
-                                    <div class="h-25 min-vh-25" style="background: url('{% static 'portal/images/2222.jpg' %}') no-repeat center center / cover;"></div>
-                                </div>
-                                <div style='color: #000000; padding: 10px 15px 20px 10px; border-right: solid 2px var(--cnvs-themecolor); border-bottom: solid 2px var(--cnvs-themecolor);'>
-                                    <div class="entry-title title-sm text-transform-none">
-                                        <h3><a href="/blog-single.html">Заголовок новости и еще несколько слов для объема #4</a></h3>
-                                    </div>
-                                    <div class="entry-meta">
-                                        <ul>
-                                            <li><i class="uil uil-schedule"></i> 07.04.2024</li>
-                                            <li><a href="/blog-single.html#comments"><i class="uil uil-comments-alt"></i> 3</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+<div class="fancy-title title-center title-border mt-6">
+    <h3>Posts Carousel</h3>
+</div>
+
+<div id="oc-posts" class="owl-carousel posts-carousel carousel-widget posts-md" data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
+
+    <div class="oc-item">
+        <div class="entry">
+            <div class="entry-image">
+                <a href="images/portfolio/full/17.jpg" data-lightbox="image"><img src="{% static 'portal/images/5555.jpg' %}" alt="Standard Post with Image"></a>
+            </div>
+            <div class="entry-title title-xs text-transform-none">
+                <h3><a href="blog-single.html">This is a Standard post with a Preview Image</a></h3>
+            </div>
+            <div class="entry-meta">
+                <ul>
+                    <li><i class="uil uil-schedule"></i> 10th Feb 2021</li>
+                    <li><a href="blog-single.html#comments"><i class="uil uil-comments-alt"></i> 13</a></li>
+                    <li><a href="#"><i class="uil uil-camera"></i></a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="oc-item">
+        <div class="entry">
+            <div class="entry-image">
+                <iframe src="https://player.vimeo.com/video/87701971" width="500" height="281" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+            <div class="entry-title title-xs text-transform-none">
+                <h3><a href="blog-single-full.html">This is a Standard post with a Vimeo Video</a></h3>
+            </div>
+            <div class="entry-meta">
+                <ul>
+                    <li><i class="uil uil-schedule"></i> 16th Feb 2021</li>
+                    <li><a href="blog-single-full.html#comments"><i class="uil uil-comments-alt"></i> 19</a></li>
+                    <li><a href="#"><i class="uil uil-film"></i></a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="oc-item">
+        <div class="entry">
+            <div class="entry-image">
+                <div class="fslider" data-arrows="false" data-lightbox="gallery">
+                    <div class="flexslider">
+                        <div class="slider-wrap">
+                            <div class="slide"><a href="images/portfolio/full/10.jpg" data-lightbox="gallery-item"><img src="{% static 'portal/images/5555.jpg' %}" alt="Standard Post with Gallery"></a></div>
+                            <div class="slide"><a href="images/portfolio/full/20.jpg" data-lightbox="gallery-item"><img src="{% static 'portal/images/7777.jpg' %}" alt="Standard Post with Gallery"></a></div>
+                            <div class="slide"><a href="images/portfolio/full/21.jpg" data-lightbox="gallery-item"><img src="{% static 'portal/images/1111.jpg' %}" alt="Standard Post with Gallery"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="entry-title title-xs text-transform-none">
+                <h3><a href="blog-single-small.html">This is a Standard post with a Slider Gallery</a></h3>
+            </div>
+            <div class="entry-meta">
+                <ul>
+                    <li><i class="uil uil-schedule"></i> 24th Feb 2021</li>
+                    <li><a href="blog-single-small.html#comments"><i class="uil uil-comments-alt"></i> 21</a></li>
+                    <li><a href="#"><i class="uil uil-images"></i></a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="oc-item">
+        <div class="entry">
+            <div class="entry-image">
+                <iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/301161123&amp;auto_play=false&amp;hide_related=true&amp;visual=true"></iframe>
+            </div>
+            <div class="entry-title title-xs text-transform-none">
+                <h3><a href="blog-single.html">This is an Embedded Audio Post</a></h3>
+            </div>
+            <div class="entry-meta">
+                <ul>
+                    <li><i class="uil uil-schedule"></i> 28th Apr 2021</li>
+                    <li><a href="blog-single.html#comments"><i class="uil uil-comments-alt"></i> 16</a></li>
+                    <li><a href="#"><i class="uil uil-music"></i></a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="oc-item">
+        <div class="entry">
+            <div class="entry-image">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/SZEflIVnhH8" allowfullscreen></iframe>
+            </div>
+            <div class="entry-title title-xs text-transform-none">
+                <h3><a href="blog-single-full.html">This is a Standard post with a Youtube Video</a></h3>
+            </div>
+            <div class="entry-meta">
+                <ul>
+                    <li><i class="uil uil-schedule"></i> 30th Apr 2021</li>
+                    <li><a href="blog-single-full.html#comments"><i class="uil uil-comments-alt"></i> 34</a></li>
+                    <li><a href="#"><i class="uil uil-film"></i></a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="oc-item">
+        <div class="entry">
+            <div class="entry-image">
+                <a href="images/portfolio/full/1.jpg" data-lightbox="image"><img src="{% static 'portal/images/5555.jpg' %}" alt="Standard Post with Image"></a>
+            </div>
+            <div class="entry-title title-xs text-transform-none">
+                <h3><a href="blog-single.html">This is a Standard post with another Preview Image</a></h3>
+            </div>
+            <div class="entry-meta">
+                <ul>
+                    <li><i class="uil uil-schedule"></i> 5th May 2021</li>
+                    <li><a href="blog-single.html#comments"><i class="uil uil-comments-alt"></i> 6</a></li>
+                    <li><a href="#"><i class="uil uil-camera"></i></a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="oc-item">
+        <div class="entry">
+            <div class="entry-image">
+                <iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/17521446&amp;auto_play=false&amp;hide_related=false&amp;visual=true"></iframe>
+            </div>
+            <div class="entry-title title-xs text-transform-none">
+                <h3><a href="blog-single.html">This is another Embedded Audio Post</a></h3>
+            </div>
+            <div class="entry-meta">
+                <ul>
+                    <li><i class="uil uil-schedule"></i> 15th May 2021</li>
+                    <li><a href="blog-single.html#comments"><i class="uil uil-comments-alt"></i> 2</a></li>
+                    <li><a href="#"><i class="uil uil-music"></i></a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem!</p>
+            </div>
+        </div>
+    </div>
+
+</div>
 </div>
