@@ -22928,14 +22928,14 @@ td.actions {
   }
 }
 .button.button-dark {
-  background-color: var(--cnvs-btn-color-dark);
+  background-color: var(--cnvs-themecolor);
 }
 .button.button-light {
   --cnvs-btn-color: var(--cnvs-btn-color-light);
-  color: var(--cnvs-btn-color-dark);
+  color: var(--cnvs-btn-color-light);
 }
 .button:hover {
-  background-color: var(--cnvs-btn-color-dark);
+  background-color: var(--cnvs-themecolor);
   color: #fff;
 }
 .button.button-dark:hover {

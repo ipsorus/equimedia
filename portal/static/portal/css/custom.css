@@ -142,19 +142,12 @@ body.modal-open { overflow-y: auto; }
 /* Responsive Device more than 992px (.device-md >)
 -----------------------------------------------------------------*/
 @media (min-width: 992px) {
-
-
-
 	#top-account a {
 		position: relative;
 		display: block;
 		z-index: 11;
 	}
-
-
 	.card-img-overlay.bg { background-color: rgba(0, 0, 0, 0.4); }
-
-
 
 }
 
@@ -238,6 +231,12 @@ body.modal-open { overflow-y: auto; }
 	-webkit-animation: scrollDown 2.5s infinite;
 			animation: scrollDown 2.5s infinite;
 }
+
+.one-page-arrow {
+			bottom: 40px;
+			left: 40px;
+			right: auto;
+		}
 
 
 .button-offset:is(:hover, :focus) {
