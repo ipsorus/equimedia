@@ -1,32 +1,31 @@
 <!-- Login/Register Modal -->
-<div class="modal-register mfp-hide" id="modal-register">
-    <div class="card mx-auto" style="max-width: 400px;">
-        <div class="card-header py-3 bg-transparent text-center">
-            <h3 class="mb-0 fw-normal">Добро пожаловать</h3>
-        </div>
-        <div class="card-body mx-auto py-5" style="max-width: 70%;">
 
-            <form id="login-form" name="login-form" class="mb-0 row" action="#" method="post">
-
-                <div class="col-12">
-                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control not-dark" placeholder="Логин">
+<div class="modal1 mfp-hide" id="modal-login">
+    <div class="block mx-auto" style="background-color: #FFF; max-width: 400px;">
+        <div style="padding: 50px;">
+            <h3 class="font-body">Login to your Account</h3>
+            <form action="#" method="post" class="row mb-0">
+                <div class="col-12 form-group">
+                    <label class="font-body text-capitalize" for="login-form-modal-username">Username:</label>
+                    <input type="text" id="login-form-modal-username" name="login-form-modal-username" value="" class="form-control">
                 </div>
 
-                <div class="col-12 mt-4">
-                    <input type="password" id="login-form-password" name="login-form-password" value="" class="form-control not-dark" placeholder="Пароль">
+                <div class="col-12 form-group">
+                    <label class="font-body text-capitalize" for="login-form-modal-password">Password:</label>
+                    <input type="password" id="login-form-modal-password" name="login-form-modal-password" value="" class="form-control">
                 </div>
 
-                <div class="col-12 text-end">
-                    <a href="#" class="text-dark fw-light mt-2">Забыли пароль?</a>
-                </div>
-
-                <div class="col-12 mt-4">
-                    <button class="button w-100 m-0" id="login-form-submit" name="login-form-submit" value="login">Авторизоваться</button>
+                <div class="col-12 form-group">
+                    <div class="d-flex justify-content-between">
+                        <button class="button button-rounded m-0" id="login-form-modal-submit" name="login-form-modal-submit" value="login">Login</button>
+                        <a href="#">Forgot Password?</a>
+                    </div>
                 </div>
             </form>
-        </div>
-        <div class="card-footer py-4 text-center">
-            <p class="mb-0">Не зарегистрированы? <a href="#"><u>Регистрация</u></a></p>
+            <div class="line line-sm"></div>
+            <div class="card-footer py-4 text-center">
+                <p class="mb-0">Не зарегистрированы? <a href="#"><u>Регистрация</u></a></p>
+            </div>
         </div>
     </div>
 </div>
