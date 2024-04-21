@@ -379,12 +379,33 @@ body.modal-open { overflow-y: auto; }
     right: auto;
 }
 
+.icon-dark { font-family: 'font-icons'; }
+.dark .icon-dark { font-family: 'lined-icons'; }
+.dark .dark-mode .icon-dark::before { content: "\e9e3"; }
+.dark-mode .icon-dark::before { content: "\eae7"; }
 
+.dropdown-langs .dropdown-item {
+	font-size: 14px;
+}
+
+.dropdown-langs img {
+	width: 18px;
+	height: 18px;
+}
+
+.dropdown-langs .dropdown-toggle::after {
+	position: relative;
+	font-family: 'font-icons';
+	content: "\e998";
+	font-size: 10px;
+	top: 3px;
+	border: 0;
+	color: #666;
+	margin-left: -5px;
+}
 
 .entry::after { background-color: #EEE !important; }
 .dark .entry::after { background-color: rgba(255,255,255,0.15) !important; }
-
-
 
 .date-today {
 	position: relative;

@@ -19,7 +19,29 @@
 					</a>
 				</div><!-- #logo end -->
 
+				<div class="header-misc">
 
+					<!-- Top Login
+					============================================= -->
+					<div id="top-account" class="ps-5 header-misc-icon">
+						<a href="#modal-register" data-lightbox="inline"><i class="bi-person"></i></a>
+					</div><!-- #top-login end -->
+					<!-- Bookmark
+					============================================= -->
+					<div class="dropdown dropdown-langs">
+						<button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<img src="{% static 'portal/images/flags/eng.png' %}" alt="English">
+						</button>
+						<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+							<a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/ara.png' %}" alt="Lang"> Arabic</a>
+							<a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/tha.png' %}" alt="Lang"> Thailand</a>
+							<a href="#" class="dropdown-item disabled" tabindex="-1" aria-disabled="true"><img src="{% static 'portal/images/flags/eng.png' %}" alt="Lang"> English</a>
+						</div>
+					</div>
+					<div class="dark-mode header-misc-icon d-none d-md-block">
+						<a href="#" class="body-scheme-toggle" data-bodyclass-toggle="dark" data-add-html="<i class='bi-sun'></i>" data-remove-html="<i class='bi-moon-stars'></i>"><i class="bi-moon-stars"></i></a>
+					</div>
+				</div>
 
 				<div class="primary-menu-trigger" data-target=".main-primary-menu">
 					<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
@@ -28,15 +50,6 @@
 				</div>
 
 				{% include 'portal/includes/menu.html' %}
-
-				<div class="header-misc">
-
-					<!-- Top Login
-					============================================= -->
-					<div id="top-account" class="px-4">
-						<a href="#modal-register" data-lightbox="inline"><i class="i-style rounded-circle i-light bi-person"></i></a>
-					</div><!-- #top-login end -->
-				</div>
 
 			</div>
 
