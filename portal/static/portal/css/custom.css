@@ -49,10 +49,6 @@
 	font-size: 14px;
 }
 
-.dark .header-misc a {
-	color: rgba(255,255,255,0.9);
-}
-
 .container-fluid {
 	padding-right: 40px;
 	padding-left: 40px;
@@ -338,45 +334,6 @@ body.modal-open { overflow-y: auto; }
   border-radius: 0 !important;
 }
 
-.slider-element .slider-product-desc {
-	position: absolute;
-	top: auto;
-	bottom: 0;
-	left: auto;
-	right: 0;
-	width: 65%;
-	z-index: 2;
-}
-
-.slider-element .slider-product-desc [class^='col-'] {
-	background-color: rgba(0, 0, 0, 0.6);
-	padding: 30px;
-}
-
-.slider-element .slider-product-desc [class^='col-'] { padding: 50px; }
-
-.play-icon { margin: 0 auto; }
-
-.section-product .section-product-image {
-    position: relative;
-    width: 85%;
-    background: #FFF;
-}
-
-.section-product .section-product-content {
-    max-width: 400px;
-    position: absolute;
-    bottom: 30px;
-    right: 0;
-    padding: 30px;
-}
-
-.section-product.alt .section-product-image { float: right; }
-
-.section-product.alt .section-product-content {
-    left: 0;
-    right: auto;
-}
 
 .icon-dark { font-family: 'font-icons'; }
 .dark .icon-dark { font-family: 'lined-icons'; }
@@ -760,3 +717,92 @@ a.more-link i {
 	margin-top: 20px;
 	max-width: 600px;
 }
+
+
+.block-slider-3.slider-element .slider-product-desc {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    width: 35%;
+    z-index: 2;
+    overflow: hidden;
+    background-color: rgba(245, 165, 5, 0.8);
+}
+
+.block-slider-3.slider-element .slider-product-desc a .bi-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 99;
+    color: #000;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    padding-left: 4px;
+    margin-top: -20px;
+    margin-left: -20px;
+    -webkit-transition: transform .3s ease;
+    -o-transition: transform .3s ease;
+    transition: transform .3s ease;
+}
+
+.block-slider-3.slider-element .slider-product-desc a:hover .bi-play {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.block-slider-3 .blurred-box:after{
+    content: '';
+    width: 80%;
+    height: 130%;
+    background: inherit;
+    position: absolute;
+    left: -25px;
+    top: -25px;
+    background-color: rgba(252, 183, 45, 0.4);
+    -webkit-filter: blur(40px);
+    -o-filter: blur(40px);
+    filter: blur(40px);
+}
+
+
+.bg-travel,
+.bg-color-travel.nav-link:hover,
+.menu-color-travel > a::before,
+.bg-color-travel.nav-link.active {background: #6F42C1 !important;}
+
+.entry-categories {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	text-transform: capitalize;
+}
+
+.bg-overlay .entry-categories {
+	position: relative;
+	left: auto;
+	bottom: auto;
+	margin-bottom: 12px;
+	z-index: 2;
+}
+
+.entry-categories a {
+	color: #FFF !important;
+	padding: 3px 5px;
+	font-size: 10px;
+	border-radius: 2px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 400;
+	font-family: var(--cnvs-body-font);
+}
+
+.section-colored { background-color: #FFEAE6; }

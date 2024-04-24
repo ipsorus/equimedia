@@ -2,7 +2,7 @@
 <!-- Hero Section
 ============================================= -->
 <div id="home" class="page-section" style="position:absolute;top:0;left:0;width:100%;height:200px;z-index:-2;"></div>
-<section id="slider" class="page-section min-vh-60 min-vh-md-100 slider-element slider-parallax swiper_wrapper min-vh-100 customjs include-header dark" data-loop="true">
+<section id="slider" class="block-slider-3 page-section min-vh-60 min-vh-md-100 slider-element slider-parallax swiper_wrapper min-vh-100 customjs include-header dark" data-loop="true">
     <div class="slider-inner">
         <div class="swiper swiper-parent">
             <div class="swiper-wrapper">
@@ -16,7 +16,43 @@
                             </div>
                         </div>
                     </div>
+                    <div class="swiper-slide-bg" style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{% static 'portal/images/1111.jpg' %}'); background-size: cover;"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="container">
+                        <div class="slider-caption">
+                            <h2>Заголовок слайда</h2>
+                            <p>Дополнительный текст к слайду</p>
+                            <div>
+                                <a href="block-slider-7-vertical.html" class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded" target="_blank">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="swiper-slide-bg" style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{% static 'portal/images/2222.jpg' %}'); background-size: cover;"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="container">
+                        <div class="slider-caption">
+                            <h2>Заголовок слайда</h2>
+                            <p>Дополнительный текст к слайду</p>
+                            <div>
+                                <a href="block-slider-7-vertical.html" class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded" target="_blank">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide-bg" style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{% static 'portal/images/7777.jpg' %}'); background-size: cover;"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="container">
+                        <div class="slider-caption">
+                            <h2>Заголовок слайда</h2>
+                            <p>Дополнительный текст к слайду</p>
+                            <div>
+                                <a href="block-slider-7-vertical.html" class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded" target="_blank">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide-bg" style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{% static 'portal/images/5555.jpg' %}'); background-size: cover;"></div>
                 </div>
                 <div class="swiper-slide dark">
                     <div class="container">
@@ -63,28 +99,41 @@
 
         <!-- Slider Bottom Content
         ============================================= -->
-        <div class="slider-product-desc" data-animate="fadeInRight">
-            <div class="row m-0 d-none d-md-flex">
-                <div class="col-md-6" style="border-right: 1px solid rgba(255,255,255,0.08);">
-                    <div class="feature-box fbox-plain mb-0">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="bi-calendar-event"></i></a>
-                        </div>
-                        <div class="fbox-content">
-                            <h3 class="fw-normal mb-3">Предстоящее событие</h3>
-                            <p class="d-none d-lg-block">В данном блоке отображается самое новое предстоящее событие в мире конного спорта</p>
+        <div class="slider-product-desc dark">
+            <div id="oc-testi" class="owl-carousel carousel-widget" data-items-xl="1" data-items-lg="1" data-items-md="1" data-items-xs="1" data-pagi="false" data-loop="true" data-margin="0" data-autoplay="5000">
+                <div class="oc-item">
+                    <div class="row m-0 d-none d-md-flex">
+                        <div class="col-md-12 px-5 py-4">
+                            <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 fw-normal mb-3" style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">Новости</div>
+                            <h3 class="mb-1" style="font-family: 'Poppins', sans-serif;">Rules not to Follow about Travel</h3>
+                            <p class="mb-2 text-white-50">Eveniet expedita sint ut temporibus dignissimos, ex esse molestiae atque.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="feature-box fbox-plain mb-0">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="bi-book"></i></a>
+                <div class="oc-item">
+                    <div class="row m-0 d-none d-md-flex">
+                        <div class="col-md-12 px-5 py-4">
+                            <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 fw-normal mb-3" style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">Статьи</div>
+                            <h3 class="mb-1" style="font-family: 'Poppins', sans-serif;">Rules not to Follow about Travel</h3>
+                            <p class="mb-2 text-white-50">Eveniet expedita sint ut temporibus dignissimos, ex esse molestiae atque.</p>
                         </div>
-                        <div class="fbox-content">
-                            <h3 class="fw-normal mb-3">Главная новость</h3>
-                            <p class="d-none d-lg-block">Эта новость добавлена самой последней и попадает на этот экран для большего охвата аудитории</p>
+                    </div>
+                </div>
+                <div class="oc-item">
+                    <div class="row m-0 d-none d-md-flex">
+                        <div class="col-md-12 px-5 py-4">
+                            <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 fw-normal mb-3" style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">Блоги</div>
+                            <h3 class="mb-1" style="font-family: 'Poppins', sans-serif;">Rules not to Follow about Travel</h3>
+                            <p class="mb-2 text-white-50">Eveniet expedita sint ut temporibus dignissimos, ex esse molestiae atque.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="oc-item">
+                    <div class="row m-0 d-none d-md-flex">
+                        <div class="col-md-12 px-5 py-4">
+                            <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 fw-normal mb-3" style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">Событие</div>
+                            <h3 class="mb-1" style="font-family: 'Poppins', sans-serif;">Rules not to Follow about Travel</h3>
+                            <p class="mb-2 text-white-50">Eveniet expedita sint ut temporibus dignissimos, ex esse molestiae atque.</p>
                         </div>
                     </div>
                 </div>
