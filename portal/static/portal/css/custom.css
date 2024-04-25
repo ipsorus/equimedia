@@ -728,7 +728,7 @@ a.more-link i {
     width: 35%;
     z-index: 2;
     overflow: hidden;
-    background-color: rgba(245, 165, 5, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .block-slider-3.slider-element .slider-product-desc a .bi-play {
@@ -773,36 +773,22 @@ a.more-link i {
     filter: blur(40px);
 }
 
-
-.bg-travel,
-.bg-color-travel.nav-link:hover,
-.menu-color-travel > a::before,
-.bg-color-travel.nav-link.active {background: #6F42C1 !important;}
-
-.entry-categories {
-	position: absolute;
-	bottom: 10px;
-	left: 10px;
-	text-transform: capitalize;
-}
-
-.bg-overlay .entry-categories {
-	position: relative;
-	left: auto;
-	bottom: auto;
-	margin-bottom: 12px;
-	z-index: 2;
-}
-
-.entry-categories a {
-	color: #FFF !important;
-	padding: 3px 5px;
-	font-size: 10px;
-	border-radius: 2px;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-weight: 400;
-	font-family: var(--cnvs-body-font);
-}
-
 .section-colored { background-color: #FFEAE6; }
+
+
+.dotted-bg:before {
+	content: "";
+	position: absolute;
+	display: block;
+	top: 50%;
+	left: 50%;
+	width: 110%;
+	height: 100%;
+	background-size: 12px 12px;
+	background-position: center;
+	transform: translate(-50%, -50%);
+	background-image: radial-gradient(rgba(var(--cnvs-themecolor-rgb),0.3) 14%, transparent 14%);
+	-webkit-mask-image: radial-gradient(rgba(0,0,0,1),rgba(0,0,0,0) 75%);
+	mask-image: radial-gradient(rgba(0,0,0,1),rgba(0,0,0,0) 75%);
+	z-index: 0;
+}
