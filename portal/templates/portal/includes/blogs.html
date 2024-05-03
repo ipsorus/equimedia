@@ -2,15 +2,14 @@
 <div id="section-blogs" class="section page-section mt-0 mb-0 dark dotted-bg"
      style="background-color: rgba(16, 70, 92, 0.2);">
     <div class="container">
-        <div class="col-lg-11">
-            <div class="fancy-title title-border mb-3 ls-1 fw-bold">
-                <h4>Популярные блоги</h4>
-            </div>
+        <div class="heading-block">
+            <h4 class="fw-bold text-transform-none mb-4">Блоги
+                <span>пользователей</span></h4>
         </div>
 
         <!-- Owl Carousel
         ============================================= -->
-        <div id="oc-news" class="owl-carousel fixed-nav top-nav carousel-widget posts-md customjs" data-loop="true"
+        <div id="oc-news" class="owl-carousel carousel-widget posts-md customjs" data-loop="true"
              data-autoplay="4000" data-speed="500">
             <!-- Post Article -->
             <div class="entry mb-0"
@@ -92,7 +91,7 @@
 
             <!-- Post Article -->
             <div class="entry mb-0"
-                 style="background: url('demos/news/images/posts/fashion/2.jpg') center center; background-size: cover; height: 400px;">
+                 style="background: url('{% static 'portal/images/8888.jpg' %}') center center; background-size: cover; height: 400px;">
                 <div class="bg-overlay">
                     <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
                         <div class="position-relative w-100">
@@ -118,7 +117,7 @@
 
             <!-- Post Article -->
             <div class="entry mb-0"
-                 style="background: url('demos/news/images/posts/market/1.jpg') center center; background-size: cover; height: 400px;">
+                 style="background: url('{% static 'portal/images/9999.jpg' %}') center center; background-size: cover; height: 400px;">
                 <div class="bg-overlay">
                     <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
                         <div class="position-relative w-100">
@@ -144,7 +143,7 @@
         </div> <!-- Carousel End -->
         <div class="m-auto col-md-10 border-0">
             <div class="col-12 text-center">
-                <a href="#" class="btn rounded-0 btn-border color w-auto size-sm mt-4"><span
+                <a href="#" class="btn rounded-0 btn-border color w-auto size-sm mt-5"><span
                         class="flex-grow-1 font-body">Перейти в блоги</span><i
                         class="bi-arrow-right border-start border-light border-end-0"></i></a>
                 <!--                                        <button class="w-auto m-0 btn rounded-0 btn-border color" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Отправить отзыв</button>-->

@@ -35,7 +35,9 @@ body {
 .bg-color,
 .page-transition-wrap, .css3-spinner { background-color: var(--cnvs-body-bg) !important; }
 
+.bg-color-white { background-color: rgba(255, 255, 255, 0.9) !important; }
 .bg-color-card { background-color: rgba(46, 54, 79, 0.9) !important; }
+.bg-color-card-light { background-color: rgba(241,199,122, 0.9) !important; }
 
 .css3-spinner > div {  background-color: var(--cnvs-themecolor) !important; }
 
@@ -435,32 +437,6 @@ body.modal-open { overflow-y: auto; }
 }
 
 .dark .week-posts > li::before { color: rgba(255,255,255,0.3); }
-
-.play-icon {
-	position: absolute;
-	bottom: 15px;
-	left: 15px;
-	color:  #EEE;
-	text-transform: uppercase;
-	font-size: 12px;
-	letter-spacing: 1px;
-	font-weight: 500;
-}
-
-.play-icon i {
-	position: relative;
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	background-color: rgba(255, 255, 255, 0.85);
-	text-align: center;
-	line-height: 28px;
-	color: #222;
-	padding: 1px 0 0 3px;
-	font-size: 10px;
-	margin-right: 5px;
-}
-
 
 
 /* .fancy-title.title-border::before {
