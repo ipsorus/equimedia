@@ -19689,7 +19689,7 @@ body:not(.is-expanded-pagemenu) #header[data-mobile-sticky=true] ~ #page-menu {
   --cnvs-slider-pagination-gutters: 4px;
   --cnvs-slider-pagination-rounded: 50%;
   --cnvs-swiper-dots-position-bottom: 20px;
-  --cnvs-slider-caption-width: 550px;
+  --cnvs-slider-caption-width: 850px;
   --cnvs-slider-caption-font-size: 1.375rem;
   --cnvs-slider-caption-font-weight: 300;
   --cnvs-slider-caption-transition: top 0.3s ease;

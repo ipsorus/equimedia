@@ -1,19 +1,19 @@
 {% load static %}
 <!-- Header
 ============================================= -->
-<header id="header" class="transparent-header dark header-size-md" data-sticky-class="not-dark" data-sticky-offset="full" data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
+<header id="header" class="transparent-header dark header-size-md header-size-sm" data-sticky-class="not-dark" data-sticky-offset="full" data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
 	<div class="container">
-		<div class="header-row">
+		<div class="header-row justify-content-lg-between">
 		</div>
 	</div>
 	<div id="header-wrap">
-		<div class="container px-0">
-			<div class="header-row">
+		<div class="container">
+			<div class="header-row justify-content-lg-between">
 
 				<!-- Logo
 				============================================= -->
-				<div id="logo" class="col-lg-2 me-lg-auto">
-					<a href="" class="w-auto">
+				<div id="logo" class="me-lg-4 pe-lg-4 me-lg-auto">
+					<a href="" data-scrollto="#slider">
 						<img class="logo-default" srcset="{% static 'portal/images/logo.png' %}, {% static 'portal/images/logo@2x.png 2x' %}" src="{% static 'portal/images/logo@2x.png' %}" alt="Canvas Logo">
 						<img class="logo-dark" srcset="{% static 'portal/images/logo-dark.png' %}, {% static 'portal/images/logo-dark@2x.png 2x' %}" src="{% static 'portal/images/logo-dark@2x.png' %}" alt="Canvas Logo">
 					</a>
@@ -40,7 +40,7 @@
 					</div>
 				</div>
 
-				<div class="primary-menu-trigger" data-target=".main-primary-menu">
+				<div class="primary-menu-trigger"">
 					<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
 						<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
 					</button>

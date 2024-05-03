@@ -1,108 +1,153 @@
 {% load static %}
-<div id="section-blogs" class="section bg-contrast-200 my-0" >
+<div id="section-blogs" class="section page-section mt-0 mb-0 dark dotted-bg"
+     style="background-color: rgba(16, 70, 92, 0.2);">
     <div class="container">
-        <div class="row g-5 col-mb-50 my-10">
-            <div class="col-lg-8">
-                <div class="fancy-title title-border">
-                    <h4>Блоги</h4>
-                </div>
+        <div class="col-lg-11">
+            <div class="fancy-title title-border mb-3 ls-1 fw-bold">
+                <h4>Популярные блоги</h4>
+            </div>
+        </div>
 
-                <div class="row posts-md col-mb-30">
-                    <div class="entry col-md-6">
-                        <div class="grid-inner">
-                            <div class="entry-image">
-                                <a href="#"><img src="{% static 'portal/images/5555.jpg' %}" alt="Image"></a>
+        <!-- Owl Carousel
+        ============================================= -->
+        <div id="oc-news" class="owl-carousel fixed-nav top-nav carousel-widget posts-md customjs" data-loop="true"
+             data-autoplay="4000" data-speed="500">
+            <!-- Post Article -->
+            <div class="entry mb-0"
+                 style="background: url('{% static 'portal/images/5555.jpg' %}') center center; background-size: cover; height: 400px;">
+                <div class="bg-overlay">
+                    <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
+                        <div class="position-relative w-100">
+                            <div class="entry-title text-transform-none">
+                                <h3 class="fw-semibold mb-2"><a href="#" class="text-light">The Ultimate Guide To
+                                    Fashion</a></h3>
                             </div>
-                            <div class="entry-title title-sm text-transform-none">
-                                <h3><a href="/blog-single.html">Toyotas next minivan will let you shout at your kids without turning around</a></h3>
-                            </div>
-                            <div class="entry-meta">
+                            <div class="entry-meta no-separator">
                                 <ul>
-                                    <li><i class="uil uil-schedule"></i> 10th Feb 2021</li>
-                                    <li><a href="/blog-single.html#comments"><i class="uil uil-comments-alt"></i> 13</a></li>
+                                    <li><span>by</span> <a href="#">John Doe</a></li>
+                                    <li><i class="bi-clock"></i><a href="#">11 Mar 2021</a></li>
                                 </ul>
                             </div>
-                            <div class="entry-content">
-                                <p>Medecins du Monde eradicate sustainability free expression contribution assessment expert humanitarian relief.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="entry col-md-6">
-                        <div class="grid-inner">
-                            <div class="entry-image">
-                                <a href="#"><img src="{% static 'portal/images/6666.jpg' %}" alt="Image"></a>
-                            </div>
-                            <div class="entry-title title-sm text-transform-none">
-                                <h3><a href="/blog-single.html">UK government weighs Tesla's Model S for its ??5 million electric vehicle fleet</a></h3>
-                            </div>
-                            <div class="entry-meta">
-                                <ul>
-                                    <li><i class="uil uil-schedule"></i> 10th Feb 2021</li>
-                                    <li><a href="/blog-single.html#comments"><i class="uil uil-comments-alt"></i> 13</a></li>
-                                </ul>
-                            </div>
-                            <div class="entry-content">
-                                <p>Urban public institutions life-saving women and children Rockefeller combat malaria honesty. Sustainability foster immunize treatment.</p>
-                            </div>
+                            <ul class="entry-icons d-none d-sm-block">
+                                <li><a href="#" class="bi-bookmark"></a></li>
+                                <li><a href="#" class="bi-heart"><span>18</span></a></li>
+                                <li><a href="#" class="bi-chat"><span>3</span></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4">
-                <div class="fancy-title title-border">
-                    <h4>Client Testimonials</h4>
-                </div>
-
-                <div class="fslider testimonial p-0 border-0 shadow-none" data-animation="slide" data-arrows="false">
-                    <div class="flexslider">
-                        <div class="slider-wrap">
-                            <div class="slide">
-                                <div class="row gx-3">
-                                    <div class="col-auto pt-1">
-                                        <img class="rounded-circle" src="{% static 'portal/images/7777.jpg' %}" width="56" height="56" alt="Customer Testimonails">
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-3 font-secondary">Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque. Repellendus, vero numquam?</p>
-                                        <h4 class="h6 mb-0 fw-medium">Steve Jobs</h4>
-                                        <small class="text-muted">Apple Inc.</small>
-                                    </div>
-                                </div>
-                                <div class="bg-icon bi-quote op-02"></div>
+            <!-- Post Article -->
+            <div class="entry mb-0"
+                 style="background: url('{% static 'portal/images/7777.jpg' %}') center center; background-size: cover; height: 400px;">
+                <div class="bg-overlay">
+                    <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
+                        <div class="position-relative w-100">
+                            <div class="entry-title text-transform-none">
+                                <h3 class="fw-semibold mb-2"><a href="#" class="text-light">The Sports Strategies For
+                                    Beginners</a></h3>
                             </div>
-                            <div class="slide">
-                                <div class="row gx-3">
-                                    <div class="col-auto pt-1">
-                                        <img class="rounded-circle" src="{% static 'portal/images/8888.jpg' %}" width="56" height="56" alt="Customer Testimonails">
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-3 font-secondary">Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
-                                        <h4 class="h6 mb-0 fw-medium">Collis Ta'eed</h4>
-                                        <small class="text-muted">Envato Inc.</small>
-                                    </div>
-                                </div>
-                                <div class="bg-icon bi-quote op-02"></div>
+                            <div class="entry-meta no-separator">
+                                <ul>
+                                    <li><span>by</span> <a href="#">John Doe</a></li>
+                                    <li><i class="bi-clock"></i><a href="#">11 Mar 2021</a></li>
+                                </ul>
                             </div>
+                            <ul class="entry-icons d-none d-sm-block">
+                                <li><a href="#" class="bi-bookmark"></a></li>
+                                <li><a href="#" class="bi-heart"><span>18</span></a></li>
+                                <li><a href="#" class="bi-chat"><span>3</span></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="fancy-title title-border mt-5">
-                    <h4>Opening Hours</h4>
+            <!-- Post Article -->
+            <div class="entry mb-0"
+                 style="background: url('{% static 'portal/images/3333.jpg' %}') center center; background-size: cover; height: 400px;">
+                <div class="bg-overlay">
+                    <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
+                        <div class="position-relative w-100">
+                            <div class="entry-title text-transform-none">
+                                <h3 class="fw-semibold mb-2"><a href="#" class="text-light">2 Things You Must Know About
+                                    you Cafe</a></h3>
+                            </div>
+                            <div class="entry-meta no-separator">
+                                <ul>
+                                    <li><span>by</span> <a href="#">John Doe</a></li>
+                                    <li><i class="bi-clock"></i><a href="#">11 Mar 2021</a></li>
+                                </ul>
+                            </div>
+                            <ul class="entry-icons d-none d-sm-block">
+                                <li><a href="#" class="bi-bookmark"></a></li>
+                                <li><a href="#" class="bi-heart"><span>18</span></a></li>
+                                <li><a href="#" class="bi-chat"><span>3</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <div class="position-relative overflow-hidden pb-4">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit reprehenderit voluptates.</p>
-
-                    <ul class="iconlist mb-0">
-                        <li><i class="bi-clock color"></i> <strong class="me-2">Mondays-Fridays:</strong> 10AM to 7PM</li>
-                        <li><i class="bi-clock color"></i> <strong class="me-2">Saturdays:</strong> 11AM to 3PM</li>
-                        <li><i class="bi-clock text-danger"></i> <strong class="me-2">Sundays:</strong> Closed</li>
-                    </ul>
-
-                    <i class="bi-clock bg-icon" style="bottom: -70px;"></i>
+            <!-- Post Article -->
+            <div class="entry mb-0"
+                 style="background: url('demos/news/images/posts/fashion/2.jpg') center center; background-size: cover; height: 400px;">
+                <div class="bg-overlay">
+                    <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
+                        <div class="position-relative w-100">
+                            <div class="entry-title text-transform-none">
+                                <h3 class="fw-semibold mb-2"><a href="#" class="text-light">The Truth About Fashion In 3
+                                    Minutes</a></h3>
+                            </div>
+                            <div class="entry-meta no-separator">
+                                <ul>
+                                    <li><span>by</span> <a href="#">John Doe</a></li>
+                                    <li><i class="bi-clock"></i><a href="#">11 Mar 2021</a></li>
+                                </ul>
+                            </div>
+                            <ul class="entry-icons d-none d-sm-block">
+                                <li><a href="#" class="bi-bookmark"></a></li>
+                                <li><a href="#" class="bi-heart"><span>18</span></a></li>
+                                <li><a href="#" class="bi-chat"><span>3</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Post Article -->
+            <div class="entry mb-0"
+                 style="background: url('demos/news/images/posts/market/1.jpg') center center; background-size: cover; height: 400px;">
+                <div class="bg-overlay">
+                    <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
+                        <div class="position-relative w-100">
+                            <div class="entry-title text-transform-none">
+                                <h3 class="fw-semibold mb-2"><a href="#" class="text-light">The Hidden Mystery Behind
+                                    market</a></h3>
+                            </div>
+                            <div class="entry-meta no-separator">
+                                <ul>
+                                    <li><span>by</span> <a href="#">John Doe</a></li>
+                                    <li><i class="bi-clock"></i><a href="#">11 Mar 2021</a></li>
+                                </ul>
+                            </div>
+                            <ul class="entry-icons d-none d-sm-block">
+                                <li><a href="#" class="bi-bookmark"></a></li>
+                                <li><a href="#" class="bi-heart"><span>18</span></a></li>
+                                <li><a href="#" class="bi-chat"><span>3</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Carousel End -->
+        <div class="m-auto col-md-10 border-0">
+            <div class="col-12 text-center">
+                <a href="#" class="btn rounded-0 btn-border color w-auto size-sm mt-4"><span
+                        class="flex-grow-1 font-body">Перейти в блоги</span><i
+                        class="bi-arrow-right border-start border-light border-end-0"></i></a>
+                <!--                                        <button class="w-auto m-0 btn rounded-0 btn-border color" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Отправить отзыв</button>-->
             </div>
         </div>
     </div>

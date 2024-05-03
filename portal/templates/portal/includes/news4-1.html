@@ -1,0 +1,450 @@
+{% load static %}
+
+
+<style>
+    :not(.dark) .entry-categories a {
+	display: block;
+	text-transform: uppercase;
+	font-size: 11px;
+	color: #333;
+	font-weight: 700;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
+}
+
+.dark .entry-categories a {
+	color: var(--cnvs-themecolor);
+}
+
+.bg-categories,
+.bg-color-categories.nav-link:hover,
+.menu-color-categories > a::before,
+.bg-color-categories.nav-link.active { background: #17A2B8 !important; }
+
+.color-underline {
+	background-image: linear-gradient(rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3), rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3));
+	background-repeat: no-repeat;
+	background-size: 0 8px;
+	background-position: 0 82%;
+	padding: 0 2px 2px 0;
+	transition: background .6s cubic-bezier(.19,1,.22,1);
+}
+
+.color-underline:hover { background-size: 100% 8px; }
+
+
+.slider {
+  display: flex;
+}
+
+.block {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  transition: all 0.3s;
+}
+
+.block.active {
+  background-color: #ffcc00;
+  transform: scale(1.1);
+}
+
+.slider:hover .block {
+  background-color: #f0f0f0;
+}
+
+.slider:hover .block.active {
+  background-color: #ffcc00;
+}
+</style>
+
+<div id="section-services" class="page-section">
+    <div class="container">
+        <div class="row justify-content-center mt-lg-6 mt-5">
+            <div class="w-100"></div>
+            <div class="col-lg-12">
+                <!-- Section Featured Boxes
+                ============================================= -->
+                <div class="row align-items-stretch g-4">
+                    <div class="col-xl-7">
+                        <div class="d-flex p-5 position-relative bg-contrast-200 flex-column h-100 overflow-hidden" style="border-radius: 20px;">
+                            <div class="row">
+                                <div class="col-xl-7 col-md-8">
+                                    <span class="badge rounded-pill text-bg-light px-3 py-2 mb-2 fw-normal">Speed Optimaztion</span>
+                                    <h3 class="fs-2 mb-3 fw-bolder">92% Faster</h3>
+                                    <!-- <i class="fa-solid fa-coins"></i> -->
+                                    <p class="op-09 mb-5">Experience ~92% faster results with our optimized processes. Accelerate Projects and Achieve Goals effortlessly.</p>
+                                    <div>
+                                        <a href="#" class="button button-large button-border button-dark button-black rounded-pill m-0">Discover the Speed</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <svg class="d-none d-md-block" viewBox="0 0 300 300" width="380" height="380" style="position: absolute; right: -38px; bottom: -40px; rotate: 180deg;  z-index: auto;"><path fill="#162C38" d="M272.9 27.1c0 135.76-110.04 245.8-245.8 245.8V27.1h245.8z"></path><path fill="#417972" d="M232.75 27.1c0 113.59-92.06 205.65-205.65 205.65V27.1h205.65z"></path><path fill="#C1B2A3" d="M188.88 27.1c0 89.36-72.43 161.78-161.78 161.78V27.1h161.78z"></path></svg>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12">
+                        <div class="card rounded-xxl bg-contrast-200 border-0">
+                            <div class="card-body p-5">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="col-lg-12">
+                                            <div class="fancy-title title-border">
+                                                <h4>Последние новости</h4>
+                                            </div>
+                                        </div>
+                                        <!-- Hero Area
+                                        ============================================= -->
+                                        <div class="row border-between">
+                                            <div class="col-lg-7 mb-5 mb-lg-0">
+                                                <!-- Post Article -->
+                                                <article class="entry border-bottom-0 mb-0">
+                                                    <div class="entry-image">
+                                                        <a href="demo-blog-single.html"><img src="{% static 'portal/images/7777.jpg' %}" alt="Image 3"></a>
+                                                    </div>
+                                                    <div class="entry-title">
+                                                        <div class="entry-categories"><a href="demo-blog-categories.html">Coronavirus Update - World</a></div>
+                                                        <h3><a href="demo-blog-single.html" class="stretched-link color-underline"><span>Statement from Vice President Joe Biden on Record Number of Americans Filing for Unemployment</span></a></h3>
+                                                    </div>
+                                                    <div class="entry-meta">
+                                                        <ul>
+                                                            <li><a href="#">Mar 11, 2016</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="entry-content">
+                                                        <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam laboriosam esse beatae hic perferendis. Lorem ipsum dolor sit amet. Rapidiously negotiate standardized web services and goal-oriented outsourcing. Uniquely repurpose compelling functionalities before parallel mindshare.</p>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <div class="col-lg-5">
+                                                <div class="row posts-md col-mb-30">
+                                                    <article class="entry col-12">
+                                                        <div class="grid-inner row gutter-20">
+                                                            <div class="col-md-4">
+                                                                <a class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/2222.jpg' %}" alt="Image"></a>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="entry-title title-xs">
+                                                                    <div class="entry-categories"><a href="demo-blog-categories.html">Market</a></div>
+                                                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">What Everyone’s Getting Wrong About the Toilet Paper Shortage</a></h3>
+                                                                </div>
+                                                                <div class="entry-meta">
+                                                                    <ul>
+                                                                        <li><a href="#">Mar 11, 2016</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+
+                                                    <article class="entry col-12">
+                                                        <div class="grid-inner row gutter-20">
+                                                            <div class="col-md-4">
+                                                                <a  class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/3333.jpg' %}" alt="Image"></a>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="entry-title title-xs">
+                                                                    <div class="entry-categories"><a href="demo-blog-categories.html">Tech</a></div>
+                                                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">Designing an e-commerce site for a Cloth store — a UI/UX case</a></h3>
+                                                                </div>
+                                                                <div class="entry-meta">
+                                                                    <ul>
+                                                                        <li><a href="#">Mar 11, 2016</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+
+                                                    <article class="entry col-12">
+                                                        <div class="grid-inner row gutter-20">
+                                                            <div class="col-md-4">
+                                                                <a  class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/4444.jpg' %}" alt="Image"></a>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="entry-title title-xs">
+                                                                    <div class="entry-categories"><a href="demo-blog-categories.html">Food</a></div>
+                                                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">The Path: “I stayed loyal to those who gave me opportunities, and tried to remain humble every step of the way.”</a></h3>
+                                                                </div>
+                                                                <div class="entry-meta">
+                                                                    <ul>
+                                                                        <li><a href="#">Mar 11, 2016</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+
+                                                    <article class="entry col-12">
+                                                        <div class="grid-inner row gutter-20">
+                                                            <div class="col-md-4">
+                                                                <a class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/5555.jpg' %}" alt="Image"></a>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="entry-title title-xs">
+                                                                    <div class="entry-categories"><a href="demo-blog-categories.html">Tech</a></div>
+                                                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">Adobe XD: putting auto-animate to the test</a></h3>
+                                                                </div>
+                                                                <div class="entry-meta">
+                                                                    <ul>
+                                                                        <li><a href="#">Mar 11, 2016</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="line border-black border-width-2"></div>
+                                <div class="row gy-5">
+                                    <div class="col-lg-3">
+                                        <h3 class="fw-bold ls-n-1 fs-1 lh-sm">Our Core Features</h3>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <img src="demos/saas-2/images/svg/analysis.svg" alt=".." height="52">
+                                        <h4 class="mt-4 mb-2 fs-5 fw-bold"> Data Analysis</h4>
+                                        <p class="mb-0">Professionally target bricks and clicks applications whereas.</p>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <img src="demos/saas-2/images/svg/paybill.svg" alt=".." height="52">
+                                        <h4 class="mt-4 mb-2 fs-5 fw-bold">Pay Invoice</h4>
+                                        <p class="mb-0">Progressively network just in time collaboration and idea sharing.</p>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <img src="demos/saas-2/images/svg/install.svg" alt=".." height="52">
+                                        <h4 class="mt-4 mb-2 fs-5 fw-bold">Installation</h4>
+                                        <p class="mb-0">Synergistically customized technology with schemas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Latest News Grid Section
+============================================= -->
+<div id="section-news" class="section bg-contrast-0 my-0" >
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="fancy-title title-border">
+                <h4>Последние новости</h4>
+            </div>
+        </div>
+        <!-- Hero Area
+        ============================================= -->
+        <div class="row border-between">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <!-- Post Article -->
+                <article class="entry border-bottom-0 mb-0">
+                    <div class="entry-image">
+                        <a href="demo-blog-single.html"><img src="{% static 'portal/images/7777.jpg' %}" alt="Image 3"></a>
+                    </div>
+                    <div class="entry-title">
+                        <div class="entry-categories"><a href="demo-blog-categories.html">Coronavirus Update - World</a></div>
+                        <h3><a href="demo-blog-single.html" class="stretched-link color-underline"><span>Statement from Vice President Joe Biden on Record Number of Americans Filing for Unemployment</span></a></h3>
+                    </div>
+                    <div class="entry-meta">
+                        <ul>
+                            <li><a href="#">Mar 11, 2016</a></li>
+                        </ul>
+                    </div>
+                    <div class="entry-content">
+                        <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam laboriosam esse beatae hic perferendis. Lorem ipsum dolor sit amet. Rapidiously negotiate standardized web services and goal-oriented outsourcing. Uniquely repurpose compelling functionalities before parallel mindshare.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="row posts-md col-mb-30">
+                    <article class="entry col-12">
+                        <div class="grid-inner row gutter-20">
+                            <div class="col-md-4">
+                                <a class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/2222.jpg' %}" alt="Image"></a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="entry-title title-xs">
+                                    <div class="entry-categories"><a href="demo-blog-categories.html">Market</a></div>
+                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">What Everyone’s Getting Wrong About the Toilet Paper Shortage</a></h3>
+                                </div>
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li><a href="#">Mar 11, 2016</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="entry col-12">
+                        <div class="grid-inner row gutter-20">
+                            <div class="col-md-4">
+                                <a  class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/3333.jpg' %}" alt="Image"></a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="entry-title title-xs">
+                                    <div class="entry-categories"><a href="demo-blog-categories.html">Tech</a></div>
+                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">Designing an e-commerce site for a Cloth store — a UI/UX case</a></h3>
+                                </div>
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li><a href="#">Mar 11, 2016</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="entry col-12">
+                        <div class="grid-inner row gutter-20">
+                            <div class="col-md-4">
+                                <a  class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/4444.jpg' %}" alt="Image"></a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="entry-title title-xs">
+                                    <div class="entry-categories"><a href="demo-blog-categories.html">Food</a></div>
+                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">The Path: “I stayed loyal to those who gave me opportunities, and tried to remain humble every step of the way.”</a></h3>
+                                </div>
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li><a href="#">Mar 11, 2016</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="entry col-12">
+                        <div class="grid-inner row gutter-20">
+                            <div class="col-md-4">
+                                <a class="entry-image" href="demo-blog-single.html"><img src="{% static 'portal/images/5555.jpg' %}" alt="Image"></a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="entry-title title-xs">
+                                    <div class="entry-categories"><a href="demo-blog-categories.html">Tech</a></div>
+                                    <h3><a href="demo-blog-single.html" class="stretched-link color-underline">Adobe XD: putting auto-animate to the test</a></h3>
+                                </div>
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li><a href="#">Mar 11, 2016</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </div> <!-- Hero Area End -->
+
+        <!-- Subscribe Section
+        ============================================= -->
+        <div class="container mt-6 dotted-bg rounded-6" style="background-color: #2646531b;">
+					<div class="row align-items-center justify-content-between p-5 p-md-6">
+						<div class="col mb-5 mb-lg-0">
+							<h5 class="font-body h5 mb-1 fw-medium color">Ready to Grow your Business?</h5>
+							<h2 class="font-body h1 mb-0">Best way to save your Money.</h2>
+						</div>
+						<div class="col-auto">
+							<a href="#" class="btn px-3 py-2 px-md-5 py-md-3 btn-dark bg-color rounded-pill"><i class="bi-calendar color-2 me-2 position-relative" style="top: 1px"></i>Book a Schedule</a>
+							<a href="#" class="btn px-3 py-2 px-md-5 py-md-3 bg-color-2 rounded-pill ms-2"><i class="bi-envelope color me-2 position-relative" style="top: 1px"></i>Contact Us</a>
+						</div>
+					</div>
+				</div>
+        <div class="section section-colored rounded px-4">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-5">
+                    <h3 class="mb-4 mb-lg-0">Sign up for Updates &amp; Newsletters.</h3>
+                </div>
+                <div class="col-lg-6">
+                    <div class="widget subscribe-widget" data-loader="button">
+
+                        <div class="widget-subscribe-form-result"></div>
+                        <form id="widget-subscribe-form" action="include/subscribe.php" method="post" class="mb-0 d-flex">
+                            <input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control form-control-lg not-dark required email" placeholder="Your Email Address">
+                            <button class="button button-large button-black button-dark fw-medium ls-0 button-rounded m-0 ms-3" type="submit">Subscribe Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Subscribe Section End -->
+
+        <!-- Video Section
+        ============================================= -->
+        <div class="d-flex justify-content-between mb-4">
+            <h3 class="font-body fw-medium m-0">Latest Videos</h3>
+            <a href="#" class="btn btn-sm btn-outline-secondary">More Content <i class="bi-arrow-right"></i></a>
+        </div>
+
+        <div class="row posts-md col-mb-30">
+            <div class="col-md-4">
+                <article class="entry border-bottom-0 mb-0">
+                    <div class="entry-image">
+                        <a href="https://www.youtube.com/watch?v=P3Huse9K6Xs" data-lightbox="iframe"><img src="{% static 'portal/images/6666.jpg' %}" alt="Image 3">
+                            <div class="play-icon"><i class="bi-play"></i>Watch</div>
+                        </a>
+                    </div>
+                    <div class="entry-title title-sm">
+                        <div class="entry-categories"><a href="demo-blog-categories.html">Travel</a></div>
+                        <h3><a href="demo-blog-single.html" class="color-underline">The Best Destinations in Asia for Solo Travel</a></h3>
+                    </div>
+                    <div class="entry-meta">
+                        <ul>
+                            <li><a href="#">Mar 11, 2016</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="entry border-bottom-0 mb-0">
+                    <div class="entry-image">
+                        <a href="https://www.youtube.com/watch?v=P3Huse9K6Xs" data-lightbox="iframe"><img src="{% static 'portal/images/1111.jpg' %}" alt="Image 3">
+                            <div class="play-icon"><i class="bi-play"></i>Watch</div>
+                        </a>
+                    </div>
+                    <div class="entry-title title-sm">
+                        <div class="entry-categories"><a href="demo-blog-categories.html">Fashion</a></div>
+                        <h3><a href="demo-blog-single.html" class="color-underline">10 Trendy Fashion Instagram Profile You Need to Follow</a></h3>
+                    </div>
+                    <div class="entry-meta">
+                        <ul>
+                            <li><a href="#">Mar 11, 2016</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="entry border-bottom-0 mb-0">
+                    <div class="entry-image">
+                        <a href="https://www.youtube.com/watch?v=P3Huse9K6Xs" data-lightbox="iframe"><img src="{% static 'portal/images/3333.jpg' %}" alt="Image 3">
+                            <div class="play-icon"><i class="bi-play"></i>Watch</div>
+                        </a>
+                    </div>
+                    <div class="entry-title title-sm">
+                        <div class="entry-categories"><a href="demo-blog-categories.html">Travel</a></div>
+                        <h3><a href="demo-blog-single.html" class="color-underline">23 Top Travel Bloggers Who Inspire Us To Travel</a></h3>
+                    </div>
+                    <div class="entry-meta">
+                        <ul>
+                            <li><a href="#">Mar 11, 2016</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>  <!-- Video Section End -->
+    </div>
+</div>

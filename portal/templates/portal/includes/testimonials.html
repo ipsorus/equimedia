@@ -1,0 +1,132 @@
+{% load static %}
+
+<!-- Testimonials Section
+============================================= -->
+<!-- Section Testimonials
+============================================= -->
+<div id="section-testimonials" class="section page-section mt-0 mb-0" style="background-color: rgba(16, 70, 92, 0.2);">
+	<div class="container">
+		<div class="row justify-content-center text-center" data-animate="fadeIn">
+			<div class="col-12">
+				<div class="overflow-hidden">
+					<div class="text-white-50 mb-2 text-uppercase ls-3" data-animate="fadeInUpSmall" data-delay="100">Что говорят о нас</div>
+					<h3 class="display-4 color mb-0" data-animate="fadeInUpSmall fast" data-delay="200"><i class="spa-facial pe-2 color"></i> Отзывы клиентов</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="oc-testi" class="owl-carousel carousel-widget dark mt-5 border-bottom border-top border-light mb-5" data-items-xl="3" data-items-lg="3" data-items-md="2" data-items-xs="1" data-pagi="false" data-loop="true" data-margin="0"  style="background: url('{% static 'portal/images/rating.svg' %}') no-repeat center center / 300px;" data-autoplay="4000" data-speed="500">
+
+		<div class="oc-item">
+			<div class="p-5 text-center">
+				<div>
+					<p class="text-medium fw-light testimonial-quotes">Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum repellendus!</p>
+					<h4 class="h5 mb-0 fw-medium">Jim Séchen</h4>
+					<small class="op-06">XYZ Inc.</small>
+				</div>
+			</div>
+		</div>
+
+		<div class="oc-item">
+			<div class="p-5 text-center">
+				<div>
+					<p class="text-medium fw-light testimonial-quotes">Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
+					<h4 class="h5 mb-0 fw-medium">Alan Fresco</h4>
+					<small class="op-06">Company Inc.</small>
+				</div>
+			</div>
+		</div>
+
+		<div class="oc-item">
+			<div class="p-5 text-center">
+				<div>
+					<p class="text-medium fw-light testimonial-quotes">Fugit officia dolor sed harum excepturi ex iusto magnam asperiores molestiae qui natus obcaecati facere sint amet.</p>
+					<h4 class="h5 mb-0 fw-medium">Fig Nelson</h4>
+					<small class="op-06">Google Inc.</small>
+				</div>
+			</div>
+		</div>
+
+		<div class="oc-item">
+			<div class="p-5 text-center">
+				<div>
+					<p class="text-medium fw-light testimonial-quotes">Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque. Repellendus, vero numquam?</p>
+					<h4 class="h5 mb-0 fw-medium">Pelican Steve</h4>
+					<small class="op-06">Apple Inc.</small>
+				</div>
+			</div>
+		</div>
+
+		<div class="oc-item">
+			<div class="p-5 text-center">
+				<div>
+					<p class="text-medium fw-light testimonial-quotes">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, perspiciatis illum totam dolore deleniti labore.</p>
+					<h4 class="h5 mb-0 fw-medium">Russell Sprout</h4>
+					<small class="op-06">Adobe Inc.</small>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 text-center">
+		<p>
+			<a href="#" class="w-auto m-0 btn rounded-0 btn-border color size-sm mt-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTestimonials" aria-expanded="false" aria-controls="collapseTestimonials"><i class="fa-solid uil-comment-plus"></i><span class="font-body">Оставить отзыв</span></a>
+
+<!--                <button class="button rounded w-auto m-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTestimonials" aria-expanded="false" aria-controls="collapseTestimonials">-->
+<!--                    Оставить отзыв-->
+<!--                </button>-->
+		</p>
+		<div class="collapse" id="collapseTestimonials">
+			<div class="m-auto col-md-10 d-flex flex-column card bg-secondary bg-opacity-10 border-0">
+				<div class="card-body p-4">
+
+					<div class="form-widget">
+
+						<div class="form-result"></div>
+
+						<form class="mb-0" id="template-contactform" name="template-contactform" action="include/form.php" method="post">
+
+							<div class="form-process">
+								<div class="css3-spinner">
+									<div class="css3-spinner-scaler"></div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-4 form-group">
+									<input type="text" id="template-contactform-name" name="template-contactform-name" value="" placeholder="Name" class="form-control required">
+								</div>
+
+								<div class="col-md-4 form-group">
+									<input type="email" id="template-contactform-email" name="template-contactform-email" value="" placeholder="Email Address" class="form-control required">
+								</div>
+
+								<div class="col-md-4 form-group">
+									<input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" placeholder="Phone Number" class="form-control required">
+								</div>
+
+								<div class="col-12 form-group">
+									<textarea class="required form-control" id="template-contactform-message" name="template-contactform-message" placeholder="Message" rows="6" cols="30"></textarea>
+								</div>
+
+								<div class="col-12 form-group d-none">
+									<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="form-control">
+								</div>
+
+								<div class="col-12">
+									<a href="#" class="btn rounded-0 btn-border color w-auto size-sm mt-4"><span class="flex-grow-1 font-body">Отправить отзыв</span><i class="bi-arrow-right border-start border-light border-end-0"></i></a>
+
+<!--                                        <button class="w-auto m-0 btn rounded-0 btn-border color" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Отправить отзыв</button>-->
+								</div>
+							</div>
+
+							<input type="hidden" name="prefix" value="template-contactform-">
+
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
