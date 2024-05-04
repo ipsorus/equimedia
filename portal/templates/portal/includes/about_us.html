@@ -1,0 +1,131 @@
+{% load static %}
+<!-- Section Grid
+				============================================= -->
+<div id="section-about" class="section my-0 mt-0 parallax" style="padding: 100px 0; background-color:rgb(66, 100, 158);" data-0-top="background-color:rgb(66, 100, 158);" data-top-bottom="background-color:rgb(13, 36, 74);">
+    <div class="container">
+        <div class="row g-0 align-items-md-stretch align-items-lg-center">
+            <div class="col-xl-7 col-md-6 img-overlap">
+                <img src="{% static 'portal/images/1000.jpg' %}" alt="..." class="h-100" style="object-fit: cover;">
+            </div>
+
+            <div class="col-xl-5 col-md-6 bg-white">
+                <div class="position-absolute start-0 top-0 w-100 h-100 bg-color bg-opacity-10"></div>
+                <p class="ls-4 small mb-3">Узнайте больше о нас</p>
+                <h2 class="display-6">Все ресурсы – в одном месте</h2>
+                <p>На нашей площадке вы можете пройти онлайн-курсы по посадке, выездке, конкуру, ветеринарии, кормлению, конному английскому или немецкому, повысить квалификацию как тренера или в сфере коневодства. Записаться на тренировки с лучшими тренерами в Москве или онлайн-тренировки с тренерами из США, Нидерландов и других стран. Или поехать на стажировку к топ-спортсменам в любую точку мира</p>
+                <a href="#" class="button button-small button-border m-0">Узнать больше</a>
+            </div>
+        </div>
+    </div>
+    <div class="container dark">
+        <div class="line"></div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center text-center" data-animate="fadeIn">
+            <div class="col-12">
+                <div class="overflow-hidden">
+                    <h3 class="color mb-0" data-animate="fadeInUpSmall fast" data-delay="200">Отзывы клиентов</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fslider" data-arrows="false" style="z-index: 2;">
+        <div class="owl-carousel carousel-widget text-center mw-xs mx-auto dark" data-items="1" data-autoplay="5000"
+             data-nav="false"
+             style="background: url('{% static 'portal/images/rating.svg' %}') no-repeat center center / 300px;">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mx-auto w-auto mt-5 mb-4"></div>
+                    <h3 class="mb-4 lh-base fw-normal font-secondary">Seamlessly Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Quia rerum porro est delectus ad in vitae neque nostrum nesciunt.</h3>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div>
+                        <h4 class="h6 mb-0 fw-medium">Alex Coman</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="mx-auto w-auto mt-5 mb-4"></div>
+                    <h3 class="mb-4 lh-base fw-normal font-secondary">Seamlessly conceptualize multimedia based web
+                        services for optimal human capital. Collaboratively evisculate e-business value.</h3>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div>
+                        <h4 class="h6 mb-0 fw-medium">John Coman</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="mx-auto w-auto mt-5 mb-4"></div>
+                    <h3 class="mb-4 lh-base fw-normal font-secondary">Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Molestias facilis ea voluptatem cum.</h3>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div>
+                        <h4 class="h6 mb-0 fw-medium">Ricky Coman</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mx-auto" style="max-width: 740px">
+            <div class="col-md-12">
+                <div class="text-center dark mb-0">
+                    <a href="#" class="w-auto m-0 btn rounded-0 btn-border color size-sm mt-4" type="button"
+                       data-bs-toggle="collapse" data-bs-target="#collapseTestimonials" aria-expanded="false"
+                       aria-controls="collapseTestimonials"><i class="fa-solid uil-comment-plus"></i><span
+                            class="font-body">Оставить отзыв</span></a>
+                </div>
+                <div class="collapse" id="collapseTestimonials">
+                    <div class="card bg-color-white-form shadow-lg border-0 mt-5">
+                        <div class="card-body p-5" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;">
+                            <div class="form-widget" data-loader="button" data-alert-type="inline">
+
+                                <div class="form-result"></div>
+
+                                <form class="row mb-0" id="landing-enquiry1" action="include/form.php" method="post"
+                                      enctype="multipart/form-data">
+                                    <div class="form-process"></div>
+                                    <div class="col-12 form-group mb-4">
+                                        <input type="text" name="landing-enquiry-name" id="landing-enquiry-name1"
+                                               class="form-control form-control required" value="" placeholder="ФИО">
+                                    </div>
+                                    <div class="col-12 form-group mb-4">
+                                        <input type="email" name="landing-enquiry-email" id="landing-enquiry-email1"
+                                               class="form-control form-control required" value=""
+                                               placeholder="E-mail">
+                                    </div>
+                                    <div class="col-12 form-group mb-4">
+                                    <textarea name="landing-enquiry-additional-requirements"
+                                              id="landing-enquiry-additional-requirements1"
+                                              class="form-control form-control" cols="30" rows="3"
+                                              placeholder="Ваш отзыв"></textarea>
+                                    </div>
+                                    <div class="col-12 d-none">
+                                        <input type="text" id="landing-enquiry-botcheck1"
+                                               name="landing-enquiry-botcheck"
+                                               value="">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="col-12">
+													<button type="submit" name="landing-enquiry-submit" class="btn w-100 text-white bg-color-card rounded-3 py-3 fw-semibold text-uppercase mt-2">Отправить отзыв</button>
+												</div>
+                                    </div>
+
+                                    <input type="hidden" name="prefix" value="landing-enquiry-">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

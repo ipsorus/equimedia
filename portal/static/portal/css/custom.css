@@ -3,11 +3,13 @@
 -----------------------------------------------------------------*/
 
 :root {
-	--cnvs-themecolor: #F1C77A;
-	--cnvs-themecolor-rgb: 241,199,122;
-	--cnvs-secondary-color: #2E364F;
+    --cnvs-themecolor-light-rgb: 255, 255, 255;
+	--cnvs-themecolor: #FFF;
+	--cnvs-themecolor-rgb: 255,255,255;
+	--cnvs-secondary-color: #FFF;
 	--cnvs-secondary-color-rgb: 46, 54, 79;
 	--cnvs-body-bg: var(--cnvs-secondary-color);
+	--cnvs-body-bg-light: var(--cnvs-themecolor-light-rgb);
 	--cnvs-body-bg-rgba: 58,133,144;
 
 	--cnvs-body-font: 'Roboto', sans-serif;
@@ -35,9 +37,12 @@ body {
 .bg-color,
 .page-transition-wrap, .css3-spinner { background-color: var(--cnvs-body-bg) !important; }
 
-.bg-color-white { background-color: rgba(255, 255, 255, 0.9) !important; }
+.bg-color-white { background-color: rgba(18, 55, 120, 0.65) !important; }
+.bg-color-white-form { background-color: rgba(255, 255, 255, 0.1) !important; }
+.bg-color-grey { background-color: rgba(255, 255, 255, 0.9) !important; }
 .bg-color-card { background-color: rgba(46, 54, 79, 0.9) !important; }
 .bg-color-card-light { background-color: rgba(241,199,122, 0.9) !important; }
+.bg-color-card-light-about { background-color: rgba(45, 93, 237, 0.3); !important; }
 
 .css3-spinner > div {  background-color: var(--cnvs-themecolor) !important; }
 
@@ -834,70 +839,11 @@ background-color: transparent !important;
 	font-size: 11px;
 }
 
-.owl-carousel .owl-nav [class*=owl-] {
-	opacity: 1 !important;
-	background-color: var(--cnvs-secondary-color);
-	border-color: rgba(var(--cnvs-themecolor-rgb), var(--cnvs-border-opacity));
-	color: var(--cnvs-themecolor);
-	width: 40px;
-	height: 40px;
-	margin: 0px;
-	font-size: 24px;
-	top: auto;
-	bottom: -20px;
-}
-
-.owl-carousel .owl-nav .owl-next {
-	left: calc(50% + 3px) !important;
-}
-.owl-carousel .owl-nav .owl-prev {
-	left: auto !important;
-	right: calc(50% + 3px) !important;
-}
-
-#oc-testi .owl-item {
-	border-right: 1px solid rgba(var(--cnvs-themecolor-rgb), var(--cnvs-border-opacity));
-}
-
-.owl-prev i {
-	position: relative;
-	left: -1px;
-}
-
-#oc-testi .owl-item img,
-#oc-testi .owl-item p,
-#oc-testi .owl-item .testi-meta {
-	opacity: 0;
-}
-
-#oc-testi .owl-item.active img,
-#oc-testi .owl-item.active p,
-#oc-testi .owl-item.active .testi-meta {
-	opacity: 1;
-	-webkit-animation-delay: 0s;
-	animation-delay: 0s;
-	-webkit-animation-duration: 1s;
-	animation-duration: 1s;
-	-webkit-animation-name: fade-in-bottom;
-	animation-name: fade-in-bottom;
-	animation-iteration-count: 1;
-
-}
-#oc-testi .owl-item.active p {
-	-webkit-animation-delay: .1s;
-	animation-delay: .1s;
-}
-#oc-testi .owl-item.active .testi-meta {
-	-webkit-animation-delay: .2s;
-	animation-delay: .2s;
-}
-
 .dark #copyrights p,
 .dark .copyright-links a {
 	font-weight: 400;
 	opacity: .4;
 }
-
 
 #toast-container > div {
 	border-radius: 4px;
@@ -924,13 +870,6 @@ background-color: transparent !important;
 	content: close-quote;
 }
 
-.owl-carousel .owl-nav .owl-next {
-	left: calc(50% + 3px) !important;
-}
-.owl-carousel .owl-nav .owl-prev {
-	left: auto !important;
-	right: calc(50% + 3px) !important;
-}
 
 .grid-border {
 	--cnvs-grid-border-width: 1px;
@@ -1153,3 +1092,26 @@ background-color: transparent !important;
 
 .entry-meta ul + ul li:first-child::before { content: none; }
 
+.img-overlap+div {
+	padding: 40px;
+}
+
+@media (min-width: 992px) {
+	.img-overlap img {
+		width: calc(100% + 30%);
+		max-width: none;
+	}
+
+	.img-overlap + div {
+		border-radius: 0.3rem;
+		padding: 60px;
+	}
+
+}
+
+.bg-color .ticker-wrap .ticker-item {
+	text-shadow: -1px 0 #FFF,
+		0 1px #FFF,
+		1px 0 #FFF,
+		0 -1px #FFF;
+}
