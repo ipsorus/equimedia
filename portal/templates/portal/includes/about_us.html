@@ -1,9 +1,11 @@
 {% load static %}
 <!-- Section Grid
 				============================================= -->
-<div id="section-about" class="section my-0 mt-0 parallax" style="padding: 100px 0; background-color:rgb(66, 100, 158);" data-0-top="background-color:rgb(66, 100, 158);" data-top-bottom="background-color:rgb(13, 36, 74);">
+<div id="section-about" class="section my-0 mt-0 parallax" style="padding: 100px 0; background-color:rgb(66, 100, 158);" data-0-top="background-color:rgb(66, 100, 158);" data-top-bottom="background-color:rgb(9, 28, 61);">
     <div class="container">
         <div class="row g-0 align-items-md-stretch align-items-lg-center">
+                    <div style="background-image: url({% static 'portal/images/grid.svg' %}); position: absolute; top: 4%;left: 6%;width: 20vw;height: 30vh;opacity: .15;transform: translate(-50%, -50%);"></div>
+
             <div class="col-xl-7 col-md-6 img-overlap">
                 <img src="{% static 'portal/images/1000.jpg' %}" alt="..." class="h-100" style="object-fit: cover;">
             </div>
@@ -18,13 +20,13 @@
         </div>
     </div>
     <div class="container dark">
-        <div class="line"></div>
+        <div class="line dark"></div>
     </div>
     <div class="container">
         <div class="row justify-content-center text-center" data-animate="fadeIn">
             <div class="col-12">
                 <div class="overflow-hidden">
-                    <h3 class="color mb-0" data-animate="fadeInUpSmall fast" data-delay="200">Отзывы клиентов</h3>
+                    <h3 class="dark mb-0" data-animate="fadeInUpSmall fast" data-delay="200">Отзывы наших гостей</h3>
                 </div>
             </div>
         </div>
@@ -36,7 +38,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mx-auto w-auto mt-5 mb-4"></div>
-                    <h3 class="mb-4 lh-base fw-normal font-secondary">Seamlessly Lorem, ipsum dolor sit amet consectetur
+                    <h3 class="mb-4 lh-base lead">Seamlessly Lorem, ipsum dolor sit amet consectetur
                         adipisicing elit. Quia rerum porro est delectus ad in vitae neque nostrum nesciunt.</h3>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
@@ -49,7 +51,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mx-auto w-auto mt-5 mb-4"></div>
-                    <h3 class="mb-4 lh-base fw-normal font-secondary">Seamlessly conceptualize multimedia based web
+                    <h3 class="mb-4 lh-base lead">Seamlessly conceptualize multimedia based web
                         services for optimal human capital. Collaboratively evisculate e-business value.</h3>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
@@ -62,7 +64,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mx-auto w-auto mt-5 mb-4"></div>
-                    <h3 class="mb-4 lh-base fw-normal font-secondary">Lorem, ipsum dolor sit amet consectetur
+                    <h3 class="mb-4 lh-base lead">Lorem, ipsum dolor sit amet consectetur
                         adipisicing elit. Molestias facilis ea voluptatem cum.</h3>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
@@ -77,15 +79,15 @@
     <div class="container">
         <div class="row mx-auto" style="max-width: 740px">
             <div class="col-md-12">
-                <div class="text-center dark mb-0">
-                    <a href="#" class="w-auto m-0 btn rounded-0 btn-border color size-sm mt-4" type="button"
+                <div class="text-center mb-0">
+                    <a href="#" class="w-auto btn button-border m-0 mt-5 button button-large button-rounded px-4 button-light button-white fadeInUp animated" type="button"
                        data-bs-toggle="collapse" data-bs-target="#collapseTestimonials" aria-expanded="false"
                        aria-controls="collapseTestimonials"><i class="fa-solid uil-comment-plus"></i><span
-                            class="font-body">Оставить отзыв</span></a>
+                                    class="flex-grow">Оставить отзыв</span></a>
                 </div>
                 <div class="collapse" id="collapseTestimonials">
                     <div class="card bg-color-white-form shadow-lg border-0 mt-5">
-                        <div class="card-body p-5" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;">
+                        <div class="card-body p-5" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 5px;">
                             <div class="form-widget" data-loader="button" data-alert-type="inline">
 
                                 <div class="form-result"></div>
@@ -106,17 +108,15 @@
                                     <textarea name="landing-enquiry-additional-requirements"
                                               id="landing-enquiry-additional-requirements1"
                                               class="form-control form-control" cols="30" rows="3"
-                                              placeholder="Ваш отзыв"></textarea>
+                                              placeholder="Напишите свой отзыв о нас..."></textarea>
                                     </div>
                                     <div class="col-12 d-none">
                                         <input type="text" id="landing-enquiry-botcheck1"
                                                name="landing-enquiry-botcheck"
                                                value="">
                                     </div>
-                                    <div class="col-12">
-                                        <div class="col-12">
-													<button type="submit" name="landing-enquiry-submit" class="btn w-100 text-white bg-color-card rounded-3 py-3 fw-semibold text-uppercase mt-2">Отправить отзыв</button>
-												</div>
+                                    <div class="col-12 text-center">
+													<button type="submit" name="landing-enquiry-submit" class="w-auto btn button-border m-0 button button-large button-rounded px-4 button-light button-white fadeInUp animated">Отправить отзыв</button>
                                     </div>
 
                                     <input type="hidden" name="prefix" value="landing-enquiry-">

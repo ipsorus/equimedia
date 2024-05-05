@@ -4,26 +4,27 @@
 
 :root {
     --cnvs-themecolor-light-rgb: 255, 255, 255;
-	--cnvs-themecolor: #FFF;
-	--cnvs-themecolor-rgb: 255,255,255;
-	--cnvs-secondary-color: #FFF;
-	--cnvs-secondary-color-rgb: 46, 54, 79;
-	--cnvs-body-bg: var(--cnvs-secondary-color);
+	--cnvs-themecolor: #1c448a;
+	--cnvs-themecolor-rgb: 28, 68, 138;
+	--cnvs-secondary-color: #8c7719;
+	--cnvs-secondary-color-rgb: 140, 119, 25;
+	--cnvs-body-bg: 255, 255, 255;
 	--cnvs-body-bg-light: var(--cnvs-themecolor-light-rgb);
 	--cnvs-body-bg-rgba: 58,133,144;
+	--cnvs-link-color: #000;
 
 	--cnvs-body-font: 'Roboto', sans-serif;
 
 	--cnvs-border-opacity: .15;
-	--cnvs-body-image: url('images/blur-svg/blur-bg.png');
-	--cnvs-slider-arrows-bg-hover-color: rgba(0, 0, 0, 0.6);
-    --cnvs-slider-arrow-color: var(--bs-gray-100);
-    --cnvs-owl-dots-slider-color: #fff;
+}
+
+:root .dark {
+	--cnvs-themecolor: #fff;
+	--cnvs-themecolor-rgb: 255, 255, 255;
 }
 
 body {
 	background-color: var(--cnvs-body-bg);
-	background-image: var(--cnvs-body-image);
 	background-repeat: repeat-y;
 	background-position: center top;
 	background-size: 100% auto;
@@ -31,13 +32,12 @@ body {
 	-webkit-backface-visibility: hidden;
 }
 
-.border-light,
-.line { border-color: rgba(var(--cnvs-themecolor-rgb), var(--cnvs-border-opacity)) !important; }
+.border-light { border-color: rgba(var(--cnvs-themecolor-rgb), var(--cnvs-border-opacity)) !important; }
 
 .bg-color,
 .page-transition-wrap, .css3-spinner { background-color: var(--cnvs-body-bg) !important; }
 
-.bg-color-white { background-color: rgba(18, 55, 120, 0.65) !important; }
+.bg-color-white { background-color: rgba(255, 255, 255, 0.95) !important; }
 .bg-color-white-form { background-color: rgba(255, 255, 255, 0.1) !important; }
 .bg-color-grey { background-color: rgba(255, 255, 255, 0.9) !important; }
 .bg-color-card { background-color: rgba(46, 54, 79, 0.9) !important; }
@@ -45,17 +45,6 @@ body {
 .bg-color-card-light-about { background-color: rgba(45, 93, 237, 0.3); !important; }
 
 .css3-spinner > div {  background-color: var(--cnvs-themecolor) !important; }
-
-.dark body,
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6,
-.dark #copyrights,
-#copyrights.dark,
-.dark .copyright-links a { color: var(--cnvs-themecolor); }
 
 #header {
 	--cnvs-primary-menu-font-weight: 500;
@@ -644,7 +633,7 @@ a.more-link i {
 }
 
 
-.block-slider-3.slider-element .slider-product-desc {
+.slider-element .slider-product-desc {
     position: absolute;
     top: auto;
     bottom: 0;
@@ -656,7 +645,7 @@ a.more-link i {
     background-color: rgba(16, 75, 120, 0.8);
 }
 
-.block-slider-3.slider-element .slider-product-desc a .bi-play {
+.slider-element .slider-product-desc a .bi-play {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -677,25 +666,11 @@ a.more-link i {
     transition: transform .3s ease;
 }
 
-.block-slider-3.slider-element .slider-product-desc a:hover .bi-play {
+.slider-element .slider-product-desc a:hover .bi-play {
     -webkit-transform: scale(1.1);
     -ms-transform: scale(1.1);
     -o-transform: scale(1.1);
     transform: scale(1.1);
-}
-
-.block-slider-3 .blurred-box:after{
-    content: '';
-    width: 80%;
-    height: 130%;
-    background: inherit;
-    position: absolute;
-    left: -25px;
-    top: -25px;
-    background-color: rgba(252, 183, 45, 0.4);
-    -webkit-filter: blur(40px);
-    -o-filter: blur(40px);
-    filter: blur(40px);
 }
 
 .section-colored { background-color: #FFEAE6; }
@@ -772,7 +747,7 @@ a.more-link i {
 
 .flex-prev i { margin-left: 0;}
 
-.slider-arrow-left ,.slider-arrow-right ,.flex-prev:hover i,
+.flex-prev:hover i,
 .flex-next:hover i  { color: #fff;}
 
 .flex-control-nav li {
@@ -959,7 +934,7 @@ background-color: transparent !important;
 	transition: width .5s cubic-bezier(.645, .045, .355, 1);
 }
 
-.menu-link::after,
+.dark .menu-link::after,
 .menu-link .menu-link::after,
 .btn-border-light span::before {
 	content: "";
@@ -968,7 +943,7 @@ background-color: transparent !important;
 	left: 0;
 	width: 0%;
 	height: 3px;
-	background-color: var(--cnvs-themecolor);
+	background-color: #fff;
 	transition: width .5s cubic-bezier(.645, .045, .355, 1);
 }
 
@@ -1114,4 +1089,15 @@ background-color: transparent !important;
 		0 1px #FFF,
 		1px 0 #FFF,
 		0 -1px #FFF;
+}
+
+.not-dark .is-expanded-menu .menu-container > .menu-item {
+	--cnvs-primary-menu-hover-color: #FFF !important;
+	--cnvs-primary-menu-active-color: #FFF !important;
+	color: var(--cnvs-primary-menu-color);
+
+}
+
+.section {
+    background-color: #1660aafc;
 }
