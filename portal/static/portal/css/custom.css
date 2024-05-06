@@ -1101,3 +1101,30 @@ background-color: transparent !important;
 .section {
     background-color: #1660aafc;
 }
+
+.menu-live-center {
+	display: inline-block;
+	margin-left: 6px;
+}
+.menu-live-center .ml-dot {
+	background: #E03C31;
+	position: relative;
+	top: 1px;
+}
+.menu-live-center .ml-circle {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 1px 1px #0000001a;
+}
+.menu-live-center .ml-pulse {
+	animation: ml-pulse-animation 2s infinite;
+}
+@keyframes ml-pulse-animation {
+	0% {
+		box-shadow: 0 0 0 0px rgba(219, 33, 33, 0.3);
+	}
+	100% {
+		box-shadow: 0 0 0 10px rgba(219, 33, 33, 0);
+	}
+}
