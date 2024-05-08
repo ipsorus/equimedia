@@ -1,57 +1,66 @@
 {% load static %}
 <!-- Header
 ============================================= -->
-<header id="header" class="transparent-header dark header-size-md header-size-sm" data-sticky-class="not-dark" data-sticky-offset="full" data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
-	<div class="container">
-		<div class="header-row justify-content-lg-between">
-		</div>
-	</div>
-	<div id="header-wrap">
-		<div class="container">
-			<div class="header-row justify-content-md-between">
+<header id="header"
+        class="{% if request.path == '/' %}transparent-header dark header-size-md header-size-sm{$ else %}header-size-md header-size-sm{% endif %}"
+        data-sticky-class="not-dark" {% if request.path == '/' %}data-sticky-offset="full"{$ else %}data-sticky-offset="0"{% endif %}
+        data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
+    {% if request.path == '/' %}
+    <div class="container">
+        <div class="header-row justify-content-lg-between">
+        </div>
+    </div>
+    {% endif %}
+    <div id="header-wrap">
+        <div class="container">
+            <div class="header-row justify-content-md-between">
 
-				<!-- Logo
-				============================================= -->
-				<div id="logo" class="pe-lg-4 me-lg-auto">
-					<a class="color fw-normal fs-4" href="" data-scrollto="#slider">
-						EQUI MEDIA
-</a>
-				</div><!-- #logo end -->
+                <!-- Logo
+                ============================================= -->
+                <div id="logo" class="pe-lg-4 me-lg-auto">
+                    <a class="color fw-normal fs-4" href="" data-scrollto="#slider">
+                        EQUI MEDIA
+                    </a>
+                </div><!-- #logo end -->
 
-				<div class="header-misc ms-auto col-lg-2 justify-content-lg-end">
+                <div class="header-misc ms-auto col-lg-2 justify-content-lg-end">
 
-					<!-- Top Login
-					============================================= -->
-					<div id="top-account" class="ps-5 header-misc-icon">
-						<a href="#modal-register" data-lightbox="inline"><i class="bi-person"></i></a>
-					</div><!-- #top-login end -->
-					<!-- Bookmark
-					============================================= -->
-					<div class="dropdown dropdown-langs not-dark">
-						<button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img src="{% static 'portal/images/flags/rus.png' %}" alt="Русский">
-						</button>
-						<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-							<a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/rus.png' %}" alt="Russia"> Русский</a>
-							<a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/chn.png' %}" alt="China"> 中国语文科</a>
-							<a href="#" class="dropdown-item disabled" tabindex="-1" aria-disabled="true"><img src="{% static 'portal/images/flags/eng.png' %}" alt="English"> English</a>
-						</div>
-					</div>
-				</div>
+                    <!-- Top Login
+                    ============================================= -->
+                    <div id="top-account" class="ps-5 header-misc-icon">
+                        <a href="#modal-register" data-lightbox="inline"><i class="bi-person"></i></a>
+                    </div><!-- #top-login end -->
+                    <!-- Bookmark
+                    ============================================= -->
+                    <div class="dropdown dropdown-langs not-dark">
+                        <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <img src="{% static 'portal/images/flags/rus.png' %}" alt="Русский">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                            <a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/rus.png' %}"
+                                                                   alt="Russia"> Русский</a>
+                            <a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/chn.png' %}"
+                                                                   alt="China"> 中国语文科</a>
+                            <a href="#" class="dropdown-item disabled" tabindex="-1" aria-disabled="true"><img
+                                    src="{% static 'portal/images/flags/eng.png' %}" alt="English"> English</a>
+                        </div>
+                    </div>
+                </div>
 
-				<div class="primary-menu-trigger"">
-					<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-						<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-					</button>
-				</div>
+                <div class="primary-menu-trigger">
+                    <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+                        <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+                    </button>
+                </div>
 
-				{% include 'portal/includes/menu.html' %}
+                {% include 'portal/includes/menu.html' %}
 
-			</div>
+            </div>
 
-		</div>
+        </div>
 
-	</div>
-	<div class="header-wrap-clone"></div>
+    </div>
+    <div class="header-wrap-clone"></div>
 
 </header><!-- #header end -->

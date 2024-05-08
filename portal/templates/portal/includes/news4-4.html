@@ -2,25 +2,6 @@
 
 
 <style>
-    :not(.dark) .entry-categories a {
-	display: block;
-	text-transform: uppercase;
-	font-size: 11px;
-	color: #333;
-	font-weight: 700;
-	letter-spacing: 1px;
-	margin-bottom: 10px;
-}
-
-.dark .entry-categories a {
-	color: var(--cnvs-themecolor);
-}
-
-.bg-categories,
-.bg-color-categories.nav-link:hover,
-.menu-color-categories > a::before,
-.bg-color-categories.nav-link.active { background: #17A2B8 !important; }
-
 .color-underline {
 	background-image: linear-gradient(rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3), rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3));
 	background-repeat: no-repeat;
@@ -29,39 +10,7 @@
 	padding: 0 2px 2px 0;
 	transition: background .6s cubic-bezier(.19,1,.22,1);
 }
-
 .color-underline:hover { background-size: 100% 8px; }
-
-
-.slider {
-  display: flex;
-}
-
-.block {
-  flex: 1;
-  text-align: center;
-  padding: 20px;
-  background-color: #f0f0f0;
-  transition: all 0.3s;
-}
-
-.block.active {
-  background-color: #ffcc00;
-  transform: scale(1.1);
-}
-
-.slider:hover .block {
-  background-color: #f0f0f0;
-}
-
-.slider:hover .block.active {
-  background-color: #ffcc00;
-}
-
-
-
-
-
 
 
 </style>
@@ -71,7 +20,7 @@
 <div id="section-news" class="section bg-contrast-0 my-0">
     <div class="container">
         <div class="row">
-            <!-- Posts Area
+            <!-- News Area
             ============================================= -->
             <div class="col-lg-9">
                 <div class="col-lg-12">
@@ -81,27 +30,31 @@
                 </div>
                 <div class="row border-between">
                     <div class="col-lg-12 mb-5 mb-lg-0">
-                        <!-- Post Article -->
+                        {% for n in news %}
+                        <!-- Post News -->
+                        {% if forloop.first %}
                         <article class="entry border-bottom-0 mb-0">
                             <div class="entry-image">
-                                <a href="blog-single.html"><img src="{% static 'portal/images/8888.jpg' %}"
-                                                                     alt="Image 3"></a>
+                                <a href="{{ n.get_absolute_url }}"><img src="{% static 'portal/images/8888.jpg' %}"
+                                                                        alt="Image 3"></a>
                             </div>
                             <div class="entry-title">
                                 <!--                                <div class="entry-categories"><a href="demo-blog-categories.html">Coronavirus Update - World</a></div>-->
-                                <h3><a href="blog-single.html"
-                                       class="stretched-link color-underline"><span>Если не победа, то точно такая подрезка в перепрыжке как та, которую вчера сделали в Гран-при Кубка Абхазии Иван Малюгин и Милан, поможет вам запомниться и попасть во все новости с турнира!</span></a>
+                                <h3><a href="{{ n.get_absolute_url }}"
+                                       class="stretched-link color-underline"><span>{{ n.title }}</span></a>
                                 </h3>
                             </div>
                             <div class="entry-meta">
                                 <ul>
-                                    <li><a href="#">Май 06, 2024</a></li>
+                                    <li><a href="#">{{ n.time_create }}</a></li>
                                 </ul>
                             </div>
                             <!--                            <div class="entry-content">-->
                             <!--                                <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam laboriosam esse beatae hic perferendis. Lorem ipsum dolor sit amet. Rapidiously negotiate standardized web services and goal-oriented outsourcing. Uniquely repurpose compelling functionalities before parallel mindshare.</p>-->
                             <!--                            </div>-->
                         </article>
+                        {% endif %}
+                        {% endfor %}
                     </div>
 
 
@@ -116,72 +69,77 @@
                         <h4>Другие новости</h4>
                     </div>
                     <div class="row posts-md col-mb-30">
+                        {% for n in news %}
+                        <!-- Post News -->
+                        {% if not forloop.first %}
                         <div class="entry col-sm-6 col-xl-3 col-md-3">
                             <div class="grid-inner">
                                 <div class="entry-image">
-                                    <a href="#"><img src="{% static 'portal/images/9999.jpg' %}"
-                                                     alt="Image"></a>
+                                    <a href="{{ n.get_absolute_url }}"><img src="{% static 'portal/images/9999.jpg' %}"
+                                                                            alt="Image"></a>
                                 </div>
                                 <div class="entry-meta">
                                     <ul>
-                                        <li><i class="uil uil-schedule"></i> Апрель 29, 2024</li>
+                                        <li><i class="uil uil-schedule"></i> {{ n.time_create }}</li>
                                     </ul>
                                 </div>
                                 <div class="entry-title title-xs text-transform-none">
-                                    <h3><a href="blog-single.html" class="stretched-link color-underline">Сергей Петров – обладатель кубка Абхазии по конкуру!</a></h3>
+                                    <h3><a href="{{ n.get_absolute_url }}" class="stretched-link color-underline">{{ n.title }}</a></h3>
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
 
-                        <div class="entry col-sm-6 col-xl-3 col-md-3">
-                            <div class="grid-inner">
-                                <div class="entry-image">
-                                    <a href="#"><img src="{% static 'portal/images/1111.jpg' %}"
-                                                     alt="Image"></a>
-                                </div>
-                                <div class="entry-meta">
-                                    <ul>
-                                        <li><i class="uil uil-schedule"></i> Апрель 28, 2024</li>
-                                    </ul>
-                                </div>
-                                <div class="entry-title title-xs text-transform-none">
-                                    <h3><a href="blog-single.html" class="stretched-link color-underline">Тарас Миронович Хагба, министр спорта Республики Абхазия, о Кубке Абхазии: станет ли этот турнир традиционным</a></h3>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                        <div class="entry col-sm-6 col-xl-3 col-md-3">-->
+                        <!--                            <div class="grid-inner">-->
+                        <!--                                <div class="entry-image">-->
+                        <!--                                    <a href="#"><img src="{% static 'portal/images/1111.jpg' %}"-->
+                        <!--                                                     alt="Image"></a>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="entry-meta">-->
+                        <!--                                    <ul>-->
+                        <!--                                        <li><i class="uil uil-schedule"></i> Апрель 28, 2024</li>-->
+                        <!--                                    </ul>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="entry-title title-xs text-transform-none">-->
+                        <!--                                    <h3><a href="blog-single.html" class="stretched-link color-underline">Тарас Миронович Хагба, министр спорта Республики Абхазия, о Кубке Абхазии: станет ли этот турнир традиционным</a></h3>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
 
-                        <div class="entry col-sm-6 col-xl-3 col-md-3">
-                            <div class="grid-inner">
-                                <div class="entry-image">
-                                    <a href="#"><img src="{% static 'portal/images/4444.jpg' %}"
-                                                     alt="Image"></a>
-                                </div>
-                                <div class="entry-meta">
-                                    <ul>
-                                        <li><i class="uil uil-schedule"></i> Апрель 28, 2024</li>
-                                    </ul>
-                                </div>
-                                <div class="entry-title title-xs text-transform-none">
-                                    <h3><a href="blog-single.html" class="stretched-link color-underline">МСМК Владимир Туганов о Кубке Абхазии по конкуру в КСК «Виват, Россия!»</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="entry col-sm-6 col-xl-3 col-md-3">
-                            <div class="grid-inner">
-                                <div class="entry-image">
-                                    <a href="#"><img src="{% static 'portal/images/2222.jpg' %}"
-                                                     alt="Image"></a>
-                                </div>
-                                <div class="entry-meta">
-                                    <ul>
-                                        <li><i class="uil uil-schedule"></i> Апрель 27, 2024</li>
-                                    </ul>
-                                </div>
-                                <div class="entry-title title-xs text-transform-none">
-                                    <h3><a href="blog-single.html" class="stretched-link color-underline">Валерия Соколова выигрывает первый из запланированных этапов Кубка мира, киргизские всадники снова забирают все «золото» - в Ташкенте завершился евразийский турнир по конкуру!</a></h3>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                        <div class="entry col-sm-6 col-xl-3 col-md-3">-->
+                        <!--                            <div class="grid-inner">-->
+                        <!--                                <div class="entry-image">-->
+                        <!--                                    <a href="#"><img src="{% static 'portal/images/4444.jpg' %}"-->
+                        <!--                                                     alt="Image"></a>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="entry-meta">-->
+                        <!--                                    <ul>-->
+                        <!--                                        <li><i class="uil uil-schedule"></i> Апрель 28, 2024</li>-->
+                        <!--                                    </ul>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="entry-title title-xs text-transform-none">-->
+                        <!--                                    <h3><a href="blog-single.html" class="stretched-link color-underline">МСМК Владимир Туганов о Кубке Абхазии по конкуру в КСК «Виват, Россия!»</a></h3>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="entry col-sm-6 col-xl-3 col-md-3">-->
+                        <!--                            <div class="grid-inner">-->
+                        <!--                                <div class="entry-image">-->
+                        <!--                                    <a href="#"><img src="{% static 'portal/images/2222.jpg' %}"-->
+                        <!--                                                     alt="Image"></a>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="entry-meta">-->
+                        <!--                                    <ul>-->
+                        <!--                                        <li><i class="uil uil-schedule"></i> Апрель 27, 2024</li>-->
+                        <!--                                    </ul>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="entry-title title-xs text-transform-none">-->
+                        <!--                                    <h3><a href="blog-single.html" class="stretched-link color-underline">Валерия Соколова выигрывает первый из запланированных этапов Кубка мира, киргизские всадники снова забирают все «золото» - в Ташкенте завершился евразийский турнир по конкуру!</a></h3>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                     </div>
                     <div class="m-auto col-md-10 border-0 mt-5">
                         <div class="col-12 text-center">
