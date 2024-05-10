@@ -13,7 +13,8 @@
 	--cnvs-body-bg-rgb: 58,133,144;
 	--cnvs-link-color: #000;
 
-	--cnvs-body-font: 'Roboto', sans-serif;
+	--cnvs-primary-font: 'bowlerregular', sans-serif;
+    --cnvs-body-font: 'bowlerregular', sans-serif;
 
 	--cnvs-border-opacity: .15;
 }

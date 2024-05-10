@@ -11,9 +11,8 @@
 	<link rel="shortcut icon" href="{% static 'portal/images/favicon.ico' %}">
 
 	<!-- Font Imports -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@400;500;700;900&family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/jpx0kib.css">
+<!--	<link rel="stylesheet" href="https://use.typekit.net/gmv6nzn.css">-->
 
 	<!-- Core Style -->
 	<link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
@@ -41,7 +40,24 @@
 	<!-- Document Title
 	============================================= -->
 	<title>EquiMedia</title>
+	<style>
+@font-face {
+    font-family: 'bowlerregular';
+    src: url('{% static 'portal/fonts/BOWLER.otf' %}') format('otf'),
+    font-weight: normal;
+    font-style: normal;
 
+}
+@font-face {
+    font-family: 'floriparegular';
+    src: url('{% static 'portal/fonts/Floripa.otf' %}') format('otf'),
+         url('{% static 'portal/fonts/Floripa.ttf' %}') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+</style>
+	</style>
 <style>
 	.swiper-pagination {
 		--cnvs-swiper-bar-color: #000;

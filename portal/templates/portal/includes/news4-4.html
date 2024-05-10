@@ -1,6 +1,6 @@
 {% load static %}
 
-
+{% block content %}
 <style>
 .color-underline {
 	background-image: linear-gradient(rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3), rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3));
@@ -41,7 +41,7 @@
                             <div class="entry-title">
                                 <!--                                <div class="entry-categories"><a href="demo-blog-categories.html">Coronavirus Update - World</a></div>-->
                                 <h3><a href="{{ n.get_absolute_url }}"
-                                       class="stretched-link color-underline"><span>{{ n.title }}</span></a>
+                                       class="stretched-link color-underline"><span>Sint aliquid sagittis {{ n.title }}</span></a>
                                 </h3>
                             </div>
                             <div class="entry-meta">
@@ -232,3 +232,4 @@
         </div>
     </div>
 </div>
+{% endblock %}
