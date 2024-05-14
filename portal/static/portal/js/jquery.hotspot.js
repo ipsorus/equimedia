@@ -6,8 +6,6 @@
 (function() {
 	'use strict';
 
-	var $ = jQuery.noConflict();
-
 	/*
 		Reposition the HotSpots during init and resize windows
 	*/
@@ -54,10 +52,10 @@
 
 	$.fn.hotSpot = function( options ) {
 
-		// Extend our default options with those provided.
-		// Note that the first argument to extend is an empty
-		// object – this is to keep from overriding our "defaults" object.
-		var _options = $.extend( {}, $.fn.hotSpot.defaults, options );
+	// Extend our default options with those provided.
+	// Note that the first argument to extend is an empty
+	// object – this is to keep from overriding our "defaults" object.
+	var _options = $.extend( {}, $.fn.hotSpot.defaults, options );
 
 		// Position each hotspot
 		this.each(function() {
@@ -91,7 +89,7 @@
 	$.fn.hotSpot.defaults = {
 		mainselector: '.hotspot-img',
 		selector: '.hot-spot',
-		imageselector: 'img',
+		imageselector: '.img-responsive',
 		tooltipselector: '.tooltip',
 		bindselector: 'hover'
 	};

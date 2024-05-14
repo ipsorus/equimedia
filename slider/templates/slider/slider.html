@@ -1,5 +1,4 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'portal/css/swiper.css' %}">
 <style>
 	.swiper-pagination {
 		--cnvs-swiper-bar-color: #000;
@@ -100,18 +99,18 @@
 		}
 	}
 
+
 </style>
 <!-- Hero Section
 ============================================= -->
-<section id="slider"
-         class="slider-element swiper_wrapper min-vh-md-100 customjs include-header dark"
-         data-loop="true">
+<section id="slider" class="slider-element swiper_wrapper min-vh-60 min-vh-md-100 include-header" data-loop="true">
     <div class="slider-inner">
-        <div class="swiper swiper-parent swiper-initialized swiper-horizontal swiper-backface-hidden">
+
+        <div class="swiper-container swiper-parent">
             <div class="swiper-wrapper">
                 {% for s in slider %}
                 {% if not s.is_video %}
-                <div class="swiper-slide">
+                <div class="swiper-slide dark">
                     <div class="container py-5 px-5" style="z-index: 2;">
                         <div class="row h-100 align-items-center py-5">
                             <div class="col-md-12 col-sm-12">

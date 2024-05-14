@@ -1,16 +1,8 @@
 {% load static %}
 <!-- Header
 ============================================= -->
-<header id="header"
-        class="{% if request.path == '/' %}border-0 transparent-header justify-content-flex dark header-size-md header-size-sm{$ else %}header-size-md header-size-sm{% endif %}"
-        data-sticky-class="not-dark" {% if request.path == '/' %}data-sticky-offset="full"{$ else %}data-sticky-offset="0"{% endif %}
-        data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
-    {% if request.path == '/' %}
-    <div class="container">
-        <div class="header-row justify-content-lg-between">
-        </div>
-    </div>
-    {% endif %}
+<header id="header" class="full-header transparent-header dark" data-sticky-class="not-dark"
+        data-responsive-class="not-dark">
     <div id="header-wrap">
         <div class="container">
             <div class="header-row justify-content-lg-between">
@@ -48,10 +40,12 @@
                     </div>
                 </div>
 
-                <div class="primary-menu-trigger">
-                    <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-                        <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-                    </button>
+                <div id="primary-menu-trigger">
+                    <svg class="svg-trigger" viewBox="0 0 100 100">
+                        <path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path>
+                        <path d="m 30,50 h 40"></path>
+                        <path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path>
+                    </svg>
                 </div>
 
                 {% include 'portal/includes/menu.html' %}

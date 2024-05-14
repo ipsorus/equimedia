@@ -10,36 +10,32 @@
 
 	<link rel="shortcut icon" href="{% static 'portal/images/favicon.ico' %}">
 
-	<!-- Font Imports -->
-<!--	<link rel="stylesheet" href="https://use.typekit.net/jpx0kib.css">-->
-<!--	<link rel="stylesheet" href="https://use.typekit.net/gmv6nzn.css">-->
 
+
+	<link rel="stylesheet" href="{% static 'portal/css/bootstrap.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'portal/css/style.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'portal/css/dark.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'portal/css/swiper.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'portal/css/fonts.css' %}" type="text/css" />
+
+	<link rel="stylesheet" href="{% static 'portal/css/font-icons.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'portal/css/animate.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'portal/css/magnific-popup.css' %}" type="text/css" />
 	<!-- Core Style -->
-	<link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
+<!--	<link rel="stylesheet" href="{% static 'portal/css/style.css' %}">-->
 
 	<!-- Font Icons -->
-	<link rel="stylesheet" href="{% static 'portal/css/font-icons.css' %}">
-	<link rel="stylesheet" href="{% static 'portal/css/et-line.css' %}">
-<!--	<link rel="stylesheet" href="{% static 'portal/css/landing.css' %}">-->
-<!--	<link rel="stylesheet" href="{% static 'portal/css/therapy.css' %}">-->
-
-<!--	<link rel="stylesheet" href="{% static 'portal/css/yoga.css' %}">-->
+<!--	<link rel="stylesheet" href="{% static 'portal/css/font-icons.css' %}">-->
+<!--	<link rel="stylesheet" href="{% static 'portal/css/et-line.css' %}">-->
 
 	<!-- Plugins/Components CSS -->
-	<link rel="stylesheet" href="{% static 'portal/css/calendar.css' %}">
-
-<!--	<link rel="stylesheet" href="{% static 'portal/css/accordion-slider.min.css' %}">-->
-<!--	<link rel="stylesheet" href="{% static 'portal/css/hosting.css' %}">-->
-<!--	<link rel="stylesheet" href="{% static 'portal/css/news.css' %}">-->
-<!--	<link rel="stylesheet" href="{% static 'portal/css/skincare.css' %}">-->
+<!--	<link rel="stylesheet" href="{% static 'portal/css/calendar.css' %}">-->
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="{% static 'portal/css/custom.css' %}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Document Title
-	============================================= -->
-	<title>EquiMedia</title>
+	<!-- Font Imports -->
 	<style>
 /* Webfont: Sacco-SemBdCondObliq.eot */@font-face {
     font-family: 'Sacco-SemBdCondObliq';
@@ -169,35 +165,28 @@
 
 </style>
 
+	<!-- Document Title
+	============================================= -->
+	<title>EquiMedia</title>
+
 
 
 </head>
 <body class="stretched">
 <!-- Document Wrapper
 ============================================= -->
-	<div id="wrapper">
-<!--		&lt;!&ndash; Top Bar-->
-<!--		============================================= &ndash;&gt;-->
-<!--		<div id="top-bar" class="py-3 border-0" style="background: var(&#45;&#45;cnvs-color2);">-->
-<!--			<div class="container text-center color">-->
-<!--				<div style="font-size: .9375rem;">Get 20% off* your First Order &amp; Free Shipping Upto $99</div>-->
-<!--			</div>-->
-<!--		</div>-->
-		{% include 'portal/includes/header.html' %}
+	<div id="wrapper" class="clearfix">
 		{% include 'portal/includes/login_register.html' %}
+		{% include 'portal/includes/header.html' %}
 		{% block content %}{% endblock %}
 		{% include 'portal/includes/footer.html' %}
 	</div><!-- #wrapper end -->
 
 <!-- JavaScripts
 	============================================= -->
-
-
-	<!-- Events Calendar -->
-	<script src="{% static 'portal/js/jquery.calendario.js' %}"></script>
-
-	<script src="{% static 'portal/js/plugins.min.js' %}"></script>
-	<script src="{% static 'portal/js/functions.bundle.js' %}"></script>
+<script src="{% static 'portal/js/jquery.js' %}"></script>
+<script src="{% static 'portal/js/plugins.min.js' %}"></script>
+<script src="{% static 'portal/js/functions.js' %}"></script>
 
 <script>
 	jQuery(window).on( 'load', function(){
@@ -291,7 +280,7 @@
     });
   </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
-<script>!SEMICOLON.Mobile.any() && skrollr.init({forceHeight: false});</script>
+<!--<script>!SEMICOLON.Mobile.any() && skrollr.init({forceHeight: false});</script>-->
 
 </body>
 </html>

@@ -1134,3 +1134,12 @@ background-color: transparent !important;
 	text-align: center;
 	margin-top: 50px;
 }
+
+.slider-caption h2 {
+	font-size: 4rem;
+	letter-spacing: 2px;
+	text-transform: none;
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: 0;
+}
