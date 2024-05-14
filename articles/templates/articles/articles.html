@@ -30,50 +30,30 @@
                     </div>
                 </div>
                 <div class="row border-between">
-                    {% for n in main_articles %}
+                    {% for a in main_articles %}
                     <div class="col-lg-6 mb-0 mb-lg-0">
                         <!-- Post Article -->
                         <article class="entry border-bottom-0 mb-0">
                             <div class="entry-image">
-                                <a href="{{ n.get_absolute_url }}"><img src="{% static 'portal/images/8888.jpg' %}"
+                                <a href="{{ a.get_absolute_url }}"><img src="{{ a.image.url }}"
                                                                      alt="Image 3"></a>
-                            </div>
-                            <div class="entry-title">
-                                <h3><a href="{{ n.get_absolute_url }}"
-                                       class="stretched-link color-underline"><span>{{ n.title }}</span></a>
-                                </h3>
                             </div>
                             <div class="entry-meta">
                                 <ul>
-                                    <li><a href="#">{{ n.time_create }}</a></li>
+                                    <li><a href="#">{{ a.time_create }}</a></li>
                                 </ul>
                             </div>
+                            <div class="entry-title">
+                                <h3><a href="{{ a.get_absolute_url }}"
+                                       class="stretched-link color-underline"><span>{{ a.title }}</span></a>
+                                </h3>
+                            </div>
+
 
                         </article>
                     </div>
                     {% endfor %}
-<!--                    <div class="col-lg-6 mb-5 mb-lg-0">-->
-<!--                        &lt;!&ndash; Post Article &ndash;&gt;-->
-<!--                        <article class="entry border-bottom-0 mb-0">-->
-<!--                            <div class="entry-image">-->
-<!--                                <a href="demo-blog-single.html"><img src="{% static 'portal/images/7777.jpg' %}"-->
-<!--                                                                     alt="Image 3"></a>-->
-<!--                            </div>-->
-<!--                            <div class="entry-title">-->
-<!--                                <h3><a href="demo-blog-single.html"-->
-<!--                                       class="stretched-link color-underline"><span>В Швейцарии успешно завершился Спортивный Форум FEI 2024: итоги второго дня!</span></a>-->
-<!--                                </h3>-->
-<!--                            </div>-->
-<!--                            <div class="entry-meta">-->
-<!--                                <ul>-->
-<!--                                    <li><a href="#">Май 05, 2024</a></li>-->
-<!--                                </ul>-->
-<!--                            </div>-->
-
-<!--                        </article>-->
-<!--                    </div>-->
                 </div>
-
                 <!-- Ad
                 ============================================= -->
                 <a href="#"><img src="{% static 'portal/images/ad.jpg' %}" width="728" alt="Ad"
@@ -84,82 +64,28 @@
                         <h4>Другие статьи</h4>
                     </div>
                     <div class="row posts-md col-mb-30">
-                        {% for n in articles %}
+                        {% for a in articles %}
                         <div class="entry col-sm-6 col-xl-3 col-md-3">
                             <div class="grid-inner">
                                 <div class="entry-image">
-                                    <a href="{{ n.get_absolute_url }}"><img src="{% static 'portal/images/3333.jpg' %}"
-                                                     alt="Image"></a>
+                                    <a href="{{ a.get_absolute_url }}">{% if a.image %}<img src="{{ a.image.url }}" alt="Image">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}</a>
                                 </div>
                                                                 <div class="entry-meta">
                                     <ul>
-                                        <li><i class="uil uil-schedule"></i> {{ n.time_create }}</li>
+                                        <li><i class="uil uil-schedule"></i> {{ a.time_create }}</li>
                                     </ul>
                                 </div>
                                 <div class="entry-title title-xs text-transform-none">
-                                    <h3><a href="{{ n.get_absolute_url }}" class="stretched-link color-underline">{{ n.title }}</a></h3>
+                                    <h3><a href="{{ a.get_absolute_url }}" class="stretched-link color-underline">{{ a.title }}</a></h3>
                                 </div>
 
                             </div>
                         </div>
                         {% endfor %}
-
-<!--                        <div class="entry col-sm-6 col-xl-3 col-md-3">-->
-<!--                            <div class="grid-inner">-->
-<!--                                <div class="entry-image">-->
-<!--                                    <a href="#"><img src="{% static 'portal/images/1111.jpg' %}"-->
-<!--                                                     alt="Image"></a>-->
-<!--                                </div>-->
-<!--                                                                <div class="entry-meta">-->
-<!--                                    <ul>-->
-<!--                                        <li><i class="uil uil-schedule"></i> Май 04, 2024</li>-->
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                                <div class="entry-title title-xs text-transform-none">-->
-<!--                                    <h3><a href="blog-single.html" class="stretched-link color-underline">В новом выпуске мы расскажем о результатах турниров в живописных Фонтенбло и Кентукки и последних Гран-при CSI3* и CSI2*, прошедших на различных аренах мира в эти выходные.</a></h3>-->
-<!--                                </div>-->
-
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div class="entry col-sm-6 col-xl-3 col-md-3">-->
-<!--                            <div class="grid-inner">-->
-<!--                                <div class="entry-image">-->
-<!--                                    <a href="#"><img src="{% static 'portal/images/4444.jpg' %}"-->
-<!--                                                     alt="Image"></a>-->
-<!--                                </div>-->
-<!--                                                          <div class="entry-meta">-->
-<!--                                    <ul>-->
-<!--                                        <li><i class="uil uil-schedule"></i> Май 04, 2024</li>-->
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                                <div class="entry-title title-xs text-transform-none">-->
-<!--                                    <h3><a href="blog-single.html" class="stretched-link color-underline">29 апреля в Швейцарии открылся Спортивный Форум FEI 2024!</a></h3>-->
-<!--                                </div>-->
-
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="entry col-sm-6 col-xl-3 col-md-3">-->
-<!--                            <div class="grid-inner">-->
-<!--                                <div class="entry-image">-->
-<!--                                    <a href="#"><img src="{% static 'portal/images/2222.jpg' %}"-->
-<!--                                                     alt="Image"></a>-->
-<!--                                </div>-->
-<!--                                <div class="entry-meta">-->
-<!--                                    <ul>-->
-<!--                                        <li><i class="uil uil-schedule"></i> Май 02, 2024</li>-->
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                                <div class="entry-title title-xs text-transform-none">-->
-<!--                                    <h3><a href="blog-single.html" class="stretched-link color-underline">Евгений Овчаренко – победитель финального маршрута Гран-при 150 см в КСК Golden Horse!</a></h3>-->
-<!--                                </div>-->
-
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
                     <div class="m-auto col-md-10 border-0 mt-5">
                         <div class="col-12 text-center">
-                            <a href="#" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal d-inline-flex fadeInUp animated" data-animate="fadeInUp" data-delay="300"><i class="bi-arrow-right"></i><span>Перейти к статьям</span></a>
+                            <a href="/articles" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal d-inline-flex fadeInUp animated" data-animate="fadeInUp" data-delay="300"><i class="bi-arrow-right"></i><span>Перейти к статьям</span></a>
                         </div>
                     </div>
                 </div>

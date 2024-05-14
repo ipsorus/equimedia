@@ -1,16 +1,7 @@
 from django.contrib import admin
 from django.db import ProgrammingError
 
-from articles.models import Article
-from portal.models import NewsPost, WebsiteSettings, SiteSettings
-
-
-class NewsAdmin(admin.ModelAdmin):
-    model = NewsPost
-
-
-class ArticlesAdmin(admin.ModelAdmin):
-    model = Article
+from portal.models import WebsiteSettings, SiteSettings
 
 
 class WebSiteSettings(admin.ModelAdmin):
@@ -38,6 +29,4 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SiteSettings, SiteSettingsAdmin)
-admin.site.register(NewsPost, NewsAdmin)
-admin.site.register(Article, ArticlesAdmin)
 admin.site.register(WebsiteSettings, WebSiteSettings)

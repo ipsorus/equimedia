@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from articles.models import Article
+
+
+class ArticlesAdmin(admin.ModelAdmin):
+    model = Article
+
+admin.site.register(Article, ArticlesAdmin)

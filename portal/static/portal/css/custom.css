@@ -13,8 +13,8 @@
 	--cnvs-body-bg-rgb: 58,133,144;
 	--cnvs-link-color: #000;
 
-	--cnvs-primary-font: 'bowlerregular', sans-serif;
-    --cnvs-body-font: 'bowlerregular', sans-serif;
+	--cnvs-primary-font: 'Sharp Grotesk', Arial,sans-serif;
+    --cnvs-body-font: 'Sharp Grotesk', Arial,sans-serif;
 
 	--cnvs-border-opacity: .15;
 }
@@ -49,7 +49,7 @@ body {
 
 #header {
 	--cnvs-primary-menu-font-weight: 500;
-	--cnvs-primary-menu-font-size:	1rem;
+	--cnvs-primary-menu-font-size:	0.8rem;
 	--cnvs-primary-menu-tt:	none;
 	--cnvs-primary-menu-ls:	0;
 	--cnvs-primary-menu-submenu-font-size:	0.875rem;
@@ -865,7 +865,7 @@ background-color: transparent !important;
 
 @media (min-width: 991px) and (max-width: 1200px) {
 	.menu-link {
-		font-size: 14px;
+		font-size: 10px;
 	}
 }
 
@@ -973,7 +973,7 @@ background-color: transparent !important;
 
 
 .entry-title h3 {
-	font-weight: 600;
+	font-weight: 300;
 }
 
 .entry-meta {
@@ -981,7 +981,7 @@ background-color: transparent !important;
 }
 
 .entry-meta li {
-	font-size: 0.875rem;
+	font-size: 0.675rem;
 }
 
 .entry-meta li a:not(:hover) {
@@ -1128,4 +1128,9 @@ background-color: transparent !important;
 	100% {
 		box-shadow: 0 0 0 10px rgba(219, 33, 33, 0);
 	}
+}
+
+.endless_container {
+	text-align: center;
+	margin-top: 50px;
 }

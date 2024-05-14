@@ -1,0 +1,19 @@
+{% load el_pagination_tags %}
+{% load static %}
+{% paginate 9 articles %}
+
+{% for post in articles %}
+<article class="portfolio-item col-12 col-sm-6 col-md-4 pf-media pf-icons">
+    <div class="grid-inner">
+        <div class="portfolio-image">
+            {% if post.image %}<img src="{{ post.image.url }}" alt="">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}
+        </div>
+        <div class="portfolio-desc">
+            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+            <span>{{ post.time_create }}</span>
+        </div>
+    </div>
+</article>
+{% endfor %}
+
+{% show_more "Показать еще" "Загрузка..." class_name='btn button rounded-1 button-border m-0 size-lg mt-6 button-reveal' %}

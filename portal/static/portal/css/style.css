@@ -20090,10 +20090,10 @@ body:not(.has-plugin-html5video) .video-wrap video {
   text-shadow: none;
 }
 .slider-caption h2, .slider-caption .h2 {
-  font-size: 4.5rem;
+  font-size: 3.5rem;
   letter-spacing: 0;
   text-transform: none;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
   margin-bottom: 0;
 }

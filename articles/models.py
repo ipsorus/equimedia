@@ -7,7 +7,7 @@ class Article(models.Model):
     title = models.CharField(max_length=200, db_index=True, verbose_name="Заголовок статьи")
     slug = models.SlugField(max_length=150, unique=True, db_index=True)
     content = RichTextField(blank=True)
-    image = models.ImageField(upload_to='images/articles/%Y/%m/%d', blank=True)
+    image = models.ImageField(upload_to='media/articles/%Y/%m/%d', blank=True)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False, verbose_name="Публикация статьи")

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +44,11 @@ INSTALLED_APPS = [
 
     'portal.apps.PortalConfig',
     'articles.apps.ArticlesConfig',
-    'ckeditor'
+    'news.apps.NewsConfig',
+    'slider.apps.SliderConfig',
+    'testimonial.apps.TestimonialConfig',
+    'ckeditor',
+    'el_pagination'
 ]
 
 MIDDLEWARE = [
@@ -76,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'portal.context_processors.website_settings',
                 'portal.context_processors.load_settings',
+                'django.template.context_processors.request', ## For EL-pagination
             ],
         },
     },
@@ -133,7 +138,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = []
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
 
@@ -148,3 +158,5 @@ LANGUAGES = [
     ('en', _('English')),
     ('ru', _('Russian')),
 ]
+
+PER_PAGE = 9

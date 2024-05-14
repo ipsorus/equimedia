@@ -1,0 +1,235 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'portal/css/swiper.css' %}">
+<style>
+	.swiper-pagination {
+		--cnvs-swiper-bar-color: #000;
+		--cnvs-swiper-bar-size: 30px;
+		--cnvs-swiper-bar-dot-size: 4px;
+		--cnvs-swiper-bar-dot-color: #000;
+		--cnvs-swiper-stroke-width: 6;
+		--cnvs-swiper-autoplay-speed: 5000ms;
+		--cnvs-swiper-bullet-gutter: 3px;
+		--cnvs-swiper-bullet-offset: 25px;
+
+		bottom: var(--cnvs-swiper-bullet-offset) !important;
+	}
+
+	.swiper-pagination.center-left,
+	.swiper-pagination.center-right {
+		display: block;
+		width: var(--cnvs-swiper-bar-size);
+		top: 50% !important;
+		bottom: auto !important;
+		left: var(--cnvs-swiper-bullet-offset) !important;
+		transform: translateY(-50%);
+	}
+
+	.swiper-pagination.center-right {
+		right: var(--cnvs-swiper-bullet-offset) !important;
+		left: auto !important;
+	}
+
+	.dark .swiper-pagination,
+	.dark.swiper-pagination {
+		--cnvs-swiper-bar-color: var(--bs-light);
+		--cnvs-swiper-bar-dot-color: var(--bs-light);
+	}
+
+	.swiper-pagination span,
+	.swiper-pagination-bullet svg {
+		position: relative;
+		width: var(--cnvs-swiper-bar-size);
+		height: var(--cnvs-swiper-bar-size);
+		background-color: transparent;
+		border: 0;
+	}
+
+	.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+		margin: 0 var(--cnvs-swiper-bullet-gutter);
+	}
+
+	.swiper-horizontal>.swiper-pagination.center-left.swiper-pagination-bullets .swiper-pagination-bullet,
+	.swiper-horizontal>.swiper-pagination.center-right.swiper-pagination-bullets .swiper-pagination-bullet {
+		margin: var(--cnvs-swiper-bullet-gutter) 0;
+	}
+
+	.swiper-pagination span:hover,
+	.swiper-pagination span.swiper-pagination-bullet-active {
+		background: transparent !important;
+	}
+
+	.swiper-pagination-bullet circle {
+		stroke: var(--cnvs-swiper-bar-color);
+		stroke-width: var(--cnvs-swiper-stroke-width);
+		fill: none;
+	}
+
+	.swiper-pagination-bullet::before {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: var(--cnvs-swiper-bar-dot-size);
+		height: var(--cnvs-swiper-bar-dot-size);
+		background: var(--cnvs-swiper-bar-dot-color);
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.swiper-pagination-bullet circle {
+		stroke-dashoffset: 260;
+		stroke-dasharray: 259;
+	}
+	.swiper-pagination-bullet-active circle {
+		transform: rotate(-90deg);
+		transform-origin: center;
+		animation-name: swiperSVGAnim;
+		animation-duration: var(--cnvs-swiper-autoplay-speed);
+		animation-timing-function: ease-in;
+		animation-iteration-count: 1;
+		animation-direction: alternate;
+		animation-fill-mode: forwards;
+	}
+
+	@keyframes swiperSVGAnim {
+		0% {
+			stroke-dashoffset: 260;
+		}
+		100% {
+			stroke-dashoffset: 0;
+		}
+	}
+
+</style>
+<!-- Hero Section
+============================================= -->
+<section id="slider"
+         class="slider-element swiper_wrapper min-vh-md-100 customjs include-header dark"
+         data-loop="true">
+    <div class="slider-inner">
+        <div class="swiper swiper-parent swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper">
+                {% for s in slider %}
+                {% if not s.is_video %}
+                <div class="swiper-slide">
+                    <div class="container py-5 px-5" style="z-index: 2;">
+                        <div class="row h-100 align-items-center py-5">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="slider-caption"
+                                     style="max-width: 650px; position: relative; line-height: 80px;">
+                                    <h2>{{ s.title }}</h2>
+                                    {% if s.additional_content %}
+                                    <p>{{ s.additional_content }}</p>
+                                    {% endif %}
+                                    <div>
+                                        <a href="{{ s.url }}"
+                                           class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded"
+                                           target="_blank">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide-bg"
+                         style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{{ s.poster.url }}'); background-position: center center;"></div>
+                </div>
+                {% else %}
+                <div class="swiper-slide dark">
+                    <div class="container">
+                        <div class="slider-caption display-4">
+                            <h2>{{ s.title }}</h2>
+                            {% if s.additional_content %}
+                            <p>{{ s.additional_content }}</p>
+                            {% endif %}
+                            <div>
+                                <a href="{{ s.url }}"
+                                   class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded"
+                                   target="_blank">Смотреть</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-wrap no-placeholder">
+                        <video id="slide-video" poster="{{ s.poster.url }}" preload="auto"
+                               loop autoplay muted playsinline>
+                            <source src="{{ s.video.url }}" type='video/webm'>
+                            <source src="{{ s.video.url }}" type='video/mp4'>
+                        </video>
+                        <div class="video-overlay" style="background-color: rgba(0,0,0,0.55);"></div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <!--            <div class="swiper-slide">-->
+                <!--            <div class="container">-->
+                <!--                <div class="slider-caption">-->
+                <!--                    <h2>Видео-слайд #2</h2>-->
+                <!--                    <p>Можно использовать загруженное на youtube видео</p>-->
+                <!--                    <div>-->
+                <!--                        <a href="block-slider-7-vertical.html" class="mt-6 border-width-2 button button-large button-offset button-light bg-white text-dark rounded" target="_blank">Смотреть</a>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--            <div class="video-wrap">-->
+                <!--                <div class="yt-bg-player" data-quality="hd1080" data-start="19" data-mute="true" data-volume="1" data-stop="52" data-video="https://youtu.be/BAs61JQ3ciQ"></div>-->
+                <!--                <div class="video-overlay" style="background: rgba(0,0,0,0.4);"></div>-->
+                <!--            </div>-->
+                <!--            </div>-->
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Slider Mouse Icon
+            ============================================= -->
+            <a href="#" class="scroll-down d-none d-lg-block one-page-arrow" data-scrollto="#section-news"
+               data-offset="30">
+                <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+            </a>
+        </div>
+
+        <!-- Slider Bottom Content
+        ============================================= -->
+        <div class="announce slider-product-desc dark bg-color-card">
+            <div class="d-none d-lg-flex fslider testimonial testimonial-full bg-transparent mx-auto"
+                 data-animation="fade"
+                 data-pagi="false">
+                <div class="flexslider">
+                    <div class="slider-wrap mw-sm mx-auto">
+                        <div class="slide">
+                            <div class="col-md-12 px-5 py-4">
+                                <div class="before-heading text-white-50 fw-normal ls-1 mb-3"
+                                     style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">
+                                    Новости
+                                </div>
+                                <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">Новая
+                                    лошадь с перспективой на Гран-при у Хейрадина Нуриева!</h3>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="col-md-12 px-5 py-4">
+                                <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 mb-3"
+                                     style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">
+                                    Статьи
+                                </div>
+                                <h3 class="mb-1" style="font-size: 14px;">В Ташкенте, Узбекистан, стартовал
+                                    лично-командный евразийский турнир по конкуру</h3>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="col-md-12 px-5 py-4">
+                                <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 mb-3"
+                                     style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">
+                                    Блоги
+                                </div>
+                                <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">Немного
+                                    фото-впечатлений от первого дня евразийского турнира по конкуру</h3>
+                                <!--                                <p class="mb-2 text-white-50">еукеуеa sint ut temporibus dignissimos, ex esse molestiae-->
+                                <!--                                    atque.</p>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

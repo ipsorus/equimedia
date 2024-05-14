@@ -11,7 +11,7 @@
 	<link rel="shortcut icon" href="{% static 'portal/images/favicon.ico' %}">
 
 	<!-- Font Imports -->
-	<link rel="stylesheet" href="https://use.typekit.net/jpx0kib.css">
+<!--	<link rel="stylesheet" href="https://use.typekit.net/jpx0kib.css">-->
 <!--	<link rel="stylesheet" href="https://use.typekit.net/gmv6nzn.css">-->
 
 	<!-- Core Style -->
@@ -27,7 +27,7 @@
 
 	<!-- Plugins/Components CSS -->
 	<link rel="stylesheet" href="{% static 'portal/css/calendar.css' %}">
-	<link rel="stylesheet" href="{% static 'portal/css/swiper.css' %}">
+
 <!--	<link rel="stylesheet" href="{% static 'portal/css/accordion-slider.min.css' %}">-->
 <!--	<link rel="stylesheet" href="{% static 'portal/css/hosting.css' %}">-->
 <!--	<link rel="stylesheet" href="{% static 'portal/css/news.css' %}">-->
@@ -41,123 +41,135 @@
 	============================================= -->
 	<title>EquiMedia</title>
 	<style>
-@font-face {
-    font-family: 'bowlerregular';
-    src: url('{% static 'portal/fonts/BOWLER.otf' %}') format('otf'),
+/* Webfont: Sacco-SemBdCondObliq.eot */@font-face {
+    font-family: 'Sacco-SemBdCondObliq';
+    src: url('{% static 'portal/fonts/sacco/web/Sacco-SemiBoldCondensed.eot' %}'); /* IE9 Compat Modes */
+    src: url('{% static 'portal/fonts/sacco/web/Sacco-SemiBoldCondensed.eot?#iefix' %}') format('embedded-opentype'), /* IE6-IE8 */
+         url('{% static 'portal/fonts/sacco/web/Sacco-SemiBoldCondensed.woff' %}') format('woff'), /* Modern Browsers */
+         url('{% static 'portal/fonts/sacco/web/Sacco-SemiBoldCondensed.woff2' %}') format('woff2'), /* Modern Browsers */
+         url('{% static 'portal/fonts/sacco/truetype/Sacco-SemiBoldCondensed.ttf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
     font-weight: normal;
-    font-style: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: didot_bold */@font-face {
+    font-family: 'didot_bold';
+    src: url('{% static 'portal/fonts/didot_bold.otf' %}'); /* Safari, Android, iOS */
+             font-style: bold;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: AC Boucle.ttf */@font-face {
+    font-family: 'AC Boucle';
+    src: url('{% static 'portal/fonts/AC Boucle.ttf' %}'); /* IE9 Compat Modes */
+    src: url('{% static 'portal/fonts/AC Boucle.ttf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: Moniqa */@font-face {
+    font-family: 'Moniqa';
+    src: url('{% static 'portal/fonts/Moniqa/Fonts/OpenType-PS (OTF)/Moniqa-MediumHeading.otf' %}'); /* IE9 Compat Modes */
+    src: url('{% static 'portal/fonts/Moniqa/Fonts/OpenType-TT (TTF)/Moniqa-MediumHeading.ttf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: Moniqa */@font-face {
+    font-family: 'Moniqa2';
+    src: url('{% static 'portal/fonts/Moniqa/Fonts/Variable-PS (OTF)/CYR_CT_OP_Emberly Regular [wdth,wght]-VF.otf' %}'); /* IE9 Compat Modes */
+    src: url('{% static 'portal/fonts/Moniqa/Fonts/Variable-TT (TTF)/CYR_CT_OP_Emberly Regular [wdth,wght]-VF.ttf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: Bartina */@font-face {
+    font-family: 'Bartina';
+    src: url('{% static 'portal/fonts/bartina/Bartina Light.ttf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: Cruinn */@font-face {
+    font-family: 'Cruinn';
+    src: url('{% static 'portal/fonts/cruinn/Cruinn Regular.ttf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: Izis */@font-face {
+    font-family: 'Izis';
+    src: url('{% static 'portal/fonts/Izis_One.ttf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
 
+/* Webfont: Belarus */@font-face {
+    font-family: 'Belarus';
+    src: url('{% static 'portal/fonts/Belarus.otf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+/* Webfont: Handil */@font-face {
+    font-family: 'Handil';
+    src: url('{% static 'portal/fonts/HandilPro-Medium.otf' %}') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
 }
 @font-face {
-    font-family: 'floriparegular';
-    src: url('{% static 'portal/fonts/Floripa.otf' %}') format('otf'),
-         url('{% static 'portal/fonts/Floripa.ttf' %}') format('ttf');
+    font-family: 'Didot1';
+    src: url('{% static 'portal/fonts/didot/Didot-Italic.eot' %}');
+    src: local('Didot Italic'), local('Didot-Italic'),
+        url('{% static 'portal/fonts/didot/Didot-Italic.eot?#iefix' %}') format('embedded-opentype'),
+        url('{% static 'portal/fonts/didot/Didot-Italic.woff2' %}') format('woff2'),
+        url('{% static 'portal/fonts/didot/Didot-Italic.woff' %}') format('woff'),
+        url('{% static 'portal/fonts/didot/Didot-Italic.ttf' %}') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Didot2';
+    src: url('{% static 'portal/fonts/didot/Didot.eot' %}');
+    src: local('Didot'),
+        url('{% static 'portal/fonts/didot/Didot.eot?#iefix' %}') format('embedded-opentype'),
+        url('{% static 'portal/fonts/didot/Didot.woff2' %}') format('woff2'),
+        url('{% static 'portal/fonts/didot/Didot.woff' %}') format('woff'),
+        url('{% static 'portal/fonts/didot/Didot.ttf' %}') format('truetype');
     font-weight: normal;
     font-style: normal;
-
 }
+
+@font-face {
+    font-family: 'Didot3';
+    src: url('{% static 'portal/fonts/didot/Didot-Bold.eot' %}');
+    src: local('Didot Bold'), local('Didot-Bold'),
+        url('{% static 'portal/fonts/didot/Didot-Bold.eot?#iefix' %}') format('embedded-opentype'),
+        url('{% static 'portal/fonts/didot/Didot-Bold.woff2' %}') format('woff2'),
+        url('{% static 'portal/fonts/didot/Didot-Bold.woff' %}') format('woff'),
+        url('{% static 'portal/fonts/didot/Didot-Bold.ttf' %}') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Sharp Grotesk";
+    src: url("{% static 'portal/fonts/Sharp Grotesk DB Cyr Medium 22 Regular/Web Fonts/0b6986b36b7d81188f996e58f2ec0643.eot' %}");
+    src: url("{% static 'portal/fonts/Sharp Grotesk DB Cyr Medium 22 Regular/Web Fonts/0b6986b36b7d81188f996e58f2ec0643.eot?#iefix' %}")format("embedded-opentype"),
+        url("{% static 'portal/fonts/Sharp Grotesk DB Cyr Medium 22 Regular/Web Fonts/0b6986b36b7d81188f996e58f2ec0643.woff' %}")format("woff"),
+        url("{% static 'portal/fonts/Sharp Grotesk DB Cyr Medium 22 Regular/Web Fonts/0b6986b36b7d81188f996e58f2ec0643.woff2' %}")format("woff2"),
+        url("{% static 'portal/fonts/Sharp Grotesk DB Cyr Medium 22 Regular/Web Fonts/0b6986b36b7d81188f996e58f2ec0643.ttf' %}")format("truetype"),
+        url("{% static 'portal/fonts/Sharp Grotesk DB Cyr Medium 22 Regular/Web Fonts/0b6986b36b7d81188f996e58f2ec0643.svg#Sharp Grotesk DB Cyr Medium 22 Regular' %}")format("svg");
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
+
 </style>
-	</style>
-<style>
-	.swiper-pagination {
-		--cnvs-swiper-bar-color: #000;
-		--cnvs-swiper-bar-size: 30px;
-		--cnvs-swiper-bar-dot-size: 4px;
-		--cnvs-swiper-bar-dot-color: #000;
-		--cnvs-swiper-stroke-width: 6;
-		--cnvs-swiper-autoplay-speed: 5000ms;
-		--cnvs-swiper-bullet-gutter: 3px;
-		--cnvs-swiper-bullet-offset: 25px;
 
-		bottom: var(--cnvs-swiper-bullet-offset) !important;
-	}
 
-	.swiper-pagination.center-left,
-	.swiper-pagination.center-right {
-		display: block;
-		width: var(--cnvs-swiper-bar-size);
-		top: 50% !important;
-		bottom: auto !important;
-		left: var(--cnvs-swiper-bullet-offset) !important;
-		transform: translateY(-50%);
-	}
-
-	.swiper-pagination.center-right {
-		right: var(--cnvs-swiper-bullet-offset) !important;
-		left: auto !important;
-	}
-
-	.dark .swiper-pagination,
-	.dark.swiper-pagination {
-		--cnvs-swiper-bar-color: var(--bs-light);
-		--cnvs-swiper-bar-dot-color: var(--bs-light);
-	}
-
-	.swiper-pagination span,
-	.swiper-pagination-bullet svg {
-		position: relative;
-		width: var(--cnvs-swiper-bar-size);
-		height: var(--cnvs-swiper-bar-size);
-		background-color: transparent;
-		border: 0;
-	}
-
-	.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
-		margin: 0 var(--cnvs-swiper-bullet-gutter);
-	}
-
-	.swiper-horizontal>.swiper-pagination.center-left.swiper-pagination-bullets .swiper-pagination-bullet,
-	.swiper-horizontal>.swiper-pagination.center-right.swiper-pagination-bullets .swiper-pagination-bullet {
-		margin: var(--cnvs-swiper-bullet-gutter) 0;
-	}
-
-	.swiper-pagination span:hover,
-	.swiper-pagination span.swiper-pagination-bullet-active {
-		background: transparent !important;
-	}
-
-	.swiper-pagination-bullet circle {
-		stroke: var(--cnvs-swiper-bar-color);
-		stroke-width: var(--cnvs-swiper-stroke-width);
-		fill: none;
-	}
-
-	.swiper-pagination-bullet::before {
-		content: "";
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		width: var(--cnvs-swiper-bar-dot-size);
-		height: var(--cnvs-swiper-bar-dot-size);
-		background: var(--cnvs-swiper-bar-dot-color);
-		border-radius: 50%;
-		transform: translate(-50%, -50%);
-	}
-
-	.swiper-pagination-bullet circle {
-		stroke-dashoffset: 260;
-		stroke-dasharray: 259;
-	}
-	.swiper-pagination-bullet-active circle {
-		transform: rotate(-90deg);
-		transform-origin: center;
-		animation-name: swiperSVGAnim;
-		animation-duration: var(--cnvs-swiper-autoplay-speed);
-		animation-timing-function: ease-in;
-		animation-iteration-count: 1;
-		animation-direction: alternate;
-		animation-fill-mode: forwards;
-	}
-
-	@keyframes swiperSVGAnim {
-		0% {
-			stroke-dashoffset: 260;
-		}
-		100% {
-			stroke-dashoffset: 0;
-		}
-	}
-</style>
 
 </head>
 <body class="stretched">
@@ -184,10 +196,8 @@
 	<!-- Events Calendar -->
 	<script src="{% static 'portal/js/jquery.calendario.js' %}"></script>
 
-	<script src="{% static 'portal/js/plugins.infinitescroll.js' %}"></script>
 	<script src="{% static 'portal/js/plugins.min.js' %}"></script>
 	<script src="{% static 'portal/js/functions.bundle.js' %}"></script>
-<!--	<script src="{% static 'portal/js/jquery.accordionSlider.min.js' %}"></script>-->
 
 <script>
 	jQuery(window).on( 'load', function(){
@@ -214,35 +224,34 @@
 		});
 	});
 </script>
+<!--<script>-->
+<!--	var cal = jQuery( '#calendar' ).calendario( {-->
+<!--		onDayClick : function( $el, $contentEl, dateProperties ) {-->
+<!--			for( var key in dateProperties ) {-->
+<!--				console.log( key + ' = ' + dateProperties[ key ] );-->
+<!--			}-->
+<!--		},-->
+<!--		caldata : {}-->
 
-<script>
-	var cal = jQuery( '#calendar' ).calendario( {
-		onDayClick : function( $el, $contentEl, dateProperties ) {
-			for( var key in dateProperties ) {
-				console.log( key + ' = ' + dateProperties[ key ] );
-			}
-		},
-		caldata : {}
+<!--	}),-->
+<!--	$month = jQuery( '#calendar-month' ).html( cal.getMonthName() ),-->
+<!--	$year = jQuery( '#calendar-year' ).html( cal.getYear() );-->
 
-	}),
-	$month = jQuery( '#calendar-month' ).html( cal.getMonthName() ),
-	$year = jQuery( '#calendar-year' ).html( cal.getYear() );
+<!--	jQuery( '#calendar-next' ).on( 'click', function() {-->
+<!--		cal.gotoNextMonth( updateMonthYear );-->
+<!--	} );-->
+<!--	jQuery( '#calendar-prev' ).on( 'click', function() {-->
+<!--		cal.gotoPreviousMonth( updateMonthYear );-->
+<!--	} );-->
+<!--	jQuery( '#calendar-current' ).on( 'click', function() {-->
+<!--		cal.gotoNow( updateMonthYear );-->
+<!--	} );-->
 
-	jQuery( '#calendar-next' ).on( 'click', function() {
-		cal.gotoNextMonth( updateMonthYear );
-	} );
-	jQuery( '#calendar-prev' ).on( 'click', function() {
-		cal.gotoPreviousMonth( updateMonthYear );
-	} );
-	jQuery( '#calendar-current' ).on( 'click', function() {
-		cal.gotoNow( updateMonthYear );
-	} );
-
-	function updateMonthYear() {
-		$month.html( cal.getMonthName() );
-		$year.html( cal.getYear() );
-	}
-</script>
+<!--	function updateMonthYear() {-->
+<!--		$month.html( cal.getMonthName() );-->
+<!--		$year.html( cal.getYear() );-->
+<!--	}-->
+<!--</script>-->
 <script>
 	jQuery('#oc-blogs').owlCarousel({
 		items: 1,
@@ -283,7 +292,6 @@
   </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
 <script>!SEMICOLON.Mobile.any() && skrollr.init({forceHeight: false});</script>
-
 
 </body>
 </html>
