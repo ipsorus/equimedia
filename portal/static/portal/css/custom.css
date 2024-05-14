@@ -4,13 +4,13 @@
 
 :root {
     --cnvs-themecolor-light-rgb: 255, 255, 255;
-	--cnvs-themecolor: #1c448a;
-	--cnvs-themecolor-rgb: 28, 68, 138;
-	--cnvs-secondary-color: #8c7719;
-	--cnvs-secondary-color-rgb: 140, 119, 25;
+	--cnvs-themecolor: #fff;
+	--cnvs-themecolor-rgb: 255, 255, 255;
+	--cnvs-secondary-color: #fff;
+	--cnvs-secondary-color-rgb: 255, 255, 255;
 	--cnvs-body-bg: #fff;
 	--cnvs-body-bg-light: var(--cnvs-themecolor-light-rgb);
-	--cnvs-body-bg-rgb: 58,133,144;
+	--cnvs-body-bg-rgb: 255, 255, 255;
 	--cnvs-link-color: #000;
 
 	--cnvs-primary-font: 'Sharp Grotesk', Arial,sans-serif;
@@ -1100,7 +1100,7 @@ background-color: transparent !important;
 }
 
 .section {
-    background-color: #1660aafc;
+    background-color: #fff;
 }
 
 .menu-live-center {
