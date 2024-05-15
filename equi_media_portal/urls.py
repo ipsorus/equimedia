@@ -5,6 +5,7 @@ from django.urls import path, include
 from equi_media_portal import settings
 from portal import views
 from portal.views import page_not_found
+from django.views.static import serve as mediaserve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,3 +20,11 @@ handler404 = page_not_found
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+else:
+    urlpatterns += [
+        path(f'^{settings.MEDIA_URL.lstrip("/")}(?P<path>.*)$',
+            mediaserve, {'document_root': settings.MEDIA_ROOT}),
+        path(f'^{settings.STATIC_URL.lstrip("/")}(?P<path>.*)$',
+            mediaserve, {'document_root': settings.STATIC_ROOT}),
+    ]

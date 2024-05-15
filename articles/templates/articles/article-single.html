@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
 
-                                {{ item.content }}
+                                {{ item.content|safe }}
                                 <!-- Post Single - Content End -->
 
 
@@ -162,7 +162,7 @@
                                     <div class="grid-inner row align-items-center g-0">
                                         <div class="col ps-3">
                                             <div class="entry-title">
-                                                <h4 class="fw-semibold"><a href="{{ n.get_absolute_url }}">{{ n.title }}</a></h4>
+                                                <h4><a href="{{ n.get_absolute_url }}">{{ n.title }}</a></h4>
                                             </div>
                                             <div class="entry-meta">
                                                 <ul>
