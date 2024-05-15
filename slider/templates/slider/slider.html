@@ -104,34 +104,31 @@
 <!-- Hero Section
 ============================================= -->
 <section id="slider"
-         class="slider-element swiper_wrapper min-vh-md-100 customjs include-header dark"
+         class="slider-element swiper_wrapper main-slider__container customjs include-header dark""
          data-loop="true">
     <div class="slider-inner">
-        <div class="swiper swiper-parent swiper-initialized swiper-horizontal swiper-backface-hidden">
+        <div class="swiper swiper-parent swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
             <div class="swiper-wrapper">
                 {% for s in slider %}
                 {% if not s.is_video %}
                 <div class="swiper-slide">
-                    <div class="container py-5 px-5" style="z-index: 2;">
-                        <div class="row h-100 align-items-center py-5">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="slider-caption"
-                                     style="max-width: 650px; position: relative; line-height: 80px;">
-                                    <h2>{{ s.title }}</h2>
-                                    {% if s.additional_content %}
-                                    <p>{{ s.additional_content }}</p>
-                                    {% endif %}
-                                    <div>
-                                        <a href="{{ s.url }}"
-                                           class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded"
-                                           target="_blank">Подробнее</a>
-                                    </div>
+                    <div class="container" style="z-index: 2;">
+                        <div class="row main-slider__content">
+                            <div class="slider-caption">
+                                <h2>{{ s.title }}</h2>
+                                {% if s.additional_content %}
+                                <p>{{ s.additional_content }}</p>
+                                {% endif %}
+                                <div>
+                                    <a href="{{ s.url }}"
+                                       class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded"
+                                       target="_blank">Подробнее</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-slide-bg"
-                         style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{{ s.poster.url }}'); background-position: center center;"></div>
+                         style="background-image: linear-gradient(rgba(24, 80, 121, 0.65), rgba(0,0,0,.4)), url('{{ s.poster.url }}'); background-position: center center;background-size:cover"></div>
                 </div>
                 {% else %}
                 <div class="swiper-slide dark">

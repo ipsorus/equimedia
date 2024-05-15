@@ -297,7 +297,7 @@ body.modal-open { overflow-y: auto; }
 .entry::after {
   content: "";
   position: relative;
-  height: 0px;
+  height: 1px;
   margin-top: var(--cnvs-post-item-margin);
   background-color: var(--cnvs-contrast-100);
 }
@@ -498,16 +498,14 @@ a.more-link i {
 
 /* SINGLE PAGE */
 
-.single-post { margin-top: 20px; }
+.single-post { margin-top: 0px; }
 
 .single-post .entry .entry-title,
 .single-post .entry .entry-title h2 {
-	max-width: 750px;
+	max-width: 100%;
 	margin: 0 auto;
-	text-align: center;
 	text-transform: none;
-	letter-spacing: -1px;
-	font-size: 34px;
+	letter-spacing: 1px;
 }
 
 .single-post .entry .entry-image {
@@ -978,10 +976,11 @@ background-color: transparent !important;
 
 .entry-meta {
 	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .entry-meta li {
-	font-size: 0.675rem;
+	font-size: 0.875rem;
 }
 
 .entry-meta li a:not(:hover) {
@@ -1133,4 +1132,71 @@ background-color: transparent !important;
 .endless_container {
 	text-align: center;
 	margin-top: 50px;
+}
+
+.main-slider__container {
+    height: 100vh;
+    min-height: 700px;
+}
+
+.slider-caption h2, .slider-caption .h2 {
+        font-size: 3.5rem;
+        letter-spacing: 0;
+        text-transform: none;
+        font-weight: 500;
+        line-height: 50px;
+        margin-bottom: 14px;
+    }
+
+.main-slider__content {
+    padding-top: 130px;
+    max-width: 650px;
+    position: relative;
+    }
+
+@media screen and (max-width: 767.98px) {
+    .main-slider__container {
+        height:450px;
+        min-height: auto;
+    }
+    .slider-caption h2, .slider-caption .h2 {
+        font-size: 1.5rem;
+        letter-spacing: 0;
+        text-transform: none;
+        font-weight: 300;
+        line-height: 20px;
+        margin-bottom: 5px;
+    }
+    .main-slider__content {
+        padding-top: 40px;
+        padding-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .main-slider__container {
+        height: 520px;
+        min-height: 520px;
+    }
+    .slider-caption h2, .slider-caption .h2 {
+        font-size: 2.5rem;
+        letter-spacing: 0;
+        text-transform: none;
+        font-weight: 500;
+        line-height: 50px;
+        margin-bottom: 14px;
+    }
+    .main-slider__content {
+        padding-top: 100px;
+    }
+
+}
+
+
+.entry:not(:last-child)::after {
+	--cnvs-post-item-margin: 30px;
+	display: block;
+}
+.entry::after {
+    background-color: #EEE !important;
 }
