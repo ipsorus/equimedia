@@ -65,7 +65,7 @@
                     </div>
                     <div class="row posts-md col-mb-30">
                         {% for a in articles %}
-                        <div class="entry col-sm-6 col-xl-3 col-md-3">
+                        <div class="entry col-sm-6 col-xl-3 col-md-3 border-0">
                             <div class="grid-inner">
                                 <div class="entry-image">
                                     <a href="{{ a.get_absolute_url }}">{% if a.image %}<img src="{{ a.image.url }}" alt="Image">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}</a>

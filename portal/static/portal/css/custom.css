@@ -1220,3 +1220,11 @@ background-color: transparent !important;
 .entry::after {
     background-color: #EEE !important;
 }
+
+.entry.border-0:not(:last-child)::after {
+	--cnvs-post-item-margin: 0px;
+	display: block;
+}
+.entry.border-0::after {
+    background-color: #fff !important;
+}
