@@ -1,3 +1,127 @@
-from django.shortcuts import render
+import json
+from datetime import timedelta, datetime
+from itertools import chain
+from operator import attrgetter
 
-# Create your views here.
+from django.shortcuts import render, get_object_or_404
+
+from event.models import Event, Tournament, Stage
+
+
+def event_detail(request, event_id):
+    single_event = get_object_or_404(Event, pk=event_id)
+
+    return render(request, 'news/news-single.html', {'item': single_event})
+
+
+def calendar_view(request):
+    events = Event.objects.filter(is_published=True).values('date_start', 'date_end')
+    stages = Stage.objects.filter(is_published=True).values('date_start', 'date_end')
+    tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True).values('date_start', 'date_end')
+    result_list = list(chain(events, stages, tournaments))
+
+    dates = set()
+    for event in result_list:
+        if event:
+            start_date = event['date_start']
+            dates.add(start_date)
+            if event['date_end']:
+                end_date = event['date_end']
+                delta = (end_date - start_date).days
+                dates.add(end_date)
+                for i in range(int(delta)+1):
+                    dates.add(start_date + timedelta(days=i))
+
+    return render(request, 'event/calendar.html', {'events': dates})
+
+
+def get_events(request):
+    date = json.loads(request.GET.get('date'))
+    date_ = datetime.strptime(f'{date["month"]}.{date["day"]}.{date["year"]}', '%m.%d.%Y').date()
+    events = Event.objects.filter(is_published=True, date_start__lte=date_, date_end__gte=date_)
+    stages = Stage.objects.filter(is_published=True, date_start__lte=date_, date_end__gte=date_)
+    tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_start__lte=date_, date_end__gte=date_)
+    result_list = sorted(list(chain(events, stages, tournaments)), key=attrgetter('date_start'))
+
+    return render(request, 'event/events_by_date.html', {'events': result_list, 'date': date_, 'day_name': date['weekdayname']})
+
+
+def get_weekly_events(request):
+    date = json.loads(request.GET.get('date'))
+    date_ = datetime.strptime(f'{date["month"]}.{date["day"]}.{date["year"]}', '%m.%d.%Y').date()
+    week_start = date_ - timedelta(days=date['weekday'])
+    week_end = week_start + timedelta(days=6)
+    events = Event.objects.filter(is_published=True, date_start__range=[week_start, week_end])
+    stages = Stage.objects.filter(is_published=True, date_start__range=[week_start, week_end])
+    tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_start__range=[week_start, week_end])
+
+    result_list = sorted(list(chain(events, stages, tournaments)), key=attrgetter('date_start'))
+
+    return render(request, 'event/events_by_week.html', {'events': result_list})
+
+
+def get_monthly_events(request):
+    events_dict = {}
+    dates = json.loads(request.GET.get('dates'))
+    month = dates.pop('month')
+    year = dates.pop('year')
+    for week in dates.keys():
+        last_month = month
+        other_year = year
+        first_day = int(dates[week][0])
+        last_day = int(dates[week][-1])
+
+        week_start = datetime.strptime(f'{month}.{first_day}.{year}', '%m.%d.%Y').date()
+        week_end = datetime.strptime(f'{month}.{last_day}.{year}', '%m.%d.%Y').date()
+
+        if int(week) == 1 and first_day > last_day:
+            if month == 1:
+                last_month = 12
+                other_year -= 1
+            elif 12 >= month >= 2:
+                last_month -= 1
+
+            week_start = datetime.strptime(f'{last_month}.{first_day}.{other_year}', '%m.%d.%Y').date()
+            week_end = datetime.strptime(f'{month}.{last_day}.{year}', '%m.%d.%Y').date()
+
+        elif int(week) >= 5 and last_day < first_day:
+            if month == 12:
+                last_month = 1
+                other_year += 1
+            elif 11 >= month >= 1:
+                last_month += 1
+
+            week_start = datetime.strptime(f'{month}.{first_day}.{year}', '%m.%d.%Y').date()
+            week_end = datetime.strptime(f'{last_month}.{last_day}.{year}', '%m.%d.%Y').date()
+
+        events = Event.objects.filter(is_published=True, date_start__range=[week_start, week_end])
+        stages = Stage.objects.filter(is_published=True, date_start__range=[week_start, week_end])
+        tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_start__range=[week_start, week_end])
+        result_list = sorted(list(chain(events, stages, tournaments)), key=attrgetter('date_start'))
+
+        events_dict[week] = dict(first=week_start, last=week_end, items=result_list)
+
+    return render(request, 'event/events_by_month.html', {'events': events_dict})
+
+
+def tournaments(request):
+    tournaments_list = Tournament.objects.all()
+    return render(request, 'event/tournaments.html', {'tournaments': tournaments_list})
+
+
+def tournament_detail(request, tournament_id):
+    single_tournament = get_object_or_404(Tournament, pk=tournament_id)
+    stages = Stage.objects.filter(is_published=True, tournament=single_tournament.id)
+
+    return render(request, 'event/tournament_detail.html', {'item': single_tournament, 'stages': stages})
+
+
+def contest_detail(request, tournament_id):
+    single_tournament = get_object_or_404(Tournament, pk=tournament_id)
+
+    return render(request, 'event/tournament_detail.html', {'item': single_tournament})
+
+
+def stage_detail(request, tournament_id, stage_id):
+    single_stage = get_object_or_404(Stage, pk=stage_id)
+    return render(request, 'event/stage-single.html', {'item': single_stage})

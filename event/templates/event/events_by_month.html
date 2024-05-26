@@ -1,0 +1,77 @@
+{% for week, data in events.items %}
+<div class="content-wrap bg-light mt-0 mb-0">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="fancy-title title-border">
+                {% if data.first|date:"m" == data.last|date:"m" %}
+                    <h3>{{ data.first|date:"j" }} - {{ data.last }}</h3>
+                {% else %}
+                    <h3>{{ data.first }} - {{ data.last }}</h3>
+                {% endif %}
+            </div>
+
+        </div>
+
+    {% if data.items %}
+        <div class="d-grid col-mb-50">
+            {% for item in data.items %}
+                <div style="border:1px solid rgba(189, 189, 189, 0.4) !important;" class="grid-col shadow-sm bg-light rounded bg-white row g-0 p-3 rounded-5 shadow-sm h-shadow all-ts h-translate-y-sm">
+                    <div class="col-md-12 p-4">
+                        <div class="entry-meta no-separator mb-1 mt-0">
+                            <ul>
+                                {% if item.date_end %}
+                                    {% if item.date_start|date:"m" == item.date_end|date:"m" %}
+                                        <li>{{ item.date_start|date:"j" }} - {{ item.date_end }}</li>
+                                    {% else %}
+                                        <li>{{ item.date_start }} - {{ item.date_end }}</li>
+                                    {% endif %}
+                                {% else %}
+                                        <li>{{ item.date_start }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                        <div class="entry-title nott">
+                            {% if item.tournament %}
+                                <h4><a href="{% url 'stage_detail_url' tournament_id=item.tournament.id stage_id=item.id %}" class="stretched-link color-underline">{{ item.title }}</a></h4>
+                            {% elif item.stages %}
+                                <h4><a href="{% url 'contest_detail_url' tournament_id=item.id %}" class="stretched-link color-underline">{{ item.title }}</a></h4>
+                            {% else %}
+                                <h4><a href="{{ item.get_absolute_url }}" class="stretched-link color-underline">{{ item.title }}</a></h4>
+                            {% endif %}
+                        </div>
+                        <div class="entry-content my-3">
+                            <p class="mb-0">{{ item.description }}</p>
+                        </div>
+
+                        <div class="entry-content my-3">
+                            {% for t in item.type.all %}
+                            <p class="mb-0">{{ t.title }}</p>
+                        {% endfor %}
+                        </div>
+                        <div class="entry-content my-3">
+                            {% for d in item.discipline.all %}
+                                <p class="mb-0">{{ d.title }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="entry-content my-3">
+                            <p class="mb-0">{{ item.prize }}</p>
+                        </div>
+
+                        <div class="entry-meta no-separator">
+                            <ul>
+                                <li><a href="#" class="fw-normal"><i class="uil uil-map-marker"></i> {{ item.location }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="heading-block text-center mt-0">
+            <h4 style="font-size: 18px; font-weight: 200; color: #ccc;">На этой неделе событий нет</h4>
+        </div>
+    {% endif %}
+        </div>
+    </div>
+{% endfor %}

@@ -34,18 +34,15 @@
                 {% block js %}
                 {{ block.super }}
                 <script src="{% static 'portal/js/plugins.min.js' %}"></script>
-
-<!--                                <script src="http://code.jquery.com/jquery-latest.js"></script>-->
+                <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
                 <script src="{% static 'portal/js/el-pagination.js' %}"></script>
                 <script>
                     $.endlessPaginate({
                         paginateOnScroll: true,
                     });
                 </script>
-
                 {% endblock %}
             </div>
-
         </div>
     </div>
 </section><!-- #content end -->

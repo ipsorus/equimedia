@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .d-grid {
+        --column: 1;
+        display: grid;
+        grid-template-columns: repeat(var(--column), 1fr);
+        grid-gap: 30px;
+    }
+
+    @media (min-width: 991px) {
+        .d-grid {
+           --column: 3;
+        }
+        .d-grid .grid-w {
+           grid-row: span 2 / auto;
+        }
+    }
+</style>
+<!-- Page Title
+		============================================= -->
+<section class="page-title bg-transparent">
+    <div class="container">
+        <div class="page-title-row">
+
+            <div class="page-title-content">
+                <h1>Турниры</h1>
+            </div>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Турниры</li>
+                </ol>
+            </nav>
+
+        </div>
+    </div>
+</section><!-- .page-title end -->
+<!-- Content
+		============================================= -->
+<section id="content">
+    <div class="content-wrap bg-light">
+        <div class="container">
+            {% if tournaments %}
+            <div class="d-grid col-mb-50">
+                {% for t in tournaments %}
+                <div style="border:1px solid rgba(189, 189, 189, 0.4) !important;" class="grid-col shadow-sm bg-light rounded bg-white row g-0 p-3 rounded-5 shadow-sm h-shadow all-ts h-translate-y-sm">
+                    <div class="col-md-12 p-4">
+                        <!--                    <span class="badge px-3 py-2 mt-2 me-1 bg-white border border-default text-dark rounded-pill fw-normal position-absolute z-9"-->
+                        <!--                          style="left: 50px; top: -23px;">{{ t.type }}</span>-->
+                        <div class="row align-items-center">
+                            <div class="mb-3"><span style="color:blue; font-weight: 400;">{% if t.date_start|date:"m" == t.date_end|date:"m" %}
+                                                    {{ t.date_start|date:"d" }} - {{ t.date_end }}
+                                                {% else %}
+                                                    {{ t.date_start }} - {{ t.date_end }}
+                                                {% endif %}</span>
+                            </div>
+                            <div class="col-lg-12">
+                                <h6 class="fw-bolder mb-3"><a class="stretched-link color-underline"
+                                                              href="{{ t.get_absolute_url }}">{{ t.title }}</a></h6>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex align-middle text-smaller mb-2">
+                                    <div><span style="font-size:14px; font-weight: 400;">Дисциплина:</span>
+                                        {% for d in t.discipline.all %}
+                                        <span class="font-primary ms-2">{{ d.title }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if t.prize %}
+                            <div class="col-lg-12">
+                                <div class="d-flex align-middle text-smaller mb-2">
+                                    <div><span style="font-size:14px; font-weight: 400;">Призовой фонд:</span><span
+                                            class="font-primary ms-2">{{ t.prize }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="pricing-features bg-transparent border-bottom-0 border-width-2 border-black mt-3 pt-2 pb-3">
+                            {% for stage in t.stages.all %}
+                            <p class="lead fw-bold mb-2">Этапы:</p>
+                            <div class="col-lg-12">
+                                <div class="d-flex align-middle text-smaller mb-2">
+                                    <div>
+                                        <a href="{% url 'stage_detail_url' tournament_id=t.id stage_id=stage.id %}"><span
+                                                style="font-size:13px; font-weight: 400;">{{ forloop.counter }}.</span>
+                                            <span style="color:blue;" class="font-primary ms-2">{% if stage.date_end %}
+                                                {% if stage.date_start|date:"m" == stage.date_end|date:"m" %}
+                                                    {{ stage.date_start|date:"d" }} - {{ stage.date_end }}
+                                                {% else %}
+                                                    {{ stage.date_start }} - {{ stage.date_end }}
+                                                {% endif %}
+                                                {% else %}
+                                                        {{ stage.date_start }}
+                                                {% endif %}
+                                            </span>
+                                            <span class="font-primary ms-2">{{ stage.title }}</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="heading-block text-center mb-0">
+                <h4 style="font-size: 18px; font-weight: 200; color: #ccc;">На выбранную дату событий нет</h4>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section><!-- #content end -->
+
+{% endblock %}

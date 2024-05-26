@@ -3,14 +3,15 @@
 {% paginate 9 news %}
 
 {% for post in news %}
-<article class="portfolio-item col-12 col-sm-6 col-md-4 pf-media pf-icons">
+<article class="col-12 col-sm-6 col-md-4 pf-media pf-icons">
     <div class="grid-inner">
         <div class="portfolio-image">
             {% if post.image %}<img src="{{ post.image.url }}" alt="">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}
         </div>
         <div class="portfolio-desc">
-            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
             <span>{{ post.time_create }}</span>
+            <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+
         </div>
     </div>
 </article>

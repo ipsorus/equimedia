@@ -133,12 +133,22 @@
                         ============================================= -->
                         <div class="row text-center text-md-start justify-content-between my-5">
                             <div class="col-md-auto">
-                                <a href="#" class="d-inline-flex align-items-center text-dark h-text-color"><i
+                                {% if prev %}
+                                <a href="{{ prev.get_absolute_url }}" class="d-inline-flex align-items-center text-dark h-text-color"><i
                                         class="uil uil-angle-left-b fs-3 me-1"></i><span>Предыдущая статья</span></a>
+                                {% else %}
+                                <a href="" class="d-none d-inline-flex align-items-center text-dark h-text-color disabled" aria-disabled="true"><i
+                                        class="uil uil-angle-left-b fs-3 me-1"></i><span>Предыдущая статья</span></a>
+                                {% endif %}
                             </div>
                             <div class="col-md-auto">
-                                <a href="#" class="d-inline-flex align-items-center text-dark h-text-color"><span>Следующая статья</span><i
+                                {% if next %}
+                                <a href="{{ next.get_absolute_url }}" class="d-inline-flex align-items-center text-dark h-text-color"><span>Следующая статья</span><i
                                         class="uil uil-angle-right-b fs-3 ms-1"></i></a>
+                                {% else %}
+                                <a href="" class="d-none d-inline-flex align-items-center text-dark h-text-color"><span>Следующая статья</span><i
+                                        class="uil uil-angle-right-b fs-3 ms-1"></i></a>
+                                {% endif %}
                             </div>
                         </div><!-- .post-navigation end -->
                     </div>

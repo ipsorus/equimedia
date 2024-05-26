@@ -17,7 +17,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ SECRET_KEY = 'django-insecure-rsqzrx)%d)f^50@!kf=5e2j3(xswm#ntxt=%dh9e$nrbniw_d*
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -42,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'event.apps.EventConfig',
     'portal.apps.PortalConfig',
     'articles.apps.ArticlesConfig',
     'news.apps.NewsConfig',
@@ -80,14 +79,13 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'portal.context_processors.website_settings',
                 'portal.context_processors.load_settings',
-                'django.template.context_processors.request', ## For EL-pagination
+                'django.template.context_processors.request',  ## For EL-pagination
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'equi_media_portal.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -102,7 +100,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -122,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -133,7 +129,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -158,5 +153,35 @@ LANGUAGES = [
     ('en', _('English')),
     ('ru', _('Russian')),
 ]
+
+DISCIPLINE = [('Вестерн', _('Вестерн')),
+              ('Вольтижировка', _('Вольтижировка')),
+              ('Выездка', _('Выездка')),
+              ('Джигитовка', _('Джигитовка')),
+              ('Драйвинг', _('Драйвинг')),
+              ('Конкур', _('Конкур')),
+              ('Паравыездка', _('Паравыездка')),
+              ('Пони-спорт', _('Пони-спорт')),
+              ('Пробеги', _('Пробеги')),
+              ('Тентпеггинг', _('Тентпеггинг')),
+              ('Троеборье', _('Троеборье')),
+              ('Хобби-хорсинг', _('Хобби-хорсинг'))]
+
+CONTEST_TYPE = [('Всероссийский', _('Всероссийский')),
+                ('Международный', _('Международный')),
+                ('Муниципальный', _('Муниципальный')),
+                ('Клубный', _('Клубный')),
+                ('Региональный', _('Региональный'))]
+
+EVENT_TYPE = [(1, _('Аукционы')),
+              (2, _('Выставки')),
+              (3, _('Конференции')),
+              (4, _('Мастер-классы')),
+              (5, _('Семинары')),
+              (6, _('Тренировки'))
+              ]
+
+STAGE_TYPE = [('Соревнования', _('Соревнования')),
+              ]
 
 PER_PAGE = 9

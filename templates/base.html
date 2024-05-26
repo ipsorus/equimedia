@@ -5,8 +5,8 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
-	<meta name="author" content="SemiColonWeb">
-	<meta name="description" content="Get Canvas to build powerful websites easily with the Highly Customizable &amp; Best Selling Bootstrap Template, today.">
+	<meta name="author" content="">
+	<meta name="description" content="H">
 
 	<link rel="shortcut icon" href="{% static 'portal/images/favicon.ico' %}">
 
@@ -18,10 +18,17 @@
 	<link rel="stylesheet" href="{% static 'portal/css/et-line.css' %}">
 
 	<!-- Plugins/Components CSS -->
-	<link rel="stylesheet" href="{% static 'portal/css/calendar.css' %}">
+<!--	<link rel="stylesheet" href="{% static 'portal/css/calendar.css' %}">-->
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="{% static 'portal/css/custom.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'portal/css/demo.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'portal/css/calendar.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'portal/css/custom_2.css' %}" />
+
+
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Document Title
@@ -179,13 +186,10 @@
 
 <!-- JavaScripts
 	============================================= -->
-
-
-	<!-- Events Calendar -->
-<!--	<script src="{% static 'portal/js/jquery.calendario.js' %}"></script>-->
-
 	<script src="{% static 'portal/js/plugins.min.js' %}"></script>
 	<script src="{% static 'portal/js/functions.bundle.js' %}"></script>
+
+
 
 <script>
 	jQuery(window).on( 'load', function(){
@@ -212,34 +216,7 @@
 		});
 	});
 </script>
-<!--<script>-->
-<!--	var cal = jQuery( '#calendar' ).calendario( {-->
-<!--		onDayClick : function( $el, $contentEl, dateProperties ) {-->
-<!--			for( var key in dateProperties ) {-->
-<!--				console.log( key + ' = ' + dateProperties[ key ] );-->
-<!--			}-->
-<!--		},-->
-<!--		caldata : {}-->
 
-<!--	}),-->
-<!--	$month = jQuery( '#calendar-month' ).html( cal.getMonthName() ),-->
-<!--	$year = jQuery( '#calendar-year' ).html( cal.getYear() );-->
-
-<!--	jQuery( '#calendar-next' ).on( 'click', function() {-->
-<!--		cal.gotoNextMonth( updateMonthYear );-->
-<!--	} );-->
-<!--	jQuery( '#calendar-prev' ).on( 'click', function() {-->
-<!--		cal.gotoPreviousMonth( updateMonthYear );-->
-<!--	} );-->
-<!--	jQuery( '#calendar-current' ).on( 'click', function() {-->
-<!--		cal.gotoNow( updateMonthYear );-->
-<!--	} );-->
-
-<!--	function updateMonthYear() {-->
-<!--		$month.html( cal.getMonthName() );-->
-<!--		$year.html( cal.getYear() );-->
-<!--	}-->
-<!--</script>-->
 <script>
 	jQuery('#oc-blogs').owlCarousel({
 		items: 1,

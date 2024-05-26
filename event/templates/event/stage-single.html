@@ -77,7 +77,9 @@
                                     </div>
                                 </div>
 
-                                {{ item.content|safe }}
+                                {{ item.tournament.title }}
+                                <a href="{{ item.tournament.get_absolute_url }}" class="d-inline-flex align-items-center text-dark h-text-color"><i
+                                        class="uil uil-angle-left-b fs-3 me-1"></i><span>{{ item.tournament.title }}</span></a>
                                 <!-- Post Single - Content End -->
 
 

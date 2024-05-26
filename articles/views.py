@@ -16,13 +16,25 @@ def articles_section(request,
     return render(request, template, context)
 
 
-def article_detail(request, article_slug):
-    article = get_object_or_404(Article, slug=article_slug)
+def article_detail(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
     articles = Article.objects.filter(is_published=True).exclude(pk=article.id)[:10]
+
+    try:
+        previous_post = article.get_previous_by_time_create()
+    except Article.DoesNotExist:
+        previous_post = None
+
+    try:
+        next_post = article.get_next_by_time_create()
+    except Article.DoesNotExist:
+        next_post = None
 
     data = {
         'item': article,
-        'articles': articles
+        'articles': articles,
+        'prev': previous_post,
+        'next': next_post
     }
 
     return render(request, 'articles/article-single.html', data)

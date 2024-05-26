@@ -1,0 +1,218 @@
+{% load static %}
+<div id="section-events"
+     class="section page-section mt-0 mb-0 parallax scroll-detect align-items-center justify-content-center d-flex"
+     style="padding: 150px 0 150px 0;">
+    <img src="{% static 'portal/images/9999.jpg' %}" alt="Image" class="parallax-bg"
+         style="opacity:0.6; filter:alpha(opacity=60);">
+    <div class="shape-divider" data-shape="slant-2" data-height="150" id="shape-divider-8581">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 131.1" preserveAspectRatio="none" class="op-ts op-1">
+            <path class="shape-divider-fill" d="M0 0L2600 0 2600 69.1 0 0z"></path>
+            <path class="shape-divider-fill" opacity="0.5" d="M0 0L2600 0 2600 69.1 0 69.1z"></path>
+            <path class="shape-divider-fill" opacity="0.25" d="M2600 0L0 0 0 130.1 2600 69.1z"></path>
+        </svg>
+    </div>
+    <div class="container">
+        <div class="col-lg-12 mb-5 mt-0">
+            <div class="col-lg-12">
+                <div class="fancy-title title-border dark">
+                    <h2>Соревнования и мероприятия</h2>
+                </div>
+            </div>
+
+            <div class="row justify-content-center gy-5" style="--bs-gutter-x: 60px">
+                <div class="col-md-4">
+                    <div class="card bg-color-white border-light shadow-lg">
+                        <h5 class="card-header p-4 border-bottom">Текущие события</h5>
+                        <div class="card-body px-4">
+                            {% if current_contests %}
+                            {% for event in current_contests %}
+                            <div class="row align-items-center" data-animate="fadeInUpSmall faster">
+                                <div class="col-12">
+                                    {% if event.tournament %}
+                                        <div class="mb-2">
+                                            <h6><a href="{% url 'stage_detail_url' tournament_id=event.tournament.id stage_id=event.id %}" class="stretched-link color-underline">{{ event.title }}</a></h6>
+                                        </div>
+                                    {% elif event.stages %}
+                                        <div class="mb-2">
+                                            <h6><a href="{% url 'contest_detail_url' tournament_id=event.id %}" class="stretched-link color-underline">{{ event.title }}</a></h6>
+                                        </div>
+                                    {% else %}
+                                        <div class="mb-2">
+                                            <h6><a href="{{ event.get_absolute_url }}" class="stretched-link color-underline">{{ event.title }}</a></h6>
+                                        </div>
+                                    {% endif %}
+                                    <div class="d-flex align-middle text-smaller mb-2">
+                                        <div><span class="op-08"><i class="bi-clock"></i></span>
+                                        <span class="font-primary ms-2">{% if event.date_end %}
+                                                {% if event.date_start|date:"m" == event.date_end|date:"m" %}
+                                                    {{ event.date_start|date:"j" }} - {{ event.date_end }}
+                                                {% else %}
+                                                    {{ event.date_start }} - {{ event.date_end }}
+                                                {% endif %}
+                                                {% else %}
+                                                        {{ event.date_start }}
+                                                {% endif %}
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-middle text-smaller">
+                                        <div><span class="op-08"><i class="uil uil-map-marker"></i></span><span
+                                                class="font-primary ms-2">{{ event.location }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                {% if not forloop.last %}<div class="line my-4"></div>{% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <div class="row align-items-center" data-animate="fadeInUpSmall faster">
+                                <div class="col-12">
+                                    <div class="d-flex align-middle text-smaller mb-2">
+                                        <div><span class="op-08"><i class="bi-info-circle"></i></span>
+                                        <span class="font-primary ms-2">
+                                            Сегодня нет событий
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <a href="calendar/"
+                               class="text-center w-100 btn button rounded-1 button-border m-0 size-lg mt-2 mb-2 button-reveal fadeInUp animated"
+                               data-animate="fadeInUp" data-delay="300"><i
+                                    class="bi-calendar3"></i><span>Все события</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-color-white border-light shadow-lg">
+                        <h5 class="card-header p-4 border-bottom">Ближайшие соревнования</h5>
+                        <div class="card-body px-4">
+                            {% if future_contests %}
+                            {% for event in future_contests %}
+                            <div class="row align-items-center" data-animate="fadeInUpSmall faster">
+                                <div class="col-12">
+                                    {% if event.tournament %}
+                                        <div class="mb-2">
+                                            <h6><a href="{% url 'stage_detail_url' tournament_id=event.tournament.id stage_id=event.id %}" class="stretched-link color-underline">{{ event.title }}</a></h6>
+                                        </div>
+                                    {% else %}
+                                        <div class="mb-2">
+                                            <h6><a href="{% url 'contest_detail_url' tournament_id=event.id %}" class="stretched-link color-underline">{{ event.title }}</a></h6>
+                                        </div>
+                                    {% endif %}
+                                    <div class="d-flex align-middle text-smaller mb-2">
+                                        <div><span class="op-08"><i class="bi-clock"></i></span>
+                                            <span class="font-primary ms-2">{% if event.date_end %}
+                                                {% if event.date_start|date:"m" == event.date_end|date:"m" %}
+                                                    {{ event.date_start|date:"j" }} - {{ event.date_end }}
+                                                {% else %}
+                                                    {{ event.date_start }} - {{ event.date_end }}
+                                                {% endif %}
+                                                {% else %}
+                                                        {{ event.date_start }}
+                                                {% endif %}
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-middle text-smaller">
+                                        <div><span class="op-08"><i class="uil uil-map-marker"></i></span><span
+                                                class="font-primary ms-2">{{ event.location }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not forloop.last %}<div class="line my-4"></div>{% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <div class="row align-items-center" data-animate="fadeInUpSmall faster">
+                                <div class="col-12">
+                                    <div class="d-flex align-middle text-smaller mb-2">
+                                        <div><span class="op-08"><i class="bi-info-circle"></i></span>
+                                        <span class="font-primary ms-2">
+                                            В ближайшее время нет соревнований
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <a href="calendar/"
+                               class="text-center w-100 btn button rounded-1 button-border m-0 size-lg mt-2 mb-2 button-reveal fadeInUp animated"
+                               data-animate="fadeInUp" data-delay="300"><i
+                                    class="bi-calendar3"></i><span>Все соревнования</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-color-white border-light shadow-lg">
+                        <h5 class="card-header p-4 border-bottom">Ближайшие мероприятия</h5>
+                        <div class="card-body px-4">
+                            {% if events %}
+                            {% for event in events %}
+                            <div class="row align-items-center" data-animate="fadeInUpSmall faster">
+
+                                <div class="col-12">
+                                    <div class="mb-2"><h6><a href="{{ event.get_absolute_url }}" class="stretched-link color-underline">{{ event.title }}</a></h6></div>
+                                    <div class="d-flex align-middle text-smaller mb-2">
+                                        <div><span class="op-08"><i class="bi-clock"></i></span>
+                                            <span class="font-primary ms-2">{% if event.date_end %}
+                                                {% if event.date_start|date:"m" == event.date_end|date:"m" %}
+                                                    {{ event.date_start|date:"j" }} - {{ event.date_end }}
+                                                {% else %}
+                                                    {{ event.date_start }} - {{ event.date_end }}
+                                                {% endif %}
+                                                {% else %}
+                                                        {{ event.date_start }}
+                                                {% endif %}
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-middle text-smaller">
+                                        <div><span class="op-08"><i class="uil uil-map-marker"></i></span><span
+                                                class="font-primary ms-2">{{ event.location }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not forloop.last %}<div class="line my-4"></div>{% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <div class="row align-items-center" data-animate="fadeInUpSmall faster">
+                                <div class="col-12">
+                                    <div class="d-flex align-middle text-smaller mb-2">
+                                        <div><span class="op-08"><i class="bi-info-circle"></i></span>
+                                        <span class="font-primary ms-2">
+                                            В ближайшее время нет мероприятий
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <a href="calendar/"
+                               class="text-center w-100 btn button rounded-1 button-border m-0 size-lg mt-2 mb-2 button-reveal fadeInUp animated"
+                               data-animate="fadeInUp" data-delay="300"><i
+                                    class="bi-calendar3"></i><span>Все мероприятия</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape-divider" data-shape="slant-2" data-position="bottom" data-height="150" id="shape-divider-3075">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2600 131.1" preserveAspectRatio="none" class="op-ts op-1">
+            <path class="shape-divider-fill" d="M0 0L2600 0 2600 69.1 0 0z"></path>
+            <path class="shape-divider-fill" opacity="0.5" d="M0 0L2600 0 2600 69.1 0 69.1z"></path>
+            <path class="shape-divider-fill" opacity="0.25" d="M2600 0L0 0 0 130.1 2600 69.1z"></path>
+        </svg>
+    </div>
+</div>
+

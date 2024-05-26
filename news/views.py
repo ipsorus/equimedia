@@ -20,13 +20,25 @@ def news_section(request,
     return render(request, template, context)
 
 
-def news_detail(request, news_slug):
-    single_news = get_object_or_404(NewsPost, slug=news_slug)
+def news_detail(request, news_id):
+    single_news = get_object_or_404(NewsPost, pk=news_id)
     news = NewsPost.objects.filter(is_published=True).exclude(pk=single_news.id)[:10]
+
+    try:
+        previous_post = single_news.get_previous_by_time_create()
+    except NewsPost.DoesNotExist:
+        previous_post = None
+
+    try:
+        next_post = single_news.get_next_by_time_create()
+    except NewsPost.DoesNotExist:
+        next_post = None
 
     data = {'title': single_news.title,
             'item': single_news,
-            'news': news
+            'news': news,
+            'prev': previous_post,
+            'next': next_post
             }
 
     return render(request, 'news/news-single.html', data)

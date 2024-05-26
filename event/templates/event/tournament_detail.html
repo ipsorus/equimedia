@@ -77,7 +77,12 @@
                                     </div>
                                 </div>
 
-                                {{ item.content|safe }}
+                                {% for stage in stages %}
+                                 <div>
+                                     <span>{{ stage.title }}</span>
+                                 </div>
+                                {% endfor %}
+
                                 <!-- Post Single - Content End -->
 
 

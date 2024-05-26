@@ -222,48 +222,6 @@ body.modal-open { overflow-y: auto; }
 	outline-color: var(--bs-primary);
 }
 
-/* Event Calendar
------------------------------------------------------------------*/
-.fc-calendar {
-	background: #FFF;
-	box-shadow: 0 0 10px rgba(99, 114, 130, 0.15);
-}
-
-.fc-calendar .fc-row > div.fc-today,
-.fc-calendar .fc-row > div > div a, .fc-calendar .fc-row > div > div span {
-	background-color: var(--cnvs-themecolor);
-	box-shadow: none;
-}
-
-.fc-calendar .fc-row > div.fc-today > span.fc-date,
-.fc-calendar .fc-row > div > div a:not(:hover),
-.fc-calendar .fc-row > div > div span:not(:hover) {
-	color: #222;
-	text-shadow: none;
-}
-
-.fc-content { overflow-y: scroll !important; }
-
-.fc-calendar-event + .fc-calendar-event {
-	border-top: 1px solid rgba(0,0,0,0.3);
-	padding-top: 12px;
-	margin-top: 8px;
-}
-
-.fc-allday[datetime="true"] + .fc-starttime,
-.fc-allday[datetime="true"] + .fc-starttime + .fc-endtime { display: none; }
-
-.fc-emptydate,
-.fc-weekday { opacity: .07 !important; }
-
-.fc-past.fc-content .fc-calendar-event a {
-	background-color: rgba(var(--cnvs-themecolor-rgb, 198,192,156),0.5);
-	pointer-events: none;
-	color: #666 !important;
-}
-
-.fc-body { background: url('images/world-map.png') no-repeat center center/ contain; }
-
 .border-radius {
   --bs-card-border-radius: 0 !important;
   border-radius: 0 !important;
@@ -622,7 +580,6 @@ a.more-link i {
 
 
 .page-title h1 {
-	letter-spacing: 3px;
 	font-family: var(--cnvs-body-font);
 }
 
@@ -1226,5 +1183,7 @@ background-color: transparent !important;
 	display: block;
 }
 .entry.border-0::after {
-    background-color: #fff !important;
+    background-color: transparent !important;
 }
+
+
