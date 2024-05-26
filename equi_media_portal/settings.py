@@ -23,12 +23,36 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-rsqzrx)%d)f^50@!kf=5e2j3(xswm#ntxt=%dh9e$nrbniw_d*'
 
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
+#
+# ALLOWED_HOSTS = ['ipsoru68.beget.tech', 'www.ipsoru68.beget.tech']
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
+
+# INSTALLED_APPS = [
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+#     'django.contrib.sites',
+#     'django.contrib.flatpages',
+#
+#     'portal.apps.PortalConfig',
+#     'articles.apps.ArticlesConfig',
+#     'news.apps.NewsConfig',
+#     'slider.apps.SliderConfig',
+#     'testimonial.apps.TestimonialConfig',
+#     'ckeditor',
+#     'el_pagination'
+# ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -89,6 +113,17 @@ WSGI_APPLICATION = 'equi_media_portal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ipsoru68_equip',
+# 	'USER': 'ipsoru68_equip',
+#         'PASSWORD': 'Zxcv0987',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 DATABASES = {
     'default': {
