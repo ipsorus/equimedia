@@ -64,7 +64,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
-    'event.apps.EventConfig',
     'portal.apps.PortalConfig',
     'articles.apps.ArticlesConfig',
     'news.apps.NewsConfig',
@@ -103,7 +102,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'portal.context_processors.website_settings',
                 'portal.context_processors.load_settings',
-                'django.template.context_processors.request',  ## For EL-pagination
+                'django.template.context_processors.request', ## For EL-pagination
             ],
         },
     },
