@@ -28,6 +28,8 @@ class NewsPost(models.Model):
         return f'Дата создания: {self.time_create} - {self.title}'
 
     class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
         ordering = ['-time_create']
         indexes = [
             models.Index(fields=['-time_create'])

@@ -13,6 +13,8 @@ class Testimonial(models.Model):
         return f'{self.author} - {self.content}'
 
     class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
         ordering = ['-time_create']
         indexes = [
             models.Index(fields=['-time_create'])

@@ -27,6 +27,8 @@ class Article(models.Model):
         return f'Дата создания: {self.time_create} - {self.title}'
 
     class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
         ordering = ['-time_create']
         indexes = [
             models.Index(fields=['-time_create'])

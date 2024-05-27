@@ -16,6 +16,8 @@ class Slider(models.Model):
         return f'{self.title}, {self.additional_content}'
 
     class Meta:
+        verbose_name = 'Слайд'
+        verbose_name_plural = 'Слайды'
         ordering = ['-time_create']
         indexes = [
             models.Index(fields=['-time_create'])

@@ -1186,4 +1186,11 @@ background-color: transparent !important;
     background-color: transparent !important;
 }
 
+#logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+  max-height: 100%;
+
 
