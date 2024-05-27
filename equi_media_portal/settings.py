@@ -35,25 +35,6 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-# INSTALLED_APPS = [
-#     'django.contrib.admin',
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.messages',
-#     'django.contrib.staticfiles',
-#     'django.contrib.sites',
-#     'django.contrib.flatpages',
-#
-#     'portal.apps.PortalConfig',
-#     'articles.apps.ArticlesConfig',
-#     'news.apps.NewsConfig',
-#     'slider.apps.SliderConfig',
-#     'testimonial.apps.TestimonialConfig',
-#     'ckeditor',
-#     'el_pagination'
-# ]
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'event.apps.EventConfig',
     'portal.apps.PortalConfig',
     'articles.apps.ArticlesConfig',
     'news.apps.NewsConfig',
