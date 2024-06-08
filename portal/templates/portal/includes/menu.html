@@ -4,13 +4,13 @@
 
     <!-- Menu Left -->
     <ul class="menu-container">
-        <li class="menu-item"><a class="menu-link" href="news" data-href="#section-news">Новости</a></li>
-        <li class="menu-item"><a class="menu-link" href="articles" data-href="#section-about">Статьи</a></li>
-        <li class="menu-item"><a class="menu-link" href="#" data-href="#section-services">Блоги</a></li>
-        <li class="menu-item"><a class="menu-link" href="#" data-href="#section-gallery">Фотобанк</a></li>
-        <li class="menu-item"><a class="menu-link" href="#" data-href="#section-testimonials">Контакты</a></li>
-        <li class="menu-item"><a class="menu-link" href="calendar" data-href="#section-calendar">События</a></li>
-        <li class="menu-item"><a class="menu-link" href="tournaments" data-href="#section-calendar">Турниры</a></li>
+        <li class="menu-item"><a class="menu-link" href="{% url 'news_list_url' %}">Новости</a></li>
+        <li class="menu-item"><a class="menu-link" href="{% url 'articles_list_url' %}">Статьи</a></li>
+        <li class="menu-item"><a class="menu-link" href="{% url 'posts_list_url' %}">Блоги</a></li>
+        <li class="menu-item"><a class="menu-link" href="#">Фотобанк</a></li>
+        <li class="menu-item"><a class="menu-link" href="#">Контакты</a></li>
+        <li class="menu-item"><a class="menu-link" href="{% url 'calendar_page' %}">События</a></li>
+        <li class="menu-item"><a class="menu-link" href="{% url 'tournaments' %}">Турниры</a></li>
         <li class="menu-item"><a class="menu-link" href="#">Трансляции <div class="menu-live-center"><div class="ml-circle ml-pulse ml-dot"></div></div></a></li>
     </ul>
 

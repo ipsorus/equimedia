@@ -2,7 +2,22 @@
 {% load static %}
 
 {% block content %}
+<!-- Page Title
+============================================= -->
+<section class="page-title bg-transparent">
+	<div class="container">
+		<div class="page-title-row">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'news_list_url' %}">Новости</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ item.title }}</li>
+				</ol>
+			</nav>
 
+		</div>
+	</div>
+</section><!-- .page-title end -->
 <!-- Content
 ============================================= -->
 <section id="content">

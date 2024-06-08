@@ -22062,7 +22062,6 @@ body:not(.has-plugin-html5video) .video-wrap video {
 
 .commentlist ul .comment-wrap {
   margin-left: 1.5rem;
-  padding-left: 1.25rem;
 }
 
 #reviews .comment-wrap {
@@ -22110,7 +22109,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
   top: 15px;
   left: -35px;
   padding: 0.25rem;
-  background: var(--cnvs-body-bg);
+  background: #3463b8;
   border: 1px solid var(--cnvs-contrast-200);
   border-radius: 50%;
 }
@@ -22121,7 +22120,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
 }
 
 .commentlist li .children .comment-avatar {
-  left: -25px;
+  left: -35px;
 }
 
 .comment-content .comment-author {
@@ -28752,12 +28751,12 @@ blockquote.float-end {
 }
 
 .text-overlay-mask {
-  opacity: 0.85;
+  opacity: 0.95;
   top: auto;
   bottom: 0;
   height: auto;
   padding: 40px 15px 15px; /* FF3.6+ */ /* Chrome,Safari4+ */ /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%); /* W3C */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.95) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#00000000", endColorstr="#a6000000",GradientType=0 ); /* IE6-9 */
 }
 

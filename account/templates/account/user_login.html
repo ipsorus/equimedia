@@ -1,0 +1,31 @@
+<!-- Login/Register Modal -->
+<div class="modal-register mfp-hide" id="modal-register" data-animate="fadeIn">
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card-header py-3 bg-transparent text-center">
+            <h3 class="mb-0 fw-normal">Добро пожаловать</h3>
+        </div>
+        <div class="card-body mx-auto py-5" style="max-width: 90%;">
+            <form id="login-form" name="login-form" class="mb-0 row" action="" method="post">
+                {% csrf_token %}
+                <div class="col-12">
+                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control not-dark" placeholder="Логин">
+                </div>
+
+                <div class="col-12 mt-4">
+                    <input type="password" id="login-form-password" name="login-form-password" value="" class="form-control not-dark" placeholder="Пароль">
+                </div>
+
+                <div class="col-12 text-end">
+                    <a href="{% url 'password_reset' %}" class="text-dark fw-light mt-2">Забыли пароль?</a>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <button class="button w-100 m-0" id="login-form-submit" name="login-form-submit" value="login">Авторизоваться</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer py-4 text-center">
+            <p class="mb-0">Не зарегистрированы? <a href="{% url 'register' %}"><u>Регистрация</u></a></p>
+        </div>
+    </div>
+</div>

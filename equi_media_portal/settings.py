@@ -45,14 +45,18 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'account.apps.AccountConfig',
     'event.apps.EventConfig',
     'portal.apps.PortalConfig',
     'articles.apps.ArticlesConfig',
     'news.apps.NewsConfig',
     'slider.apps.SliderConfig',
     'testimonial.apps.TestimonialConfig',
+    'blog.apps.BlogConfig',
     'ckeditor',
-    'el_pagination'
+    'el_pagination',
+    'mptt',
+    'services',
 ]
 
 MIDDLEWARE = [
@@ -135,12 +139,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'users.authentication.EmailAuthBackend',
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -201,3 +210,5 @@ STAGE_TYPE = [('Соревнования', _('Соревнования')),
               ]
 
 PER_PAGE = 9
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

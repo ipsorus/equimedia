@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 
 from articles.models import Article
+from blog.models import BlogPost
 from event.models import Event, Stage, Tournament
 from news.models import NewsPost
 from slider.models import Slider
@@ -18,6 +19,7 @@ def index(request):
     articles = Article.objects.filter(is_published=True)[2:6]
     testimonials = Testimonial.objects.filter(is_published=True)[:5]
     slider = Slider.objects.filter(is_published=True)[:5]
+    blogs = BlogPost.objects.filter(is_published=True)[:6]
 
     current_date = date.today()
     events = Event.objects.filter(is_published=True, date_start__gt=current_date)
@@ -38,7 +40,8 @@ def index(request):
             'slider': slider,
             'current_contests': result_list,
             'future_contests': future_result_list,
-            'events': events
+            'events': events,
+            'blogs': blogs,
             }
     return render(request, 'portal/index.html', data)
 

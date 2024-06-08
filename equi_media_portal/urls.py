@@ -13,6 +13,8 @@ urlpatterns = [
     path('', include('articles.urls')),
     path('', include('news.urls')),
     path('', include('event.urls')),
+    path('', include('blog.urls')),
+    path('', include('account.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
 ]

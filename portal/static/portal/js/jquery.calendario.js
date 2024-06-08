@@ -46,7 +46,7 @@
 	events: 'click',
 	fillEmpty: true,
 	feedParser: './feed/',
-	zone: '+03:00', // Ex: IST zone time is '+05:30' by default it is GMT, Sign is important.
+	zone: '00:00', // Ex: IST zone time is '+05:30' by default it is GMT, Sign is important.
 	format: 'MM-DD-YYYY',
 	checkUpdate: false //Check if any new version of Calendario is released (Details will be in the browser console)
   };
@@ -117,8 +117,7 @@
 			monthname : this.options.displayMonthAbbr ? this.options.monthabbrs[this.month] : this.options.months[this.month],
 			year : this.year,
 			weekday : idx + this.options.startIn,
-			weekdayname : this.options.weeks[(idx==6?0:idx + this.options.startIn)],
-			emptydate: $cell.children('span.fc-emptydate').text(),
+			weekdayname : this.options.weeks[(idx==6?0:idx + this.options.startIn)]
 		  };
 
 	  $cell.children( 'div.fc-calendar-events').children('div.fc-calendar-event').each(function(i, e){

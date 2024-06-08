@@ -1,0 +1,57 @@
+{% load mptt_tags static %}
+<div id="comments">
+	<h3 id="comments-title">Комментариев: <span>{{ post.comments.count }}</span></h3>
+<!-- Comments List
+============================================= -->
+<ol class="commentlist nested-comments">
+{% recursetree post.comments.all %}
+
+
+	<li class="comment even thread-even" id="li-comment-{{ node.pk }}">
+		<div id="comment-{{ node.pk }}" class="comment-wrap">
+			<div class="comment-meta">
+				<div class="comment-author vcard">
+					<span class="comment-avatar">
+					<img alt='Image' src="{{ node.author.profile.avatar.url }}" class='avatar avatar-60 photo avatar-default' height='60' width='60'></span>
+				</div>
+			</div>
+			<div class="comment-content">
+				<div class="comment-author"><a href="{{ node.author.profile.get_absolute_url }}" title="Permalink to this comment">{{ node.author }}</a><span>{{ node.time_create }}</span></div>
+				<p>{{ node.content }}</p>
+				<a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="{{ node.pk }}" data-comment-username="{{ node.author }}"><i class="bi-reply-fill"></i></a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		{% if not node.is_leaf_node %}
+			<ul class='children'>
+				{{ children }}
+			</ul>
+		 {% endif %}
+	</li>
+	{% endrecursetree %}
+</ol><!-- .commentlist end -->
+
+
+<div class="clear"></div>
+<!-- Comment Form
+============================================= -->
+	<div id="respond">
+	{% if request.user.is_authenticated %}
+		<h4>Оставьте <span>комментарий</span></h4>
+		  <form method="post" action="{% url 'comment_create_view' post.pk %}" id="commentForm" name="commentForm" data-post-id="{{ post.pk }}">
+			 {% csrf_token %}
+			 {{ form }}
+			 <div class="d-grid gap-2 d-md-block mt-2">
+				<button type="submit" class="btn btn-dark" id="commentSubmit">Добавить комментарий</button>
+			 </div>
+		  </form>
+	{% else %}
+		<div class="style-msg alertmsg">
+			<div class="sb-msg"><i class="bi-exclamation-diamond-fill"></i><strong><a href="#modal-register" data-lightbox="inline">Авторизуйтесь</a></strong>, чтобы оставить комментарий</div>
+		</div>
+	{% endif %}
+	</div><!-- #respond end -->
+</div><!-- #comments end -->
+{% block script %}
+<script src="{% static 'portal/js/comments.js' %}"></script>
+{% endblock %}

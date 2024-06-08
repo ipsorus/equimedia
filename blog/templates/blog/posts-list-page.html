@@ -1,0 +1,26 @@
+{% load el_pagination_tags %}
+{% load static %}
+{% paginate 2 posts %}
+
+{% for post in posts %}
+<div class="entry col-12">
+    <div class="grid-inner">
+        <div class="entry-image">
+            <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+        </div>
+        <div class="entry-title">
+            <h3><a href="{{ post.get_absolute_url }}" class="stretched-link color-underline">{{ post.title }}</a></h3>
+        </div>
+        <div class="entry-meta">
+            <ul>
+                <li><i class="uil uil-schedule"></i> {{ post.time_create }}</li>
+                <li><a href="#"><i class="uil uil-user"></i> {{ post.author.username }}</a></li>
+                <li><a href="{{ post.get_absolute_url }}#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }} Комментариев</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% show_more "Показать еще" "Загрузка..." class_name='btn button rounded-1 button-border m-0 size-lg mt-6 button-reveal' %}

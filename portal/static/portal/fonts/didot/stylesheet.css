@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Didot';
+    src: url('Didot-Italic.eot');
+    src: local('Didot Italic'), local('Didot-Italic'),
+        url('Didot-Italic.eot?#iefix') format('embedded-opentype'),
+        url('Didot-Italic.woff2') format('woff2'),
+        url('Didot-Italic.woff') format('woff'),
+        url('Didot-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Didot';
+    src: url('Didot.eot');
+    src: local('Didot'),
+        url('Didot.eot?#iefix') format('embedded-opentype'),
+        url('Didot.woff2') format('woff2'),
+        url('Didot.woff') format('woff'),
+        url('Didot.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Didot';
+    src: url('Didot-Bold.eot');
+    src: local('Didot Bold'), local('Didot-Bold'),
+        url('Didot-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Didot-Bold.woff2') format('woff2'),
+        url('Didot-Bold.woff') format('woff'),
+        url('Didot-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
