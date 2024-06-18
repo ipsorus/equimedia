@@ -26,6 +26,8 @@ class EventCreateForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['event_type'].widget.attrs.update({'class': 'form-select'})
+        self.fields['type'].widget.attrs.update({'class': 'form-select'})
 
 
 class EventUpdateForm(EventCreateForm):
@@ -49,4 +51,6 @@ class EventUpdateForm(EventCreateForm):
         super().__init__(*args, **kwargs)
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['event_type'].widget.attrs.update({'class': 'form-select'})
+        self.fields['type'].widget.attrs.update({'class': 'form-select'})
         # self.fields['content'].required = False

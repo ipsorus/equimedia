@@ -9,7 +9,7 @@ User = get_user_model()
 
 class Article(models.Model):
     title = models.CharField(max_length=200, db_index=True, verbose_name="Заголовок статьи")
-    content = RichTextField(blank=True, verbose_name="Содержание статьи")
+    content = models.TextField(blank=True, verbose_name="Содержание статьи")
     image = models.ImageField(upload_to='media/articles/%Y/%m/%d', blank=True, verbose_name="Постер для статьи")
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
@@ -22,10 +22,10 @@ class Article(models.Model):
         return reverse('article_detail_url', kwargs={'article_id': self.id})
 
     def get_update_url(self):
-        return reverse('article_update_url', kwargs={'article_id': self.id})
+        return reverse('article_update_url', kwargs={'pk': self.id})
 
     def get_delete_url(self):
-        return reverse('article_delete_url', kwargs={'article_id': self.id})
+        return reverse('article_delete_url', kwargs={'pk': self.id})
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

@@ -32,7 +32,7 @@ class BlogPostUpdateForm(BlogPostCreateForm):
 
     class Meta:
         model = BlogPost
-        fields = BlogPostCreateForm.Meta.fields + ('updater', 'fixed')
+        fields = BlogPostCreateForm.Meta.fields + ('updater',)
 
     def __init__(self, *args, **kwargs):
         """
@@ -40,9 +40,9 @@ class BlogPostUpdateForm(BlogPostCreateForm):
         """
         super().__init__(*args, **kwargs)
 
-        self.fields['fixed'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['updater'].widget.attrs.update({'class': 'form-select'})
         self.fields['content'].required = False
 
 

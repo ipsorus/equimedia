@@ -15,7 +15,7 @@ urlpatterns = [
     path('', include('event.urls')),
     path('', include('blog.urls')),
     path('', include('account.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
 ]
 

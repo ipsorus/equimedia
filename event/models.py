@@ -167,10 +167,10 @@ class Event(models.Model):
         return reverse('event_detail_url', kwargs={'event_id': self.id})
 
     def get_update_url(self):
-        return reverse('event_update_url', kwargs={'event_id': self.id})
+        return reverse('event_update_url', kwargs={'pk': self.id})
 
     def get_delete_url(self):
-        return reverse('event_delete_url', kwargs={'event_id': self.id})
+        return reverse('event_delete_url', kwargs={'pk': self.id})
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

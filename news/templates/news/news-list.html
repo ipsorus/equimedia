@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block content %}
 <style>
+.bg-color-title, .bg-color-title #header-wrap {
+background-color: #336576 !important;
+}
 .color-underline {
 	background-image: linear-gradient(rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3), rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3));
 	background-repeat: no-repeat;
@@ -12,10 +16,9 @@
 }
 .color-underline:hover { background-size: 100% 8px; }
 </style>
-{% block content %}
 <!-- Page Title
 		============================================= -->
-<section class="page-title bg-transparent">
+<section class="page-title bg-color-title dark">
     <div class="container">
         <div class="page-title-row">
 

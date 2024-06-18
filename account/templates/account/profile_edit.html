@@ -75,7 +75,7 @@
             <h3 class="h3 fw-bolder mb-4">Редактирование профиля</h3>
 
             <div class="row col-mb-30 gutter-50">
-                  <div class="col-md-12 p-4" style="border: 1px solid #ccc;background-color: #fff;">
+                  <div class="col-md-12 p-4" style="border: 1px solid #ccc; border-radius: 5px; background-color: #fff;">
                       <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ user_form.as_p }}

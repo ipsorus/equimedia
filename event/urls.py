@@ -15,6 +15,6 @@ urlpatterns = [
     path('tournaments/<int:tournament_id>/stage/<int:stage_id>/', views.stage_detail, name='stage_detail_url'),
     path('tournaments/contest/<int:tournament_id>/', views.contest_detail, name='contest_detail_url'),
     path('event/create/', EventCreateView.as_view(), name='event_create'),
-    path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update'),
-    path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete'),
+    path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update_url'),
+    path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete_url'),
 ]

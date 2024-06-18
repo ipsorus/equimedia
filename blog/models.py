@@ -48,13 +48,12 @@ class BlogPost(models.Model):
                                default=1)
     updater = models.ForeignKey(to=User, verbose_name='Обновил', on_delete=models.SET_NULL, null=True,
                                 related_name='updater_posts', blank=True)
-    fixed = models.BooleanField(verbose_name='Зафиксировано', default=False)
 
     objects = BlogPostManager()
 
     class Meta:
-        ordering = ['-time_create', '-fixed']
-        indexes = [models.Index(fields=['-time_create', '-fixed'])]
+        ordering = ['-time_create']
+        indexes = [models.Index(fields=['-time_create'])]
         verbose_name = 'Запись блога'
         verbose_name_plural = 'Записи блогов'
 
@@ -63,6 +62,12 @@ class BlogPost(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('post_update', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('post_delete', kwargs={'pk': self.pk})
 
     def save(self, *args, **kwargs):
         """
