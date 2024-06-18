@@ -1,19 +1,92 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="card mb-3 border-0 nth-shadow">
-   <div class="card-body">
-      <div class="card-title nth-card-title">
-         <h4>Изменение профиля</h4>
-      </div>
-      <form method="post" enctype="multipart/form-data">
-         {% csrf_token %}
-         {{ user_form.as_p }}
-         {{ form.as_p }}
-         <div class="d-grid gap-2 d-md-block mt-2">
-            <button type="submit" class="btn btn-dark">Подтвердить изменение профиля</button>
-         </div>
-      </form>
-   </div>
-</div>
+<style>
+    .bg-color-profile, .bg-color-profile #header-wrap {
+    background-color: rgb(140, 119, 25), var(--bs-bg-opacity, 1)) !important;
+}
+</style>
+<!-- Page Title
+============================================= -->
+<section class="page-title bg-color-profile border-bottom-0">
+    <div class="container">
+        <div class="page-title-row">
+
+            <div class="page-title-content">
+                <div class="d-flex align-items-center">
+                    <img src="{{ profile.avatar.url }}" alt="{{ profile }}" class="rounded-circle me-3 border border-width-3 border-white" width="120" height="120">
+                    <div>
+                        <h2 class="h1 border-bottom border-dark border-width-4" style="font-weight: 800">{{ profile.user.username }}</h2>
+                        {% if user.is_superuser or user.is_staff %}
+                            <p class="mb-0">Роль: <strong>Администрация сайта</strong></p>
+                        {% else %}
+                            <p class="mb-0">Роль: <strong>Посетитель сайта</strong></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="alt-color" href="{% url 'main' %}">Главная</a></li>
+                    <li class="breadcrumb-item text-black-50 active" aria-current="page">Редактирование профиля {{ profile.user.username }}</li>
+                </ol>
+            </nav>
+
+        </div>
+    </div>
+</section>
+
+<!-- Page Sub Menu
+============================================= -->
+<div id="page-menu" class="no-sticky">
+    <div id="page-menu-wrap" class="bg-alt">
+        <div class="container">
+            <div class="page-menu-row">
+
+                <nav class="page-menu-nav">
+                    <ul class="page-menu-container">
+                        <li class="page-menu-item"><a href="{{ profile.get_absolute_url }}"><div>Профиль</div></a></li>
+                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'profile_blog_list' %}"><div>Записи в блоге</div></a></li>{% endif %}
+                        {% if profile.user.id == user.id %}
+                        {% if user.is_superuser or user.is_staff %}
+                        <li class="page-menu-item"><a href="{% url 'profile_news_list' %}"><div>Опубликованные новости</div></a></li>
+                        <li class="page-menu-item"><a href="{% url 'profile_articles_list' %}"><div>Опубликованные статьи</div></a></li>
+                        {% endif %}
+                        {% endif %}
+                        {% if profile.user.id == user.id %}<li class="page-menu-item current"><a href="{% url 'profile_edit' %}"><div>Редактировать</div></a></li>{% endif %}
+                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'password_change' %}"><div>Изменить пароль</div></a></li>{% endif %}
+                    </ul>
+                </nav>
+
+                <div id="page-menu-trigger"><i class="bi-list"></i></div>
+
+            </div>
+        </div>
+    </div>
+</div><!-- #page-menu end -->
+
+<!-- Content
+============================================= -->
+<section id="content">
+    <div class="content-wrap" style="background-color: #f3f3f3;">
+        <div class="container mw-md">
+            <h3 class="h3 fw-bolder mb-4">Редактирование профиля</h3>
+
+            <div class="row col-mb-30 gutter-50">
+                  <div class="col-md-12 p-4" style="border: 1px solid #ccc;background-color: #fff;">
+                      <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ user_form.as_p }}
+                        {{ form.as_p }}
+                        <div class="d-grid gap-2 d-md-block mt-2">
+                           <button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated"><i class="bi-check-circle"></i><span>Подтвердить изменение профиля</span></button>
+                        </div>
+                     </form>
+                  </div>
+              </div>
+        </div>
+    </div>
+</section><!-- #content end -->
 {% endblock %}

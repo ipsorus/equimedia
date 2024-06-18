@@ -104,7 +104,7 @@
 <!-- Hero Section
 ============================================= -->
 <section id="slider"
-         class="slider-element swiper_wrapper main-slider__container customjs include-header dark"
+         class="slider-element swiper_wrapper main-slider__container customjs include-header include-topbar dark"
          data-loop="true">
     <div class="slider-inner">
         <div class="swiper swiper-parent swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
@@ -113,16 +113,18 @@
                 {% if not s.is_video %}
                 <div class="swiper-slide">
                     <div class="container" style="z-index: 2;">
-                        <div class="row main-slider__content">
-                            <div class="slider-caption">
-                                <h2>{{ s.title }}</h2>
-                                {% if s.additional_content %}
-                                <p>{{ s.additional_content }}</p>
-                                {% endif %}
-                                <div>
-                                    <a href="{{ s.url }}"
-                                       class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded"
-                                       target="_blank">Подробнее</a>
+                        <div class="vertical-middle">
+                            <div class="row main-slider__content">
+                                <div class="slider-caption">
+                                    <h2>{{ s.title }}</h2>
+                                    {% if s.additional_content %}
+                                    <p>{{ s.additional_content }}</p>
+                                    {% endif %}
+                                    <div>
+                                        <a href="{{ s.url }}"
+                                           class="mt-6 border-width-2 button button-large button-offset button-primary bg-primary text-light rounded"
+                                           target="_blank">Подробнее</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -196,30 +198,25 @@
                                      style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">
                                     Новости
                                 </div>
-                                <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">Новая
-                                    лошадь с перспективой на Гран-при у Хейрадина Нуриева!</h3>
+                                <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">{{news.first.title}}</h3>
                             </div>
                         </div>
                         <div class="slide">
                             <div class="col-md-12 px-5 py-4">
-                                <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 mb-3"
+                                <div class="before-heading text-white-50 fw-normal ls-1 mb-3"
                                      style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">
                                     Статьи
                                 </div>
-                                <h3 class="mb-1" style="font-size: 14px;">В Ташкенте, Узбекистан, стартовал
-                                    лично-командный евразийский турнир по конкуру</h3>
+                                <h3 class="mb-1" style="font-size: 14px;">{{main_articles.first.title}}</h3>
                             </div>
                         </div>
                         <div class="slide">
                             <div class="col-md-12 px-5 py-4">
-                                <div class="before-heading text-white-50 fw-normal text-uppercase ls-1 mb-3"
+                                <div class="before-heading text-white-50 fw-normal ls-1 mb-3"
                                      style="font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px;">
                                     Блоги
                                 </div>
-                                <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">Немного
-                                    фото-впечатлений от первого дня евразийского турнира по конкуру</h3>
-                                <!--                                <p class="mb-2 text-white-50">еукеуеa sint ut temporibus dignissimos, ex esse molestiae-->
-                                <!--                                    atque.</p>-->
+                                <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">{{blogs.first.title}}</h3>
                             </div>
                         </div>
                     </div>

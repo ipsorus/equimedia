@@ -6,27 +6,24 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
 	<meta name="author" content="">
-	<meta name="description" content="H">
+	<meta name="description" content="Portal">
 
 	<link rel="shortcut icon" href="{% static 'portal/images/favicon.ico' %}">
 
-	<!-- Core Style -->
+	<!-- Stylesheets
+	============================================= -->
+    {% block stylesheets %}
 	<link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
-
 	<!-- Font Icons -->
 	<link rel="stylesheet" href="{% static 'portal/css/font-icons.css' %}">
 	<link rel="stylesheet" href="{% static 'portal/css/et-line.css' %}">
-
-	<!-- Plugins/Components CSS -->
-<!--	<link rel="stylesheet" href="{% static 'portal/css/calendar.css' %}">-->
-
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="{% static 'portal/css/custom.css' %}">
-
+	<!-- Plugins/Components CSS -->
 	<link rel="stylesheet" type="text/css" href="{% static 'portal/css/demo.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'portal/css/calendar.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'portal/css/custom_2.css' %}" />
-
+	<link rel="stylesheet" type="text/css" href="{% static 'portal/css/calendar.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'portal/css/custom_2.css' %}" />
+	{% endblock stylesheets %}
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -171,15 +168,56 @@
 <!-- Document Wrapper
 ============================================= -->
 	<div id="wrapper">
-<!--		&lt;!&ndash; Top Bar-->
+<!--&lt;!&ndash; Top Bar-->
 <!--		============================================= &ndash;&gt;-->
-<!--		<div id="top-bar" class="py-3 border-0" style="background: var(&#45;&#45;cnvs-color2);">-->
-<!--			<div class="container text-center color">-->
-<!--				<div style="font-size: .9375rem;">Get 20% off* your First Order &amp; Free Shipping Upto $99</div>-->
+<!--		<div id="top-bar" class="transparent-topbar border-bottom-0">-->
+<!--			<div class="container">-->
+
+<!--				<div class="row justify-content-between">-->
+<!--					<div class="col-12 col-md-auto">-->
+
+<!--						&lt;!&ndash; Top Links-->
+<!--						============================================= &ndash;&gt;-->
+<!--						<div class="top-links">-->
+<!--							<ul class="top-links-container">-->
+<!--								<li class="top-links-item"><a href="#">All Cities</a>-->
+<!--									<ul class="top-links-sub-menu">-->
+<!--										<li class="top-links-item"><a href="#">New York</a></li>-->
+<!--										<li class="top-links-item"><a href="#">Los Angeles</a></li>-->
+<!--										<li class="top-links-item"><a href="#">California</a></li>-->
+<!--										<li class="top-links-item"><a href="#">Miami</a></li>-->
+<!--										<li class="top-links-item"><a href="#">Las Vegas</a></li>-->
+<!--									</ul>-->
+<!--								</li>-->
+<!--							</ul>-->
+<!--						</div>&lt;!&ndash; .top-links end &ndash;&gt;-->
+
+<!--					</div>-->
+
+<!--					<div class="col-12 col-md-auto">-->
+
+<!--						&lt;!&ndash; Top Links-->
+<!--						============================================= &ndash;&gt;-->
+<!--						<div class="top-links">-->
+<!--							<ul class="top-links-container">-->
+<!--								<li class="top-links-item d-md-none d-lg-block"><a href="#"><i class="fa-solid fa-phone"></i> +1800-123-7890</a></li>-->
+<!--								<li class="top-links-item"><a href="#"><i class="bi-download"></i> Download App</a></li>-->
+<!--								<li class="top-links-item top-bar-highlight"><a href="#">Sell/Rent your Property</a>-->
+<!--									<div class="top-links-section" style="font-size: 14px;">-->
+<!--										Genuine Clients, 100% Trust Assurance and Lowest Fees on the Market. <a href="#" class="more-link font-secondary" style="border-bottom-style: dotted;">Learn More &rarr;</a>-->
+<!--									</div>-->
+<!--								</li>-->
+<!--								<li class="top-links-item"><a href="#" class="side-panel-trigger">Login/Register</a></li>-->
+<!--							</ul>-->
+<!--						</div>&lt;!&ndash; .top-links end &ndash;&gt;-->
+
+<!--					</div>-->
+<!--				</div>-->
+
 <!--			</div>-->
-<!--		</div>-->
+<!--		</div>&lt;!&ndash; #top-bar end &ndash;&gt;-->
 		{% include 'portal/includes/header.html' %}
-		{% include 'account/user_login.html' %}
+<!--		{% include 'account/user_login.html' %}-->
 		{% block content %}{% endblock %}
 		{% include 'portal/includes/messages.html' %}
 		{% include 'portal/includes/footer.html' %}
@@ -190,8 +228,38 @@
 	<script src="{% static 'portal/js/plugins.min.js' %}"></script>
 	<script src="{% static 'portal/js/functions.bundle.js' %}"></script>
 	<script src="{% static 'portal/js/backend.js' %}"></script>
+	<script src="{% static 'portal/js/jquery.bootstrap.modal.forms.js' %}"></script>
 
+{% include "portal/includes/_modal.html" %}
+{% block extrascripts %}
+      	<script type="text/javascript">
+          jQuery(document).ready(function() {
+              // Login
+              jQuery("#login-btn").modalForm({
+                formURL: "{% url 'login' %}?next=/"
+              });
 
+              // Login
+              jQuery("#login-btn-blog").modalForm({
+                formURL: "{% url 'login' %}?next=/"
+              });
+
+              // Hide message
+    <!--          jQuery(".alert").fadeTo(2000, 500).slideUp(500, function () {-->
+    <!--              jQuery(".alert").slideUp(500);-->
+    <!--          });-->
+
+              jQuery("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+                   jQuery("#success-alert").slideUp(500);
+              });
+
+              jQuery("#error-alert").fadeTo(2000, 500).slideUp(500, function(){
+                   jQuery("#error-alert").slideUp(500);
+              });
+
+          });
+      	</script>
+    {% endblock extrascripts %}
 
 <script>
 	jQuery(window).on( 'load', function(){

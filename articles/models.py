@@ -1,6 +1,10 @@
 from ckeditor.fields import RichTextField
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+
+
+User = get_user_model()
 
 
 class Article(models.Model):
@@ -10,6 +14,9 @@ class Article(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False, verbose_name="Публикация статьи")
+    author = models.ForeignKey(to=User, verbose_name='Автор', on_delete=models.SET_DEFAULT,
+                               related_name='author_article_posts',
+                               default=1)
 
     def get_absolute_url(self):
         return reverse('article_detail_url', kwargs={'article_id': self.id})

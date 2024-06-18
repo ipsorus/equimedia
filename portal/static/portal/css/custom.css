@@ -4,8 +4,8 @@
 
 :root {
     --cnvs-themecolor-light-rgb: 255, 255, 255;
-	--cnvs-themecolor: #1c448a;
-	--cnvs-themecolor-rgb: 28, 68, 138;
+	--cnvs-themecolor: #426176;
+	--cnvs-themecolor-rgb: 66, 97, 118;
 	--cnvs-secondary-color: #8c7719;
 	--cnvs-secondary-color-rgb: 140, 119, 25;
 	--cnvs-body-bg: #fff;
@@ -38,6 +38,8 @@ body {
 .bg-color,
 .page-transition-wrap, .css3-spinner { background-color: var(--cnvs-body-bg) !important; }
 
+.bg-color-contact { background-color: var(--cnvs-themecolor) !important; }
+
 .bg-color-white { background-color: rgba(255, 255, 255, 0.95) !important; }
 .bg-color-white-form { background-color: rgba(255, 255, 255, 0.1) !important; }
 .bg-color-grey { background-color: rgba(255, 255, 255, 0.9) !important; }
@@ -56,14 +58,13 @@ body {
 	--cnvs-primary-menu-submenu-font-weight:	400;
 	--cnvs-primary-menu-submenu-hover-font-weight: 500;
 	--cnvs-primary-menu-submenu-tt:	none;
-}
-
-#header {
+	--cnvs-header-misc-icons-size: 1.425rem;
 	--cnvs-primary-menu-font: var(--cnvs-body-font);
 	--cnvs-primary-menu-submenu-bg: var(--cnvs-themecolor);
 	--cnvs-primary-menu-submenu-width: 240px;
 	--cnvs-primary-menu-submenu-hover-bg: transparent;
 }
+
 
 /* Custom Header Size
 -----------------------------------------------------------------*/
@@ -75,9 +76,6 @@ body {
 
 .footer-widgets-wrap li { margin-bottom: 3px; }
 .dark .footer-widgets-wrap a { color: #888; }
-
-body.modal-open { overflow-y: auto; }
-.modal-backdrop { display: none; }
 
 
 /* Responsive Device less than 768px (.device-sm <)
@@ -260,8 +258,8 @@ body.modal-open { overflow-y: auto; }
   background-color: var(--cnvs-contrast-100);
 }
 
-.entry::after { background-color: #EEE !important; }
-.dark .entry::after { background-color: rgba(255,255,255,0.15) !important; }
+.entry::after { background-color: #fff !important; }
+.dark .entry::after { background-color: #fff !important; }
 
 .entry-title h3 {
 	text-transform: none;
@@ -1097,7 +1095,7 @@ background-color: transparent !important;
 }
 
 .slider-caption h2, .slider-caption .h2 {
-        font-size: 4.5rem;
+        font-size: 4.0rem;
         letter-spacing: 2;
         text-transform: none;
         font-weight: 500;
@@ -1106,14 +1104,14 @@ background-color: transparent !important;
     }
 
 .main-slider__content {
-    padding-top: 160px;
+    padding-top: 50px;
     max-width: 750px;
     position: relative;
     }
 
 .slider-caption p {
-    font-size: 2.5rem;
-    margin-top: 2.5rem;
+    font-size: 2.1rem;
+    margin-top: 0.0rem;
     margin-bottom: 0.75rem;
 }
 
@@ -1175,7 +1173,7 @@ background-color: transparent !important;
 	display: block;
 }
 .entry::after {
-    background-color: #EEE !important;
+    background-color: #fff !important;
 }
 
 .entry.border-0:not(:last-child)::after {
@@ -1211,4 +1209,9 @@ background-color: transparent !important;
 .commentlist ul .comment-wrap {
   margin-left: 1.5rem;
   padding-left: 0 !important;
+}
+
+
+.dropdown-menu {
+    --bs-dropdown-link-active-bg: var(--cnvs-themecolor-rgb) !important;
 }

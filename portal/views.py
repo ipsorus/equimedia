@@ -2,13 +2,20 @@ from datetime import date
 from itertools import chain
 from operator import attrgetter
 
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 from articles.models import Article
 from blog.models import BlogPost
 from event.models import Event, Stage, Tournament
 from news.models import NewsPost
+from portal.forms import FeedbackCreateForm
+from portal.models import Feedback
+from services.email import send_contact_email_message
+from services.utils import get_client_ip
 from slider.models import Slider
 from testimonial.models import Testimonial
 
@@ -52,3 +59,21 @@ def categories(request, cat_id):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
+
+
+class FeedbackCreateView(SuccessMessageMixin, CreateView):
+    model = Feedback
+    form_class = FeedbackCreateForm
+    success_message = 'Ваше письмо успешно отправлено администрации сайта'
+    template_name = 'portal/feedback.html'
+    extra_context = {'title': 'Контакты'}
+    success_url = reverse_lazy('main')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.ip_address = get_client_ip(self.request)
+            if self.request.user.is_authenticated:
+                feedback.user = self.request.user
+            send_contact_email_message(feedback.subject, feedback.email, feedback.content, feedback.ip_address, feedback.user_id)
+        return super().form_valid(form)

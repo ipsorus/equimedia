@@ -5,8 +5,7 @@
 ============================================= -->
 <ol class="commentlist nested-comments">
 {% recursetree post.comments.all %}
-
-
+	<div id="comm-{{ node.pk }}"></div>
 	<li class="comment even thread-even" id="li-comment-{{ node.pk }}">
 		<div id="comment-{{ node.pk }}" class="comment-wrap">
 			<div class="comment-meta">
@@ -16,7 +15,7 @@
 				</div>
 			</div>
 			<div class="comment-content">
-				<div class="comment-author"><a href="{{ node.author.profile.get_absolute_url }}" title="Permalink to this comment">{{ node.author }}</a><span>{{ node.time_create }}</span></div>
+				<div class="comment-author"><a href="{{ node.author.profile.get_absolute_url }}" title="Ссылка на профиль автора комментария">{{ node.author }}</a><a href="#comment-{{ node.pk }}" title="Ссылка на комментарий"> #</a>{% if node.parent_id %} <i class="bi-arrow-right"></i> <a href="#comm-{{ node.parent_id }}" title="Ссылка на комментарий-источник">{{ node.parent.author }}</a>{% endif %}<span>{{ node.time_create }}</span></div>
 				<p>{{ node.content }}</p>
 				<a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="{{ node.pk }}" data-comment-username="{{ node.author }}"><i class="bi-reply-fill"></i></a>
 			</div>
@@ -42,12 +41,12 @@
 			 {% csrf_token %}
 			 {{ form }}
 			 <div class="d-grid gap-2 d-md-block mt-2">
-				<button type="submit" class="btn btn-dark" id="commentSubmit">Добавить комментарий</button>
+				<button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated" id="commentSubmit"><i class="uil-comment-plus"></i><span>Добавить комментарий</span></button>
 			 </div>
 		  </form>
 	{% else %}
 		<div class="style-msg alertmsg">
-			<div class="sb-msg"><i class="bi-exclamation-diamond-fill"></i><strong><a href="#modal-register" data-lightbox="inline">Авторизуйтесь</a></strong>, чтобы оставить комментарий</div>
+			<div class="sb-msg"><i class="bi-exclamation-diamond-fill"></i><strong><a id="login-btn-blog" href="#">Авторизуйтесь</a></strong>, чтобы оставить комментарий</div>
 		</div>
 	{% endif %}
 	</div><!-- #respond end -->

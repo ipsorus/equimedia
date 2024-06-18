@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+<style>
+.form-group > label.error {
+	display: block !important;
+	text-transform: none;
+}
+
+.form-group input.valid ~ label.error,
+.form-group input[type="text"] ~ label.error,
+.form-group input[type="email"] ~ label.error,
+.form-group input[type="number"] ~ label.error,
+.form-group select ~ label.error,
+.form-group textarea ~ label.error { display: none !important; }
+</style>
+{% block content %}
+<!-- Page Title
+============================================= -->
+<section class="page-title bg-transparent">
+    <div class="container">
+        <div class="page-title-row">
+
+            <div class="page-title-content">
+                <h1>Новое событие / мероприятие</h1>
+            </div>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Добавление события</li>
+                </ol>
+            </nav>
+
+        </div>
+    </div>
+</section><!-- .page-title end -->
+<!-- Content
+============================================= -->
+<section id="content">
+    <div class="content-wrap">
+        <div class="container">
+
+            <div class="form-widget">
+
+                <div class="form-result"></div>
+                <form method="post" action="{% url 'event_create' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                    <div class="d-grid gap-2 d-md-block mt-2">
+                        <button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated"><i class="bi-check-circle"></i><span>Добавить запись</span></button>
+                    </div>
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</section><!-- #content end -->
+{% endblock %}

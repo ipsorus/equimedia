@@ -3,9 +3,15 @@ from datetime import timedelta, datetime
 from itertools import chain
 from operator import attrgetter
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, DeleteView
 
+from event.forms import EventUpdateForm, EventCreateForm
 from event.models import Event, Tournament, Stage
+from services.mixins import AuthorRequiredMixin
 
 
 def event_detail(request, event_id):
@@ -125,3 +131,60 @@ def contest_detail(request, tournament_id):
 def stage_detail(request, tournament_id, stage_id):
     single_stage = get_object_or_404(Stage, pk=stage_id)
     return render(request, 'event/stage-single.html', {'item': single_stage})
+
+
+class EventCreateView(LoginRequiredMixin, CreateView):
+    """
+    Представление: создание материалов на сайте
+    """
+    model = Event
+    template_name = 'event/event-create.html'
+    form_class = EventCreateForm
+    login_url = 'event_detail_url'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Добавление события на сайт'
+        return context
+
+    def form_valid(self, form):
+        # form.instance.author = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class EventUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """
+    Представление: обновление материала на сайте
+    """
+    model = Event
+    template_name = 'event/event-update.html'
+    context_object_name = 'item'
+    form_class = EventUpdateForm
+    login_url = 'main'
+    success_message = 'Материал был успешно обновлен'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Обновление записи: {self.object.title}'
+        return context
+
+    def form_valid(self, form):
+        # form.instance.updater = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class EventDeleteView(AuthorRequiredMixin, DeleteView):
+    """
+    Представление: удаления материала
+    """
+    model = Event
+    success_url = reverse_lazy('calendar_page')
+    context_object_name = 'post'
+    template_name = 'event/event-delete.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Удаление записи: {self.object.title}'
+        return context

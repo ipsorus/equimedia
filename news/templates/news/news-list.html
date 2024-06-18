@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<style>
+.color-underline {
+	background-image: linear-gradient(rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3), rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3));
+	background-repeat: no-repeat;
+	background-size: 0 8px;
+	background-position: 0 82%;
+	padding: 0 2px 2px 0;
+	transition: background .6s cubic-bezier(.19,1,.22,1);
+}
+.color-underline:hover { background-size: 100% 8px; }
+</style>
 {% block content %}
 <!-- Page Title
 		============================================= -->
@@ -28,13 +39,12 @@
 <section id="content">
     <div class="content-wrap">
         <div class="container">
-            <div class="row justify-content-center gutter-50 col-mb-50">
+            <div class="row gutter-50 col-mb-50">
                 {% include page_template %}
 
                 {% block js %}
                 {{ block.super }}
                 <script src="{% static 'portal/js/plugins.min.js' %}"></script>
-                <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
                 <script src="{% static 'portal/js/el-pagination.js' %}"></script>
                 <script>
                     $.endlessPaginate({

@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
+from .views import EventCreateView, EventUpdateView, EventDeleteView
 
 urlpatterns = [
     path('event/<int:event_id>/', views.event_detail, name='event_detail_url'),
@@ -13,4 +14,7 @@ urlpatterns = [
     path('tournaments/<int:tournament_id>/', views.tournament_detail, name='tournament_detail_url'),
     path('tournaments/<int:tournament_id>/stage/<int:stage_id>/', views.stage_detail, name='stage_detail_url'),
     path('tournaments/contest/<int:tournament_id>/', views.contest_detail, name='contest_detail_url'),
+    path('event/create/', EventCreateView.as_view(), name='event_create'),
+    path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update'),
+    path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete'),
 ]

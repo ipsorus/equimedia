@@ -3459,7 +3459,7 @@ textarea.form-control-lg {
   --bs-dropdown-link-hover-color: var(--bs-body-color);
   --bs-dropdown-link-hover-bg: var(--bs-tertiary-bg);
   --bs-dropdown-link-active-color: #fff;
-  --bs-dropdown-link-active-bg: #0d6efd;
+  --bs-dropdown-link-active-bg: #426176;
   --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
   --bs-dropdown-item-padding-x: 1rem;
   --bs-dropdown-item-padding-y: 0.25rem;
@@ -5575,7 +5575,7 @@ textarea.form-control-lg {
 .modal-backdrop {
   --bs-backdrop-zindex: 1050;
   --bs-backdrop-bg: #000;
-  --bs-backdrop-opacity: 0.5;
+  --bs-backdrop-opacity: 0.9;
   position: fixed;
   top: 0;
   left: 0;
@@ -21719,7 +21719,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
 .entry-meta li {
   font-size: var(--cnvs-post-meta-fontsize);
   margin: 0 var(--cnvs-post-meta-margin) 0.75rem 0;
-  color: var(--cnvs-contrast-500);
+  color: var(--cnvs-contrast-700);
 }
 .entry-meta ul.flex-column li {
   margin-left: 0;

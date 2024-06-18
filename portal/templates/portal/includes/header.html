@@ -1,4 +1,5 @@
 {% load static %}
+
 <!-- Header
 ============================================= -->
 <header id="header"
@@ -18,34 +19,74 @@
                 <!-- Logo
                 ============================================= -->
                 <div id="logo" class="pe-lg-4 me-lg-auto">
-                    <a class="color fw-normal fs-4" href="/" data-scrollto="#slider">
+                    <a class="color fw-normal fs-4" href="{% url 'main' %}">
                         EQUI MEDIA
                     </a>
                 </div><!-- #logo end -->
 
                 <div class="header-misc ms-auto justify-content-lg-end">
-
-                    <!-- Top Login
-                    ============================================= -->
-                    <div id="top-account" class="header-misc-icon">
-                        <a href="#modal-register" data-lightbox="inline"><i class="bi-person-circle"></i></a>
-                    </div><!-- #top-login end -->
-                    <!-- Bookmark
-                    ============================================= -->
-                    <div class="dropdown dropdown-langs not-dark">
-                        <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <img src="{% static 'portal/images/flags/rus.png' %}" alt="Русский">
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/rus.png' %}"
-                                                                   alt="Russia"> Русский</a>
-                            <a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/chn.png' %}"
-                                                                   alt="China"> 中国语文科</a>
-                            <a href="#" class="dropdown-item disabled" tabindex="-1" aria-disabled="true"><img
-                                    src="{% static 'portal/images/flags/eng.png' %}" alt="English"> English</a>
+                    {% if user.is_authenticated %}
+                    <div class="header-misc-icon top-account">
+                        <a href="#" data-bs-toggle="dropdown" data-bs-offset="0,20" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false"><i class="i-plain bi-person-circle"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end px-2 m-0">
+                            {% if user.is_superuser or user.is_staff %}
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="/admin" target="_blank"><i class="bi-gear me-2"></i>Админпанель</a>
+                            {% endif %}
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{{ user.profile.get_absolute_url }}"><i class="bi-person me-2"></i>Профиль</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'post_create' %}"><i class="bi-pencil-square me-2"></i>Написать в блог</a>
+                            {% if user.is_superuser or user.is_staff %}
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'news_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать новость</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'article_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать статью</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'event_create' %}"><i class="bi-calendar2-event me-2"></i>Добавить событие</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="#"><i class="bi-calendar2-event me-2"></i>Добавить турнир</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <form class="mb-0" method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button class="dropdown-item py-2 h-bg-tranparent mb-0" type="submit"><i class="bi-box-arrow-right me-2"></i>Выход</button>
+                            </form>
                         </div>
                     </div>
+                    {% else %}
+                        <!-- Top Login
+                    ============================================= -->
+                    <div id="top-account" class="header-misc-icon">
+                        <a id="login-btn" href="#"><i class="bi-person-circle"></i></a>
+                    </div><!-- #top-login end -->
+                    {% endif %}
+<!--                    {% if user.is_superuser or user.is_staff %}-->
+<!--                    <div class="header-misc-icon top-account">-->
+<!--                        <a href="#" data-bs-toggle="dropdown" data-bs-offset="0,20" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false"><i class="bi-person-circle"></i></a>-->
+<!--                        <div class="dropdown-menu dropdown-menu-end px-2 m-0">-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="/admin" target="_blank"><i class="bi-gear me-2"></i>Админпанель</a>-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="{{ user.profile.get_absolute_url }}"><i class="bi-person me-2"></i>Профиль</a>-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="#"><i class="bi-pencil-square me-2"></i>Написать новость</a>-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="#"><i class="bi-pencil-square me-2"></i>Написать статью</a>-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="#"><i class="bi-pencil-square me-2"></i>Написать в блог</a>-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="#"><i class="bi-calendar2-event me-2"></i>Добавить событие</a>-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="#"><i class="bi-calendar2-event me-2"></i>Добавить турнир</a>-->
+<!--                            <a class="dropdown-item py-2 fw-medium h-bg-tranparent font-primary" href="{% url 'logout' %}?next={% url 'main' %}"><i class="bi-box-arrow-right me-2"></i>Выход</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    {% endif %}-->
+
+
+<!--                    &lt;!&ndash; Languages-->
+<!--                    ============================================= &ndash;&gt;-->
+<!--                    <div class="dropdown dropdown-langs not-dark">-->
+<!--                        <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"-->
+<!--                                aria-haspopup="true" aria-expanded="false">-->
+<!--                            <img src="{% static 'portal/images/flags/rus.png' %}" alt="Русский">-->
+<!--                        </button>-->
+<!--                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">-->
+<!--                            <a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/rus.png' %}"-->
+<!--                                                                   alt="Russia"> Русский</a>-->
+<!--                            <a href="#" class="dropdown-item"><img src="{% static 'portal/images/flags/chn.png' %}"-->
+<!--                                                                   alt="China"> 中国语文科</a>-->
+<!--                            <a href="#" class="dropdown-item disabled" tabindex="-1" aria-disabled="true"><img-->
+<!--                                    src="{% static 'portal/images/flags/eng.png' %}" alt="English"> English</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 
                 <div class="primary-menu-trigger">

@@ -1,6 +1,9 @@
 from ckeditor.fields import RichTextField
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+
+User = get_user_model()
 
 
 class NewsPost(models.Model):
@@ -11,6 +14,8 @@ class NewsPost(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False, verbose_name="Публикация новости")
     source = models.CharField(max_length=150, blank=True, verbose_name="Источник новости")
+    author = models.ForeignKey(to=User, verbose_name='Автор', on_delete=models.SET_DEFAULT, related_name='author_news_posts',
+                               default=1)
 
     def get_absolute_url(self):
         return reverse('news_detail_url', kwargs={'news_id': self.id})

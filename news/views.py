@@ -1,7 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, DeleteView
 
+from news.forms import NewsPostUpdateForm, NewsPostCreateForm
 from news.models import NewsPost
 from el_pagination.decorators import page_template
+from services.mixins import AuthorRequiredMixin
 
 
 def is_ajax(request):
@@ -42,3 +48,60 @@ def news_detail(request, news_id):
             }
 
     return render(request, 'news/news-single.html', data)
+
+
+class NewsPostCreateView(LoginRequiredMixin, CreateView):
+    """
+    Представление: создание материалов на сайте
+    """
+    model = NewsPost
+    template_name = 'news/news-single-create.html'
+    form_class = NewsPostCreateForm
+    login_url = 'news_list_url'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Добавление новости на сайт'
+        return context
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class NewsPostUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
+    """
+    Представление: обновления материала на сайте
+    """
+    model = NewsPost
+    template_name = 'news/news-single-update.html'
+    context_object_name = 'post'
+    form_class = NewsPostUpdateForm
+    login_url = 'news_list_url'
+    success_message = 'Материал был успешно обновлен'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Обновление записи: {self.object.title}'
+        return context
+
+    def form_valid(self, form):
+        # form.instance.updater = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class NewsPostDeleteView(AuthorRequiredMixin, DeleteView):
+    """
+    Представление: удаления материала
+    """
+    model = NewsPost
+    success_url = reverse_lazy('news_list_url')
+    context_object_name = 'post'
+    template_name = 'news/news-single-delete.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Удаление записи: {self.object.title}'
+        return context

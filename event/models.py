@@ -1,8 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-from equi_media_portal import settings
-
 
 class Discipline(models.Model):
     title = models.CharField(max_length=200, db_index=True, verbose_name="Название дисциплины")
@@ -27,14 +25,14 @@ class EventType(models.Model):
 
 
 class ContestType(models.Model):
-    title = models.CharField(max_length=200, db_index=True, verbose_name="Тип соревнования")
+    title = models.CharField(max_length=200, db_index=True, verbose_name="Уровень события")
 
     def __str__(self):
         return f'{self.title}'
 
     class Meta:
-        verbose_name = 'Тип соревнования'
-        verbose_name_plural = 'Типы соревнований'
+        verbose_name = 'Уровень события'
+        verbose_name_plural = 'Уровни событий'
 
 
 class StageType(models.Model):
@@ -49,7 +47,7 @@ class Tournament(models.Model):
     location = models.TextField(max_length=300, blank=True, verbose_name="Место проведения")
     prize = models.TextField(max_length=300, blank=True, verbose_name="Призовой фонд")
     discipline = models.ManyToManyField(Discipline, max_length=100, verbose_name='Дисциплина')
-    type = models.ManyToManyField(ContestType, max_length=100, verbose_name='Вид соревнования')
+    type = models.ForeignKey(ContestType, on_delete=models.PROTECT, max_length=100, verbose_name='Уровень соревнования')
     date_start = models.DateField(verbose_name="Дата начала")
     date_end = models.DateField(verbose_name="Дата окончания")
     result = models.TextField(blank=True, verbose_name="Результаты турнира")
@@ -105,7 +103,7 @@ class Stage(models.Model):
     date_end = models.DateField(verbose_name="Дата окончания")
     location = models.TextField(max_length=300, blank=True, verbose_name="Место проведения")
     discipline = models.ManyToManyField(Discipline, max_length=100, verbose_name='Дисциплина')
-    type = models.ManyToManyField(ContestType, max_length=100, verbose_name='Вид соревнования')
+    type = models.ForeignKey(ContestType, on_delete=models.PROTECT, max_length=100, verbose_name='Уровень соревнования')
     prize = models.TextField(max_length=300, blank=True, verbose_name="Призовой фонд")
     result = models.TextField(max_length=500, blank=True, verbose_name="Результаты соревнования")
     description = models.TextField(max_length=2000, blank=True, verbose_name="Описание")
@@ -152,12 +150,12 @@ class StageDocument(models.Model):
 
 
 class Event(models.Model):
-    event_type = models.ManyToManyField(EventType, max_length=100, verbose_name='Тип события')
+    event_type = models.ForeignKey(EventType, on_delete=models.PROTECT, max_length=100, verbose_name='Тип события')
     title = models.CharField(max_length=200, db_index=True, verbose_name="Название события")
     date_start = models.DateField(verbose_name="Дата начала")
     date_end = models.DateField(verbose_name="Дата окончания")
     location = models.TextField(max_length=300, blank=True, verbose_name="Место проведения")
-    type = models.ManyToManyField(ContestType, max_length=100, verbose_name='Вид мероприятия')
+    type = models.ForeignKey(ContestType, on_delete=models.PROTECT, max_length=100, verbose_name='Уровень мероприятия')
     prize = models.TextField(max_length=300, blank=True, verbose_name="Призовой фонд")
     result = models.TextField(max_length=500, blank=True, verbose_name="Результаты соревнований")
     image = models.ImageField(upload_to='media/events/%Y/%m/%d', blank=True, verbose_name="Постер для события")

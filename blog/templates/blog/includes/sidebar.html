@@ -1,0 +1,163 @@
+{% load mptt_tags blog_tags %}
+
+<!-- Sidebar
+============================================= -->
+<aside class="sidebar col-lg-3">
+    <div class="sidebar-widgets-wrap">
+
+        <div class="widget">
+            <h4>Последние комментарии</h4>
+            {% show_latest_comments count=5 %}
+        </div>
+
+        <div class="widget">
+            <ul class="nav canvas-tabs tabs nav-tabs size-sm mb-3" id="canvas-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="canvas-tab-1" data-bs-toggle="pill" data-bs-target="#tab-1" type="button" role="tab" aria-controls="canvas-tab-1" aria-selected="true">Popular</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="canvas-tab-2" data-bs-toggle="pill" data-bs-target="#tab-2" type="button" role="tab" aria-controls="canvas-tab-2" aria-selected="false">Recents</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link uil uil-comments-alt" id="canvas-tab-3" data-bs-toggle="pill" data-bs-target="#tab-3" type="button" role="tab" aria-controls="canvas-tab-3" aria-selected="false"></button>
+                </li>
+            </ul>
+
+            <div id="canvas-TabContent" class="tab-content">
+
+                <div class="tab-pane show active" id="tab-1" role="tabpanel" aria-labelledby="canvas-tab-1" tabindex="0">
+                    <div class="posts-sm row col-mb-30" id="popular-post-list-sidebar">
+                        <div class="entry col-12">
+                            <div class="grid-inner row g-0">
+                                <div class="col-auto">
+                                    <div class="entry-image">
+                                        <a href="#"><img class="rounded-circle" src="images/magazine/small/3.jpg" alt="Image"></a>
+                                    </div>
+                                </div>
+                                <div class="col ps-3">
+                                    <div class="entry-title">
+                                        <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li><i class="uil uil-comments-alt"></i> 35 Comments</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="entry col-12">
+                            <div class="grid-inner row g-0">
+                                <div class="col-auto">
+                                    <div class="entry-image">
+                                        <a href="#"><img class="rounded-circle" src="images/magazine/small/2.jpg" alt="Image"></a>
+                                    </div>
+                                </div>
+                                <div class="col ps-3">
+                                    <div class="entry-title">
+                                        <h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li><i class="uil uil-comments-alt"></i> 24 Comments</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="entry col-12">
+                            <div class="grid-inner row g-0">
+                                <div class="col-auto">
+                                    <div class="entry-image">
+                                        <a href="#"><img class="rounded-circle" src="images/magazine/small/1.jpg" alt="Image"></a>
+                                    </div>
+                                </div>
+                                <div class="col ps-3">
+                                    <div class="entry-title">
+                                        <h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li><i class="uil uil-comments-alt"></i> 19 Comments</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab-2" role="tabpanel" aria-labelledby="canvas-tab-2" tabindex="0">
+                    <div class="posts-sm row col-mb-30" id="recent-post-list-sidebar">
+                        <div class="entry col-12">
+                            <div class="grid-inner row g-0">
+                                <div class="col-auto">
+                                    <div class="entry-image">
+                                        <a href="#"><img class="rounded-circle" src="images/magazine/small/1.jpg" alt="Image"></a>
+                                    </div>
+                                </div>
+                                <div class="col ps-3">
+                                    <div class="entry-title">
+                                        <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li>10th July 2021</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="entry col-12">
+                            <div class="grid-inner row g-0">
+                                <div class="col-auto">
+                                    <div class="entry-image">
+                                        <a href="#"><img class="rounded-circle" src="images/magazine/small/2.jpg" alt="Image"></a>
+                                    </div>
+                                </div>
+                                <div class="col ps-3">
+                                    <div class="entry-title">
+                                        <h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li>10th July 2021</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="entry col-12">
+                            <div class="grid-inner row g-0">
+                                <div class="col-auto">
+                                    <div class="entry-image">
+                                        <a href="#"><img class="rounded-circle" src="images/magazine/small/3.jpg" alt="Image"></a>
+                                    </div>
+                                </div>
+                                <div class="col ps-3">
+                                    <div class="entry-title">
+                                        <h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li>10th July 2021</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab-3" role="tabpanel" aria-labelledby="canvas-tab-3" tabindex="0">
+                    {% show_latest_comments count=5 %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</aside><!-- .sidebar end -->

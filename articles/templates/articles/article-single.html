@@ -28,14 +28,6 @@
                                 <h3>{{ item.title }}</h3>
                             </div><!-- .entry-title end -->
 
-                            <!-- Entry Meta
-                            ============================================= -->
-                            <div class="entry-meta">
-                                <ul>
-                                    <li><i class="uil uil-schedule"></i> {{ item.time_create }}</li>
-                                </ul>
-                            </div><!-- .entry-meta end -->
-
                             <!-- Entry Image
                             ============================================= -->
                             <div class="entry-image">
@@ -49,7 +41,7 @@
                                 <div class="card border-default mb-4">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center justify-content-between fs-6">
-<!--                                            <div class="col-md-auto fst-italic text-muted">5 min read</div>-->
+                                            <div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ item.time_create }}</div>
 
                                             <div class="col-md-auto">
                                                 <div class="d-flex">

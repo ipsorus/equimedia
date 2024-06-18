@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm, PasswordChangeForm, \
+    PasswordResetForm
 from django.contrib.auth.models import User
 
 from .models import Profile
@@ -22,7 +23,7 @@ class UserUpdateForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
-                'autocomplete': 'off'
+                'autocomplete': 'new-password'
             })
 
     def clean_email(self):
@@ -43,6 +44,9 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('slug', 'birth_date', 'bio', 'avatar')
+        widgets = {
+            'birth_date': forms.widgets.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+        }
 
     def __init__(self, *args, **kwargs):
         """
@@ -52,7 +56,7 @@ class ProfileUpdateForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
-                'autocomplete': 'off'
+                'autocomplete': 'new-password'
             })
 
 
@@ -86,7 +90,33 @@ class UserRegisterForm(UserCreationForm):
             self.fields["last_name"].widget.attrs.update({"placeholder": 'Ваша фамилия'})
             self.fields['password1'].widget.attrs.update({"placeholder": 'Придумайте свой пароль'})
             self.fields['password2'].widget.attrs.update({"placeholder": 'Повторите придуманный пароль'})
-            self.fields[field].widget.attrs.update({"class": "form-control", "autocomplete": "off"})
+            self.fields[field].widget.attrs.update({"class": "form-control", "autocomplete": "new-password"})
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+    def __init__(self, *args, **kwargs):
+        """
+        Обновление стилей формы регистрации
+        """
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields['username'].widget.attrs['placeholder'] = 'Логин пользователя'
+            self.fields['password'].widget.attrs['placeholder'] = 'Пароль пользователя'
+            self.fields['username'].widget.attrs.update({
+                'id': "border-form-username",
+                'autocomplete': 'off'
+            })
+            self.fields['password'].widget.attrs.update({
+                'id': "border-form-password",
+                'autocomplete': 'new-password'
+            })
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control border-form-control px-1 rounded-0',
+            })
 
 
 class UserLoginForm(AuthenticationForm):
@@ -105,7 +135,7 @@ class UserLoginForm(AuthenticationForm):
             self.fields['username'].label = 'Логин'
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
-                'autocomplete': 'off'
+                'autocomplete': 'new-password'
             })
 
 
@@ -113,6 +143,40 @@ class UserPasswordChangeForm(PasswordChangeForm):
     """
     Форма изменения пароля
     """
+    def __init__(self, *args, **kwargs):
+        """
+        Обновление стилей формы
+        """
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                'autocomplete': 'new-password'
+            })
+
+
+class UserForgotPasswordForm(PasswordResetForm):
+    """
+    Запрос на восстановление пароля
+    """
+
+    def __init__(self, *args, **kwargs):
+        """
+        Обновление стилей формы
+        """
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                'autocomplete': 'off'
+            })
+
+
+class UserSetNewPasswordForm(SetPasswordForm):
+    """
+    Изменение пароля пользователя после подтверждения
+    """
+
     def __init__(self, *args, **kwargs):
         """
         Обновление стилей формы

@@ -1,47 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load mptt_tags %}
-
-<!--<div class="card mb-3">-->
-<!--	<div class="row">-->
-<!--		<div class="col-4">-->
-<!--			<img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}" />-->
-<!--		</div>-->
-<!--		<div class="col-8">-->
-<!--			<div class="card-body">-->
-<!--				<h5>{{ post.title }}</h5>-->
-<!--				<p class="card-text">{{ post.content }}</p>-->
-<!-- Добавил: {{ post.author.username }} / <small>{{ post.time_create }}</small>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->
-<!--<div class="card border-0">-->
-<!--	<div class="card-body">-->
-<!--		<h5 class="card-title">-->
-<!--			Комментарии-->
-<!--		</h5>-->
-<!--		{% include 'blog/comments/comments_list.html' %}-->
-<!--	</div>-->
-<!--</div>-->
-
 {% block content %}
 <!-- Page Title
 		============================================= -->
-		<section class="page-title bg-transparent">
-			<div class="container">
-				<div class="page-title-row">
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
-							<li class="breadcrumb-item"><a href="{% url 'posts_list_url' %}">Блоги</a></li>
-							<li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
-						</ol>
-					</nav>
+<section class="page-title dark page-title-parallax parallax scroll-detect page-title-center">
+	<img src="{{ post.thumbnail.url }}" class="parallax-bg">
+	<div class="container">
+		<div class="page-title-row">
 
-				</div>
+			<div class="page-title-content text-uppercase">
+				<h2 class="mb-3">{{ post.title }}</h2>
 			</div>
-		</section><!-- .page-title end -->
 
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'posts_list_url' %}">Блоги</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+				</ol>
+			</nav>
+
+		</div>
+	</div>
+	<div class="video-overlay z-1" style="background: linear-gradient(to bottom, rgba(66, 97, 118,.9), rgba(66, 97, 118,.9))"></div>
+</section><!-- .page-title end -->
 		<!-- Content
 		============================================= -->
 		<section id="content">
@@ -58,23 +41,6 @@
 								<!-- Single Post
 								============================================= -->
 								<div class="entry">
-
-									<!-- Entry Title
-									============================================= -->
-									<div class="entry-title">
-										<h2>{{ post.title }}</h2>
-									</div><!-- .entry-title end -->
-
-									<!-- Entry Meta
-									============================================= -->
-									<div class="entry-meta">
-										<ul>
-											<li><i class="uil uil-schedule"></i> {{ post.time_create }}</li>
-											<li><a href="#"><i class="uil uil-user"></i> {{ post.author.username }}</a></li>
-											<li><a href="#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }} Комментариев</a></li>
-										</ul>
-									</div><!-- .entry-meta end -->
-
 									<!-- Entry Image
 									============================================= -->
 									<div class="entry-image">
@@ -88,7 +54,7 @@
 										<div class="card border-default mb-4">
 											<div class="card-body py-2">
 												<div class="row align-items-center justify-content-between fs-6">
-													<div class="col-md-auto fst-italic text-muted">5 min read</div>
+													<div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ post.time_create }} <i class="bi-three-dots-vertical"></i> <a href="{{ post.author.profile.get_absolute_url }}"><i class="uil uil-user"></i> {{ post.author.username }}</a> <i class="bi-three-dots-vertical"></i> <a href="#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }} Комментариев</a></div>
 
 													<div class="col-md-auto">
 														<div class="d-flex">
@@ -109,6 +75,8 @@
 										<p>{{ post.content }}</p>
 										<!-- Post Single - Content End -->
 
+									</div>
+								</div><!-- .entry end -->
 										<!-- Post Single - Share
                                 ============================================= -->
                                 <div id="cnvs-article-share" class="card border-default my-4">
@@ -154,9 +122,6 @@
                                     </div>
                                 </div><!-- Post Single - Share End -->
 
-									</div>
-								</div><!-- .entry end -->
-
 								<!-- Post Navigation
                         ============================================= -->
                         <div class="row text-center text-md-start justify-content-between my-5">
@@ -177,85 +142,41 @@
                                 {% endif %}
                             </div>
                         </div><!-- .post-navigation end -->
+								<div class="container mt-6 rounded-6" style="border: 3px solid rgba(233, 156, 52, 1);">
+									<div class="row align-items-center justify-content-between p-md-3">
+										{% if similar_articles %}
 
-								<!-- Post Author Info
-								============================================= -->
-								<div class="card border-default mb-6">
-									<div class="card-body p-4">
-										<div class="row">
-											<div class="col-auto">
-												<img src="images/author/1.jpg" alt="Author Image" class="rounded-circle square square-md">
-											</div>
-											<div class="col">
-												<div class="d-flex align-items-start mb-2">
-													<div>
-														<h5 class="text-medium fw-semibold mb-0"><a href="#" class="text-dark">Jonathan Swift</a></h5>
-														<span class="text-muted text-smaller">12.5K Followers</span>
-													</div>
-													<a href="#" class="btn btn-light btn-sm rounded-pill px-3 ms-auto">Follow</a>
-												</div>
-												<p class="mb-3">Writer at Canvas Inc. Posting stories about Best Blog Designs.</p>
-												<a href="#" class="more-link">More Posts by Jonathan Swift</a>
-											</div>
-										</div>
-									</div>
-								</div><!-- Post Single - Author End -->
+								<h4 class="fs-4 fw-medium">Может быть интересно</h4>
 
-								<h4 class="fs-4 fw-medium">Recommended for you</h4>
-
-								<div class="related-posts row posts-md g-4">
+								<div class="related-posts row posts-md">
+									{% for sim_article in similar_articles %}
 									<div class="entry col-12 col-md-6">
 										<div class="grid-inner row gx-4">
 											<div class="col-auto">
 												<div class="entry-image">
-													<a href="#"><img src="images/blog/small/10.jpg" alt="Blog Single" class="square square-lg" style="object-fit: cover; object-position: center;"></a>
+													<a href="{{ sim_article.get_absolute_url }}"><img src="{{ sim_article.thumbnail.url }}" alt="{{ sim_article.title }}" class="square square-lg" style="object-fit: cover; object-position: center;"></a>
 												</div>
 											</div>
 											<div class="col">
-												<div class="entry-meta font-secondary fst-italic mt-0">
-													<ul>
-														<li><a href="#">Entertainment</a></li>
-													</ul>
-												</div>
 												<div class="entry-title title-sm text-transform-none">
-													<h3><a href="#">Best Ways to be more Creative</a></h3>
+													<h3><a href="{{ sim_article.get_absolute_url }}">{{ sim_article.title }}</a></h3>
 												</div>
-												<div class="entry-meta font-secondary mt-2">
+												<div class="entry-meta mt-2">
 													<ul>
-														<li>Posted 4 Days ago</li>
-														<li><a href="#"><i class="uil uil-comments-alt"></i> 12</a></li>
+														<li>{{ sim_article.time_create }}</li>
+														<li><a href="{{ sim_article.get_absolute_url }}#comments"><i class="uil uil-comments-alt"></i> {{ sim_article.comments.count }}</a></li>
 													</ul>
 												</div>
 											</div>
 										</div>
 									</div>
-
-									<div class="entry col-12 col-md-6">
-										<div class="grid-inner row gx-4">
-											<div class="col-auto">
-												<div class="entry-image">
-													<a href="#"><img src="images/blog/small/20.jpg" alt="Blog Single" class="square square-lg" style="object-fit: cover; object-position: center;"></a>
-												</div>
-											</div>
-											<div class="col">
-												<div class="entry-meta font-secondary fst-italic mt-0">
-													<ul>
-														<li><a href="#">Viral</a></li>
-													</ul>
-												</div>
-												<div class="entry-title title-sm text-transform-none">
-													<h3><a href="#">5 Interesting Viral Videos</a></h3>
-												</div>
-												<div class="entry-meta font-secondary mt-2">
-													<ul>
-														<li>Posted 2 weeks ago</li>
-														<li><a href="#"><i class="uil uil-comments-alt"></i> 422</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
+									{% endfor %}
+								</div>
+								{% endif %}
 									</div>
 								</div>
+
+
 
 								<!-- Comments
 								============================================= -->
@@ -269,19 +190,6 @@
 						============================================= -->
 						<aside class="sidebar col-lg-3">
 							<div class="sidebar-widgets-wrap">
-
-								<div class="widget widget-twitter-feed">
-
-									<h4>Twitter Feed</h4>
-
-								</div>
-
-								<div class="widget">
-
-									<h4>Flickr Photostream</h4>
-
-								</div>
-
 								<div class="widget">
 
 									<ul class="nav canvas-tabs tabs nav-tabs size-sm mb-3" id="canvas-tab" role="tablist">
@@ -471,51 +379,11 @@
 
 								</div>
 
+								<!-- Sidebar Widget 2 Advertisement
+								============================================= -->
 								<div class="widget">
-
-									<h4>Portfolio Carousel</h4>
-									<div id="oc-portfolio-sidebar" class="owl-carousel carousel-widget" data-items="1" data-margin="10" data-loop="true" data-nav="false" data-autoplay="5000">
-
-										<div class="oc-item">
-											<div class="portfolio-item">
-												<div class="portfolio-image">
-													<a href="#">
-														<img src="images/portfolio/4/3.jpg" alt="Mac Sunglasses">
-													</a>
-													<div class="bg-overlay">
-														<div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
-															<a href="https://vimeo.com/89396394" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="zoomIn" data-hover-speed="350" data-lightbox="iframe"><i class="uil uil-play"></i></a>
-														</div>
-														<div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
-													</div>
-												</div>
-												<div class="portfolio-desc text-center pb-0">
-													<h3><a href="portfolio-single-video.html">Mac Sunglasses</a></h3>
-													<span><a href="#">Graphics</a>, <a href="#">UI Elements</a></span>
-												</div>
-											</div>
-										</div>
-
-										<div class="oc-item">
-											<div class="portfolio-item">
-												<div class="portfolio-image">
-													<a href="portfolio-single.html">
-														<img src="images/portfolio/4/1.jpg" alt="Open Imagination">
-													</a>
-													<div class="bg-overlay">
-														<div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
-															<a href="images/blog/full/1.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="zoomIn" data-hover-speed="350" data-lightbox="image"><i class="uil uil-plus"></i></a>
-														</div>
-														<div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
-													</div>
-												</div>
-												<div class="portfolio-desc text-center pb-0">
-													<h3><a href="portfolio-single.html">Open Imagination</a></h3>
-													<span><a href="#">Media</a>, <a href="#">Icons</a></span>
-												</div>
-											</div>
-										</div>
-									</div>
+									<a href=""><img src="{% static 'portal/images/ad.png' %}" alt="Ad"
+													class="img-responsive aligncenter"></a>
 								</div>
 							</div>
 						</aside><!-- .sidebar end -->

@@ -1,5 +1,16 @@
 {% load el_pagination_tags %}
 {% load static %}
+<style>
+.color-underline {
+	background-image: linear-gradient(rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3), rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3));
+	background-repeat: no-repeat;
+	background-size: 0 8px;
+	background-position: 0 82%;
+	padding: 0 2px 2px 0;
+	transition: background .6s cubic-bezier(.19,1,.22,1);
+}
+.color-underline:hover { background-size: 100% 8px; }
+</style>
 {% paginate 9 news %}
 
 {% for post in news %}
@@ -9,9 +20,8 @@
             {% if post.image %}<img src="{{ post.image.url }}" alt="">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}
         </div>
         <div class="portfolio-desc">
-            <span>{{ post.time_create }}</span>
-            <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
-
+            <span class="mb-2">{{ post.time_create }}</span>
+            <h5><a href="{{ post.get_absolute_url }}" class="stretched-link color-underline">{{ post.title }}</a></h5>
         </div>
     </div>
 </article>

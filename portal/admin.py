@@ -1,7 +1,16 @@
 from django.contrib import admin
 from django.db import ProgrammingError
 
-from portal.models import WebsiteSettings, SiteSettings
+from portal.models import WebsiteSettings, SiteSettings, Feedback
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    """
+    Админ-панель модели профиля
+    """
+    list_display = ('email', 'ip_address', 'user')
+    list_display_links = ('email', 'ip_address')
 
 
 class WebSiteSettings(admin.ModelAdmin):

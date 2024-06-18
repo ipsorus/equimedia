@@ -1,31 +1,103 @@
-<!-- Login/Register Modal -->
-<div class="modal-register mfp-hide" id="modal-register" data-animate="fadeIn">
-    <div class="card mx-auto" style="max-width: 400px;">
-        <div class="card-header py-3 bg-transparent text-center">
-            <h3 class="mb-0 fw-normal">Добро пожаловать</h3>
+{% load widget_tweaks %}
+<style>
+		.block-form-1 .form-group {
+			position: relative;
+			margin-bottom: 1rem;
+		}
+
+		.block-form-1 .form-group label:not(.error) {
+			position: absolute;
+			top: 50%;
+			left: 10px;
+			margin-bottom: 0; /* Override default `<label>` margin */
+			color: #BBB;
+			padding: 0 4px;
+			transform: translateY(-50%);
+			transition: all 200ms ease;
+			cursor: text;
+			text-transform: none;
+			letter-spacing: 0;
+			font-weight: 500;
+		}
+
+		.block-form-1 .form-group input:focus + label:not(.error),
+		.block-form-1 .form-group input.focus-visible + label:not(.error),
+		.block-form-1 .form-group input:visited + label:not(.error),
+		.block-form-1 .form-group input:not(:placeholder-shown) + label:not(.error) {
+		  font-size: 70%;
+		  transform: translate3d(0, -50%, 0);
+		  top: 0;
+		  color: #999;
+		  background-color: #FFF;
+		}
+
+		.block-form-1 .form-group input::-webkit-input-placeholder {
+			opacity: 0;
+		}
+		.block-form-1 .form-group input:-ms-input-placeholder {
+			opacity: 0;
+		}
+		.block-form-1 .form-group input::-moz-placeholder {
+			opacity: 0;
+		}
+
+		.block-form-1 .form-control.border-form-control {
+			--cnvs-input-btn-padding-x : 0;
+		}
+
+		.block-form-1 .form-control.border-form-control + label:not(.error) {
+			left: 0;
+			color: #BBb !important;
+		}
+	</style>
+
+
+<div style="padding: 20px;">
+<form name="login-form" class="row g-0 form-signin block-form-1 mb-0" method="POST" action="" autocomplete="off">
+  {% csrf_token %}
+
+  <div class="modal-header">
+    <h3 class="modal-title">Авторизация</h3>
+    <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal" aria-hidden="true"></button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+      {% for error in form.non_field_errors %}
+        <div class="alert alert-danger .alert-dismissible" role="alert">
+            <div class="text-left">
+              <strong>Ошибка:</strong> {{ error }}<br />
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+
+    {% for field in form %}
+      <div class="col-12 form-group">
+
+        {% render_field field autofocus="" %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="{% if field.errors %} invalid{% endif %}">
+          {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
         </div>
-        <div class="card-body mx-auto py-5" style="max-width: 90%;">
-            <form id="login-form" name="login-form" class="mb-0 row" action="" method="post">
-                {% csrf_token %}
-                <div class="col-12">
-                    <input type="text" id="login-form-username" name="login-form-username" value="" class="form-control not-dark" placeholder="Логин">
-                </div>
-
-                <div class="col-12 mt-4">
-                    <input type="password" id="login-form-password" name="login-form-password" value="" class="form-control not-dark" placeholder="Пароль">
-                </div>
-
-                <div class="col-12 text-end">
-                    <a href="{% url 'password_reset' %}" class="text-dark fw-light mt-2">Забыли пароль?</a>
-                </div>
-
-                <div class="col-12 mt-4">
-                    <button class="button w-100 m-0" id="login-form-submit" name="login-form-submit" value="login">Авторизоваться</button>
-                </div>
-            </form>
-        </div>
-        <div class="card-footer py-4 text-center">
-            <p class="mb-0">Не зарегистрированы? <a href="{% url 'register' %}"><u>Регистрация</u></a></p>
+      </div>
+    {% endfor %}
+    <div class="col-12 form-group">
+        <div class="d-flex justify-content-end">
+            <a href="{% url 'password_reset' %}" class="forgot-password">Забыли пароль?</a>
         </div>
     </div>
-</div>
+  </div>
+  <div class="col-12 form-group text-center">
+      <button type="submit" formnovalidate="formnovalidate" class="button button-rounded m-0 w-100">Войти</button>
+  </div>
+  <div class="modal-footer mb-0">
+    <div class="col-12 form-group text-center">
+        <h6 class="fw-medium">Не зарегистрированы? <a href="{% url 'register' %}"><u>Регистрация</u></a></h6>
+    </div>
+  </div>
+
+</form></div>

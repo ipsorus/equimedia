@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+.contact-section {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 50%;
+    padding: 60px 60px 60px 180px;
+    z-index: 0;
+}
+.contact-image {
+    position: relative;
+    width: 60%;
+    margin-top: 30px;
+    z-index: 2;
+    box-shadow: 0 0 40px rgba(0,0,0,.3);
+}
+@media (max-width: 991px) {
+    .contact-section {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 20px;
+    }
+    .contact-image {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+.bg-color-contacts, .bg-color-contacts #header-wrap {
+background-color: rgb(140, 119, 25), var(--bs-bg-opacity, 1)) !important;
+}
+</style>
+<!-- Page Title
+============================================= -->
+<section class="page-title bg-color-contacts page-title-center">
+	<div class="container">
+		<div class="page-title-row">
+			<div class="page-title-content text-uppercase">
+				<h2 class="mb-3">{{ title }}</h2>
+			</div>
+
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+</section><!-- .page-title end -->
+<!-- Content
+============================================= -->
+<section id="content">
+	<div class="content-wrap">
+		<div class="container">
+
+			<div style="position: relative;">
+				<img src="{% static 'portal/images/contacts.webp' %}" alt="Image" class="contact-image">
+				<div class="contact-section bg-color-contact">
+					<div class="p-5 p-lg-0 dark" style="font-size: 15px; line-height: 1.7;">
+						<address style="line-height: 1.7;">
+						<span class="fw-light">Адрес:</span><br>
+						<span class="h6 text-white ls-1 fw-normal">
+							Московская область,<br>
+							Ленинский городской округ,<br>
+							сельское поселение Молоковское.
+						</span>
+						</address>
+						<span class="fw-light">Телефон:</span><br>
+						<a href="tel:8 (495) 632-52-11" class="h6 text-white ls-1 fw-normal">8 (495) 632-52-11</a><br><br>
+
+						<span class="fw-light">Email:</span><br>
+						<a href="mailto:info@equimedia.ru?Subject=Добрый%20день" class="h6 text-white ls-1 fw-normal">info@equimedia.ru</a>
+					</div>
+				</div>
+			</div>
+			<div class="clear mt-5"></div>
+
+			<div class="row align-items-stretch mx-0" style="border: 1px solid #eee;background-color: #fff;box-shadow: 0 0 40px rgba(0,0,0,.09)">
+				<div class="col-md-6 px-4 min-vh-25 p-4">
+					<div class="gmap h-100" style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/ksk_vivat_rossiya_/194812110432/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">КСК Виват, Россия!</a><a href="https://yandex.ru/maps/1/moscow-and-moscow-oblast/category/horse_riding/184107287/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Конный клуб в Москве и Московской области</a><iframe src="https://yandex.ru/map-widget/v1/?ll=37.863109%2C55.553340&mode=search&oid=194812110432&ol=biz&utm_source=ntp_chrome&z=12.23" width="560" height="560" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+				</div>
+				<div class="col-md-6">
+					<div class="p-4">
+						<div class="quick-contact-widget form-widget" >
+							<h3 class="text-capitalize ls-1 fw-normal">Напишите нам</h3>
+							<form method="post" action="{% url 'feedback' %}">
+								{% csrf_token %}
+								{{ form.as_p }}
+								<div class="d-grid gap-2 d-md-block mt-2">
+								<button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated"><i class="bi-send"></i><span>Отправить письмо</span></button>
+							 </div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div><!-- .content-wrap end -->
+</section><!-- #content end -->
+
+{% endblock %}

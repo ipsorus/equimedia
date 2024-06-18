@@ -17,7 +17,7 @@ function replyUser() {
 function replyComment() {
   const commentUsername = this.getAttribute('data-comment-username');
   const commentMessageId = this.getAttribute('data-comment-id');
-  commentFormContent.value = `${commentUsername}, `;
+  commentFormContent.value = ``;
   commentFormParentInput.value = commentMessageId;
 }
 async function createComment(event) {
@@ -44,15 +44,33 @@ async function createComment(event) {
                                             </div>
                                         </div>
                                         <div class="comment-content">
-                                            <div class="comment-author"><a href="${comment.get_absolute_url}" title="Permalink to this comment">${comment.author}</a><span>Добавлен только что</span></div>
+                                            <div class="comment-author"><a href="${comment.get_absolute_url}" title="Ссылка на профиль автора комментария">${comment.author}</a><a href="#comment-${comment.id}" title="Ссылка на комментарий"> #</a><span>Добавлен только что</span></div>
                                             <p>${comment.content}</p>
                                             <a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="${comment.id}" data-comment-username="${comment.author}"><i class="bi-reply-fill"></i></a>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
                                 </li>`;
+
+        let commentChildTemplate = `<li class="comment even thread-even" id="li-comment-${comment.id}">
+                                    <div id="comment-${comment.id}" class="comment-wrap">
+                                        <div class="comment-meta">
+                                            <div class="comment-author vcard">
+                                                <span class="comment-avatar">
+                                                <img alt='Image' src='${comment.avatar}' class='avatar avatar-60 photo avatar-default' height='60' width='60'></span>
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <div class="comment-author"><a href="${comment.get_absolute_url}" title="Ссылка на профиль автора комментария">${comment.author}</a><a href="#comment-${comment.id}" title="Ссылка на комментарий"> #</a> <i class="bi-arrow-right"></i> <a href="#comm-${comment.parent_id}" title="Ссылка на комментарий-источник">${comment.parent_author}</a><span>Добавлен только что</span></div>
+                                            <p>${comment.content}</p>
+                                            <a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="${comment.id}" data-comment-username="${comment.author}"><i class="bi-reply-fill"></i></a>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>`;
+
         if (comment.is_child) {
-            document.querySelector(`#li-comment-${comment.parent_id}`).insertAdjacentHTML("beforeend", commentTemplate);
+            document.querySelector(`#li-comment-${comment.parent_id}`).insertAdjacentHTML("beforeend", commentChildTemplate);
         }
         else {
             document.querySelector('.nested-comments').insertAdjacentHTML("beforeend", commentTemplate)

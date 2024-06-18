@@ -1,11 +1,14 @@
+import random
+from itertools import chain
+
+from django.db.models import Q
 from django.http import JsonResponse
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
-from el_pagination.decorators import page_template
 from el_pagination.views import AjaxListView
 from services.mixins import AuthorRequiredMixin
 from .models import Comment, BlogPost
@@ -21,41 +24,29 @@ class BlogPostListView(AjaxListView):
         return BlogPost.objects.filter(is_published=True)
 
 
-@page_template('blog/posts-list-page.html')
-def blogs_section(request,
-                  template='blog/posts_list.html',
-                  extra_context=None):
-    context = {
-        'posts': BlogPost.objects.filter(is_published=True),
-    }
-    if extra_context is not None:
-        context.update(extra_context)
-    return render(request, template, context)
-
-
-# class BlogPostListView(ListView):
-#     model = BlogPost
-#     template_name = 'blog/posts_list.html'
-#     context_object_name = 'posts'
-#
-#     # paginate_by = 10
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = 'Страница блогов'
-#         return context
-
-
 class BlogPostDetailView(DetailView):
     model = BlogPost
     template_name = 'blog/post_detail.html'
     context_object_name = 'post'
     queryset = model.objects.detail()
 
+    def get_similar_articles(self, obj):
+        article_title = obj.title.split()
+        similar_articles_list = list()
+        for word in article_title:
+            if len(word) > 4:
+                similar_articles = BlogPost.objects.filter(Q(title__icontains=word) | Q(content__icontains=word)).exclude(id=obj.id)
+
+                if similar_articles:
+                    similar_articles_list += similar_articles.all()
+        random.shuffle(similar_articles_list)
+        return similar_articles_list[:2]
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.title
         context['form'] = CommentCreateForm
+        context['similar_articles'] = set(chain(self.get_similar_articles(self.object)))
 
         try:
             previous_post = self.object.get_previous_by_time_create()
@@ -130,16 +121,6 @@ class BlogPostDeleteView(AuthorRequiredMixin, DeleteView):
         return context
 
 
-# def posts_list(request):
-#     posts = BlogPost.objects.all()
-#     paginator = Paginator(posts, per_page=5)
-#     page_number = request.GET.get('page')
-#     page_object = paginator.get_page(page_number)
-#     context = {'page_obj': page_object}
-#     return render(request, 'blog/posts_list.html', {'posts': posts})
-#     # return render(request, 'blog/posts_list.html', context)
-
-
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentCreateForm
@@ -157,6 +138,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         comment.post_id = self.kwargs.get('pk')
         comment.author = self.request.user
         comment.parent_id = form.cleaned_data.get('parent')
+        comment.parent_author = form.cleaned_data.get('parent')
         comment.save()
 
         if self.is_ajax():
@@ -165,6 +147,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
                 'id': comment.id,
                 'author': comment.author.username,
                 'parent_id': comment.parent_id,
+                'parent_author': comment.parent.author.username if comment.parent else None,
                 'time_create': comment.time_create.strftime('%d %b %Y %H:%M'),
                 'avatar': comment.author.profile.avatar.url,
                 'content': comment.content,
