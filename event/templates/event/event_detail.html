@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}
+	<title>{{ title }} - EquiMedia</title>
+{% endblock %}
 {% load mptt_tags %}
 {% block content %}
 <!-- Page Title
@@ -78,7 +81,7 @@
 											</div>
 										</div>
 
-										<p>{{ item.content }}</p>
+										<p>{{ item.content|safe }}</p>
 										<!-- Post Single - Content End -->
 
 									</div>

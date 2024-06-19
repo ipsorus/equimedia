@@ -1,6 +1,9 @@
 {% load el_pagination_tags %}
 {% load static %}
-{% paginate 2 posts %}
+{% block title %}
+	<title>{{ title }} - EquiMedia</title>
+{% endblock %}
+{% paginate 4 posts %}
 
 {% for post in posts %}
 <div class="entry col-12">

@@ -49,12 +49,9 @@ def index(request):
             'future_contests': future_result_list,
             'events': events,
             'blogs': blogs,
+            'title': 'КСК Виват-Россия!'
             }
     return render(request, 'portal/index.html', data)
-
-
-def categories(request, cat_id):
-    return HttpResponse("<h1>Статьи по категориям</h1>")
 
 
 def page_not_found(request, exception):

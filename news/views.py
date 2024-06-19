@@ -20,6 +20,7 @@ def news_section(request,
                  extra_context=None):
     context = {
         'news': NewsPost.objects.filter(is_published=True),
+        'title': 'Новости',
     }
     if extra_context is not None:
         context.update(extra_context)

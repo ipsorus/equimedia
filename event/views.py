@@ -38,7 +38,7 @@ def calendar_view(request):
                 for i in range(int(delta)+1):
                     dates.add(start_date + timedelta(days=i))
 
-    return render(request, 'event/calendar.html', {'events': dates})
+    return render(request, 'event/calendar.html', {'events': dates, 'title': 'Календарь мероприятий'})
 
 
 def get_events(request):
@@ -112,25 +112,25 @@ def get_monthly_events(request):
 
 def tournaments(request):
     tournaments_list = Tournament.objects.all()
-    return render(request, 'event/tournaments.html', {'tournaments': tournaments_list})
+    return render(request, 'event/tournaments.html', {'tournaments': tournaments_list, 'title': 'Турниры'})
 
 
 def tournament_detail(request, tournament_id):
     single_tournament = get_object_or_404(Tournament, pk=tournament_id)
     stages = Stage.objects.filter(is_published=True, tournament=single_tournament.id)
 
-    return render(request, 'event/tournament_detail.html', {'item': single_tournament, 'stages': stages})
+    return render(request, 'event/tournament_detail.html', {'item': single_tournament, 'stages': stages, 'title': single_tournament.title})
 
 
 def contest_detail(request, tournament_id):
     single_tournament = get_object_or_404(Tournament, pk=tournament_id)
 
-    return render(request, 'event/tournament_detail.html', {'item': single_tournament})
+    return render(request, 'event/tournament_detail.html', {'item': single_tournament, 'title': single_tournament.title})
 
 
 def stage_detail(request, tournament_id, stage_id):
     single_stage = get_object_or_404(Stage, pk=stage_id)
-    return render(request, 'event/stage-single.html', {'item': single_stage})
+    return render(request, 'event/stage-single.html', {'item': single_stage, 'title': single_stage.title})
 
 
 class EventCreateView(LoginRequiredMixin, CreateView):

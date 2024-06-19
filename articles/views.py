@@ -16,6 +16,7 @@ def articles_section(request,
                      extra_context=None):
     context = {
         'articles': Article.objects.filter(is_published=True),
+        'title': 'Статьи'
     }
     if extra_context is not None:
         context.update(extra_context)
@@ -37,6 +38,7 @@ def article_detail(request, article_id):
         next_post = None
 
     data = {
+        'title': article.title,
         'item': article,
         'articles': articles,
         'prev': previous_post,

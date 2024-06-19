@@ -23,6 +23,14 @@ class BlogPostListView(AjaxListView):
     def get_queryset(self):
         return BlogPost.objects.filter(is_published=True)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Блоги'
+        context['subtitle'] = 'Истории наших пользователей о лошадях и не только...'
+        context['posts'] = self.get_queryset()
+
+        return context
+
 
 class BlogPostDetailView(DetailView):
     model = BlogPost

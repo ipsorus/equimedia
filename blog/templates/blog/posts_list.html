@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}
+	<title>{{ title }} - EquiMedia</title>
+{% endblock %}
 {% block content %}
 <style>
 .bg-color-title, .bg-color-title #header-wrap {
@@ -22,14 +25,14 @@ background-color: #336576 !important;
 		<div class="page-title-row">
 
 			<div class="page-title-content">
-				<h1>Блоги</h1>
-				<span>Истории наших пользователей о лошадях и не только...</span>
+				<h1>{{ title }}</h1>
+				<span>{{ subtitle }}</span>
 			</div>
 
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Блоги</li>
+					<li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
 				</ol>
 			</nav>
 
