@@ -84,7 +84,7 @@ class Tournament(models.Model):
 class TournamentDocument(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT, related_name="tournament_doc")
     title = models.CharField(max_length=200, db_index=True, verbose_name="Название документа")
-    description = models.CharField(blank=True, verbose_name="Описание документа")
+    description = models.CharField(max_length=200, blank=True, verbose_name="Описание документа")
     file = models.FileField(upload_to='media/documents/tournaments/%Y/%m/%d', blank=True, verbose_name="Файл")
     time_create = models.DateTimeField(auto_now_add=True)
 
@@ -138,7 +138,7 @@ class Stage(models.Model):
 class StageDocument(models.Model):
     stage = models.ForeignKey(Stage, on_delete=models.PROTECT, related_name="stage")
     title = models.CharField(max_length=200, db_index=True, verbose_name="Название документа")
-    description = models.CharField(blank=True, verbose_name="Описание документа")
+    description = models.CharField(max_length=200, blank=True, verbose_name="Описание документа")
     file = models.FileField(upload_to='media/documents/stage/%Y/%m/%d', blank=True, verbose_name="Файл")
     time_create = models.DateTimeField(auto_now_add=True)
 
@@ -191,7 +191,7 @@ class Event(models.Model):
 class EventDocument(models.Model):
     event = models.ForeignKey(Event, on_delete=models.PROTECT, related_name="event")
     title = models.CharField(max_length=200, db_index=True, verbose_name="Название документа")
-    description = models.CharField(blank=True, verbose_name="Описание документа")
+    description = models.CharField(max_length=200, blank=True, verbose_name="Описание документа")
     file = models.FileField(upload_to='media/documents/events/%Y/%m/%d', blank=True, verbose_name="Файл")
     time_create = models.DateTimeField(auto_now_add=True)
 
