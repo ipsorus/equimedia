@@ -19,7 +19,7 @@ background-color: #e99c34 !important;
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
-					<li class="breadcrumb-item"><a href="{% url 'news_list_url' %}">Новости</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'calendar_page' %}">События</a></li>
 					<li class="breadcrumb-item active" aria-current="page">{{ title|truncatechars:100 }}</li>
 				</ol>
 			</nav>
@@ -33,8 +33,9 @@ background-color: #e99c34 !important;
         <div class="container mw-md">
             <div class="row col-mb-30 gutter-50">
                   <div class="col-md-12 p-4" style="border: 1px solid #ccc; border-radius: 5px; background-color: #fff; box-shadow: 0 0 40px rgba(0,0,0,.09)">
-                      <form method="post" action="{% url 'article_post_create' %}" enctype="multipart/form-data">
+                      <form method="post" action="" enctype="multipart/form-data">
                         {% csrf_token %}
+                          {{ form.media }}
                         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
                               {% for error in form.non_field_errors %}
                                 <div class="alert alert-danger .alert-dismissible" role="alert">
@@ -59,7 +60,7 @@ background-color: #e99c34 !important;
                             {% endfor %}
                         <div class="d-grid gap-2 d-md-block mt-2">
                            <button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-check-circle"></i><span>Обновить запись</span></button>
-                            <a href="{{ post.get_absolute_url }}" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="fa-solid fa-cancel"></i><span>Отмена</span></a>
+                            <a href="{{ item.get_absolute_url }}" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="fa-solid fa-cancel"></i><span>Отмена</span></a>
                         </div>
                      </form>
                   </div>

@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 from equi_media_portal import settings
-from portal import views
 from portal.views import page_not_found
 from django.views.static import serve as mediaserve
 
@@ -27,7 +26,7 @@ if settings.DEBUG:
 else:
     urlpatterns += [
         path(f'^{settings.MEDIA_URL.lstrip("/")}(?P<path>.*)$',
-            mediaserve, {'document_root': settings.MEDIA_ROOT}),
+             mediaserve, {'document_root': settings.MEDIA_ROOT}),
         path(f'^{settings.STATIC_URL.lstrip("/")}(?P<path>.*)$',
-            mediaserve, {'document_root': settings.STATIC_ROOT}),
+             mediaserve, {'document_root': settings.STATIC_ROOT}),
     ]

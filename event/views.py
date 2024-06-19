@@ -17,7 +17,7 @@ from services.mixins import AuthorRequiredMixin
 def event_detail(request, event_id):
     single_event = get_object_or_404(Event, pk=event_id)
 
-    return render(request, 'news/news-single.html', {'item': single_event})
+    return render(request, 'event/event_detail.html', {'item': single_event})
 
 
 def calendar_view(request):
@@ -175,7 +175,7 @@ class EventUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return super().form_valid(form)
 
 
-class EventDeleteView(AuthorRequiredMixin, DeleteView):
+class EventDeleteView(DeleteView):
     """
     Представление: удаления материала
     """

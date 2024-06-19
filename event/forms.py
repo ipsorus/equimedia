@@ -28,6 +28,9 @@ class EventCreateForm(forms.ModelForm):
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['event_type'].widget.attrs.update({'class': 'form-select'})
         self.fields['type'].widget.attrs.update({'class': 'form-select'})
+        self.fields['prize'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['result'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
 
 
 class EventUpdateForm(EventCreateForm):
@@ -53,4 +56,6 @@ class EventUpdateForm(EventCreateForm):
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['event_type'].widget.attrs.update({'class': 'form-select'})
         self.fields['type'].widget.attrs.update({'class': 'form-select'})
-        # self.fields['content'].required = False
+        self.fields['prize'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['result'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})

@@ -45,7 +45,9 @@ background-color: #336576 !important;
                             <!-- Entry Image
                             ============================================= -->
                             <div class="entry-image">
-                                <img src="{{ item.image.url }}" alt="">
+                                {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                                {% endif %}
                             </div><!-- .entry-image end -->
 
                             <!-- Entry Content

@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Discipline(models.Model):
@@ -45,14 +46,14 @@ class StageType(models.Model):
 class Tournament(models.Model):
     title = models.CharField(max_length=300, db_index=True, verbose_name="Название турнира")
     location = models.TextField(max_length=300, blank=True, verbose_name="Место проведения")
-    prize = models.TextField(max_length=300, blank=True, verbose_name="Призовой фонд")
+    prize = CKEditor5Field(max_length=300, blank=True, verbose_name="Призовой фонд")
     discipline = models.ManyToManyField(Discipline, max_length=100, verbose_name='Дисциплина')
     type = models.ForeignKey(ContestType, on_delete=models.PROTECT, max_length=100, verbose_name='Уровень соревнования')
     date_start = models.DateField(verbose_name="Дата начала")
     date_end = models.DateField(verbose_name="Дата окончания")
-    result = models.TextField(blank=True, verbose_name="Результаты турнира")
+    result = CKEditor5Field(blank=True, verbose_name="Результаты турнира")
     image = models.ImageField(upload_to='media/tournaments/%Y/%m/%d', blank=True, verbose_name="Постер для турнира")
-    description = models.TextField(blank=True, verbose_name="Описание и условия турнира")
+    description = CKEditor5Field(blank=True, verbose_name="Описание и условия турнира")
     is_published = models.BooleanField(default=False, verbose_name="Опубликовать запись")
     time_create = models.DateTimeField(auto_now_add=True)
 
@@ -104,9 +105,9 @@ class Stage(models.Model):
     location = models.TextField(max_length=300, blank=True, verbose_name="Место проведения")
     discipline = models.ManyToManyField(Discipline, max_length=100, verbose_name='Дисциплина')
     type = models.ForeignKey(ContestType, on_delete=models.PROTECT, max_length=100, verbose_name='Уровень соревнования')
-    prize = models.TextField(max_length=300, blank=True, verbose_name="Призовой фонд")
-    result = models.TextField(max_length=500, blank=True, verbose_name="Результаты соревнования")
-    description = models.TextField(max_length=2000, blank=True, verbose_name="Описание")
+    prize = CKEditor5Field(max_length=300, blank=True, verbose_name="Призовой фонд")
+    result = CKEditor5Field(max_length=500, blank=True, verbose_name="Результаты соревнования")
+    description = CKEditor5Field(max_length=2000, blank=True, verbose_name="Описание")
     is_published = models.BooleanField(default=False, verbose_name="Опубликовать запись")
     time_create = models.DateTimeField(auto_now_add=True)
 
@@ -156,10 +157,10 @@ class Event(models.Model):
     date_end = models.DateField(verbose_name="Дата окончания")
     location = models.TextField(max_length=300, blank=True, verbose_name="Место проведения")
     type = models.ForeignKey(ContestType, on_delete=models.PROTECT, max_length=100, verbose_name='Уровень мероприятия')
-    prize = models.TextField(max_length=300, blank=True, verbose_name="Призовой фонд")
-    result = models.TextField(max_length=500, blank=True, verbose_name="Результаты соревнований")
+    prize = CKEditor5Field(max_length=300, blank=True, verbose_name="Призовой фонд")
+    result = CKEditor5Field(max_length=500, blank=True, verbose_name="Результаты соревнований")
     image = models.ImageField(upload_to='media/events/%Y/%m/%d', blank=True, verbose_name="Постер для события")
-    description = models.TextField(max_length=2000, blank=True, verbose_name="Краткое описание")
+    description = CKEditor5Field(max_length=2000, blank=True, verbose_name="Краткое описание")
     is_published = models.BooleanField(default=False, verbose_name="Опубликовать запись")
     time_create = models.DateTimeField(auto_now_add=True)
 

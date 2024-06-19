@@ -21,7 +21,7 @@ class ArticlePostCreateForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
-        self.fields['content'].widget.attrs.update({'class': 'form-control'})
+        self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['content'].required = False
 
 

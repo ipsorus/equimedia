@@ -19,7 +19,7 @@ class NewsPost(models.Model):
                                default=1)
 
     def get_absolute_url(self):
-        return reverse('news_detail_url', kwargs={'news_id': self.id})
+        return reverse('news_detail_url', kwargs={'pk': self.id})
 
     def get_update_url(self):
         return reverse('news_post_update', kwargs={'pk': self.id})

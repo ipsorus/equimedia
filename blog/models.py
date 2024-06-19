@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth import get_user_model
+from django_ckeditor_5.fields import CKEditor5Field
 
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
@@ -34,7 +35,7 @@ class BlogPost(models.Model):
                 .filter(is_published=True)
 
     title = models.CharField(verbose_name='Заголовок', max_length=255)
-    content = models.TextField(verbose_name='Содержание поста')
+    content = CKEditor5Field(verbose_name='Содержание поста')
     thumbnail = models.ImageField(
         verbose_name='Превью поста',
         blank=True,

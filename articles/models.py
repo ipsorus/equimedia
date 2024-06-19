@@ -2,14 +2,14 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
-
+from django_ckeditor_5.fields import CKEditor5Field
 
 User = get_user_model()
 
 
 class Article(models.Model):
     title = models.CharField(max_length=200, db_index=True, verbose_name="Заголовок статьи")
-    content = models.TextField(blank=True, verbose_name="Содержание статьи")
+    content = CKEditor5Field(blank=True, verbose_name="Содержание статьи")
     image = models.ImageField(upload_to='media/articles/%Y/%m/%d', blank=True, verbose_name="Постер для статьи")
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)

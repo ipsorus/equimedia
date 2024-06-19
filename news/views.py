@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
 from news.forms import NewsPostUpdateForm, NewsPostCreateForm
 from news.models import NewsPost
@@ -26,28 +26,58 @@ def news_section(request,
     return render(request, template, context)
 
 
-def news_detail(request, news_id):
-    single_news = get_object_or_404(NewsPost, pk=news_id)
-    news = NewsPost.objects.filter(is_published=True).exclude(pk=single_news.id)[:10]
+class NewsPostDetailView(DetailView):
+    model = NewsPost
+    template_name = 'news/news-single.html'
+    context_object_name = 'post'
 
-    try:
-        previous_post = single_news.get_previous_by_time_create()
-    except NewsPost.DoesNotExist:
-        previous_post = None
+    def get_other_news(self, obj):
+        other_news = NewsPost.objects.filter(is_published=True).exclude(pk=obj.id)[:10]
+        return other_news
 
-    try:
-        next_post = single_news.get_next_by_time_create()
-    except NewsPost.DoesNotExist:
-        next_post = None
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.object.title
+        context['other_news'] = self.get_other_news(self.object)
 
-    data = {'title': single_news.title,
-            'item': single_news,
-            'news': news,
-            'prev': previous_post,
-            'next': next_post
-            }
+        try:
+            previous_post = self.object.get_previous_by_time_create()
+        except self.model.DoesNotExist:
+            previous_post = None
 
-    return render(request, 'news/news-single.html', data)
+        try:
+            next_post = self.object.get_next_by_time_create()
+        except self.model.DoesNotExist:
+            next_post = None
+
+        context['prev'] = previous_post
+        context['next'] = next_post
+
+        return context
+
+
+# def news_detail(request, news_id):
+#     single_news = get_object_or_404(NewsPost, pk=news_id)
+#     news = NewsPost.objects.filter(is_published=True).exclude(pk=single_news.id)[:10]
+#
+#     try:
+#         previous_post = single_news.get_previous_by_time_create()
+#     except NewsPost.DoesNotExist:
+#         previous_post = None
+#
+#     try:
+#         next_post = single_news.get_next_by_time_create()
+#     except NewsPost.DoesNotExist:
+#         next_post = None
+#
+#     data = {'title': single_news.title,
+#             'item': single_news,
+#             'news': news,
+#             'prev': previous_post,
+#             'next': next_post
+#             }
+#
+#     return render(request, 'news/news-single.html', data)
 
 
 class NewsPostCreateView(LoginRequiredMixin, CreateView):

@@ -46,6 +46,7 @@ background-color: #336576 !important;
                   <div class="col-md-12 p-4" style="border: 1px solid #ccc; border-radius: 5px; background-color: #fff; box-shadow: 0 0 40px rgba(0,0,0,.09)">
                       <form method="post" action="{% url 'event_create' %}" enctype="multipart/form-data">
                         {% csrf_token %}
+                          {{ form.media }}
                         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
                               {% for error in form.non_field_errors %}
                                 <div class="alert alert-danger .alert-dismissible" role="alert">

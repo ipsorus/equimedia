@@ -33,7 +33,7 @@ background-color: #e99c34 !important;
         <div class="container mw-md">
             <div class="row col-mb-30 gutter-50">
                   <div class="col-md-12 p-4" style="border: 1px solid #ccc; border-radius: 5px; background-color: #fff; box-shadow: 0 0 40px rgba(0,0,0,.09)">
-                      <form method="post" action="{% url 'news_post_create' %}" enctype="multipart/form-data">
+                      <form method="post" action="" enctype="multipart/form-data">
                         {% csrf_token %}
                           {{ form.media }}
                         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">

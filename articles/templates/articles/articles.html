@@ -35,8 +35,9 @@
                         <!-- Post Article -->
                         <article class="entry border-bottom-0 mb-0">
                             <div class="entry-image">
-                                <a href="{{ a.get_absolute_url }}"><img src="{{ a.image.url }}"
-                                                                     alt="Image 3"></a>
+                                {% if a.image %}
+                                <a href="{{ a.get_absolute_url }}"><img src="{{ a.image.url }}" alt="{{ a.title }}"></a>
+                                {% endif %}
                             </div>
                             <div class="entry-meta">
                                 <ul>
