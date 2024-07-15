@@ -7,6 +7,7 @@
 	--cnvs-themecolor: #1d6172;
 	--cnvs-themecolor-rgb: 29, 97, 114;
 	--cnvs-custom-themecolor-rgb: 29, 97, 114;
+	--cnvs-custom-themecolor: #1d6172;
 	--cnvs-secondary-color: #e99c34;
 	--cnvs-secondary-color-rgb: 233, 156, 52;
 	--cnvs-body-bg: #fff;
@@ -209,17 +210,21 @@ body {
 			animation: scrollDown 2.5s infinite;
 }
 
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--cnvs-custom-themecolor-rgb), var(--bs-bg-opacity)) !important;
+}
 
 .button-offset:is(:hover, :focus) {
 	outline-width: 3px;
 	outline-style: solid;
-	outline-color: var(--cnvs-themecolor);
+	outline-color: #1d6172;
 	outline-offset: 0;
 	transition: all .1s;
 }
 
 .button-offset.button-offset-circle {
-	outline-color: #FFF;
+	outline-color: #1d6172;
 	outline-width: 2px;
 }
 
@@ -228,11 +233,11 @@ body {
 }
 
 .button-offset.button-light {
-	outline-color: var(--bs-light);
+	outline-color: #1d6172;
 }
 
 .button-offset.button-primary {
-	outline-color: var(--bs-primary);
+	outline-color: #1d6172;
 }
 
 .border-radius {

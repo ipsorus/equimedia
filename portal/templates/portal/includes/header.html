@@ -15,14 +15,21 @@
     <div id="header-wrap">
         <div class="container">
             <div class="header-row justify-content-lg-between">
-
                 <!-- Logo
-                ============================================= -->
-                <div id="logo" class="pe-lg-4 me-lg-auto">
-                    <a class="color fw-normal fs-4" href="{% url 'main' %}">
-                        EQUI MEDIA
-                    </a>
-                </div><!-- #logo end -->
+                    ============================================= -->
+                    <div id="logo" class="pe-lg-4 me-lg-auto">
+                        <a href="{% url 'main' %}" class="w-auto">
+                            <img class="logo-default" srcset="{% static 'portal/images/logo.png' %}, {% static 'portal/images/logo2x.png' %} 2x" src="{% static 'portal/images/logo2x.png' %}" alt="EquiMedia">
+                        </a>
+                    </div><!-- #logo end -->
+
+<!--                &lt;!&ndash; Logo-->
+<!--                ============================================= &ndash;&gt;-->
+<!--                <div id="logo" class="pe-lg-4 me-lg-auto">-->
+<!--                    <a class="color fw-normal fs-4" href="{% url 'main' %}">-->
+<!--                        EQUI MEDIA-->
+<!--                    </a>-->
+<!--                </div>&lt;!&ndash; #logo end &ndash;&gt;-->
 
                 <div class="header-misc ms-auto justify-content-lg-end">
                     {% if user.is_authenticated %}
