@@ -192,6 +192,7 @@
                  data-pagi="false">
                 <div class="flexslider">
                     <div class="slider-wrap mw-sm mx-auto">
+                        {% if news %}
                         <div class="slide">
                             <div class="col-md-12 px-5 py-4">
                                 <div class="before-heading text-white-50 fw-normal ls-1 mb-3"
@@ -201,6 +202,8 @@
                                 <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">{{news.first.title}}</h3>
                             </div>
                         </div>
+                        {% endif %}
+                        {% if main_articles %}
                         <div class="slide">
                             <div class="col-md-12 px-5 py-4">
                                 <div class="before-heading text-white-50 fw-normal ls-1 mb-3"
@@ -210,6 +213,8 @@
                                 <h3 class="mb-1" style="font-size: 14px;">{{main_articles.first.title}}</h3>
                             </div>
                         </div>
+                        {% endif %}
+                        {% if blogs %}
                         <div class="slide">
                             <div class="col-md-12 px-5 py-4">
                                 <div class="before-heading text-white-50 fw-normal ls-1 mb-3"
@@ -219,6 +224,7 @@
                                 <h3 class="mb-1" style="font-family: 'Poppins', sans-serif; font-size: 18px;">{{blogs.first.title}}</h3>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

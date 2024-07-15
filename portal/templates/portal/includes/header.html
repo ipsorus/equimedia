@@ -3,7 +3,7 @@
 <!-- Header
 ============================================= -->
 <header id="header"
-        class="{% if request.path == '/' %}transparent-header justify-content-flex dark header-size-md header-size-sm{$ else %}header-size-md header-size-sm{% endif %}"
+        class="{% if request.path == '/' %}transparent-header semi-transparent justify-content-flex dark header-size-md header-size-sm{$ else %}header-size-md header-size-sm{% endif %}"
         data-sticky-class="not-dark" {% if request.path == '/' %}data-sticky-offset="full"{$ else %}data-sticky-offset="0"{% endif %}
         data-sticky-offset-negative="60" data-responsive-class="not-dark" data-sticky-shrink="true">
     {% if request.path == '/' %}

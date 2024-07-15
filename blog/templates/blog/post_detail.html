@@ -146,9 +146,10 @@
                                 {% endif %}
                             </div>
                         </div><!-- .post-navigation end -->
+								{% if similar_articles %}
 								<div class="container mt-6 rounded-6" style="border: 3px solid rgba(233, 156, 52, 1);">
 									<div class="row align-items-center justify-content-between p-md-3">
-										{% if similar_articles %}
+
 
 								<h4 class="fs-4 fw-medium">Может быть интересно</h4>
 
@@ -176,12 +177,10 @@
 									</div>
 									{% endfor %}
 								</div>
-								{% endif %}
+
 									</div>
 								</div>
-
-
-
+								{% endif %}
 								<!-- Comments
 								============================================= -->
 								{% include 'blog/comments/comments_list.html' %}

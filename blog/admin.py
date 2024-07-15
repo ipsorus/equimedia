@@ -4,12 +4,6 @@ from mptt.admin import DraggableMPTTAdmin
 from .models import Comment, BlogPost
 
 
-@admin.register(BlogPost)
-class BlogPostAdmin(admin.ModelAdmin):
-    # prepopulated_fields = {'slug': ('title',)}
-    pass
-
-
 @admin.register(Comment)
 class CommentAdminPage(DraggableMPTTAdmin):
     """

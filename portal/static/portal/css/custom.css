@@ -4,10 +4,11 @@
 
 :root {
     --cnvs-themecolor-light-rgb: 255, 255, 255;
-	--cnvs-themecolor: #426176;
-	--cnvs-themecolor-rgb: 66, 97, 118;
-	--cnvs-secondary-color: #8c7719;
-	--cnvs-secondary-color-rgb: 140, 119, 25;
+	--cnvs-themecolor: #1d6172;
+	--cnvs-themecolor-rgb: 29, 97, 114;
+	--cnvs-custom-themecolor-rgb: 29, 97, 114;
+	--cnvs-secondary-color: #e99c34;
+	--cnvs-secondary-color-rgb: 233, 156, 52;
 	--cnvs-body-bg: #fff;
 	--cnvs-body-bg-light: var(--cnvs-themecolor-light-rgb);
 	--cnvs-body-bg-rgb: 58,133,144;
@@ -17,11 +18,25 @@
     --cnvs-body-font: 'Sharp Grotesk', Arial,sans-serif;
 
 	--cnvs-border-opacity: .15;
+
+	--cnvs-header-bg: var(--cnvs-themecolor);
 }
 
 :root .dark {
 	--cnvs-themecolor: #fff;
 	--cnvs-themecolor-rgb: 255, 255, 255;
+}
+
+.is-expanded-menu #header.transparent-header.semi-transparent {
+  --cnvs-header-bg: rgba(var(--cnvs-custom-themecolor-rgb), .7);
+}
+#header-wrap {
+  background-color: var(--cnvs-header-bg) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #header-wrap {
+    transition: none;
+  }
 }
 
 body {
@@ -43,7 +58,7 @@ body {
 .bg-color-white { background-color: rgba(255, 255, 255, 0.95) !important; }
 .bg-color-white-form { background-color: rgba(255, 255, 255, 0.1) !important; }
 .bg-color-grey { background-color: rgba(255, 255, 255, 0.9) !important; }
-.bg-color-card { background-color: rgba(46, 54, 79, 0.9) !important; }
+.bg-color-card { background-color: rgba(233, 156, 52, 0.9) !important; }
 .bg-color-card-light { background-color: rgba(241,199,122, 0.9) !important; }
 .bg-color-card-light-about { background-color: rgba(45, 93, 237, 0.3); !important; }
 

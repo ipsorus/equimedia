@@ -71,8 +71,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'django.middleware.locale.LocaleMiddleware'
+    'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'equi_media_portal.urls'
 
@@ -227,11 +230,14 @@ customColorPalette = [
             'label': 'Blue'
         },
     ]
-
+CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png', 'jpg', 'gif', 'bmp', 'webp', 'tiff']
 CKEDITOR_5_FILE_STORAGE = 'services.utils.CkeditorCustomStorage'
 CKEDITOR_5_CONFIGS = {
     "default": {
         "language": "ru",
+        "upload_file_types": ['jpeg', 'pdf', 'png', 'jpg', 'gif', 'bmp', 'webp', 'tiff'],
         'toolbar': {
             'items': [
                 '|', 'heading',

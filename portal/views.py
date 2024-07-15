@@ -26,7 +26,7 @@ def index(request):
     articles = Article.objects.filter(is_published=True)[2:6]
     testimonials = Testimonial.objects.filter(is_published=True)[:5]
     slider = Slider.objects.filter(is_published=True)[:5]
-    blogs = BlogPost.objects.filter(is_published=True)[:6]
+    blogs = BlogPost.objects.all()[:6]
 
     current_date = date.today()
     events = Event.objects.filter(is_published=True, date_start__gt=current_date)
