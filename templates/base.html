@@ -235,6 +235,21 @@
 
 {% include "portal/includes/_modal.html" %}
 {% block extrascripts %}
+<script>
+		jQuery(document).ready( function($){
+			var lastScrollTop = 0;
+
+			window.addEventListener("scroll", function(event){
+				var st = jQuery(this).scrollTop();
+				if (st > lastScrollTop){
+					jQuery('#header.sticky-on-scrollup').removeClass('show-sticky-onscroll'); // Down Scroll
+				} else {
+					jQuery('#header.sticky-on-scrollup').addClass('show-sticky-onscroll'); // Up Scroll
+				}
+				lastScrollTop = st;
+			});
+		});
+	</script>
       	<script type="text/javascript">
           jQuery(document).ready(function() {
               // Login

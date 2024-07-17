@@ -29,25 +29,30 @@ def index(request):
     blogs = BlogPost.objects.all()[:6]
 
     current_date = date.today()
-    events = Event.objects.filter(is_published=True, date_start__gt=current_date)
 
     current_events = Event.objects.filter(is_published=True, date_start__lte=current_date, date_end__gte=current_date)
     stages = Stage.objects.filter(is_published=True, date_start__lte=current_date, date_end__gte=current_date)
-    tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True,date_start__lte=current_date, date_end__gte=current_date)
-    result_list = sorted(list(chain(current_events, stages, tournaments)), key=attrgetter('date_start'))
+    tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_start__lte=current_date, date_end__gte=current_date)
+    result_list = sorted(list(chain(current_events, stages, tournaments)), key=attrgetter('date_start'))[:5]
 
     future_stages = Stage.objects.filter(is_published=True, date_start__gt=current_date)
     future_tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_start__gt=current_date)
-    future_result_list = sorted(list(chain(future_stages, future_tournaments)), key=attrgetter('date_start'))
+    future_events = Event.objects.filter(is_published=True, date_start__gt=current_date)
+    future_result_list = sorted(list(chain(future_stages, future_tournaments, future_events)), key=attrgetter('date_start'))[:5]
+
+    past_stages = Stage.objects.filter(is_published=True, date_start__lt=current_date)
+    past_tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_start__lt=current_date)
+    past_events = Event.objects.filter(is_published=True, date_start__lt=current_date)
+    past_result_list = sorted(list(chain(past_stages, past_tournaments, past_events)), key=attrgetter('date_start'))[:5]
 
     data = {'news': news,
             'main_articles': main_articles,
             'articles': articles,
             'testimonials': testimonials,
             'slider': slider,
-            'current_contests': result_list,
-            'future_contests': future_result_list,
-            'events': events,
+            'current_events': result_list,
+            'future_events': future_result_list,
+            'past_events': past_result_list,
             'blogs': blogs,
             'title': 'КСК Виват-Россия!'
             }

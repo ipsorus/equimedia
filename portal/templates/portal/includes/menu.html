@@ -1,6 +1,6 @@
 <!-- Primary Navigation
 ============================================= -->
-<nav class="primary-menu">
+<nav class="primary-menu with-arrows">
 
     <!-- Menu Left -->
     <ul class="menu-container">
@@ -8,23 +8,14 @@
         <li class="menu-item"><a class="menu-link" href="{% url 'articles_list_url' %}">Статьи</a></li>
         <li class="menu-item"><a class="menu-link" href="{% url 'posts_list_url' %}">Блоги</a></li>
         <li class="menu-item"><a class="menu-link" href="#">Фотобанк</a></li>
-        <li class="menu-item"><a class="menu-link" href="{% url 'feedback' %}">Контакты</a></li>
-        <li class="menu-item sub-menu">
-				<a class="menu-link" href="#"><div>Календарь<i class="sub-menu-indicator fa-solid fa-caret-down"></i></div>
-				</a>
-				<ul class="sub-menu-container border-0" style="">
-					<li class="menu-item" style="">
-						<a class="menu-link" href="{% url 'calendar_page' %}"><div>События</div></a>
-					</li>
-					<li class="menu-item" style="">
-						<a class="menu-link" href="{% url 'tournaments' %}"><div>Турниры</div></a>
-					</li>
-				</ul>
-			<button class="sub-menu-trigger fa-solid fa-chevron-right"><span class="visually-hidden">Open Sub-Menu</span></button>
+		<li class="menu-item"><a class="menu-link" href="#"><div>Календарь</div></a>
+			<ul class="sub-menu-container">
+				<li class="menu-item"><a class="menu-link" href="{% url 'calendar_page' %}"><div>События</div></a></li>
+				<li class="menu-item"><a class="menu-link" href="{% url 'tournaments' %}"><div>Турниры</div></a></li>
+			</ul>
 		</li>
-<!--        <li class="menu-item"><a class="menu-link" href="{% url 'calendar_page' %}">События</a></li>-->
-<!--        <li class="menu-item"><a class="menu-link" href="{% url 'tournaments' %}">Турниры</a></li>-->
         <li class="menu-item"><a class="menu-link" href="#">Трансляции <div class="menu-live-center"><div class="ml-circle ml-pulse ml-dot"></div></div></a></li>
+        <li class="menu-item"><a class="menu-link" href="{% url 'feedback' %}">Контакты</a></li>
     </ul>
 
 </nav><!-- #primary-menu end -->
