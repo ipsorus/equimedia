@@ -174,16 +174,20 @@
                 <!--            </div>-->
                 <!--            </div>-->
             </div>
+            {% if slider_settings.pagination_dots %}
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
+            {% endif %}
+            {% if slider_settings.scroller %}
             <!-- Slider Mouse Icon
             ============================================= -->
             <a href="#" class="scroll-down d-none d-lg-block one-page-arrow" data-scrollto="#section-news"
                data-offset="30">
                 <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
             </a>
+            {% endif %}
         </div>
-
+        {% if slider_settings.announcement_slider %}
         <!-- Slider Bottom Content
         ============================================= -->
         <div class="announce slider-product-desc dark bg-color-card">
@@ -229,6 +233,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </section>
 

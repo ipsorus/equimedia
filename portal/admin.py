@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.db import ProgrammingError
 
-from portal.models import WebsiteSettings, SiteSettings, Feedback
+from portal.models import SiteSettings, Feedback, ContactsSettings, AboutUsSettings, SocialsSettings, NewsSettings, \
+    ArticlesSettings, BlogSettings, SliderSettings
 
 
 @admin.register(Feedback)
@@ -11,10 +12,6 @@ class FeedbackAdmin(admin.ModelAdmin):
     """
     list_display = ('email', 'ip_address', 'user')
     list_display_links = ('email', 'ip_address')
-
-
-class WebSiteSettings(admin.ModelAdmin):
-    model = WebsiteSettings
 
 
 class SiteSettingsAdmin(admin.ModelAdmin):
@@ -37,5 +34,151 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         return False
 
 
+class ContactsSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            ContactsSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class AboutUsSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            AboutUsSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class SocialsSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            SocialsSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class NewsSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            NewsSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class ArticlesSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            ArticlesSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class BlogSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            BlogSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class SliderSettingsAdmin(admin.ModelAdmin):
+    # Create a default object on the first page of SiteSettingsAdmin with a list of settings
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        # be sure to wrap the loading and saving SiteSettings in a try catch,
+        # so that you can create database migrations
+        try:
+            SliderSettings.load().save()
+        except ProgrammingError:
+            pass
+
+    # prohibit adding new settings
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    # as well as deleting existing
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
 admin.site.register(SiteSettings, SiteSettingsAdmin)
-admin.site.register(WebsiteSettings, WebSiteSettings)
+admin.site.register(ContactsSettings, ContactsSettingsAdmin)
+admin.site.register(AboutUsSettings, AboutUsSettingsAdmin)
+admin.site.register(SocialsSettings, SocialsSettingsAdmin)
+admin.site.register(NewsSettings, NewsSettingsAdmin)
+admin.site.register(ArticlesSettings, ArticlesSettingsAdmin)
+admin.site.register(BlogSettings, BlogSettingsAdmin)
+admin.site.register(SliderSettings, SliderSettingsAdmin)

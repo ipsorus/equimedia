@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-	<title>{{ title }} - EquiMedia</title>
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
 {% endblock %}
 {% block content %}
 <style>
@@ -34,7 +34,7 @@
     }
 }
 .bg-color-contacts, .bg-color-contacts #header-wrap {
-background-color: #336576 !important;
+background-color: #1d6172 !important;
 }
 </style>
 <!-- Page Title
@@ -62,22 +62,23 @@ background-color: #336576 !important;
 		<div class="container">
 
 			<div style="position: relative;">
-				<img src="{% static 'portal/images/contacts.webp' %}" alt="Image" class="contact-image">
+				<img src="{{ contacts_settings.poster_contacts.url }}" alt="Image" class="contact-image">
 				<div class="contact-section bg-color-contact">
 					<div class="p-5 p-lg-0 dark" style="font-size: 15px; line-height: 1.7;">
 						<address style="line-height: 1.7;">
 						<span class="fw-light">Адрес:</span><br>
 						<span class="h6 text-white ls-1 fw-normal">
-							Московская область,<br>
-							Ленинский городской округ,<br>
-							сельское поселение Молоковское.
+							{{ contacts_settings.address }}
 						</span>
 						</address>
 						<span class="fw-light">Телефон:</span><br>
-						<a href="tel:8 (495) 632-52-11" class="h6 text-white ls-1 fw-normal">8 (495) 632-52-11</a><br><br>
+						<a href="{{ contacts_settings.phone1 }}" class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone1 }}</a><br><br>
+						{% if contacts_settings.phone2 %}
+						<a href="{{ contacts_settings.phone2 }}" class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone2 }}</a><br><br>
+						{% endif %}
 
 						<span class="fw-light">Email:</span><br>
-						<a href="mailto:info@equimedia.ru?Subject=Добрый%20день" class="h6 text-white ls-1 fw-normal">info@equimedia.ru</a>
+						<a href="mailto:{{ contacts_settings.email }}?Subject=Добрый%20день" class="h6 text-white ls-1 fw-normal">{{ contacts_settings.email }}</a>
 					</div>
 				</div>
 			</div>

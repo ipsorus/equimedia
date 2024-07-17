@@ -6,12 +6,12 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
 	<meta name="author" content="">
-	<meta name="description" content="Portal">
+	<meta name="description" content="{{ site_settings.description_seo }}">
 	<meta name="robots" content="index, follow" />
-	<meta name="keywords" content="EquiMedia КСК Виват" />
+	<meta name="keywords" content="{{ site_settings.keywords_seo }}" />
 	{% block title %}{% endblock %}
 
-	<link rel="shortcut icon" href="{% static 'portal/images/favicon.ico' %}">
+	<link rel="shortcut icon" href="{{ site_settings.favicon.url }}">
 
 	<!-- Stylesheets
 	============================================= -->
@@ -33,7 +33,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>EquiMedia</title>
+	<title>{{ site_settings.title }}</title>
 	<style>
 /* Webfont: Sacco-SemBdCondObliq.eot */@font-face {
     font-family: 'Sacco-SemBdCondObliq';
@@ -171,59 +171,9 @@
 <!-- Document Wrapper
 ============================================= -->
 	<div id="wrapper">
-<!--&lt;!&ndash; Top Bar-->
-<!--		============================================= &ndash;&gt;-->
-<!--		<div id="top-bar" class="transparent-topbar border-bottom-0">-->
-<!--			<div class="container">-->
-
-<!--				<div class="row justify-content-between">-->
-<!--					<div class="col-12 col-md-auto">-->
-
-<!--						&lt;!&ndash; Top Links-->
-<!--						============================================= &ndash;&gt;-->
-<!--						<div class="top-links">-->
-<!--							<ul class="top-links-container">-->
-<!--								<li class="top-links-item"><a href="#">All Cities</a>-->
-<!--									<ul class="top-links-sub-menu">-->
-<!--										<li class="top-links-item"><a href="#">New York</a></li>-->
-<!--										<li class="top-links-item"><a href="#">Los Angeles</a></li>-->
-<!--										<li class="top-links-item"><a href="#">California</a></li>-->
-<!--										<li class="top-links-item"><a href="#">Miami</a></li>-->
-<!--										<li class="top-links-item"><a href="#">Las Vegas</a></li>-->
-<!--									</ul>-->
-<!--								</li>-->
-<!--							</ul>-->
-<!--						</div>&lt;!&ndash; .top-links end &ndash;&gt;-->
-
-<!--					</div>-->
-
-<!--					<div class="col-12 col-md-auto">-->
-
-<!--						&lt;!&ndash; Top Links-->
-<!--						============================================= &ndash;&gt;-->
-<!--						<div class="top-links">-->
-<!--							<ul class="top-links-container">-->
-<!--								<li class="top-links-item d-md-none d-lg-block"><a href="#"><i class="fa-solid fa-phone"></i> +1800-123-7890</a></li>-->
-<!--								<li class="top-links-item"><a href="#"><i class="bi-download"></i> Download App</a></li>-->
-<!--								<li class="top-links-item top-bar-highlight"><a href="#">Sell/Rent your Property</a>-->
-<!--									<div class="top-links-section" style="font-size: 14px;">-->
-<!--										Genuine Clients, 100% Trust Assurance and Lowest Fees on the Market. <a href="#" class="more-link font-secondary" style="border-bottom-style: dotted;">Learn More &rarr;</a>-->
-<!--									</div>-->
-<!--								</li>-->
-<!--								<li class="top-links-item"><a href="#" class="side-panel-trigger">Login/Register</a></li>-->
-<!--							</ul>-->
-<!--						</div>&lt;!&ndash; .top-links end &ndash;&gt;-->
-
-<!--					</div>-->
-<!--				</div>-->
-
-<!--			</div>-->
-<!--		</div>&lt;!&ndash; #top-bar end &ndash;&gt;-->
-		{% include 'portal/includes/messages.html' %}
 		{% include 'portal/includes/header.html' %}
-
 		{% block content %}{% endblock %}
-
+		{% include 'portal/includes/messages.html' %}
 		{% include 'portal/includes/footer.html' %}
 	</div><!-- #wrapper end -->
 

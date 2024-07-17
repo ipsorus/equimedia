@@ -55,7 +55,7 @@ body {
 .bg-color,
 .page-transition-wrap, .css3-spinner { background-color: var(--cnvs-body-bg) !important; }
 
-.bg-color-contact { background-color: var(--cnvs-themecolor) !important; }
+.bg-color-contact { background-color: var(--cnvs-custom-themecolor) !important; }
 
 .bg-color-white { background-color: rgba(255, 255, 255, 0.95) !important; }
 .bg-color-white-form { background-color: rgba(255, 255, 255, 0.1) !important; }

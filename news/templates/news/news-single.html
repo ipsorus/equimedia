@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-	<title>{{ title }} - EquiMedia</title>
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
 {% endblock %}
 {% block content %}
 <style>
@@ -102,39 +102,38 @@ background-color: #336576 !important;
                                         <div class="d-flex align-items-center justify-content-between">
                                             <h6 class="fs-6 fw-semibold mb-0">Поделиться:</h6>
                                             <div class="d-flex">
-                                                <a href="#"
+                                                {% if social_settings.social_vk_url %}
+                                                <a href="{{ social_settings.social_vk_url }}"
                                                    class="social-icon si-small text-white border-transparent rounded-circle bg-vk"
-                                                   title="VK">
+                                                   title="VK" target="_blank">
                                                     <i class="fa-brands fa-vk"></i>
                                                     <i class="fa-brands fa-vk"></i>
                                                 </a>
-
-                                                <a href="#"
+                                                {% endif %}
+                                                {% if social_settings.social_twitter_url %}
+                                                <a href="{{ social_settings.social_twitter_url }}"
                                                    class="social-icon si-small text-white border-transparent rounded-circle bg-x-twitter"
-                                                   title="Twitter">
+                                                   title="Twitter" target="_blank">
                                                     <i class="fa-brands fa-x-twitter"></i>
                                                     <i class="fa-brands fa-x-twitter"></i>
                                                 </a>
-
-                                                <a href="#"
+                                                {% endif %}
+                                                {% if social_settings.social_pinterest_url %}
+                                                <a href="{{ social_settings.social_pinterest_url }}"
                                                    class="social-icon si-small text-white border-transparent rounded-circle bg-pinterest"
-                                                   title="Pinterest">
+                                                   title="Pinterest" target="_blank">
                                                     <i class="fa-brands fa-pinterest-p"></i>
                                                     <i class="fa-brands fa-pinterest-p"></i>
                                                 </a>
-
-                                                <a href="#"
+                                                {% endif %}
+                                                {% if social_settings.social_whatsapp_url %}
+                                                <a href="{{ social_settings.social_whatsapp_url }}"
                                                    class="social-icon si-small text-white border-transparent rounded-circle bg-whatsapp"
-                                                   title="Whatsapp">
+                                                   title="Whatsapp" target="_blank">
                                                     <i class="fa-brands fa-whatsapp"></i>
                                                     <i class="fa-brands fa-whatsapp"></i>
                                                 </a>
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-email3 me-0"
-                                                   title="Mail">
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                </a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>

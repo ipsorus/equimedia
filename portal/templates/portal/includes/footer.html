@@ -10,39 +10,45 @@
             <div class="row col-mb-30">
 
                 <div class="col-md-6 text-center text-md-start">
-                    &copy; 2024 EquiMedia<br>
+                    &copy; 2024{% if site_settings.current_year %}-{{ site_settings.current_year }}{% endif %} {{ site_settings.title }}<br>
                     <div class="copyright-links"><a href="#">Пользовательское соглашение</a> / <a href="#">Политика конфиденциальности</a></div>
                 </div>
 
                 <div class="col-md-6 text-center text-md-end">
                     <div class="d-flex justify-content-center justify-content-md-end mb-2">
-                        <a href="#" class="social-icon border-transparent si-small h-bg-vk">
+                        {% if social_settings.social_vk_url %}
+                        <a href="{{ social_settings.social_vk_url }}" target="_blank" class="social-icon border-transparent si-small h-bg-vk">
                             <i class="fa-brands fa-vk"></i>
                             <i class="fa-brands fa-vk"></i>
                         </a>
-
-                        <a href="#" class="social-icon border-transparent si-small h-bg-youtube">
+                        {% endif %}
+                        {% if social_settings.social_youtube_url %}
+                        <a href="{{ social_settings.social_youtube_url }}" target="_blank" class="social-icon border-transparent si-small h-bg-youtube">
                             <i class="fa-brands fa-youtube"></i>
                             <i class="fa-brands fa-youtube"></i>
                         </a>
-
-                        <a href="#" class="social-icon border-transparent si-small h-bg-instagram">
+                        {% endif %}
+                        {% if social_settings.social_instagram_url %}
+                        <a href="{{ social_settings.social_instagram_url }}" target="_blank" class="social-icon border-transparent si-small h-bg-instagram">
                             <i class="bi-instagram"></i>
                             <i class="bi-instagram"></i>
                         </a>
-
-                        <a href="#" class="social-icon border-transparent si-small h-bg-linkedin">
+                        {% endif %}
+                        {% if social_settings.social_telegram_url %}
+                        <a href="{{ social_settings.social_telegram_url }}" target="_blank" class="social-icon border-transparent si-small h-bg-linkedin">
                             <i class="bi-telegram"></i>
                             <i class="bi-telegram"></i>
                         </a>
-
-                        <a href="#" class="social-icon border-transparent si-small h-bg-whatsapp">
+                        {% endif %}
+                        {% if social_settings.social_whatsapp_url %}
+                        <a href="{{ social_settings.social_whatsapp_url }}" target="_blank" class="social-icon border-transparent si-small h-bg-whatsapp">
                             <i class="fa-brands fa-whatsapp"></i>
                             <i class="fa-brands fa-whatsapp"></i>
                         </a>
+                        {% endif %}
                     </div>
 
-                    <i class="bi-envelope"></i> info@equimedia.ru <span class="middot">&middot;</span> <i class="fa-solid fa-phone"></i> +7 (495) 654-32-10
+                    <i class="bi-envelope"></i> {{ site_settings.email }} <span class="middot">&middot;</span> <i class="fa-solid fa-phone"></i> {{ site_settings.phone }}
                 </div>
 
             </div>

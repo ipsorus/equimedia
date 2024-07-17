@@ -9,17 +9,14 @@
             <div style="background-image: url({% static 'portal/images/grid.svg' %}); position: absolute; top: 8%;left: 6%;width: 20vw;height: 30vh;opacity: .15;transform: translate(-50%, -50%);"></div>
 
             <div class="col-xl-7 col-md-6 img-overlap">
-                <img src="{% static 'portal/images/1000.jpg' %}" alt="..." class="h-100" style="object-fit: cover;">
+                <img src="{{ about_us_settings.poster_about_us.url }}" alt="..." class="h-100" style="object-fit: cover;">
             </div>
 
             <div class="col-xl-5 col-md-6 bg-white">
                 <div class="position-absolute start-0 top-0 w-100 h-100 bg-color bg-opacity-10"></div>
-                <p class="ls-4 small mb-3">Узнайте больше о нас</p>
-                <h2 class="display-6">Все ресурсы – в одном месте</h2>
-                <p>На нашей площадке вы можете пройти онлайн-курсы по посадке, выездке, конкуру, ветеринарии, кормлению,
-                    конному английскому или немецкому, повысить квалификацию как тренера или в сфере коневодства.
-                    Записаться на тренировки с лучшими тренерами в Москве или онлайн-тренировки с тренерами из США,
-                    Нидерландов и других стран. Или поехать на стажировку к топ-спортсменам в любую точку мира</p>
+                <p class="ls-4 small mb-3">{{ about_us_settings.title_about_us }}</p>
+                <h2 class="display-6">{{ about_us_settings.big_title_about_us }}</h2>
+                <p>{{ about_us_settings.about_us_text }}</p>
                 <a href="#" class="button button-small button-border m-0">Узнать больше</a>
             </div>
         </div>

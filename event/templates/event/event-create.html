@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block title %}
-	<title>{{ title }} - EquiMedia</title>
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
 {% endblock %}
 {% block content %}
 <style>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-	<title>{{ title }} - EquiMedia</title>
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
 {% endblock %}
 {% block content %}
 <style>
@@ -25,8 +25,8 @@ background-color: #336576 !important;
 		<div class="page-title-row">
 
 			<div class="page-title-content">
-				<h1>{{ title }}</h1>
-				<span>{{ subtitle }}</span>
+				<h1>{{ blog_settings.title_blog_page }}</h1>
+				<span>{{ blog_settings.sub_title_blog_page }}</span>
 			</div>
 
 			<nav aria-label="breadcrumb">
