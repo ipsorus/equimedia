@@ -43,6 +43,10 @@ class SocialsSettings(SingletonModel):
     def __str__(self):
         return 'Настройки социальных сетей'
 
+    class Meta:
+        verbose_name = "Социальные сети"
+        verbose_name_plural = "Социальные сети"
+
 
 class NewsSettings(SingletonModel):
     title = models.CharField(verbose_name=_('Название раздела на главной странице'), max_length=128)
@@ -57,6 +61,10 @@ class NewsSettings(SingletonModel):
 
     def __str__(self):
         return 'Основные настройки блока "Новости"'
+
+    class Meta:
+        verbose_name = "Новости"
+        verbose_name_plural = "Новости"
 
 
 class ArticlesSettings(SingletonModel):
@@ -73,6 +81,10 @@ class ArticlesSettings(SingletonModel):
     def __str__(self):
         return 'Основные настройки блока "Статьи"'
 
+    class Meta:
+        verbose_name = "Статьи"
+        verbose_name_plural = "Статьи"
+
 
 class SliderSettings(SingletonModel):
     announcement_slider = models.BooleanField(verbose_name=_('Анонс новостей в слайдере'), default=True)
@@ -81,6 +93,10 @@ class SliderSettings(SingletonModel):
 
     def __str__(self):
         return 'Основные настройки блока "Слайдер"'
+
+    class Meta:
+        verbose_name = "Слайдер"
+        verbose_name_plural = "Слайдер"
 
 
 class BlogSettings(SingletonModel):
@@ -95,6 +111,10 @@ class BlogSettings(SingletonModel):
 
     def __str__(self):
         return 'Основные настройки блока "Блоги"'
+
+    class Meta:
+        verbose_name = "Блоги"
+        verbose_name_plural = "Блоги"
 
 
 class SiteSettings(SingletonModel):
@@ -111,6 +131,10 @@ class SiteSettings(SingletonModel):
     def __str__(self):
         return 'Основные настройки сайта'
 
+    class Meta:
+        verbose_name = "Основные настройки сайта"
+        verbose_name_plural = "Основные настройки сайта"
+
 
 class AboutUsSettings(SingletonModel):
     title_about_us = models.CharField(verbose_name=_('Текст в заголовке "О нас" на главной странице'), max_length=50)
@@ -123,6 +147,10 @@ class AboutUsSettings(SingletonModel):
     def __str__(self):
         return 'Настройка страницы "О нас" на главной странице'
 
+    class Meta:
+        verbose_name = "О нас"
+        verbose_name_plural = "О нас"
+
 
 class ContactsSettings(SingletonModel):
     phone1 = models.CharField(verbose_name=_('Телефон 1'), max_length=32)
@@ -134,6 +162,10 @@ class ContactsSettings(SingletonModel):
 
     def __str__(self):
         return 'Настройка страницы "Контакты"'
+
+    class Meta:
+        verbose_name = "Контакты"
+        verbose_name_plural = "Контакты"
 
 
 class Feedback(models.Model):
