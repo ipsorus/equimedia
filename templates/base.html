@@ -219,10 +219,11 @@
 
 <!--			</div>-->
 <!--		</div>&lt;!&ndash; #top-bar end &ndash;&gt;-->
-		{% include 'portal/includes/header.html' %}
-<!--		{% include 'account/user_login.html' %}-->
-		{% block content %}{% endblock %}
 		{% include 'portal/includes/messages.html' %}
+		{% include 'portal/includes/header.html' %}
+
+		{% block content %}{% endblock %}
+
 		{% include 'portal/includes/footer.html' %}
 	</div><!-- #wrapper end -->
 

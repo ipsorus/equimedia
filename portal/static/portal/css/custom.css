@@ -83,10 +83,38 @@ body {
 	--cnvs-primary-menu-submenu-bg: var(--cnvs-themecolor);
 	--cnvs-primary-menu-submenu-width: 240px;
 	--cnvs-primary-menu-submenu-hover-bg: transparent;
+	--cnvs-primary-menu-submenu-color: #fff;
 	--cnvs-primary-menu-submenu-hover-color: #fff;
     --cnvs-primary-menu-active-color: var(--cnvs-primary-menu-hover-color);
 }
 
+
+.sub-menu-container .menu-item:not(:first-child) {
+  border-top: var(--cnvs-primary-menu-submenu-border);
+}
+
+
+.sub-menu-container .menu-item > .menu-link {
+  position: relative;
+  padding: 10px 5px;
+  font-size: var(--cnvs-primary-menu-font-size);
+  font-weight: var(--cnvs-primary-menu-submenu-font-weight);
+  color: var(--cnvs-contrast-100) !important;
+  letter-spacing: var(--cnvs-primary-menu-submenu-spacing);
+  font-family: var(--cnvs-primary-menu-submenu-font);
+}
+.sub-menu-container .menu-item > .menu-link div {
+  position: relative;
+}
+.sub-menu-container .menu-item:hover > .menu-link {
+  --cnvs-primary-menu-submenu-font-weight: var(--cnvs-primary-menu-submenu-hover-font-weight);
+}
+.sub-menu-container .menu-item .sub-menu-trigger {
+  top: 6px;
+}
+.sub-menu-container .sub-menu-trigger {
+  font-size: 10px;
+}
 
 /* Custom Header Size
 -----------------------------------------------------------------*/
@@ -1259,29 +1287,4 @@ background-color: transparent !important;
 .dropdown-menu {
     --bs-dropdown-link-active-bg: var(--cnvs-themecolor-rgb) !important;
     --bs-dropdown-bg: #fff !important;
-}
-
-.sub-menu-container .menu-item:not(:first-child) {
-  border-top: var(--cnvs-primary-menu-submenu-border);
-}
-.sub-menu-container .menu-item > .menu-link {
-  position: relative;
-  padding: 10px 5px;
-  font-size: var(--cnvs-primary-menu-font-size);
-  font-weight: var(--cnvs-primary-menu-submenu-font-weight);
-  color: var(--cnvs-contrast-100);
-  letter-spacing: var(--cnvs-primary-menu-submenu-spacing);
-  font-family: var(--cnvs-primary-menu-submenu-font);
-}
-.sub-menu-container .menu-item > .menu-link div {
-  position: relative;
-}
-.sub-menu-container .menu-item:hover > .menu-link {
-  --cnvs-primary-menu-submenu-font-weight: var(--cnvs-primary-menu-submenu-hover-font-weight);
-}
-.sub-menu-container .menu-item .sub-menu-trigger {
-  top: 6px;
-}
-.sub-menu-container .sub-menu-trigger {
-  font-size: 10px;
 }
