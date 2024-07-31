@@ -1,5 +1,8 @@
 from django.db import models
 
+from equi_media_portal.singleton import SingletonModel
+from django.utils.translation import gettext_lazy as _
+
 
 class Slider(models.Model):
     title = models.TextField(max_length=200, db_index=True, verbose_name="Заголовок слайда")
@@ -22,3 +25,16 @@ class Slider(models.Model):
         indexes = [
             models.Index(fields=['-time_create'])
         ]
+
+
+class SliderSettings(SingletonModel):
+    announcement_slider = models.BooleanField(verbose_name=_('Анонс новостей в слайдере'), default=True)
+    pagination_dots = models.BooleanField(verbose_name=_('Пагинатор на слайдере'), default=True)
+    scroller = models.BooleanField(verbose_name=_('Анимация скролла на слайдере'), default=True)
+
+    def __str__(self):
+        return 'Основные настройки блока "Слайдер"'
+
+    class Meta:
+        verbose_name = "Настройки раздела"
+        verbose_name_plural = "Настройки раздела"

@@ -6,6 +6,9 @@ from django_ckeditor_5.fields import CKEditor5Field
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
 
+from equi_media_portal.singleton import SingletonModel
+from django.utils.translation import gettext_lazy as _
+
 User = get_user_model()
 
 
@@ -108,3 +111,49 @@ class Comment(MPTTModel):
 
     def __str__(self):
         return f'{self.author}:{self.content}'
+
+
+class BlogSettings(SingletonModel):
+    title = models.CharField(verbose_name=_('Название блока на главной странице'), max_length=64, default='Блоги')
+    title_blog_page = models.CharField(verbose_name=_('Название в разделе "Блоги"'), max_length=128, blank=True, default='Блоги')
+    sub_title_blog_page = models.CharField(verbose_name=_('Текст под названием в разделе "Блоги"'), max_length=128,
+                                           blank=True, default='Истории наших пользователей о лошадях и не только...')
+    last_comments = models.BooleanField(verbose_name=_('Последние комментарии в блогах'), default=True)
+    recent_posts = models.BooleanField(verbose_name=_('Блок "Может быть интересно" в блогах'), default=True)
+    sidebar_title = models.CharField(verbose_name=_('Заголовок для сайдбара'), max_length=32, default='Рекомендуем')
+    posts_on_page = models.IntegerField(verbose_name=_('Количество видимых постов без скроллинга'), default=6)
+
+    def __str__(self):
+        return 'Основные настройки блока "Блоги"'
+
+    class Meta:
+        verbose_name = "Настройки раздела"
+        verbose_name_plural = "Настройки раздела"
+
+
+class BannerBlogSidebar(SingletonModel):
+    url = models.URLField(verbose_name=_('Адрес сайта'), max_length=256, blank=True)
+    title = models.CharField(verbose_name=_('Альтернативное название постера'), max_length=256, default='test')
+    poster = models.ImageField(upload_to='media/adv/poster/%Y/%m/%d', default='images/adv/ad-blank.png', verbose_name='Обложка для рекламного блока')
+    show = models.BooleanField(verbose_name=_('Показать баннер'), default=True)
+
+    def __str__(self):
+        return 'Настроить баннер'
+
+    class Meta:
+        verbose_name = 'Баннер в сайдбаре #1 (ширина 300px)'
+        verbose_name_plural = 'Баннер в сайдбаре #1  (ширина 300px)'
+
+
+class BannerBlogSidebar2(SingletonModel):
+    url = models.URLField(verbose_name=_('Адрес сайта'), max_length=256, blank=True)
+    title = models.CharField(verbose_name=_('Альтернативное название постера'), max_length=256, default='test')
+    poster = models.ImageField(upload_to='media/adv/poster/%Y/%m/%d', default='images/adv/ad-blank.png', verbose_name='Обложка для рекламного блока')
+    show = models.BooleanField(verbose_name=_('Показать баннер'), default=True)
+
+    def __str__(self):
+        return 'Настроить баннер'
+
+    class Meta:
+        verbose_name = 'Баннер в сайдбаре #2 (ширина 300px)'
+        verbose_name_plural = 'Баннер в сайдбаре #2 (ширина 300px)'

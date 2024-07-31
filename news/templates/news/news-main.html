@@ -55,10 +55,10 @@
 
 
                 </div>
-                {% if adv_settings.3.show %}
+                {% if news_adv_settings.3.show %}
                 <!-- Ad
                  ============================================= -->
-                <a href="{{ adv_settings.3.url }}" target="_blank"><img src="{{ adv_settings.3.poster.url }}" width="728" alt="{{ adv_settings.3.title }}"
+                <a href="{{ news_adv_settings.3.url }}" target="_blank" rel="nofollow"><img src="{{ news_adv_settings.3.poster.url }}" width="728" alt="{{ news_adv_settings.3.title }}"
                                  class="aligncenter mb-5 mt-5"></a>
                 {% endif %}
                 <div class="col-lg-12 mt-5">
@@ -99,9 +99,9 @@
 
             <!-- Top Sidebar Area
             ============================================= -->
-            <div class="col-lg-3 {% if news_settings.sticky_sidebar_new %}sticky-sidebar-wrap{% endif %} mt-5 mt-lg-0">
+            <div class="col-lg-3 {% if news_settings.sticky_sidebar_news %}sticky-sidebar-wrap{% endif %} mt-5 mt-lg-0">
 
-                <div class="{% if news_settings.sticky_sidebar_new %}sticky-sidebar{% endif %}">
+                <div class="{% if news_settings.sticky_sidebar_news %}sticky-sidebar{% endif %}">
                     {% if news_settings.subscribe_main_sidebar %}
                     <div class="widget">
                         <div class="col-lg-12">
@@ -140,7 +140,7 @@
                                 <div class="row text-center gy-4">
                                     {% if social_settings.social_vk_url %}
                                     <div class="col-3"><a href="{{ social_settings.social_vk_url }}" target="_blank"
-                                                          class="social-icon text-white bg-vk m-auto float-none">
+                                                          class="social-icon text-white bg-vk m-auto float-none" rel="nofollow">
 
                                         <i class="fa-brands fa-vk" style="font-size: 25px;"></i>
                                         <i class="fa-brands fa-vk" style="font-size: 25px;"></i>
@@ -148,21 +148,21 @@
                                     {% endif %}
                                     {% if social_settings.social_instagram_url %}
                                     <div class="col-3"><a href="{{ social_settings.social_instagram_url }}" target="_blank"
-                                                          class="social-icon text-white bg-instagram m-auto float-none">
+                                                          class="social-icon text-white bg-instagram m-auto float-none" rel="nofollow">
                                         <i class="bi-instagram" style="font-size: 25px;"></i>
                                         <i class="bi-instagram" style="font-size: 25px;"></i>
                                     </a></div>
                                     {% endif %}
                                     {% if social_settings.social_telegram_url %}
                                     <div class="col-3"><a href="{{ social_settings.social_telegram_url }}" target="_blank"
-                                                          class="social-icon text-white bg-linkedin m-auto float-none">
+                                                          class="social-icon text-white bg-linkedin m-auto float-none" rel="nofollow">
                                         <i class="bi-telegram" style="font-size: 25px;"></i>
                                         <i class="bi-telegram" style="font-size: 25px;"></i>
                                     </a></div>
                                     {% endif %}
                                     {% if social_settings.social_youtube_url %}
                                     <div class="col-3"><a href="{{ social_settings.social_youtube_url }}" target="_blank"
-                                                          class="social-icon text-white bg-youtube m-auto float-none">
+                                                          class="social-icon text-white bg-youtube m-auto float-none" rel="nofollow">
                                         <i class="fa-brands fa-youtube" style="font-size: 25px;"></i>
                                         <i class="fa-brands fa-youtube" style="font-size: 25px;"></i>
                                     </a></div>
@@ -174,7 +174,7 @@
                     <!-- Sidebar Widget 1 News
                    ============================================= -->
                     {% endif %}
-                    {% if adv_settings.1.show or adv_settings.2.show %}
+                    {% if news_adv_settings.1.show or news_adv_settings.2.show %}
                     <!-- Sidebar Widget 2 Advertisement
                     ============================================= -->
                     <div class="widget">
@@ -183,12 +183,12 @@
                                 <h3>{{ news_settings.sidebar_title }}</h3>
                             </div>
                         </div>
-                        {% if adv_settings.1.show %}
-                        <a href="{{ adv_settings.1.url}}" target="_blank"><img src="{{ adv_settings.1.poster.url}}" width="300" alt="{{ adv_settings.1.title}}"
+                        {% if news_adv_settings.1.show %}
+                        <a href="{{ news_adv_settings.1.url}}" target="_blank" rel="nofollow"><img src="{{ news_adv_settings.1.poster.url}}" width="300" alt="{{ news_adv_settings.1.title}}"
                                         class="img-responsive aligncenter"></a><br><br>
                         {% endif %}
-                        {% if adv_settings.2.show %}
-                        <a href="{{ adv_settings.2.url}}" target="_blank"><img src="{{ adv_settings.2.poster.url}}" width="300" alt="{{ adv_settings.2.title}}"
+                        {% if news_adv_settings.2.show %}
+                        <a href="{{ news_adv_settings.2.url}}" target="_blank" rel="nofollow"><img src="{{ news_adv_settings.2.poster.url}}" width="300" alt="{{ news_adv_settings.2.title}}"
                                         class="img-responsive aligncenter"></a>
                         {% endif %}
                     </div>

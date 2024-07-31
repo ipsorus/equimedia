@@ -88,39 +88,7 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <h6 class="fs-6 fw-semibold mb-0">Поделиться:</h6>
                                             <div class="d-flex">
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-vk"
-                                                   title="VK">
-                                                    <i class="fa-brands fa-vk"></i>
-                                                    <i class="fa-brands fa-vk"></i>
-                                                </a>
-
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-x-twitter"
-                                                   title="Twitter">
-                                                    <i class="fa-brands fa-x-twitter"></i>
-                                                    <i class="fa-brands fa-x-twitter"></i>
-                                                </a>
-
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-pinterest"
-                                                   title="Pinterest">
-                                                    <i class="fa-brands fa-pinterest-p"></i>
-                                                    <i class="fa-brands fa-pinterest-p"></i>
-                                                </a>
-
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-whatsapp"
-                                                   title="Whatsapp">
-                                                    <i class="fa-brands fa-whatsapp"></i>
-                                                    <i class="fa-brands fa-whatsapp"></i>
-                                                </a>
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-email3 me-0"
-                                                   title="Mail">
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                </a>
+                                                {% include 'portal/includes/social_share.html' %}
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +114,7 @@
                                 {% endif %}
                             </div>
                         </div><!-- .post-navigation end -->
-								{% if site_settings.recent_posts %}
+								{% if blog_settings.recent_posts %}
 								{% if similar_articles %}
 								<div class="container mt-6 rounded-6" style="border: 3px solid rgba(233, 156, 52, 1);">
 									<div class="row align-items-center justify-content-between p-md-3">

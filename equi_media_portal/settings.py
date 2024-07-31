@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
-    'advertisements.apps.AdvertisementsConfig',
     'account.apps.AccountConfig',
     'event.apps.EventConfig',
     'portal.apps.PortalConfig',
@@ -93,17 +92,24 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'portal.context_processors.website_settings',
                 'portal.context_processors.load_settings',
-                'portal.context_processors.advertisement_settings',
+
+                'news.context_processors.news_advertisement_settings',
+                'news.context_processors.news_settings',
+
+                'articles.context_processors.article_advertisement_settings',
+                'articles.context_processors.articles_settings',
+
+                'blog.context_processors.blog_advertisement_settings',
+                'blog.context_processors.blog_settings',
+
                 'portal.context_processors.contacts_settings',
                 'portal.context_processors.about_us_settings',
                 'portal.context_processors.socials_settings',
-                'portal.context_processors.news_settings',
-                'portal.context_processors.articles_settings',
-                'portal.context_processors.slider_settings',
-                'portal.context_processors.blog_settings',
-                'django.template.context_processors.request', ## For EL-pagination
+
+                'slider.context_processors.slider_settings',
+
+                'django.template.context_processors.request',  ## For EL-pagination
             ],
         },
     },
@@ -185,7 +191,6 @@ STATICFILES_DIRS = []
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -197,7 +202,6 @@ LANGUAGES = [
     ('en', _('English')),
     ('ru', _('Russian')),
 ]
-
 
 PER_PAGE = 9
 
@@ -214,31 +218,31 @@ SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
 customColorPalette = [
-        {
-            'color': 'hsl(4, 90%, 58%)',
-            'label': 'Red'
-        },
-        {
-            'color': 'hsl(340, 82%, 52%)',
-            'label': 'Pink'
-        },
-        {
-            'color': 'hsl(291, 64%, 42%)',
-            'label': 'Purple'
-        },
-        {
-            'color': 'hsl(262, 52%, 47%)',
-            'label': 'Deep Purple'
-        },
-        {
-            'color': 'hsl(231, 48%, 48%)',
-            'label': 'Indigo'
-        },
-        {
-            'color': 'hsl(207, 90%, 54%)',
-            'label': 'Blue'
-        },
-    ]
+    {
+        'color': 'hsl(4, 90%, 58%)',
+        'label': 'Red'
+    },
+    {
+        'color': 'hsl(340, 82%, 52%)',
+        'label': 'Pink'
+    },
+    {
+        'color': 'hsl(291, 64%, 42%)',
+        'label': 'Purple'
+    },
+    {
+        'color': 'hsl(262, 52%, 47%)',
+        'label': 'Deep Purple'
+    },
+    {
+        'color': 'hsl(231, 48%, 48%)',
+        'label': 'Indigo'
+    },
+    {
+        'color': 'hsl(207, 90%, 54%)',
+        'label': 'Blue'
+    },
+]
 CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png', 'jpg', 'gif', 'bmp', 'webp', 'tiff']

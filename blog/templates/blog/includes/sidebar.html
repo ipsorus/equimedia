@@ -10,7 +10,7 @@
             {% show_latest_comments count=5 %}
         </div>
         {% endif %}
-        {% if adv_settings.7.show or adv_settings.8.show %}
+        {% if blog_adv_settings.1.show or blog_adv_settings.2.show %}
         <!-- Sidebar Widget 2 Advertisement
         ============================================= -->
         <div class="widget">
@@ -19,15 +19,15 @@
                     <h3>{{ blog_settings.sidebar_title }}</h3>
                 </div>
             </div>
-            {% if adv_settings.7.show %}
-            <a href="{{ adv_settings.7.url }}" target="_blank"><img src="{{ adv_settings.7.poster.url }}" width="300" alt="{{ adv_settings.7.title }}"
+            {% if blog_adv_settings.1.show %}
+            <a href="{{ blog_adv_settings.1.url }}" target="_blank" rel="nofollow"><img src="{{ blog_adv_settings.1.poster.url }}" width="300" alt="{{ blog_adv_settings.1.title }}"
                                  class="aligncenter mb-5 mt-5"></a>
 
             {% endif %}
-            {% if adv_settings.8.show %}
+            {% if blog_adv_settings.2.show %}
             <!-- Sidebar Widget 3 Advertisement
             ============================================= -->
-            <a href="{{ adv_settings.8.url }}" target="_blank"><img src="{{ adv_settings.8.poster.url }}" width="300" alt="{{ adv_settings.8.title }}"
+            <a href="{{ blog_adv_settings.2.url }}" target="_blank" rel="nofollow"><img src="{{ blog_adv_settings.2.poster.url }}" width="300" alt="{{ blog_adv_settings.2.title }}"
                                      class="aligncenter mb-5 mt-5"></a>
             {% endif %}
         </div>

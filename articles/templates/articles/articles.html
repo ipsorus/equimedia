@@ -55,10 +55,10 @@
                     </div>
                     {% endfor %}
                 </div>
-                {% if adv_settings.6.show %}
+                {% if article_adv_settings.3.show %}
                 <!-- Ad
                  ============================================= -->
-                <a href="{{ adv_settings.6.url }}" target="_blank"><img src="{{ adv_settings.6.poster.url }}" width="728" alt="{{ adv_settings.6.title }}"
+                <a href="{{ article_adv_settings.3.url }}" target="_blank" rel="nofollow"><img src="{{ article_adv_settings.3.poster.url }}" width="728" alt="{{ article_adv_settings.3.title }}"
                                  class="aligncenter mb-5 mt-5"></a>
                 {% endif %}
 
@@ -298,7 +298,7 @@
                         </div>
                     </div>
                     {% endif %}
-                    {% if adv_settings.4.show or adv_settings.5.show %}
+                    {% if article_adv_settings.1.show or article_adv_settings.2.show %}
                     <!-- Sidebar Widget 2 Advertisement
                     ============================================= -->
                     <div class="widget">
@@ -307,12 +307,12 @@
                                 <h3>{{ articles_settings.sidebar_title }}</h3>
                             </div>
                         </div>
-                        {% if adv_settings.4.show %}
-                        <a href="{{ adv_settings.4.url}}" target="_blank"><img src="{{ adv_settings.4.poster.url}}" width="300" alt="{{ adv_settings.4.title}}"
+                        {% if article_adv_settings.1.show %}
+                        <a href="{{ article_adv_settings.1.url}}" target="_blank" rel="nofollow"><img src="{{ article_adv_settings.1.poster.url}}" width="300" alt="{{ article_adv_settings.1.title}}"
                                         class="img-responsive aligncenter"></a><br><br>
                         {% endif %}
-                        {% if adv_settings.5.show %}
-                        <a href="{{ adv_settings.5.url}}" target="_blank"><img src="{{ adv_settings.5.poster.url}}" width="300" alt="{{ adv_settings.5.title}}"
+                        {% if article_adv_settings.2.show %}
+                        <a href="{{ article_adv_settings.2.url}}" target="_blank" rel="nofollow"><img src="{{ article_adv_settings.2.poster.url}}" width="300" alt="{{ article_adv_settings.2.title}}"
                                         class="img-responsive aligncenter"></a>
                         {% endif %}
                     </div>
