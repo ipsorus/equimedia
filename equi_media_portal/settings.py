@@ -15,6 +15,7 @@ from django.utils.translation import gettext_lazy as _
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -33,7 +34,7 @@ DEBUG = True
 THUMBNAIL_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+# ALLOWED_HOSTS = ['www.equimedia.ru', 'equimedia.ru']
 # Application definition
 
 INSTALLED_APPS = [
@@ -128,6 +129,7 @@ WSGI_APPLICATION = 'equi_media_portal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Test DB
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -139,6 +141,19 @@ WSGI_APPLICATION = 'equi_media_portal.wsgi.application'
 #     }
 # }
 
+# Prod DB
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.mysql',
+#          'NAME': 'maslakowa_eqm',
+#  	       'USER': 'maslakowa_eqm',
+#          'PASSWORD': 'WHPxy5!i',
+#          'HOST': 'localhost',
+#          'PORT': '3306',
+#      }
+# }
+
+# Dev DB
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -214,16 +229,28 @@ LANGUAGES = [
 PER_PAGE = 9
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_USE_SSL = True
+#
+# EMAIL_HOST_USER = 'ipsorus@yandex.ru'
+# EMAIL_HOST_PASSWORD = 'ovbgwvlbwfnrugho'
+#
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# SERVER_EMAIL = EMAIL_HOST_USER
+# EMAIL_ADMIN = EMAIL_HOST_USER
+
+EMAIL_HOST = 'smtp.beget.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 
-EMAIL_HOST_USER = 'ipsorus@yandex.ru'
-EMAIL_HOST_PASSWORD = 'ovbgwvlbwfnrugho'
+EMAIL_HOST_USER = 'info@equimedia.ru'
+EMAIL_HOST_PASSWORD = '8aEuV4&qvo4P'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
+
 
 customColorPalette = [
     {

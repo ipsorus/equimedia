@@ -15,7 +15,7 @@ class SocialsSettings(SingletonModel):
     social_pinterest_url = models.URLField(verbose_name=_('Ссылка на Pinterest'), max_length=256, blank=True, default='https://ru.pinterest.com/')
 
     def __str__(self):
-        return _('Настройки социальных сетей')
+        return 'Настройки социальных сетей'
 
     class Meta:
         verbose_name = _("Социальные сети")
@@ -23,10 +23,11 @@ class SocialsSettings(SingletonModel):
 
 
 class SiteSettings(SingletonModel):
+    site_maintenance = models.BooleanField(verbose_name=_('Отключить сайт на обслуживание'), default=False)
     site_url = models.URLField(verbose_name=_('Адрес сайта'), max_length=128, blank=True, default='http://www.example.ru')
     title = models.CharField(verbose_name=_('Название сайта'), max_length=128, default='КСК Виват-Россия!')
     alter_title = models.CharField(verbose_name=_('Второе название для сайта'), max_length=128, blank=True)
-    favicon = models.ImageField(upload_to='media/favicon/%Y/%m/%d', default='images/favicon/favicon.ico', verbose_name='Иконка сайта', blank=True)
+    favicon = models.ImageField(upload_to='media/favicon/%Y/%m/%d', default='images/favicon/favicon.ico', verbose_name=_('Иконка сайта'), blank=True)
     phone = models.CharField(verbose_name=_('Телефон в футере'), max_length=32, default='8 (495) 632-52-11')
     email = models.CharField(verbose_name=_('E-mail в футере'), max_length=128, default='info@equimedia.ru')
     current_year = models.CharField(verbose_name=_('Текущий год в футере'), max_length=4, default='2024')
@@ -35,7 +36,7 @@ class SiteSettings(SingletonModel):
     gallery_url = models.URLField(verbose_name=_('Ссылка на галерею'), max_length=128, blank=True, default='http://www.gallery.ex')
 
     def __str__(self):
-        return _('Основные настройки сайта')
+        return 'Основные настройки сайта'
 
     class Meta:
         verbose_name = _("Основные настройки сайта")
@@ -66,7 +67,7 @@ class AboutUsSettings(SingletonModel):
     block6_content = models.TextField(verbose_name=_('Текст блока 6'), blank=True, max_length=160, default='Текст блока 6. Краткое описание предлагаемых услуг')
 
     def __str__(self):
-        return _('Настройка страницы "О нас" на главной странице')
+        return 'Настройка страницы "О нас" на главной странице'
 
     class Meta:
         verbose_name = _("О нас")
