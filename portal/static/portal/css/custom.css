@@ -25,9 +25,20 @@
 
 :root .dark {
 	--cnvs-themecolor: #fff;
+	--cnvs-themecolor-footer: #1d6172;
 	--cnvs-themecolor-rgb: 255, 255, 255;
 	--cnvs-header-bg: var(--cnvs-custom-themecolor);
 }
+
+.dark #copyrights, #copyrights.dark {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.dark #header:not(.transparent-header),
+#header.dark:not(.transparent-header),
+#header.dark.sticky-header.transparent-header #header-wrap:not(.not-dark),
+#footer.dark {background-color: var(--cnvs-themecolor-footer);}
 
 .is-expanded-menu #header.transparent-header.semi-transparent {
   --cnvs-header-bg: rgba(var(--cnvs-custom-themecolor-rgb), .9);

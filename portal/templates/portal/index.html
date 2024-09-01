@@ -12,8 +12,12 @@
         {% include 'news/news-main.html' %}
         {% include 'event/events.html' %}
         {% include 'articles/articles.html' %}
+        {% if blogs %}
         {% include 'blog/blogs.html' %}
+        {% endif %}
+        {% if videos %}
         {% include 'podcast/podcast.html' %}
+        {% endif %}
     </div>
 </section><!-- #content end -->
 {% endblock %}
