@@ -1,0 +1,71 @@
+{% load mptt_tags static %}
+<div id="comments">
+	<h3 id="comments-title">Комментариев: <span>{{ post.comments_article.count }}</span></h3>
+<!-- Comments List
+============================================= -->
+<ol class="commentlist nested-comments">
+{% recursetree post.comments_article.all %}
+
+	<div id="comm-{{ node.pk }}"></div>
+
+	<li class="comment even thread-even" id="li-comment-{{ node.pk }}">
+		<div id="comment-{{ node.pk }}" class="comment-wrap">
+			<div class="comment-meta">
+				<div class="comment-author vcard">
+					<span class="comment-avatar">
+					<img alt='Image' src="{{ node.author.profile.avatar.url }}" class='avatar avatar-60 photo avatar-default' height='60' width='60'></span>
+				</div>
+			</div>
+			<div class="comment-content">
+				<div class="comment-author"><a href="{{ node.author.profile.get_absolute_url }}" title="Ссылка на профиль автора комментария">{{ node.author }}</a><a href="#comment-{{ node.pk }}" title="Ссылка на комментарий"> #</a>{% if node.parent_id %} <i class="bi-arrow-right"></i> <a href="#comm-{{ node.parent_id }}" title="Ссылка на комментарий-источник">{{ node.parent.author }}</a>{% endif %}<span>{{ node.time_create }}</span></div>
+				{% if node.parent_id %}
+				<div class="quote-bubble quote-bubble-left mb-3 mt-4">
+					<span>{{ node.parent.content }}</span>
+				</div>
+				{% endif %}
+				<p>{{ node.content }}</p>
+				<a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="{{ node.pk }}" data-comment-username="{{ node.author }}" title="Ответить на комментарий"><i class="bi-reply-fill"></i></a>
+			</div>
+			<div class="clear"></div>
+		</div>
+	{% if node.level <= 3 %}
+		{% if not node.is_leaf_node %}
+			<ul class='children'>
+				{{ children }}
+			</ul>
+		 {% endif %}
+		</li>
+	{% else %}
+		{% if not node.is_leaf_node %}
+			<li class='children'>
+				{{ children }}
+			</li>
+		 {% endif %}
+	{% endif %}
+	{% endrecursetree %}
+</ol><!-- .commentlist end -->
+
+
+<div class="clear"></div>
+<!-- Comment Form
+============================================= -->
+	<div id="respond">
+	{% if request.user.is_authenticated %}
+		<h4>Оставьте <span>комментарий</span></h4>
+		  <form method="post" action="{% url 'comment_create_view' post.pk %}" id="commentForm" name="commentForm" data-post-id="{{ post.pk }}" data-post-name-format="articles">
+			 {% csrf_token %}
+			 {{ form }}
+			 <div class="d-grid gap-2 d-md-block mt-2">
+				<button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated" id="commentSubmit"><i class="uil-comment-plus"></i><span>Добавить комментарий</span></button>
+			 </div>
+		  </form>
+	{% else %}
+		<div class="style-msg alertmsg">
+			<div class="sb-msg"><i class="bi-exclamation-diamond-fill"></i><strong><a id="login-btn-blog" href="#">Авторизуйтесь</a></strong>, чтобы оставить комментарий</div>
+		</div>
+	{% endif %}
+	</div><!-- #respond end -->
+</div><!-- #comments end -->
+{% block script %}
+<script src="{% static 'portal/js/comments.js' %}"></script>
+{% endblock %}

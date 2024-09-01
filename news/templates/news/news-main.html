@@ -22,38 +22,40 @@
         <div class="row">
             <!-- News Area
             ============================================= -->
-            <div class="col-lg-9">
-                <div class="col-lg-12">
-                    <div class="fancy-title title-border">
-                        <h3>{{ news_settings.title }}</h3>
+            <div class="{% if news_settings.subscribe_main_sidebar or news_adv_settings.1.show or news_adv_settings.2.show %}col-lg-9{% else %}col-lg-12{% endif %}">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="fancy-title title-border">
+                            <h3>{{ news_settings.title }}</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="row border-between">
-                    <div class="col-lg-12 mb-5 mb-lg-0">
-                        {% for n in news %}
-                        <!-- Post News -->
-                        {% if forloop.first %}
-                        <article class="entry border-bottom-0 mb-0">
-                            <div class="entry-image">
-                                <a href="{{ n.get_absolute_url }}">{% if n.image %}<img src="{{ n.image.url }}" alt="Image">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}</a>
+                    <div class="col-lg-12 col-md-10">
+                        <div class="row col-mb-30">
+                            <div class="col-lg-12 mb-5 mb-lg-0">
+                                {% for n in news %}
+                                <!-- Post News -->
+                                {% if forloop.first %}
+                                <article class="entry border-bottom-0 mb-0">
+                                    <div class="entry-image">
+                                        <a href="{{ n.get_absolute_url }}">{% if n.image %}<img src="{{ n.image.url }}" alt="Image">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}</a>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <ul>
+                                            <li><i class="uil uil-schedule"></i> {{ n.time_create }}</li>
+                                            <li><i class="uil uil-comments-alt"></i> {{ n.comments_news.count }}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="entry-title">
+                                        <h3><a href="{{ n.get_absolute_url }}"
+                                               class="stretched-link color-underline"><span>{{ n.title }}</span></a>
+                                        </h3>
+                                    </div>
+                                </article>
+                                {% endif %}
+                                {% endfor %}
                             </div>
-                            <div class="entry-meta">
-                                <ul>
-                                    <li><a href="#">{{ n.time_create }}</a></li>
-                                </ul>
-                            </div>
-                            <div class="entry-title">
-                                <h3><a href="{{ n.get_absolute_url }}"
-                                       class="stretched-link color-underline"><span>{{ n.title }}</span></a>
-                                </h3>
-                            </div>
-
-                        </article>
-                        {% endif %}
-                        {% endfor %}
+                        </div>
                     </div>
-
-
                 </div>
                 {% if news_adv_settings.3.show %}
                 <!-- Ad
@@ -61,6 +63,7 @@
                 <a href="{{ news_adv_settings.3.url }}" target="_blank" rel="nofollow"><img src="{{ news_adv_settings.3.poster.url }}" width="728" alt="{{ news_adv_settings.3.title }}"
                                  class="aligncenter mb-5 mt-5"></a>
                 {% endif %}
+                {% if news|length > 1 %}
                 <div class="col-lg-12 mt-5">
                     <div class="fancy-title title-border">
                         <h4>{{ news_settings.other_news_title }}</h4>
@@ -95,8 +98,9 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
-
+            {% if news_settings.subscribe_main_sidebar or news_adv_settings.1.show or news_adv_settings.2.show %}
             <!-- Top Sidebar Area
             ============================================= -->
             <div class="col-lg-3 {% if news_settings.sticky_sidebar_news %}sticky-sidebar-wrap{% endif %} mt-5 mt-lg-0">
@@ -195,8 +199,8 @@
                     {% endif %}
                     </div>
                 </div>
+            {% endif %}
             </div> <!-- Sidebar End -->
         </div>
     </div>
-</div>
 {% endblock %}

@@ -1,13 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
-from news.forms import NewsPostUpdateForm, NewsPostCreateForm
-from news.models import NewsPost
+from news.forms import NewsPostUpdateForm, NewsPostCreateForm, CommentCreateForm
+from news.models import NewsPost, Comment, Rating
 from el_pagination.decorators import page_template
 from services.mixins import AuthorRequiredMixin
+from services.utils import get_client_ip
 
 
 def is_ajax(request):
@@ -40,6 +43,7 @@ class NewsPostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.title
         context['other_news'] = self.get_other_news(self.object)
+        context['form'] = CommentCreateForm
 
         try:
             previous_post = self.object.get_previous_by_time_create()
@@ -55,30 +59,6 @@ class NewsPostDetailView(DetailView):
         context['next'] = next_post
 
         return context
-
-
-# def news_detail(request, news_id):
-#     single_news = get_object_or_404(NewsPost, pk=news_id)
-#     news = NewsPost.objects.filter(is_published=True).exclude(pk=single_news.id)[:10]
-#
-#     try:
-#         previous_post = single_news.get_previous_by_time_create()
-#     except NewsPost.DoesNotExist:
-#         previous_post = None
-#
-#     try:
-#         next_post = single_news.get_next_by_time_create()
-#     except NewsPost.DoesNotExist:
-#         next_post = None
-#
-#     data = {'title': single_news.title,
-#             'item': single_news,
-#             'news': news,
-#             'prev': previous_post,
-#             'next': next_post
-#             }
-#
-#     return render(request, 'news/news-single.html', data)
 
 
 class NewsPostCreateView(LoginRequiredMixin, CreateView):
@@ -123,7 +103,7 @@ class NewsPostUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
         return super().form_valid(form)
 
 
-class NewsPostDeleteView(AuthorRequiredMixin, DeleteView):
+class NewsPostDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     Представление: удаления материала
     """
@@ -131,8 +111,77 @@ class NewsPostDeleteView(AuthorRequiredMixin, DeleteView):
     success_url = reverse_lazy('news_list_url')
     context_object_name = 'post'
     template_name = 'news/news-single-delete.html'
+    success_message = 'Новость была успешно удалена'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = f'Удаление записи: {self.object.title}'
         return context
+
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentCreateForm
+
+    def is_ajax(self):
+        return self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+    def form_invalid(self, form):
+        if self.is_ajax():
+            return JsonResponse({'error': form.errors}, status=400)
+        return super().form_invalid(form)
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.post_id = self.kwargs.get('pk')
+        comment.author = self.request.user
+        comment.parent_id = form.cleaned_data.get('parent')
+        comment.parent_author = form.cleaned_data.get('parent')
+        comment.parent_content = form.cleaned_data.get('parent')
+        comment.save()
+
+        if self.is_ajax():
+            return JsonResponse({
+                'is_child': comment.is_child_node(),
+                'id': comment.id,
+                'author': comment.author.username,
+                'parent_id': comment.parent_id,
+                'parent_author': comment.parent.author.username if comment.parent else None,
+                'parent_content': comment.parent.content if comment.parent else None,
+                'time_create': comment.time_create.strftime('%d %b %Y %H:%M'),
+                'avatar': comment.author.profile.avatar.url,
+                'content': comment.content,
+                'get_absolute_url': comment.author.profile.get_absolute_url()
+            }, status=200)
+
+        return redirect(comment.post.get_absolute_url())
+
+    def handle_no_permission(self):
+        return JsonResponse({'error': 'Необходимо авторизоваться для добавления комментариев'}, status=400)
+
+
+class RatingCreateView(View):
+    model = Rating
+
+    def post(self, request, *args, **kwargs):
+        post_id = request.POST.get('post_id')
+        value = int(request.POST.get('value'))
+        ip_address = get_client_ip(request)
+        user = request.user if request.user.is_authenticated else None
+
+        rating, created = self.model.objects.get_or_create(
+            post_id=post_id,
+            ip_address=ip_address,
+            defaults={'value': value, 'user': user},
+        )
+
+        if not created:
+            if rating.value == value:
+                rating.delete()
+                return JsonResponse({'status': 'deleted', 'rating_sum': rating.post.get_sum_rating()})
+            else:
+                rating.value = value
+                rating.user = user
+                rating.save()
+                return JsonResponse({'status': 'updated', 'rating_sum': rating.post.get_sum_rating()})
+        return JsonResponse({'status': 'created', 'rating_sum': rating.post.get_sum_rating()})

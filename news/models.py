@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
 
 from equi_media_portal.singleton import SingletonModel
 from django.utils.translation import gettext_lazy as _
@@ -10,14 +12,15 @@ User = get_user_model()
 
 
 class NewsPost(models.Model):
-    title = models.CharField(max_length=200, db_index=True, verbose_name="Заголовок новости")
-    content = CKEditor5Field(blank=True, verbose_name="Содержание новости")
-    image = models.ImageField(upload_to='media/news/%Y/%m/%d', blank=True, verbose_name="Постер для новости")
+    title = models.CharField(max_length=200, db_index=True, verbose_name=_("Заголовок новости"))
+    content = CKEditor5Field(blank=True, verbose_name=_("Содержание новости"))
+    image = models.ImageField(upload_to='media/news/%Y/%m/%d', blank=True, verbose_name=_("Постер для новости"))
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False, verbose_name="Публикация новости")
-    source = models.CharField(max_length=150, blank=True, verbose_name="Источник новости")
-    author = models.ForeignKey(to=User, verbose_name='Автор', on_delete=models.SET_DEFAULT, related_name='author_news_posts',
+    is_published = models.BooleanField(default=False, verbose_name=_("Публикация новости"))
+    source_url = models.URLField(max_length=150, blank=True, verbose_name=_("Ссылка на источник новости"))
+    source_text = models.CharField(max_length=200, blank=True, verbose_name=_("Текст ссылки на источник"))
+    author = models.ForeignKey(to=User, verbose_name=_('Автор'), on_delete=models.SET_DEFAULT, related_name='author_news_posts',
                                default=1)
 
     def get_absolute_url(self):
@@ -42,6 +45,42 @@ class NewsPost(models.Model):
         indexes = [
             models.Index(fields=['-time_create'])
         ]
+
+    def get_sum_rating(self):
+        return sum([rating.value for rating in self.news_ratings.all()])
+
+
+class Comment(MPTTModel):
+    """
+    Модель древовидных комментариев
+    """
+
+    STATUS_OPTIONS = (
+        ('published', 'Опубликовано'),
+        ('draft', 'Черновик')
+    )
+
+    post = models.ForeignKey(NewsPost, on_delete=models.CASCADE, verbose_name=_('Новость'), related_name='comments_news')
+    author = models.ForeignKey(User, verbose_name=_('Автор комментария'), on_delete=models.CASCADE,
+                               related_name='comments_news_author')
+    content = models.TextField(verbose_name=_('Текст комментария'), max_length=3000)
+    time_create = models.DateTimeField(verbose_name=_('Время добавления'), auto_now_add=True)
+    time_update = models.DateTimeField(verbose_name=_('Время обновления'), auto_now=True)
+    status = models.CharField(choices=STATUS_OPTIONS, default='published', verbose_name=_('Статус комментария'), max_length=10)
+    parent = TreeForeignKey('self', verbose_name=_('Родительский комментарий'), null=True, blank=True,
+                            related_name='children', on_delete=models.CASCADE)
+
+    class MTTMeta:
+        order_insertion_by = ('-time_create',)
+
+    class Meta:
+        indexes = [models.Index(fields=['-time_create', 'time_update', 'status', 'parent'])]
+        ordering = ['-time_create']
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return f'{self.author}:{self.content}'
 
 
 class NewsSettings(SingletonModel):
@@ -103,3 +142,24 @@ class BannerNewsBetweenNews(SingletonModel):
     class Meta:
         verbose_name = 'Баннер между новостями (ширина 720px)'
         verbose_name_plural = 'Баннер между новостями (ширина 720px)'
+
+
+class Rating(models.Model):
+    """
+    Модель рейтинга: Лайк - Дизлайк
+    """
+    post = models.ForeignKey(to=NewsPost, verbose_name='Статья', on_delete=models.CASCADE, related_name='news_ratings')
+    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True, related_name='news_user')
+    value = models.IntegerField(verbose_name='Значение', choices=[(1, 'Нравится'), (-1, 'Не нравится')])
+    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
+    ip_address = models.GenericIPAddressField(verbose_name='IP Адрес')
+
+    class Meta:
+        unique_together = ('post', 'ip_address')
+        ordering = ('-time_create',)
+        indexes = [models.Index(fields=['-time_create', 'value'])]
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = 'Рейтинги'
+
+    def __str__(self):
+        return self.post.title

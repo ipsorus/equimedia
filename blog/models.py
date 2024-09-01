@@ -26,7 +26,7 @@ class BlogPost(models.Model):
             """
             Список статей (SQL запрос с фильтрацией для страницы списка статей)
             """
-            return self.get_queryset().select_related('author').filter(is_published=True)
+            return self.get_queryset().select_related('author').prefetch_related('ratings').filter(is_published=True)
 
         def detail(self):
             """
@@ -34,13 +34,13 @@ class BlogPost(models.Model):
             """
             return self.get_queryset() \
                 .select_related('author') \
-                .prefetch_related('comments', 'comments__author') \
+                .prefetch_related('comments', 'comments__author', 'comments__author__profile', 'ratings') \
                 .filter(is_published=True)
 
     title = models.CharField(verbose_name='Заголовок', max_length=255)
     content = CKEditor5Field(verbose_name='Содержание поста')
     thumbnail = models.ImageField(
-        verbose_name='Превью поста',
+        verbose_name='Обложка поста',
         blank=True,
         upload_to='images/thumbnails/%Y/%m/%d/',
         validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))]
@@ -78,6 +78,9 @@ class BlogPost(models.Model):
         Сохранение полей модели при их отсутствии заполнения
         """
         super().save(*args, **kwargs)
+
+    def get_sum_rating(self):
+        return sum([rating.value for rating in self.ratings.all()])
 
 
 class Comment(MPTTModel):
@@ -157,3 +160,24 @@ class BannerBlogSidebar2(SingletonModel):
     class Meta:
         verbose_name = 'Баннер в сайдбаре #2 (ширина 300px)'
         verbose_name_plural = 'Баннер в сайдбаре #2 (ширина 300px)'
+
+
+class Rating(models.Model):
+    """
+    Модель рейтинга: Лайк - Дизлайк
+    """
+    post = models.ForeignKey(to=BlogPost, verbose_name='Статья', on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True)
+    value = models.IntegerField(verbose_name='Значение', choices=[(1, 'Нравится'), (-1, 'Не нравится')])
+    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
+    ip_address = models.GenericIPAddressField(verbose_name='IP Адрес')
+
+    class Meta:
+        unique_together = ('post', 'ip_address')
+        ordering = ('-time_create',)
+        indexes = [models.Index(fields=['-time_create', 'value'])]
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = 'Рейтинги'
+
+    def __str__(self):
+        return self.post.title

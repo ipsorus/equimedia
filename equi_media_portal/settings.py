@@ -30,6 +30,7 @@ SECRET_KEY = 'django-insecure-rsqzrx)%d)f^50@!kf=5e2j3(xswm#ntxt=%dh9e$nrbniw_d*
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+THUMBNAIL_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'slider.apps.SliderConfig',
     'testimonial.apps.TestimonialConfig',
     'blog.apps.BlogConfig',
+    'podcast.apps.PodcastConfig',
     'django_ckeditor_5',
     'el_pagination',
     'mptt',
@@ -60,6 +62,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'bootstrap_modal_forms',
     'widget_tweaks',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -97,6 +100,9 @@ TEMPLATES = [
                 'news.context_processors.news_advertisement_settings',
                 'news.context_processors.news_settings',
 
+                'event.context_processors.event_advertisement_settings',
+                'event.context_processors.event_settings',
+
                 'articles.context_processors.article_advertisement_settings',
                 'articles.context_processors.articles_settings',
 
@@ -106,6 +112,8 @@ TEMPLATES = [
                 'portal.context_processors.contacts_settings',
                 'portal.context_processors.about_us_settings',
                 'portal.context_processors.socials_settings',
+
+                'podcast.context_processors.video_settings',
 
                 'slider.context_processors.slider_settings',
 
@@ -249,6 +257,7 @@ CKEDITOR_5_UPLOAD_FILE_TYPES = ['jpeg', 'pdf', 'png', 'jpg', 'gif', 'bmp', 'webp
 CKEDITOR_5_FILE_STORAGE = 'services.utils.CkeditorCustomStorage'
 CKEDITOR_5_CONFIGS = {
     "default": {
+        "mediaEmbed": {"previewsInData": "true"},
         "language": "ru",
         "upload_file_types": ['jpeg', 'pdf', 'png', 'jpg', 'gif', 'bmp', 'webp', 'tiff'],
         'toolbar': {

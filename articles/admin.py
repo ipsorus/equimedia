@@ -1,8 +1,21 @@
 from django.contrib import admin
 from django.db import ProgrammingError
+from mptt.admin import DraggableMPTTAdmin
 
 from articles.models import Article, BannerArticleSideBar1, BannerArticleSideBar2, BannerArticleBetweenArticles, \
-    ArticlesSettings
+    ArticlesSettings, Comment, Rating
+
+
+@admin.register(Comment)
+class CommentAdminPage(DraggableMPTTAdmin):
+    """
+    Админ-панель модели комментариев
+    """
+    list_display = ('tree_actions', 'indented_title', 'post', 'author', 'time_create', 'status')
+    mptt_level_indent = 2
+    list_display_links = ('post',)
+    list_filter = ('time_create', 'time_update', 'author')
+    list_editable = ('status',)
 
 
 class ArticlesAdmin(admin.ModelAdmin):
@@ -88,6 +101,12 @@ class BannerArticleBetweenArticlesAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+
+class RatingsAdmin(admin.ModelAdmin):
+    model = Rating
+
+
+admin.site.register(Rating, RatingsAdmin)
 
 admin.site.register(Article, ArticlesAdmin)
 admin.site.register(ArticlesSettings, ArticlesSettingsAdmin)

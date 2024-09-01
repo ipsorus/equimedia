@@ -7,15 +7,21 @@
         <li class="menu-item"><a class="menu-link" href="{% url 'news_list_url' %}">Новости</a></li>
         <li class="menu-item"><a class="menu-link" href="{% url 'articles_list_url' %}">Статьи</a></li>
         <li class="menu-item"><a class="menu-link" href="{% url 'posts_list_url' %}">Блоги</a></li>
-        <li class="menu-item"><a class="menu-link" href="#">Фотобанк</a></li>
+        <li class="menu-item"><a class="menu-link" href="#"><div>Медиа</div></a>
+			<ul class="sub-menu-container">
+				{% if site_settings.gallery_url %}<li class="menu-item"><a class="menu-link" href="{{ site_settings.gallery_url }}" target="_blank" rel="nofollow"><div>Фотогалерея</div></a></li>{% endif %}
+				<li class="menu-item"><a class="menu-link" href="{% url 'video_list_url' %}"><div>Видео и подкасты</div></a></li>
+			</ul>
+		</li>
 		<li class="menu-item"><a class="menu-link" href="#"><div>Календарь</div></a>
 			<ul class="sub-menu-container">
-				<li class="menu-item"><a class="menu-link" href="{% url 'calendar_page' %}"><div>События</div></a></li>
+				<li class="menu-item"><a class="menu-link" href="{% url 'calendar_page' %}"><div>Все события</div></a></li>
 				<li class="menu-item"><a class="menu-link" href="{% url 'tournaments' %}"><div>Турниры</div></a></li>
 			</ul>
 		</li>
         <li class="menu-item"><a class="menu-link" href="#">Трансляции <div class="menu-live-center"><div class="ml-circle ml-pulse ml-dot"></div></div></a></li>
         <li class="menu-item"><a class="menu-link" href="{% url 'feedback' %}">Контакты</a></li>
+        {% if about_us_settings.show_page %}<li class="menu-item"><a class="menu-link" href="{% url 'about_us' %}">{{ about_us_settings.title_about_us }}</a></li>{% endif %}
     </ul>
 
 </nav><!-- #primary-menu end -->

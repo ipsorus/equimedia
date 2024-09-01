@@ -3,6 +3,7 @@ from itertools import chain
 
 from django.db.models import Q
 from django.http import JsonResponse
+from django.views import View
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -11,7 +12,8 @@ from django.shortcuts import redirect
 
 from el_pagination.views import AjaxListView
 from services.mixins import AuthorRequiredMixin
-from .models import Comment, BlogPost
+from services.utils import get_client_ip
+from .models import Comment, BlogPost, Rating
 from .forms import CommentCreateForm, BlogPostUpdateForm, BlogPostCreateForm
 
 
@@ -114,7 +116,7 @@ class BlogPostUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
         return super().form_valid(form)
 
 
-class BlogPostDeleteView(AuthorRequiredMixin, DeleteView):
+class BlogPostDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     Представление: удаления материала
     """
@@ -122,6 +124,7 @@ class BlogPostDeleteView(AuthorRequiredMixin, DeleteView):
     success_url = reverse_lazy('posts_list_url')
     context_object_name = 'post'
     template_name = 'blog/post_delete.html'
+    success_message = 'Материал был успешно удален'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -147,6 +150,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         comment.author = self.request.user
         comment.parent_id = form.cleaned_data.get('parent')
         comment.parent_author = form.cleaned_data.get('parent')
+        comment.parent_content = form.cleaned_data.get('parent')
         comment.save()
 
         if self.is_ajax():
@@ -156,6 +160,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
                 'author': comment.author.username,
                 'parent_id': comment.parent_id,
                 'parent_author': comment.parent.author.username if comment.parent else None,
+                'parent_content': comment.parent.content if comment.parent else None,
                 'time_create': comment.time_create.strftime('%d %b %Y %H:%M'),
                 'avatar': comment.author.profile.avatar.url,
                 'content': comment.content,
@@ -166,3 +171,30 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def handle_no_permission(self):
         return JsonResponse({'error': 'Необходимо авторизоваться для добавления комментариев'}, status=400)
+
+
+class RatingCreateView(View):
+    model = Rating
+
+    def post(self, request, *args, **kwargs):
+        post_id = request.POST.get('post_id')
+        value = int(request.POST.get('value'))
+        ip_address = get_client_ip(request)
+        user = request.user if request.user.is_authenticated else None
+
+        rating, created = self.model.objects.get_or_create(
+            post_id=post_id,
+            ip_address=ip_address,
+            defaults={'value': value, 'user': user},
+        )
+
+        if not created:
+            if rating.value == value:
+                rating.delete()
+                return JsonResponse({'status': 'deleted', 'rating_sum': rating.post.get_sum_rating()})
+            else:
+                rating.value = value
+                rating.user = user
+                rating.save()
+                return JsonResponse({'status': 'updated', 'rating_sum': rating.post.get_sum_rating()})
+        return JsonResponse({'status': 'created', 'rating_sum': rating.post.get_sum_rating()})

@@ -18,7 +18,7 @@
             <ul>
                 <li><i class="uil uil-schedule"></i> {{ post.time_create }}</li>
                 <li><a href="{{ post.author.profile.get_absolute_url }}"><i class="uil uil-user"></i> {{ post.author.username }}</a></li>
-                <li><a href="{{ post.get_absolute_url }}#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }} Комментариев</a></li>
+                <li><a href="{{ post.get_absolute_url }}#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }}</a></li>
             </ul>
         </div>
     </div>

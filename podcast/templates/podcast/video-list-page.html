@@ -1,0 +1,56 @@
+{% load el_pagination_tags %}
+{% load thumbnail %}
+{% load static %}
+{% block title %}
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
+{% endblock %}
+<style>
+    .d-grid {
+        --column: 1;
+        display: grid;
+        grid-template-columns: repeat(var(--column), 1fr);
+        grid-gap: 30px;
+    }
+
+    @media (min-width: 991px) {
+        .d-grid {
+           --column: 3;
+        }
+        .d-grid .grid-w {
+           grid-row: span 2 / auto;
+        }
+    }
+
+    .bg-color-title, .bg-color-title #header-wrap {
+        background-color: #336576 !important;
+}
+</style>
+{% paginate video_settings.videos_on_page videos %}
+<div class="d-grid col-mb-50">
+    {% for post in videos %}
+    {% thumbnail post.image "400x300" crop="center" as im %}
+    <div style="background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0, 0.8)), url('{{ im.url }}') no-repeat center center / cover;" class="grid-col shadow-sm bg-light rounded bg-white row g-0 p-3 rounded-5 shadow-sm h-shadow all-ts h-translate-y-sm">
+            {% endthumbnail %}
+        <div class="col-md-12 p-4">
+                <div class="row align-items-center">
+                    <div class="jumbotron m-0 dark p-1 d-flex justify-content-center flex-column">
+                        <div class="jumbotron-text mt-0 mt-md-auto row align-items-center">
+                            <div class="col-md-8">
+                                <h2 class="mb-1" style="{% if post.title|length > 30 %}font-size:0.9rem;{% else %}font-size:1.4rem;{% endif %}">{{ post.title }}</h2>
+                                <div class="testi-content">
+                                    {% if not post.short %}<div class="mb-5 p-3"></div>{% endif %}
+                                    <p style="{% if post.short|length > 30 %}font-size:0.9rem;{% endif %}">{{ post.short }}</p>
+                                </div>
+                                <div class="mt-4"></div>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-md-center mt-2 mt-md-0">
+                                <a href="{{ post.get_cleaned_url }}" data-lightbox="iframe" class="play-icon"><i class="bi-play-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% show_more "Показать еще" "Загрузка..." class_name='btn button rounded-1 button-border m-0 size-lg mt-6 button-reveal' %}

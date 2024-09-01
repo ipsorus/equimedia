@@ -2,6 +2,11 @@
 {% load static %}
 {% load mptt_tags %}
 {% block content %}
+<style>
+	.entry-meta .no-separator li::before {
+  content: "";
+}
+</style>
 <!-- Page Title
 		============================================= -->
 <section class="page-title dark page-title-parallax parallax scroll-detect page-title-center">
@@ -54,8 +59,7 @@
 										<div class="card border-default mb-4">
 											<div class="card-body py-2">
 												<div class="row align-items-center justify-content-between fs-6">
-													<div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ post.time_create }} <i class="bi-three-dots-vertical"></i> <a href="{{ post.author.profile.get_absolute_url }}"><i class="uil uil-user"></i> {{ post.author.username }}</a> <i class="bi-three-dots-vertical"></i> <a href="#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }} Комментариев</a></div>
-
+													<div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ post.time_create }} <i class="bi-three-dots-vertical"></i> <a href="{{ post.author.profile.get_absolute_url }}"><i class="uil uil-user"></i> {{ post.author.username }}</a> <i class="bi-three-dots-vertical"></i> <a href="#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }}</a></div>
 													<div class="col-md-auto">
 														<div class="d-flex">
 															<div class="font-sizer" data-step="20" data-target=".entry-content">
@@ -76,13 +80,28 @@
 											</div>
 										</div>
 
-										<p>{{ post.content|safe }}</p>
+										{{ post.content|safe }}
 										<!-- Post Single - Content End -->
 
 									</div>
 								</div><!-- .entry end -->
 										<!-- Post Single - Share
                                 ============================================= -->
+								<div class="divider divider-rounded divider-center"><i class="bi-hand-thumbs-up"></i></div>
+
+								<div class="entry col-12 text-center">
+									<div class="entry-title">
+										<h4>Вам понравилась запись?</h4>
+									</div>
+									<div class="entry-meta rating-buttons">
+										<ul class="justify-content-center mt-2 no-separator">
+											<li><button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" data-value2="post" data-post="{{ post.id }}" data-value="1" title="Нравится"><i style="pointer-events: none; font-size: 1.2rem;" class="bi-hand-thumbs-up text-success"></i></button></li>
+											<li class="rating-sum">{{ post.get_sum_rating }}</li>
+											<li><button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" data-value2="post" data-post="{{ post.id }}" data-value="-1" title="Не нравится"><i style="pointer-events: none; font-size: 1.2rem;" class="bi-hand-thumbs-down text-danger"></i></button></li>
+										</ul>
+									</div>
+								</div>
+
                                 <div id="cnvs-article-share" class="card border-default my-4">
                                     <div class="card-body p-3">
                                         <div class="d-flex align-items-center justify-content-between">
@@ -161,4 +180,8 @@
 				</div>
 			</div>
 		</section><!-- #content end -->
+{% block script %}
+<script src="{% static 'portal/js/ratings.js' %}"></script>
 {% endblock %}
+{% endblock %}
+

@@ -28402,7 +28402,7 @@ h3.titular-title, .titular-title.h3 {
   width: var(--cnvs-divider-size);
   max-width: 100%;
   line-height: 1;
-  font-size: calc(var(--cnvs-divider-size) * 0.75) !important;
+  font-size: calc(var(--cnvs-divider-size) * 1) !important;
   text-align: center;
   color: var(--cnvs-divider-color);
 }

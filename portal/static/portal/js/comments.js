@@ -3,6 +3,7 @@ const commentFormContent = commentForm.content;
 const commentFormParentInput = commentForm.parent;
 const commentFormSubmit = commentForm.commentSubmit;
 const commentPostId = commentForm.getAttribute('data-post-id');
+const commentTarget = commentForm.getAttribute('data-post-name-format');
 
 commentForm.addEventListener('submit', createComment);
 
@@ -25,7 +26,7 @@ async function createComment(event) {
     commentFormSubmit.disabled = true;
     commentFormSubmit.innerText = "Ожидаем ответа сервера";
     try {
-        const response = await fetch(`/posts/${commentPostId}/comments/create/`, {
+        const response = await fetch(`/${commentTarget}/${commentPostId}/comments/create/`, {
             method: 'POST',
             headers: {
                 'X-CSRFToken': csrftoken,
@@ -46,7 +47,7 @@ async function createComment(event) {
                                         <div class="comment-content">
                                             <div class="comment-author"><a href="${comment.get_absolute_url}" title="Ссылка на профиль автора комментария">${comment.author}</a><a href="#comment-${comment.id}" title="Ссылка на комментарий"> #</a><span>Добавлен только что</span></div>
                                             <p>${comment.content}</p>
-                                            <a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="${comment.id}" data-comment-username="${comment.author}"><i class="bi-reply-fill"></i></a>
+                                            <a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="${comment.id}" data-comment-username="${comment.author}" title="Ответить на комментарий"><i class="bi-reply-fill"></i></a>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
@@ -62,8 +63,11 @@ async function createComment(event) {
                                         </div>
                                         <div class="comment-content">
                                             <div class="comment-author"><a href="${comment.get_absolute_url}" title="Ссылка на профиль автора комментария">${comment.author}</a><a href="#comment-${comment.id}" title="Ссылка на комментарий"> #</a> <i class="bi-arrow-right"></i> <a href="#comm-${comment.parent_id}" title="Ссылка на комментарий-источник">${comment.parent_author}</a><span>Добавлен только что</span></div>
+                                                <div class="quote-bubble quote-bubble-left mb-3 mt-4">
+                                                    <span>${comment.parent_content}</span>
+                                                </div>
                                             <p>${comment.content}</p>
-                                            <a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="${comment.id}" data-comment-username="${comment.author}"><i class="bi-reply-fill"></i></a>
+                                            <a class='comment-reply-link btn-reply' href="#commentForm" data-comment-id="${comment.id}" data-comment-username="${comment.author}" title="Ответить на комментарий"><i class="bi-reply-fill"></i></a>
                                         </div>
                                         <div class="clear"></div>
                                     </div>

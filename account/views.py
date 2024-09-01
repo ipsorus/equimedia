@@ -108,6 +108,7 @@ class ProfileUpdateView(UpdateView):
     model = Profile
     form_class = ProfileUpdateForm
     template_name = 'account/profile_edit.html'
+    success_message = 'Ваш профиль обновлен'
 
     def get_object(self, queryset=None):
         return self.request.user.profile
@@ -189,15 +190,16 @@ class UserRegisterView(UserIsNotAuthenticated, CreateView):
 class CustomLoginView(BSModalLoginView):
     authentication_form = CustomAuthenticationForm
     template_name = 'account/user_login.html'
-    success_message = 'Вы успешно авторизовались.'
+    success_message = 'Вы успешно авторизовались'
     success_url = reverse_lazy('display')
 
 
-class UserLogoutView(LogoutView):
+class UserLogoutView(SuccessMessageMixin, LogoutView):
     """
     Выход с сайта
     """
     next_page = 'main'
+    success_message = 'Вы успешно вышли из системы'
 
 
 class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
@@ -208,7 +210,6 @@ class UserPasswordChangeView(SuccessMessageMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'account/user_password_change.html'
     success_message = 'Ваш пароль был успешно изменён!'
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

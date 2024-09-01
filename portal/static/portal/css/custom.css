@@ -50,6 +50,67 @@ body {
 	-webkit-backface-visibility: hidden;
 }
 
+
+
+.play-icon {
+	transition: transform .3s ease;
+}
+
+.play-icon:hover {
+	-webkit-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transform: scale(1.2);
+}
+
+.play-icon i {
+	width: 80px;
+	height: 80px;
+	line-height: 81px;
+	font-size: 28px;
+	padding-left: 5px;
+	text-align: center;
+	border-radius: 50%;
+	color: #000;
+	background-color: #FFF;
+	z-index: 2;
+	transition: all .3s ease;
+}
+
+.play-icon:hover i {
+	background-color: var(--cnvs-themecolor);
+	color: var(--cnvs-custom-themecolor);
+}
+
+.owl-carousel .jumbotron { height: 400px; }
+
+.owl-item .jumbotron {
+	opacity: .5;
+	transform: scale(0.95);
+	transition: all .5s ease;
+}
+
+.owl-item .jumbotron-text {
+	opacity: 0;
+	transform: scale(0.9);
+	transition: all .4s .2s ease;
+}
+
+.owl-item.active .jumbotron,
+.owl-item.active .jumbotron-text {
+	opacity: 1;
+	transform: scale(1);
+}
+
+
+.yoga-video .play-icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -40px;
+	margin-left: -40px;
+}
+
 .border-light { border-color: rgba(var(--cnvs-themecolor-rgb), var(--cnvs-border-opacity)) !important; }
 
 .bg-color,
@@ -273,6 +334,8 @@ body {
 .button-offset.button-primary {
 	outline-color: var(--cnvs-secondary-color);
 }
+
+
 
 .border-radius {
   --bs-card-border-radius: 0 !important;
@@ -1287,4 +1350,37 @@ background-color: transparent !important;
 .dropdown-menu {
     --bs-dropdown-link-active-bg: var(--cnvs-themecolor-rgb) !important;
     --bs-dropdown-bg: #fff !important;
+}
+
+.section-yogas .card {
+	padding: 35px;
+	background-image: url("images/card-wave-2.svg");
+	background-repeat: repeat-x;
+	background-position: 0% 101%;
+	background-size: cover;
+	-webkit-background-size: auto;
+	-moz-background-size: auto;
+	-o-background-size: auto;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	border: 0;
+	border-top: 6px solid var(--cnvs-themecolor);
+}
+
+.button-red {
+  --cnvs-btn-color: #c02942;
+}
+.button-red:hover, .button-red.button-reveal:hover, .button-red.button-border:hover {
+  --cnvs-btn-color: #c02942 !important;
+}
+.button-red.button-border.button-fill::before {
+  background-color: #c02942;
+}
+.button-red.button-action {
+  --cnvs-btn-action-border-color: #c02942;
+}
+
+.button-border.button-red, .button-border.button-light.button-red {
+  color: #c02942;
+  border-color: #c02942;
 }

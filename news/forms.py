@@ -1,6 +1,6 @@
 from django import forms
 
-from news.models import NewsPost
+from news.models import NewsPost, Comment
 
 
 class NewsPostCreateForm(forms.ModelForm):
@@ -10,7 +10,7 @@ class NewsPostCreateForm(forms.ModelForm):
 
     class Meta:
         model = NewsPost
-        fields = ('title', 'id', 'content', 'image', 'is_published', 'source')
+        fields = ('title', 'id', 'content', 'image', 'source_url', 'source_text', 'is_published')
 
     def __init__(self, *args, **kwargs):
         """
@@ -43,3 +43,15 @@ class NewsPostUpdateForm(NewsPostCreateForm):
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['content'].required = False
+
+
+class CommentCreateForm(forms.ModelForm):
+    """
+    Форма добавления комментариев к новостям
+    """
+    parent = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    content = forms.CharField(label='', widget=forms.Textarea(attrs={'cols': 30, 'rows': 5, 'placeholder': 'Комментарий', 'class': 'form-control'}))
+
+    class Meta:
+        model = Comment
+        fields = ('content',)

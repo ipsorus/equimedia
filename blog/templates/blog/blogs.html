@@ -5,7 +5,7 @@
 <div class="shape-divider" data-shape="wave-4" data-height="150" id="shape-divider-4816"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 140" preserveAspectRatio="none" class="op-ts op-1"><path class="shape-divider-fill" d="M0 51.76c36.21-2.25 77.57-3.58 126.42-3.58 320 0 320 57 640 57 271.15 0 312.58-40.91 513.58-53.4V0H0z" opacity="0.3"></path><path class="shape-divider-fill" d="M0 24.31c43.46-5.69 94.56-9.25 158.42-9.25 320 0 320 89.24 640 89.24 256.13 0 307.28-57.16 481.58-80V0H0z" opacity="0.5"></path><path class="shape-divider-fill" d="M0 0v3.4C28.2 1.6 59.4.59 94.42.59c320 0 320 84.3 640 84.3 285 0 316.17-66.85 545.58-81.49V0z"></path></svg></div>
     <div class="container">
         <div class="col-lg-12">
-            <div class="fancy-title title-border">
+            <div class="fancy-title title-border dark">
                 <h3>{{ blog_settings.title }}</h3>
             </div>
         </div>
@@ -31,8 +31,7 @@
                                 </ul>
                             </div>
                             <ul class="entry-icons d-none d-sm-block">
-                                <li><a href="#" class="bi-bookmark"></a></li>
-                                <li><i class="bi-heart"></i><span>18</span></li>
+                                <li><i class="bi-heart"></i><span>{{ post.get_sum_rating }}</span></li>
                                 <li><i class="bi-chat"></i><span>{{ post.comments.count }}</span></li>
                             </ul>
                         </div>
@@ -42,10 +41,10 @@
             {% endfor %}
         </div> <!-- Carousel End -->
         <div class="m-auto col-md-10 border-0">
-            <div class="col-12 text-center">
+            <div class="text-center mb-5">
                 <a href="{% url 'posts_list_url' %}"
-                   class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal d-inline-flex fadeInUp animated"
-                   data-animate="fadeInUp" data-delay="300"><i class="bi-arrow-right"></i><span>Перейти в раздел</span></a>
+                   class="w-auto btn button-border m-0 mt-5 button button-large button-rounded px-4 button-light button-white fadeInUp animated"
+                   type="button"><i class="bi-arrow-right"></i><span class="flex-grow">Перейти в раздел</span></a>
             </div>
         </div>
     </div>

@@ -1,0 +1,18 @@
+<div class="posts-sm row mb-5" id="recent-comments-list-sidebar">
+	{% for comment in comments %}
+	<div class="entry col-12">
+		<div class="grid-inner row g-0">
+			<div class="col-auto">
+				<div class="entry-image">
+					<a href="{{ comment.post.get_absolute_url }}#comments"><img src="{{ comment.author.profile.avatar.url }}" alt="{{ comment.author }}"></a>
+				</div>
+			</div>
+			<div class="col ps-3">
+				<strong>{{ comment.author }}:</strong> {{ comment.content|striptags }}
+			</div>
+		</div>
+	</div>
+	{% empty %}
+	Комментариев нет.
+	{% endfor %}
+</div>

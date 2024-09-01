@@ -32,12 +32,12 @@ background-color: #336576 !important;
         <div class="page-title-row">
 
             <div class="page-title-content">
-                <h1>Турниры</h1>
+                <h1>Турниры и соревнования</h1>
             </div>
 
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Турниры</li>
                 </ol>
             </nav>
@@ -58,6 +58,10 @@ background-color: #336576 !important;
                         <!--                    <span class="badge px-3 py-2 mt-2 me-1 bg-white border border-default text-dark rounded-pill fw-normal position-absolute z-9"-->
                         <!--                          style="left: 50px; top: -23px;">{{ t.type }}</span>-->
                         <div class="row align-items-center">
+                            {% if t.is_closed %}
+                            <div class="mb-3"><span style="color:green; font-weight: 400;">Турнир завершен</span>
+                            </div>
+                            {% endif %}
                             <div class="mb-3"><span style="color:blue; font-weight: 400;">{% if t.date_start|date:"m" == t.date_end|date:"m" %}
                                                     {{ t.date_start|date:"d" }} - {{ t.date_end }}
                                                 {% else %}
@@ -70,10 +74,24 @@ background-color: #336576 !important;
                             </div>
                             <div class="col-lg-12">
                                 <div class="d-flex align-middle text-smaller mb-2">
+                                    <div><span style="font-size:14px; font-weight: 400;">Тип:</span>
+                                        <span class="font-primary ms-2">{{ t.type }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex align-middle text-smaller mb-2">
                                     <div><span style="font-size:14px; font-weight: 400;">Дисциплина:</span>
                                         {% for d in t.discipline.all %}
-                                        <span class="font-primary ms-2">{{ d.title }}</span>
+                                        <span class="font-primary ms-2">{{ d.title }}{% if not forloop.last %}, {% endif %}</span>
                                         {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex align-middle text-smaller mb-2">
+                                    <div><span style="font-size:14px; font-weight: 400;">Место проведения:</span>
+                                        <span class="font-primary ms-2">{{ t.location }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -87,10 +105,11 @@ background-color: #336576 !important;
                             </div>
                             {% endif %}
                         </div>
-
+                        {% if t.stages.all %}
                         <div class="pricing-features bg-transparent border-bottom-0 border-width-2 border-black mt-3 pt-2 pb-3">
-                            {% for stage in t.stages.all %}
                             <p class="lead fw-bold mb-2">Этапы:</p>
+                            {% for stage in t.stages.all %}
+
                             <div class="col-lg-12">
                                 <div class="d-flex align-middle text-smaller mb-2">
                                     <div>
@@ -112,6 +131,7 @@ background-color: #336576 !important;
                             </div>
                             {% endfor %}
                         </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}

@@ -72,9 +72,9 @@ background-color: #1d6172 !important;
 						</span>
 						</address>
 						<span class="fw-light">Телефон:</span><br>
-						<a href="{{ contacts_settings.phone1 }}" class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone1 }}</a><br><br>
+						<span class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone1 }}</span><br><br>
 						{% if contacts_settings.phone2 %}
-						<a href="{{ contacts_settings.phone2 }}" class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone2 }}</a><br><br>
+						<span class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone2 }}</span><br><br>
 						{% endif %}
 
 						<span class="fw-light">Email:</span><br>
@@ -86,15 +86,21 @@ background-color: #1d6172 !important;
 
 			<div class="row align-items-stretch mx-0" style="border: 1px solid #eee;background-color: #fff;box-shadow: 0 0 40px rgba(0,0,0,.09)">
 				<div class="col-md-6 px-4 min-vh-25 p-4">
-					<div class="gmap h-100" style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/ksk_vivat_rossiya_/194812110432/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">КСК Виват, Россия!</a><a href="https://yandex.ru/maps/1/moscow-and-moscow-oblast/category/horse_riding/184107287/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Конный клуб в Москве и Московской области</a><iframe src="https://yandex.ru/map-widget/v1/?ll=37.863109%2C55.553340&mode=search&oid=194812110432&ol=biz&utm_source=ntp_chrome&z=12.23" width="560" height="560" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+					<div class="h-100" style="position:relative;overflow:hidden;">{{ contacts_settings.map|safe }}</div>
 				</div>
 				<div class="col-md-6">
 					<div class="p-4">
-						<div class="quick-contact-widget form-widget" >
+						<div class="quick-contact-widget">
 							<h3 class="text-capitalize ls-1 fw-normal">Напишите нам</h3>
 							<form method="post" action="{% url 'feedback' %}">
 								{% csrf_token %}
 								{{ form.as_p }}
+								{% for hidden in form.hidden_fields %}
+                                   {{ hidden }}
+                                {% endfor %}
+                                {% for error in field.errors %}
+                                        <p class="help-block mb-0">{{ error }}</p>
+                                {% endfor %}
 								<div class="d-grid gap-2 d-md-block mt-2">
 								<button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated"><i class="bi-send"></i><span>Отправить письмо</span></button>
 							 </div>

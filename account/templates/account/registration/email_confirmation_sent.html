@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 {% block title %}
-	<title>{{ title }} - EquiMedia</title>
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
 {% endblock %}
 {% block content %}
-<div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">Письмо подтверждения отправлено!</h4>
-    <p>
-        На ваш адрес электронной почты было отправлено письмо с подтверждением. Пожалуйста, проверьте свою электронную почту и нажмите на ссылку подтверждения, чтобы завершить регистрацию.
-        Если письмо не пришло, проверьте папку спам.
-    </p>
+<div class="container mt-6 alert alert-info rounded-6">
+    <div class="row align-items-center justify-content-between p-5 p-md-6">
+        <div class="col mb-5 mb-lg-0">
+            <h5 class="font-body h5 mb-2 fw-medium color">Письмо подтверждения отправлено!</h5>
+            <p>На ваш адрес электронной почты было отправлено письмо с подтверждением.<br>
+                Пожалуйста, проверьте свою электронную почту и нажмите на ссылку подтверждения, чтобы завершить регистрацию.<br>
+            Если письмо не пришло, проверьте папку спам.</p>
+        </div>
+    </div>
 </div>
 {% endblock %}

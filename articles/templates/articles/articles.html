@@ -21,7 +21,7 @@
         <div class="row">
             <!-- Posts Area
             ============================================= -->
-            <div class="col-lg-9">
+            <div class="{% if article_adv_settings.1.show or article_adv_settings.2.show or articles_settings.gallery_articles_sidebar %}col-lg-9{% else %}col-lg-12{% endif %}">
                 <!-- Tab Content 2
                 ============================================= -->
                 <div class="col-lg-12">
@@ -41,7 +41,8 @@
                             </div>
                             <div class="entry-meta">
                                 <ul>
-                                    <li><a href="#">{{ a.time_create }}</a></li>
+                                    <li><i class="uil uil-schedule"></i> {{ a.time_create }}</li>
+                                    <li><i class="uil uil-comments-alt"></i> {{ a.comments_article.count }}</li>
                                 </ul>
                             </div>
                             <div class="entry-title">
@@ -49,8 +50,6 @@
                                        class="stretched-link color-underline"><span>{{ a.title }}</span></a>
                                 </h3>
                             </div>
-
-
                         </article>
                     </div>
                     {% endfor %}
@@ -61,7 +60,7 @@
                 <a href="{{ article_adv_settings.3.url }}" target="_blank" rel="nofollow"><img src="{{ article_adv_settings.3.poster.url }}" width="728" alt="{{ article_adv_settings.3.title }}"
                                  class="aligncenter mb-5 mt-5"></a>
                 {% endif %}
-
+                {% if articles|length > 2 %}
                 <div class="col-lg-12 mt-5">
                     <div class="fancy-title title-border">
                         <h4>{{ articles_settings.other_articles_title }}</h4>
@@ -92,6 +91,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
 
             <!-- Top Sidebar Area

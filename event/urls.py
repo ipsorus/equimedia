@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
-from .views import EventCreateView, EventUpdateView, EventDeleteView
+from .views import EventCreateView, EventUpdateView, EventDeleteView, TournamentCreateView, TournamentUpdateView, \
+    TournamentDeleteView, StageUpdateView, StageDeleteView, TournamentCloseView, StageCloseView
 
 urlpatterns = [
     path('event/<int:event_id>/', views.event_detail, name='event_detail_url'),
@@ -17,4 +18,11 @@ urlpatterns = [
     path('event/create/', EventCreateView.as_view(), name='event_create'),
     path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update_url'),
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete_url'),
+    path('tournaments/create/', TournamentCreateView.as_view(), name='tournament_create'),
+    path('tournaments/<int:pk>/update/', TournamentUpdateView.as_view(), name='tournament_update_url'),
+    path('tournaments/<int:pk>/delete/', TournamentDeleteView.as_view(), name='tournament_delete_url'),
+    path('tournaments/<int:pk>/close/', TournamentCloseView.as_view(), name='tournament_close_url'),
+    path('tournaments/<int:tournament_id>/stage/<int:pk>/update/', StageUpdateView.as_view(), name='stage_update_url'),
+    path('tournaments/<int:tournament_id>/stage/<int:pk>/delete/', StageDeleteView.as_view(), name='stage_delete_url'),
+    path('tournaments/<int:tournament_id>/stage/<int:pk>/close/', StageCloseView.as_view(), name='stage_close_url'),
 ]

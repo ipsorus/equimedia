@@ -7,8 +7,10 @@
 {% block content %}
 <!-- Page Title
 		============================================= -->
-<section class="page-title dark page-title-parallax parallax scroll-detect page-title-center">
-	<img src="{{ item.image.url }}" class="parallax-bg">
+<section class="page-title dark page-title-parallax parallax scroll-detect page-title-center" style="padding: 200px 0;">
+	{% if item.image %}
+		<img src="{{ item.image.url }}" class="parallax-bg">
+	{% endif %}
 	<div class="container">
 		<div class="page-title-row">
 
@@ -23,10 +25,24 @@
 					<li class="breadcrumb-item active" aria-current="page">{{ item.title }}</li>
 				</ol>
 			</nav>
-
+			<div class="desc-md align-items-end p-2 mt-6">
+					<div class="position-relative w-100">
+						<div class="text-center entry-meta">
+							<ul>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="bi-calendar4-event"></i> {{ item.date_start }} - {{ item.date_end }}</li>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="uil-location-point"></i> {{ item.location }}</li>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="bi-info-square"></i> {{ item.event_type }}</li>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="bi-info-square"></i> {{ item.type }}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 		</div>
+
 	</div>
-	<div class="video-overlay z-1" style="background: linear-gradient(to bottom, rgba(66, 97, 118,.9), rgba(66, 97, 118,.9))"></div>
+
+
+	<div class="video-overlay z-1" style="background: linear-gradient(to bottom, rgba(66, 97, 118,.7), rgba(66, 97, 118,.7))"></div>
 </section><!-- .page-title end -->
 		<!-- Content
 		============================================= -->
@@ -44,13 +60,13 @@
 								<!-- Single Post
 								============================================= -->
 								<div class="entry">
-									<!-- Entry Image
-									============================================= -->
-									<div class="entry-image">
-										{% if item.image %}
-										<img src="{{ item.image.url }}" alt="{{ item.title }}">
-										{% endif %}
-									</div><!-- .entry-image end -->
+<!--									&lt;!&ndash; Entry Image-->
+<!--									============================================= &ndash;&gt;-->
+<!--									<div class="entry-image">-->
+<!--										{% if item.image %}-->
+<!--										<img src="{{ item.image.url }}" alt="{{ item.title }}">-->
+<!--										{% endif %}-->
+<!--									</div>&lt;!&ndash; .entry-image end &ndash;&gt;-->
 
 									<!-- Entry Content
 									============================================= -->
@@ -59,7 +75,7 @@
 										<div class="card border-default mb-4">
 											<div class="card-body py-2">
 												<div class="row align-items-center justify-content-between fs-6">
-													<div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ item.time_create }} <i class="bi-three-dots-vertical"></i> <a href="{{ post.author.profile.get_absolute_url }}"><i class="uil uil-user"></i> {{ post.author.username }}</a> <i class="bi-three-dots-vertical"></i> <a href="#comments"><i class="uil uil-comments-alt"></i> {{ post.comments.count }} Комментариев</a></div>
+													<div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ item.time_create }}</div>
 
 													<div class="col-md-auto">
 														<div class="d-flex">
@@ -71,7 +87,7 @@
 															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" onclick="window.print();"><i class="bi-printer"></i></button>
 
 															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" data-scrollto="#cnvs-article-share"><i class="bi-share"></i></button>
-															{% if item.author.id == user.id or user.is_superuser or user.is_staff%}
+															{% if item.author.id == user.id or user.is_superuser or user.is_staff %}
 															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_update_url }}"><i class="bi-pencil-square"></i></a></button>
 															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_delete_url }}"><i class="bi-x-circle"></i></a></button>
 															{% endif %}
@@ -82,6 +98,42 @@
 										</div>
 
 										<p>{{ item.content|safe }}</p>
+										<p>{{ item.description|safe }}</p>
+
+										<div class="section mb-0" style="background-color: rgba(126, 150, 128,0.2); padding: 10px;">
+											<div class="text-center text-title"><h4>Документы</h4></div>
+											<div class="container p-4">
+												{% if documents %}
+												<div class="row col-mb-50">
+													{% for document in documents %}
+
+													<div class="col-md-6 col-lg-4">
+														<a href="{{ document.file.url }}" target="_blank">
+														<div class="card text-center">
+															<div class="card-header">
+																{% if document.extension not in 'zip, rar, 7z' %}
+																	<i class="bi-filetype-{{ document.extension }}" style="font-size: 46px;"></i>
+																{% else %}
+																	<i class="bi-file-earmark" style="font-size: 46px;"></i>
+																{% endif %}
+															</div>
+															<div class="card-body">
+																<h6>{{ document.title }}</h6>
+																<span>{{ document.description }}</span>
+															</div>
+														</div>
+														</a>
+													</div>
+
+													{% endfor %}
+												</div>
+												{% else %}
+													<div class="heading-block text-center mb-0">
+														<h4 style="font-size: 18px; font-weight: 200;">Нет загруженных документов</h4>
+													</div>
+												{% endif %}
+											</div>
+										</div>
 										<!-- Post Single - Content End -->
 
 									</div>
@@ -93,49 +145,15 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <h6 class="fs-6 fw-semibold mb-0">Поделиться:</h6>
                                             <div class="d-flex">
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-vk"
-                                                   title="VK">
-                                                    <i class="fa-brands fa-vk"></i>
-                                                    <i class="fa-brands fa-vk"></i>
-                                                </a>
-
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-x-twitter"
-                                                   title="Twitter">
-                                                    <i class="fa-brands fa-x-twitter"></i>
-                                                    <i class="fa-brands fa-x-twitter"></i>
-                                                </a>
-
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-pinterest"
-                                                   title="Pinterest">
-                                                    <i class="fa-brands fa-pinterest-p"></i>
-                                                    <i class="fa-brands fa-pinterest-p"></i>
-                                                </a>
-
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-whatsapp"
-                                                   title="Whatsapp">
-                                                    <i class="fa-brands fa-whatsapp"></i>
-                                                    <i class="fa-brands fa-whatsapp"></i>
-                                                </a>
-                                                <a href="#"
-                                                   class="social-icon si-small text-white border-transparent rounded-circle bg-email3 me-0"
-                                                   title="Mail">
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                </a>
+                                                {% include 'portal/includes/social_share.html' %}
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- Post Single - Share End -->
-
 							</div>
-
 						</main><!-- .postcontent end -->
 
-						{% include 'blog/includes/sidebar.html' %}
+						{% include 'event/includes/sidebar.html' %}
 					</div>
 
 				</div>

@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="d-flex align-middle text-smaller">
                                         <div><span class="op-08"><i class="uil uil-map-marker"></i></span><span
-                                                class="font-primary ms-2">{{ event.location }}</span>
+                                                class="font-primary ms-2">{{ event.location|safe }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                             <a href="calendar/"
                                class="text-center w-100 btn button rounded-1 button-border m-0 size-lg mt-2 mb-2 button-reveal fadeInUp animated"
                                data-animate="fadeInUp" data-delay="300"><i
-                                    class="bi-calendar3"></i><span>Все событий</span></a>
+                                    class="bi-calendar3"></i><span>Все события</span></a>
                         </div>
                     </div>
                 </div>
@@ -166,9 +166,13 @@
                                         <div class="mb-2">
                                             <h6><a href="{% url 'stage_detail_url' tournament_id=event.tournament.id stage_id=event.id %}" class="stretched-link color-underline">{{ event.title }}</a></h6>
                                         </div>
-                                    {% else %}
+                                    {% elif event.stages %}
                                         <div class="mb-2">
                                             <h6><a href="{% url 'contest_detail_url' tournament_id=event.id %}" class="stretched-link color-underline">{{ event.title }}</a></h6>
+                                        </div>
+                                    {% else %}
+                                        <div class="mb-2">
+                                            <h6><a href="{{ event.get_absolute_url }}" class="stretched-link color-underline">{{ event.title }}</a></h6>
                                         </div>
                                     {% endif %}
                                     <div class="d-flex align-middle text-smaller mb-2">

@@ -6,6 +6,18 @@
 {% endblock %}
 {% block content %}
 <style>
+.price-features {
+	border: 1px solid var(--cnvs-themecolor);
+	border-radius: 10px;
+}
+
+.price-features > div { padding: 60px; }
+
+.price-features .iconlist li {
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
 .bg-color-title, .bg-color-title #header-wrap {
 background-color: #336576 !important;
 }
@@ -60,20 +72,47 @@ background-color: #336576 !important;
                               {% endfor %}
                             </div>
 
-                            {% for field in form %}
-                              <div class="col-12 form-group">
-                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                {% render_field field autofocus="" %}
-
-                                <div class="{% if field.errors %} alert alert-danger .alert-dismissible mt-2{% endif %}">
-                                  {% for error in field.errors %}
-                                    <p class="help-block mb-0">{{ error }}</p>
-                                  {% endfor %}
+                            <div class="row justify-content-center p-2" style="background-color: rgba(176, 196, 222,0.2);">
+                              <div class="text-center text-title"><h3>Основные данные события</h3></div>
+                                <div class="row col-12 justify-content-center align-items-center">
+                            {% for field in form.visible_fields %}
+                                <div class="row mb-2">
+                                    <div class="col-md-3"><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+                                    <div class="col-md-8">{% render_field field autofocus="" %}</div>
                                 </div>
-                              </div>
                             {% endfor %}
+                            {% for hidden in form.hidden_fields %}
+                               {{ hidden }}
+                            {% endfor %}
+                            {% for error in field.errors %}
+                                    <p class="help-block mb-0">{{ error }}</p>
+                          {% endfor %}
+                          </div>
+                          </div>
+                             <div class="clear mb-5"></div>
+                          <div class="row justify-content-center p-3" style="background-color: rgba(126, 150, 128,0.2);">
+                                <div class="text-center text-title"><h3>Добавить документы к событию</h3></div>
+                                <div id="form_set" class="row col-12 justify-content-center align-items-center">
+                                    {{ document_form.management_form }}
+                                      {% for form in document_form %}
+                                        <div class="form-widget row shadow bg-light border mb-3 p-4 inline {{ document_form.prefix }}">
+
+                                        {% for field in form.visible_fields %}
+                                            <div class="row mb-2">
+                                                <div class="col-md-3"><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+                                                <div class="col-md-8">{% render_field field %}</div>
+                                            </div>
+                                        {% endfor %}
+                                        {% for hidden in form.hidden_fields %}
+                                           {{ hidden }}
+                                        {% endfor %}
+                                        </div>
+                                      {% endfor %}
+                                </div>
+                            </div>
                         <div class="d-grid gap-2 d-md-block mt-2">
-                           <button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated"><i class="bi-check-circle"></i><span>Добавить запись</span></button>
+                           <button type="submit" class="btn button button-green rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-check-circle"></i><span>Добавить запись</span></button>
+                            <a href="{% url 'calendar_page' %}" class="btn button button-red rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-x-circle"></i><span>Отмена</span></a>
                         </div>
                      </form>
                   </div>
@@ -83,4 +122,22 @@ background-color: #336576 !important;
 
     </div>
 </section><!-- #content end -->
+{% block bottom_scripts %}
+<script src="{% static 'portal/js/plugins.min.js' %}"></script>
+<script src="{% static 'portal/js/jquery.formset.js' %}"></script>
+
+<script type="text/javascript">
+		jQuery(function() {
+				jQuery(".inline.{{ document_form.prefix }}").formset({
+						prefix: "{{ document_form.prefix }}", // The form prefix for your django formset
+						addCssClass: "btn btn-secondary w-100 rounded-1 m-0 size-lg mt-4 fadeInUp animated inline-form-add", // CSS class applied to the add link
+						deleteCssClass: "button button-red rounded-1 m-0 size-lg mt-4 button-border button-reveal", // CSS class applied to the delete link
+						addText: 'Добавить документ', // Text for the add link
+						deleteText: '<i class="bi-trash"></i><span>Удалить документ</span>', // Text for the delete link
+						formCssClass: 'inline-form', // CSS class applied to each form in a formset
+				})
+		});
+</script>
+{% endblock %}
+
 {% endblock %}

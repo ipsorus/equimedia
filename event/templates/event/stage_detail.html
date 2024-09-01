@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
+{% endblock %}
+{% load mptt_tags %}
+{% block content %}
+<!-- Page Title
+		============================================= -->
+<section class="page-title dark page-title-parallax parallax scroll-detect page-title-center" style="padding: 150px 0;">
+	{% if item.tournament.image %}
+		<img src="{{ item.tournament.image.url }}" class="parallax-bg">
+	{% endif %}
+	<div class="container">
+		<div class="page-title-row">
+
+			<div class="page-title-content text-uppercase">
+				<h2 class="mb-3">{{ item.title }}</h2>
+			</div>
+
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'tournaments' %}">Турниры</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'tournament_detail_url' tournament_id=item.tournament.id %}">{{ item.tournament.title }}</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ item.title }}</li>
+				</ol>
+			</nav>
+			<div class="desc-md align-items-end p-2 mt-6">
+					<div class="position-relative w-100">
+						<div class="text-center entry-meta">
+							<ul>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="bi-calendar4-event"></i> {{ item.date_start }} - {{ item.date_end }}</li>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="uil-location-point"></i> {{ item.location }}</li>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="bi-info-square"></i> {{ item.type }}</li>
+								<li style="font-weight: 700; font-size: 1rem;"><i class="bi-info-square"></i>
+									{% for d in item.discipline.all %}
+										{{ d }}{% if not forloop.last %}, {% endif %}
+									{% endfor %}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			{% if item.is_closed %}
+				<span class="p-2 mt-6" style="font-weight: 700; font-size: 1.7rem;">Этап завершен</span>
+			{% else %}
+				{% if item.prize %}
+					<span class="p-2 mt-6" style="font-weight: 700; font-size: 1.7rem;">Призовой фонд: {{ item.prize }}</span>
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="video-overlay z-1" style="background: linear-gradient(to bottom, rgba(66, 97, 118,.7), rgba(66, 97, 118,.7))"></div>
+</section><!-- .page-title end -->
+		<!-- Content
+		============================================= -->
+		<section id="content">
+			<div class="content-wrap">
+				<div class="container">
+
+					<div class="row gx-5 col-mb-80">
+						<!-- Post Content
+						============================================= -->
+						<main class="postcontent col-lg-9">
+
+							<div class="single-post mb-0">
+
+								<!-- Single Post
+								============================================= -->
+								<div class="entry">
+									<!-- Entry Content
+									============================================= -->
+									<div class="entry-content mt-0">
+
+										<div class="card border-default mb-4">
+											<div class="card-body py-2">
+												<div class="row align-items-center justify-content-between fs-6">
+													<div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ item.time_create }}</div>
+
+													<div class="col-md-auto">
+														<div class="d-flex">
+															<div class="font-sizer" data-step="20" data-target=".entry-content">
+																<button type="button" class="font-size-minus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><i class="bi-type" style="font-size: 12px;"></i></button>
+																<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><i class="bi-type" style="font-size: 20px;"></i></button>
+															</div>
+
+															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" onclick="window.print();"><i class="bi-printer"></i></button>
+
+															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" data-scrollto="#cnvs-article-share"><i class="bi-share"></i></button>
+															{% if item.author.id == user.id or user.is_superuser or user.is_staff %}
+															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_update_url }}" title="Редактировать этап"><i class="bi-pencil-square"></i></a></button>
+															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_delete_url }}" title="Удалить этап"><i class="bi-x-circle"></i></a></button>
+															{% if not item.is_closed %}<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_close_url }}" title="Завершить этап"><i class="bi-check-circle"></i></a></button>{% endif %}
+															{% endif %}
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										{{ item.description|safe }}
+
+										<div class="section mb-0" style="background-color: rgba(126, 150, 128,0.2); padding: 10px;">
+											<div class="text-center text-title"><h4>Документы</h4></div>
+											<div class="container p-4">
+												{% if documents %}
+												<div class="row col-mb-50">
+													{% for document in documents %}
+
+													<div class="col-md-6 col-lg-4">
+														<a href="{{ document.file.url }}" target="_blank">
+														<div class="card text-center">
+															<div class="card-header">
+																{% if document.extension not in 'zip, rar, 7z' %}
+																	<i class="bi-filetype-{{ document.extension }}" style="font-size: 46px; color:#1d6172;"></i>
+																{% else %}
+																	<i class="bi-file-earmark" style="font-size: 46px;"></i>
+																{% endif %}
+															</div>
+															<div class="card-body">
+																<h6>{{ document.title }}</h6>
+															</div>
+														</div>
+														</a>
+													</div>
+
+													{% endfor %}
+												</div>
+												{% else %}
+													<div class="heading-block text-center mb-0">
+														<h4 style="font-size: 18px; font-weight: 200;">Нет загруженных документов</h4>
+													</div>
+												{% endif %}
+											</div>
+										</div>
+										{% if item.is_closed %}
+										<div class="section mb-0" style="background-color: rgba(126, 150, 128,0.2); padding: 10px;">
+											<div class="text-center text-title"><h4>Документы с результатами этапа турнира</h4></div>
+											<div class="container p-4">
+												{% if documents_close %}
+												<div class="row col-mb-50">
+													{% for document in documents_close %}
+
+													<div class="col-md-6 col-lg-4">
+														<a href="{{ document.file.url }}" target="_blank">
+														<div class="card text-center">
+															<div class="card-header">
+																{% if document.extension not in 'zip, rar, 7z' %}
+																	<i class="bi-filetype-{{ document.extension }}" style="font-size: 46px; color:#1d6172;"></i>
+																{% else %}
+																	<i class="bi-file-earmark" style="font-size: 46px;"></i>
+																{% endif %}
+															</div>
+															<div class="card-body">
+																<h6>{{ document.title }}</h6>
+															</div>
+														</div>
+														</a>
+													</div>
+
+													{% endfor %}
+												</div>
+												{% else %}
+													<div class="heading-block text-center mb-0">
+														<h4 style="font-size: 18px; font-weight: 200;">Еще нет загруженных документов</h4>
+													</div>
+												{% endif %}
+											</div>
+										</div>
+										{% endif %}
+										<!-- Post Single - Content End -->
+
+									</div>
+								</div><!-- .entry end -->
+										<!-- Post Single - Share
+                                ============================================= -->
+                                <div id="cnvs-article-share" class="card border-default my-4">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h6 class="fs-6 fw-semibold mb-0">Поделиться:</h6>
+                                            <div class="d-flex">
+                                                {% include 'portal/includes/social_share.html' %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- Post Single - Share End -->
+							</div>
+						</main><!-- .postcontent end -->
+
+						{% include 'event/includes/sidebar_stages.html' %}
+					</div>
+
+				</div>
+			</div>
+		</section><!-- #content end -->
+{% endblock %}

@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
 
 from equi_media_portal.singleton import SingletonModel
 from django.utils.translation import gettext_lazy as _
@@ -19,9 +21,11 @@ class Article(models.Model):
     author = models.ForeignKey(to=User, verbose_name='Автор', on_delete=models.SET_DEFAULT,
                                related_name='author_article_posts',
                                default=1)
+    source_url = models.URLField(max_length=150, blank=True, verbose_name="Ссылка на источник статьи")
+    source_text = models.CharField(max_length=200, blank=True, verbose_name="Текст ссылки на источник")
 
     def get_absolute_url(self):
-        return reverse('article_detail_url', kwargs={'article_id': self.id})
+        return reverse('article_detail_url', kwargs={'pk': self.id})
 
     def get_update_url(self):
         return reverse('article_update_url', kwargs={'pk': self.id})
@@ -42,6 +46,42 @@ class Article(models.Model):
         indexes = [
             models.Index(fields=['-time_create'])
         ]
+
+    def get_sum_rating(self):
+        return sum([rating.value for rating in self.article_ratings.all()])
+
+
+class Comment(MPTTModel):
+    """
+    Модель древовидных комментариев
+    """
+
+    STATUS_OPTIONS = (
+        ('published', 'Опубликовано'),
+        ('draft', 'Черновик')
+    )
+
+    post = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='Статья', related_name='comments_article')
+    author = models.ForeignKey(User, verbose_name='Автор комментария', on_delete=models.CASCADE,
+                               related_name='comments_article_author')
+    content = models.TextField(verbose_name='Текст комментария', max_length=3000)
+    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
+    time_update = models.DateTimeField(verbose_name='Время обновления', auto_now=True)
+    status = models.CharField(choices=STATUS_OPTIONS, default='published', verbose_name='Статус комментария', max_length=10)
+    parent = TreeForeignKey('self', verbose_name='Родительский комментарий', null=True, blank=True,
+                            related_name='children', on_delete=models.CASCADE)
+
+    class MTTMeta:
+        order_insertion_by = ('-time_create',)
+
+    class Meta:
+        indexes = [models.Index(fields=['-time_create', 'time_update', 'status', 'parent'])]
+        ordering = ['-time_create']
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return f'{self.author}:{self.content}'
 
 
 class ArticlesSettings(SingletonModel):
@@ -103,3 +143,24 @@ class BannerArticleBetweenArticles(SingletonModel):
     class Meta:
         verbose_name = 'Баннер между статьями (ширина 720px)'
         verbose_name_plural = 'Баннер между статьями (ширина 720px)'
+
+
+class Rating(models.Model):
+    """
+    Модель рейтинга: Лайк - Дизлайк
+    """
+    post = models.ForeignKey(to=Article, verbose_name='Статья', on_delete=models.CASCADE, related_name='article_ratings')
+    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True, related_name='article_user')
+    value = models.IntegerField(verbose_name='Значение', choices=[(1, 'Нравится'), (-1, 'Не нравится')])
+    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
+    ip_address = models.GenericIPAddressField(verbose_name='IP Адрес')
+
+    class Meta:
+        unique_together = ('post', 'ip_address')
+        ordering = ('-time_create',)
+        indexes = [models.Index(fields=['-time_create', 'value'])]
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = 'Рейтинги'
+
+    def __str__(self):
+        return self.post.title

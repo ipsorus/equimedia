@@ -1,0 +1,58 @@
+{% load static %}
+<!-- Sidebar
+============================================= -->
+<aside class="sidebar col-lg-3">
+    <div class="col-lg-12">
+        <div class="title-block">
+<!--            <h4>Другие турниры {{ event_settings.other_events_title }}</h4>-->
+            <h4>Другие турниры</h4>
+        </div>
+    </div>
+    <div class="sidebar-widgets-wrap">
+        {% if event_settings.other_events_sidebar %}
+            <div class="widget">
+                <div class="posts-sm row col-mb-30">
+                    {% for e in other_tournaments %}
+                    <!-- Post Events -->
+                    <div class="entry col-12">
+                        <div class="grid-inner row align-items-center g-0">
+                            <div class="col ps-3">
+                                <div class="entry-title">
+                                    <h4><a href="{{ e.get_absolute_url }}">{{ e.title }}</a></h4>
+                                </div>
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li>{{ e.date_start }} - {{ e.date_end }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if event_adv_settings.1.show or event_adv_settings.2.show %}
+        <!-- Sidebar Widget 2 Advertisement
+        ============================================= -->
+        <div class="widget">
+            <div class="col-lg-12">
+                <div class="fancy-title title-border">
+                    <h3>{{ event_settings.adv_events_title }}</h3>
+                </div>
+            </div>
+            {% if event_adv_settings.1.show %}
+            <a href="{{ event_adv_settings.1.url }}" target="_blank" rel="nofollow"><img src="{{ event_adv_settings.1.poster.url }}" width="300" alt="{{ event_adv_settings.1.title }}"
+                                 class="aligncenter mb-5 mt-5"></a>
+
+            {% endif %}
+            {% if event_adv_settings.2.show %}
+            <!-- Sidebar Widget 3 Advertisement
+            ============================================= -->
+            <a href="{{ event_adv_settings.2.url }}" target="_blank" rel="nofollow"><img src="{{ event_adv_settings.2.poster.url }}" width="300" alt="{{ event_adv_settings.2.title }}"
+                                     class="aligncenter mb-5 mt-5"></a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</aside><!-- .sidebar end -->

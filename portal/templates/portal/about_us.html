@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
+{% endblock %}
+{% block content %}
+{% if about_us_settings.show_page %}
+<style>
+.contact-section {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 50%;
+    padding: 60px 60px 60px 180px;
+    z-index: 0;
+}
+.contact-image {
+    position: relative;
+    width: 60%;
+    margin-top: 30px;
+    z-index: 2;
+    box-shadow: 0 0 40px rgba(0,0,0,.3);
+}
+@media (max-width: 991px) {
+    .contact-section {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 20px;
+    }
+    .contact-image {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+.bg-color-contacts, .bg-color-contacts #header-wrap {
+background-color: #1d6172 !important;
+}
+</style>
+<!-- Page Title
+============================================= -->
+<section class="page-title bg-color-contacts page-title-center dark">
+	<div class="container">
+		<div class="page-title-row">
+			<div class="page-title-content text-uppercase">
+				<h2 class="mb-3">{{ about_us_settings.title_about_us }}</h2>
+			</div>
+
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
+					<li class="breadcrumb-item active" aria-current="page">{{ about_us_settings.title_about_us }}</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+</section><!-- .page-title end -->
+<!-- Content
+============================================= -->
+<!-- Section About Us
+============================================= -->
+	<section id="content">
+		<div class="content-wrap pb-0">
+			<div class="container py-5">
+
+				<div class="row justify-content-between">
+					<div class="col-md-5">
+						<h2 class="fw-normal display-4">{{ about_us_settings.big_title_about_us }}</h2>
+						<p class="text-black-50">{{ about_us_settings.about_us_text }}</p>
+					</div>
+					<div class="col-md-6">
+						<!-- Grid row -->
+						<div class="row gutter-10" data-lightbox="gallery">
+
+							<div class="col-12">
+									<img class="img-fluid h-op-09 op-ts" src="{{ about_us_settings.poster_about_us.url }}" alt="Image">
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			{% if about_us_settings.block1_title or about_us_settings.block2_title or about_us_settings.block3_title or about_us_settings.block4_title or about_us_settings.block5_title or about_us_settings.block6_title %}
+				{% if about_us_settings.show_testimonials %}
+				<a href="#testimonials" class="button button-3d border-bottom-0 button-full text-center text-end fw-light font-primary" style="font-size: 26px;">
+					<div class="container">
+						Если вы уже были у нас, <strong>Вы можете оставить отзыв</strong> <i class="uil uil-angle-right-b" style="top:3px;"></i>
+					</div>
+				</a>
+				{% else %}
+				<div class="section section-domain mt-0 mb-0" style="background: #e99c34 repeat center center;">
+
+				</div>
+				{% endif %}
+
+			<div class="row align-items-stretch grid-border border-top border-bottom border-f5">
+					{% if about_us_settings.block1_title %}
+					<div class="col-lg-4 col-sm-6 col-padding">
+						<div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
+							<div class="fbox-content">
+								<h3 class="text-transform-none ls-0 font-primary mb-3">{{ about_us_settings.block1_title }}</h3>
+								<p class="text-dark op-06">{{ about_us_settings.block1_content }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{% if about_us_settings.block2_title %}
+					<div class="col-lg-4 col-sm-6 bg-light col-padding">
+						<div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
+							<div class="fbox-content">
+								<h3 class="text-transform-none ls-0 font-primary mb-3">{{ about_us_settings.block2_title }}</h3>
+								<p class="text-dark op-06">{{ about_us_settings.block2_content }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{% if about_us_settings.block3_title %}
+					<div class="col-lg-4 col-sm-6 col-padding">
+						<div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
+							<div class="fbox-content">
+								<h3 class="text-transform-none ls-0 font-primary mb-3">{{ about_us_settings.block3_title }}</h3>
+								<p class="text-dark op-06">{{ about_us_settings.block3_content }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{% if about_us_settings.block4_title %}
+					<div class="col-lg-4 col-sm-6 bg-light col-padding">
+						<div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
+							<div class="fbox-content">
+								<h3 class="text-transform-none ls-0 font-primary mb-3">{{ about_us_settings.block4_title }}</h3>
+								<p class="text-dark op-06">{{ about_us_settings.block4_content }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{% if about_us_settings.block5_title %}
+					<div class="col-lg-4 col-sm-6 col-padding">
+						<div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
+							<div class="fbox-content">
+								<h3 class="text-transform-none ls-0 font-primary mb-3">{{ about_us_settings.block5_title }}</h3>
+								<p class="text-dark op-06">{{ about_us_settings.block5_content }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					{% if about_us_settings.block6_title %}
+					<div class="col-lg-4 col-sm-6 bg-light col-padding">
+						<div class="feature-box flex-column align-items-start fbox-dark fbox-plain">
+							<div class="fbox-content">
+								<h3 class="text-transform-none ls-0 font-primary mb-3">{{ about_us_settings.block6_title }}</h3>
+								<p class="text-dark op-06">{{ about_us_settings.block6_content }}</p>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			{% endif %}
+			{% if about_us_settings.show_testimonials %}
+			<div class="clear"></div>
+			<div class="section mt-0 pb-0" style="margin-bottom: 2px; padding: 100px 0; background-color:rgb(29, 97, 114);" data-0-top="background-color:rgb(29, 97, 114);" data-top-bottom="background-color:rgb(9, 28, 61);">
+				<div class="container text-center mb-5">
+					{% include 'testimonial/testimonials.html' %}
+				</div>
+			</div>
+			{% endif %}
+		</div>
+
+	</section><!-- #content end -->
+{% endif %}
+{% endblock %}

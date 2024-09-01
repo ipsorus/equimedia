@@ -1,0 +1,36 @@
+{% load mptt_tags news_tags %}
+{% load static %}
+<!-- Sidebar
+============================================= -->
+<aside class="sidebar col-lg-3">
+    <div class="col-lg-12">
+        <div class="title-block">
+            <h4>Читайте также:</h4>
+        </div>
+    </div>
+    <div class="sidebar-widgets-wrap">
+
+        <div class="widget">
+            <div class="posts-sm row col-mb-30">
+                {% for n in other_news %}
+                <!-- Post Article -->
+                <div class="entry col-12">
+                    <div class="grid-inner row align-items-center g-0">
+                        <div class="col ps-3">
+                            <div class="entry-title">
+                                <h4><a href="{{ n.get_absolute_url }}">{{ n.title }}</a></h4>
+                            </div>
+                            <div class="entry-meta">
+                                <ul>
+                                    <li>{{ n.time_create }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</aside><!-- .sidebar end -->

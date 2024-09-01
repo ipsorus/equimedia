@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block title %}
 	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
 {% endblock %}
@@ -21,10 +22,12 @@
                     <div>
                         <h2 class="h1 border-bottom border-dark border-width-4" style="font-weight: 800">{{ profile.user.username }}</h2>
                         {% if user.is_superuser or user.is_staff %}
-                            <p class="mb-0">Роль: <strong>Администрация сайта</strong></p>
+                            <p class="mb-0">Роль: <strong>{% translate 'Администрация сайта' %}</strong></p>
                         {% else %}
                             <p class="mb-0">Роль: <strong>Посетитель сайта</strong></p>
                         {% endif %}
+                        <p class="mb-0">Заходил: {{ profile.user.last_login }} | {% if profile.is_online %}Онлайн{% else %}Не в сети{% endif %}</p>
+
                     </div>
                 </div>
             </div>

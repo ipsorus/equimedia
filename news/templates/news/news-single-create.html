@@ -48,20 +48,26 @@ background-color: #336576 !important;
                               {% endfor %}
                             </div>
 
-                            {% for field in form %}
-                              <div class="col-12 form-group">
-                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                {% render_field field autofocus="" %}
-
-                                <div class="{% if field.errors %} alert alert-danger .alert-dismissible mt-2{% endif %}">
-                                  {% for error in field.errors %}
-                                    <p class="help-block mb-0">{{ error }}</p>
-                                  {% endfor %}
-                                </div>
+                            <div class="row justify-content-center p-2">
+                                <div class="row col-12 justify-content-center align-items-center">
+                                {% for field in form.visible_fields %}
+                                    <div class="row mb-2">
+                                        <div class="col-md-3"><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+                                        <div class="col-md-8">{% render_field field autofocus="" %}</div>
+                                    </div>
+                                {% endfor %}
+                                {% for hidden in form.hidden_fields %}
+                                   {{ hidden }}
+                                {% endfor %}
+                                {% for error in field.errors %}
+                                        <p class="help-block mb-0">{{ error }}</p>
+                                {% endfor %}
                               </div>
-                            {% endfor %}
+                            </div>
                         <div class="d-grid gap-2 d-md-block mt-2">
-                           <button type="submit" class="btn button rounded-1 button-border m-0 size-lg mt-4 button-reveal fadeInUp animated"><i class="bi-check-circle"></i><span>Добавить запись</span></button>
+                           <button type="submit" class="btn button button-green rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-check-circle"></i><span>Добавить запись</span></button>
+                            <a href="{% url 'news_list_url' %}" class="btn button button-red rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-x-circle"></i><span>Отмена</span></a>
+
                         </div>
                      </form>
                   </div>
