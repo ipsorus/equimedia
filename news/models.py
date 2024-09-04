@@ -8,6 +8,8 @@ from mptt.models import MPTTModel
 from equi_media_portal.singleton import SingletonModel
 from django.utils.translation import gettext_lazy as _
 
+from equi_media_portal.utils import image_compress
+
 User = get_user_model()
 
 
@@ -33,8 +35,15 @@ class NewsPost(models.Model):
     def get_delete_url(self):
         return reverse('news_post_delete', kwargs={'pk': self.id})
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.image if self.pk else None
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        if self.__thumbnail != self.image and self.image:
+            image_compress(self.image.path, width=1920, height=1080)
 
     def __str__(self):
         return f'Дата создания: {self.time_create} - {self.title}'

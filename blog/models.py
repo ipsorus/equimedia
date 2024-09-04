@@ -9,6 +9,8 @@ from django.urls import reverse
 from equi_media_portal.singleton import SingletonModel
 from django.utils.translation import gettext_lazy as _
 
+from equi_media_portal.utils import image_compress
+
 User = get_user_model()
 
 
@@ -61,6 +63,10 @@ class BlogPost(models.Model):
         verbose_name = 'Запись блога'
         verbose_name_plural = 'Записи блогов'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.thumbnail if self.pk else None
+
     def __str__(self):
         return self.title
 
@@ -78,6 +84,9 @@ class BlogPost(models.Model):
         Сохранение полей модели при их отсутствии заполнения
         """
         super().save(*args, **kwargs)
+
+        if self.__thumbnail != self.thumbnail and self.thumbnail:
+            image_compress(self.thumbnail.path, width=1920, height=1080)
 
     def get_sum_rating(self):
         return sum([rating.value for rating in self.ratings.all()])

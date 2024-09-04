@@ -21,6 +21,7 @@ class NewsPostCreateForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
+        self.fields['slider'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['content'].required = False

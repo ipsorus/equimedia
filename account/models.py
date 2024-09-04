@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 
+from equi_media_portal.utils import image_compress
 from services.init import unique_slugify
 
 
@@ -26,6 +27,10 @@ class Profile(models.Model):
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.avatar if self.pk else None
+
     def save(self, *args, **kwargs):
         """
         Сохранение полей модели при их отсутствии заполнения
@@ -33,6 +38,9 @@ class Profile(models.Model):
         if not self.slug:
             self.slug = unique_slugify(self, self.user.username)
         super().save(*args, **kwargs)
+
+        if self.__thumbnail != self.avatar and self.avatar:
+            image_compress(self.avatar.path, width=250, height=250)
 
     def __str__(self):
         """

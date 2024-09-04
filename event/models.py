@@ -8,6 +8,8 @@ from django_ckeditor_5.fields import CKEditor5Field
 from equi_media_portal.singleton import SingletonModel
 from django.utils.translation import gettext_lazy as _
 
+from equi_media_portal.utils import image_compress
+
 User = get_user_model()
 
 
@@ -81,8 +83,15 @@ class Tournament(models.Model):
     def get_close_url(self):
         return reverse('tournament_close_url', kwargs={'pk': self.id})
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.image if self.pk else None
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        if self.__thumbnail != self.image and self.image:
+            image_compress(self.image.path, width=1920, height=1080)
 
     def __str__(self):
         return f'{self.title, self.date_start}'
@@ -236,8 +245,15 @@ class Event(models.Model):
     def get_delete_url(self):
         return reverse('event_delete_url', kwargs={'pk': self.id})
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.image if self.pk else None
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        if self.__thumbnail != self.image and self.image:
+            image_compress(self.image.path, width=1920, height=1080)
 
     def __str__(self):
         return f'{self.title, self.date_start}'

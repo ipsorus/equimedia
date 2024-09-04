@@ -6,13 +6,14 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from equi_media_portal.singleton import SingletonModel
+from equi_media_portal.utils import image_compress
 
 User = get_user_model()
 
 
 class Video(models.Model):
     title = models.CharField(max_length=45, db_index=True, verbose_name=_("Заголовок видео"))
-    video_link = models.TextField(verbose_name=_("Код видео (iframe) youtube, vk"))
+    video_link = models.TextField(verbose_name=_("Код видео (iframe) или ссылка на youtube, vk"))
     image = models.ImageField(upload_to='media/podcast/%Y/%m/%d', default='images/podcast/podcast.jpg', blank=True,
                               verbose_name=_("Постер для видео"))
     short = models.TextField(max_length=80, blank=True, verbose_name=_("Краткое описание"))
@@ -23,8 +24,8 @@ class Video(models.Model):
                                related_name='author_video',
                                default=1)
 
-    # def get_absolute_url(self):
-    #     return reverse('video_detail_url', kwargs={'pk': self.id})
+    def get_absolute_url(self):
+        return reverse('video_detail_url', kwargs={'pk': self.id})
 
     def get_update_url(self):
         return reverse('video_update', kwargs={'pk': self.id})
@@ -32,8 +33,15 @@ class Video(models.Model):
     def get_delete_url(self):
         return reverse('video_delete', kwargs={'pk': self.id})
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.image if self.pk else None
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        if self.__thumbnail != self.image and self.image:
+            image_compress(self.image.path, width=800, height=600)
 
     def __str__(self):
         return f'Дата создания: {self.time_create} - {self.title}'
@@ -45,17 +53,6 @@ class Video(models.Model):
         indexes = [
             models.Index(fields=['-time_create'])
         ]
-
-    # def get_cleaned_url(self):
-    #     src_pattern = re.compile(r'<iframe.*?src="(.*?)"')
-    #     src_match = src_pattern.search(str(self.video_link))
-    #
-    #     if src_match:
-    #         src_value = src_match.group(1)
-    #         url = src_value.replace('embed/', '?v=')
-    #         return url
-    #     else:
-    #         return self.video_link
 
     def get_cleaned_url(self):
         src_pattern = re.compile(r'<iframe.*?src="(.*?)"')

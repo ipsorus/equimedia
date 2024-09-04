@@ -42,7 +42,7 @@ background-color: #712121 !important;
                         </div>
                         <div class="d-grid gap-2 d-md-block mt-2">
                             <button type="submit" class="btn btn-danger">Удалить запись</button>
-                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Отменить удаление</a>
+                            <a href="{% url 'video_list_url' %}" class="btn btn-primary">Отменить удаление</a>
                         </div>
                     </form>
                   </div>

@@ -4,6 +4,8 @@ from django.urls import reverse
 from equi_media_portal.singleton import SingletonModel
 from django.utils.translation import gettext_lazy as _
 
+from equi_media_portal.utils import image_compress
+
 
 class Slider(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name=_("Заголовок слайда"))
@@ -26,6 +28,10 @@ class Slider(models.Model):
     def __str__(self):
         return f'{self.title}, {self.additional_content}'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.poster if self.pk else None
+
     class Meta:
         verbose_name = 'Слайд'
         verbose_name_plural = 'Слайды'
@@ -33,6 +39,12 @@ class Slider(models.Model):
         indexes = [
             models.Index(fields=['-time_create'])
         ]
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.__thumbnail != self.poster and self.poster:
+            image_compress(self.poster.path, width=3840, height=2400)
 
 
 class SliderSettings(SingletonModel):
