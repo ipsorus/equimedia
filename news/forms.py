@@ -10,7 +10,8 @@ class NewsPostCreateForm(forms.ModelForm):
 
     class Meta:
         model = NewsPost
-        fields = ('title', 'id', 'content', 'image', 'source_url', 'source_text', 'is_published')
+        fields = '__all__'
+        exclude = ['author']
 
     def __init__(self, *args, **kwargs):
         """
@@ -25,20 +26,23 @@ class NewsPostCreateForm(forms.ModelForm):
         self.fields['content'].required = False
 
 
-class NewsPostUpdateForm(NewsPostCreateForm):
+class NewsPostUpdateForm(forms.ModelForm):
     """
     Форма обновления новости на сайте
     """
 
     class Meta:
         model = NewsPost
-        fields = NewsPostCreateForm.Meta.fields
+        fields = '__all__'
+        exclude = ['author', 'slider']
 
     def __init__(self, *args, **kwargs):
         """
         Обновление стилей формы под Bootstrap
         """
         super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})

@@ -75,25 +75,16 @@ class NewsPostCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Добавление новости на сайт'
-
-        if self.request.POST:
-            context["checkbox"] = self.request.POST.get("slide", False)
-        else:
-            context["checkbox"] = False
-
         return context
 
     def form_valid(self, form):
-        context = self.get_context_data()
-        checkbox = context["checkbox"]
-
         with transaction.atomic():
             form.instance.author = self.request.user
             self.object = form.save()
 
-            if checkbox == 'on':
-                slide = Slider.objects.create(title=self.request.POST.get("title", False),
-                                              poster=self.request.FILES.get("image", False),
+            if self.object.slider:
+                slide = Slider.objects.create(title=self.object.title,
+                                              poster=self.object.image,
                                               is_published=True,
                                               url=self.object.get_absolute_url())
                 slide.save()

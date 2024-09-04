@@ -12,7 +12,7 @@ User = get_user_model()
 
 
 class NewsPost(models.Model):
-    title = models.CharField(max_length=200, db_index=True, verbose_name=_("Заголовок новости"))
+    title = models.CharField(max_length=150, db_index=True, verbose_name=_("Заголовок новости"))
     content = CKEditor5Field(blank=True, verbose_name=_("Содержание новости"))
     image = models.ImageField(upload_to='media/news/%Y/%m/%d', blank=True, verbose_name=_("Постер для новости"))
     time_create = models.DateTimeField(auto_now_add=True)
@@ -22,6 +22,7 @@ class NewsPost(models.Model):
     source_text = models.CharField(max_length=200, blank=True, verbose_name=_("Текст ссылки на источник"))
     author = models.ForeignKey(to=User, verbose_name=_('Автор'), on_delete=models.SET_DEFAULT, related_name='author_news_posts',
                                default=1)
+    slider = models.BooleanField(default=False, verbose_name=_("Добавить новость в слайдер?"))
 
     def get_absolute_url(self):
         return reverse('news_detail_url', kwargs={'pk': self.id})

@@ -10,7 +10,8 @@ class ArticlePostCreateForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ('title', 'id', 'content', 'image', 'source_url', 'source_text', 'is_published')
+        fields = '__all__'
+        exclude = ['author']
 
     def __init__(self, *args, **kwargs):
         """
@@ -21,24 +22,28 @@ class ArticlePostCreateForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['slider'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['content'].required = False
 
 
-class ArticlePostUpdateForm(ArticlePostCreateForm):
+class ArticlePostUpdateForm(forms.ModelForm):
     """
     Форма обновления статьи на сайте
     """
 
     class Meta:
         model = Article
-        fields = ArticlePostCreateForm.Meta.fields
+        fields = '__all__'
+        exclude = ['author', 'slider']
 
     def __init__(self, *args, **kwargs):
         """
         Обновление стилей формы под Bootstrap
         """
         super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})

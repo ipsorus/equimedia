@@ -12,7 +12,7 @@ User = get_user_model()
 
 
 class Article(models.Model):
-    title = models.CharField(max_length=200, db_index=True, verbose_name="Заголовок статьи")
+    title = models.CharField(max_length=150, db_index=True, verbose_name="Заголовок статьи")
     content = CKEditor5Field(blank=True, verbose_name="Содержание статьи")
     image = models.ImageField(upload_to='media/articles/%Y/%m/%d', blank=True, verbose_name="Постер для статьи")
     time_create = models.DateTimeField(auto_now_add=True)
@@ -23,6 +23,7 @@ class Article(models.Model):
                                default=1)
     source_url = models.URLField(max_length=150, blank=True, verbose_name="Ссылка на источник статьи")
     source_text = models.CharField(max_length=200, blank=True, verbose_name="Текст ссылки на источник")
+    slider = models.BooleanField(default=False, verbose_name=_("Добавить статью в слайдер?"))
 
     def get_absolute_url(self):
         return reverse('article_detail_url', kwargs={'pk': self.id})

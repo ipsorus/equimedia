@@ -4,6 +4,7 @@ from mptt.admin import DraggableMPTTAdmin
 
 from news.models import NewsPost, NewsSettings, BannerNewsBetweenNews, BannerNewsSideBar1, BannerNewsSideBar2, Comment, \
     Rating
+from slider.models import Slider
 
 
 @admin.register(Comment)
@@ -20,6 +21,18 @@ class CommentAdminPage(DraggableMPTTAdmin):
 
 class NewsAdmin(admin.ModelAdmin):
     model = NewsPost
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        try:
+            if obj.slider:
+                slide = Slider.objects.create(title=obj.title,
+                                              poster=obj.image,
+                                              is_published=True,
+                                              url=obj.get_absolute_url())
+                slide.save()
+        except:
+            pass
 
 
 class NewsSettingsAdmin(admin.ModelAdmin):

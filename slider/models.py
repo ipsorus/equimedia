@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Slider(models.Model):
-    title = models.TextField(max_length=200, db_index=True, verbose_name=_("Заголовок слайда"))
+    title = models.CharField(max_length=150, db_index=True, verbose_name=_("Заголовок слайда"))
     url = models.CharField(max_length=350, verbose_name=_("Ссылка в слайде"))
     additional_content = models.TextField(max_length=250, blank=True, verbose_name=_("Дополнительный текст слайда"))
     poster = models.ImageField(upload_to='media/slider/poster/%Y/%m/%d', verbose_name=_("Обложка слайда"))

@@ -100,6 +100,71 @@
 		}
 	}
 
+
+.element-grid__delite-button {
+  float: right;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+}
+
+.element-grid__element {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 282px;
+  position: relative;
+}
+
+
+
+.element-grid__text {
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: black;
+  padding: 0;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 88%;
+}
+
+.element-grid__text-container {
+  margin: 0;
+  background: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 19px 31px;
+  align-items: center;
+}
+
+.element-grid {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-gap: 20px 18px;
+  grid-template-columns: repeat(auto-fit, 282px);
+  justify-content: center;
+}
+
+.element-grid__delite-button {
+  width: 20px;
+  height: 20px;
+  z-index: 4;
+  position:absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+}
+
 </style>
 <!-- Hero Section
 ============================================= -->
@@ -113,14 +178,15 @@
                 {% if not s.is_video %}
 
                 <div class="swiper-slide">
-
+                    {% if user.is_superuser or user.is_staff%}
+                        <div class="px-2" style="z-index: 100; position: fixed; right: 0; display:inline-block; justify-content: flex-end; top: 50%;">
+                            <a class="font-size-plus btn btn-outline-success border-contrast-200 border-0 ms-1" href="{% url 'slide_update' pk=s.pk %}" title="Изменить слайд"><i class="bi-pencil-square"></i></a><br/>
+                            <a class="font-size-plus btn btn-outline-danger border-contrast-200 border-0 ms-1" href="{% url 'slide_delete' pk=s.pk %}" title="Удалить слайд"><i class="bi-x-circle"></i></a>
+                        </div>
+                    {% endif %}
                     <div class="container" style="z-index: 2;">
-
                         <div class="vertical-middle">
                             <div class="row main-slider__content">
-                                                                                        <div style="display: block; width: 20px; top: 50% !important; bottom: auto !important; left: auto !important;transform: translateY(-50%);">
-                    <a class="justify-content-end font-size-plus btn btn-outline-danger border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" href="{% url 'slide_delete' pk=s.pk %}"><i class="bi-x-circle"></i></a>
-                </div>
                                 <div class="slider-caption">
 
                                     <h2>{{ s.title }}</h2>

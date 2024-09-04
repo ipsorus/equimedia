@@ -1,9 +1,11 @@
 from django.contrib import admin
+from django.contrib.sites.models import Site
 from django.db import ProgrammingError
 from mptt.admin import DraggableMPTTAdmin
 
 from articles.models import Article, BannerArticleSideBar1, BannerArticleSideBar2, BannerArticleBetweenArticles, \
     ArticlesSettings, Comment, Rating
+from slider.models import Slider
 
 
 @admin.register(Comment)
@@ -20,6 +22,18 @@ class CommentAdminPage(DraggableMPTTAdmin):
 
 class ArticlesAdmin(admin.ModelAdmin):
     model = Article
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        try:
+            if obj.slider:
+                slide = Slider.objects.create(title=obj.title,
+                                              poster=obj.image,
+                                              is_published=True,
+                                              url=obj.get_absolute_url())
+                slide.save()
+        except:
+            pass
 
 
 class ArticlesSettingsAdmin(admin.ModelAdmin):
