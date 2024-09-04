@@ -145,6 +145,7 @@ class UserRegisterView(UserIsNotAuthenticated, CreateView):
     form_class = UserRegisterForm
     success_url = reverse_lazy('main')
     template_name = 'account/registration/user_register.html'
+    usable_password = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -162,7 +163,7 @@ class UserRegisterView(UserIsNotAuthenticated, CreateView):
         current_site = Site.objects.get_current().domain
         send_mail(
             'Подтвердите свой электронный адрес',
-            f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}',
+            f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: {current_site}{activation_url}',
             settings.SERVER_EMAIL,
             [user.email],
             fail_silently=False,

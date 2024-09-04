@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -11,6 +12,7 @@ from articles.models import Article, Comment, Rating
 from el_pagination.decorators import page_template
 from services.mixins import AuthorRequiredMixin
 from services.utils import get_client_ip
+from slider.models import Slider
 
 
 @page_template('articles/articles-list-page.html')
@@ -69,11 +71,28 @@ class ArticlePostCreateView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Добавление статьи на сайт'
+
+        if self.request.POST:
+            context["checkbox"] = self.request.POST.get("slide", False)
+        else:
+            context["checkbox"] = False
+
         return context
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.save()
+        context = self.get_context_data()
+        checkbox = context["checkbox"]
+
+        with transaction.atomic():
+            form.instance.author = self.request.user
+            self.object = form.save()
+
+            if checkbox == 'on':
+                slide = Slider.objects.create(title=self.request.POST.get("title", False),
+                                              poster=self.request.FILES.get("image", False),
+                                              is_published=True,
+                                              url=self.object.get_absolute_url())
+                slide.save()
         return super().form_valid(form)
 
 

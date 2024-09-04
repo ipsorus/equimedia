@@ -46,6 +46,9 @@ class VideoCreateView(LoginRequiredMixin, CreateView):
         form.save()
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('video_list_url')
+
 
 class VideoUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
     """
@@ -68,6 +71,9 @@ class VideoUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
         form.save()
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy('video_list_url')
+
 
 class VideoDeleteView(AuthorRequiredMixin, DeleteView):
     """
@@ -82,3 +88,6 @@ class VideoDeleteView(AuthorRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['title'] = f'Удаление записи: {self.object.title}'
         return context
+
+    def get_success_url(self):
+        return reverse_lazy('video_list_url')

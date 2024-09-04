@@ -81,6 +81,17 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CSRF_TRUSTED_ORIGINS = [
+
+    # 'https://yourdomain.com',
+
+    # 'https://www.yourdomain.com',
+
+]
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
+
 ROOT_URLCONF = 'equi_media_portal.urls'
 
 TEMPLATES = [
@@ -190,6 +201,7 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_URL = 'main'
 LOGOUT_URL = 'main'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

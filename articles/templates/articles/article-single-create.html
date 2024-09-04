@@ -50,6 +50,10 @@ background-color: #336576 !important;
 
                             <div class="row justify-content-center p-2">
                                 <div class="row col-12 justify-content-center align-items-center">
+                                    <div class="row mb-4">
+                                      <div class="col-md-3"><label class="form-check-label" for="for_slider" style="color: green; font-weight: 600;">Добавить эту статью в слайдер?</label></div>
+                                      <div class="col-md-8"><input class="form-check-input" style="border: medium solid green;" name="slide" type="checkbox" id="for_slider"></div>
+                                    </div>
                                 {% for field in form.visible_fields %}
                                     <div class="row mb-2">
                                         <div class="col-md-3"><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>

@@ -87,7 +87,7 @@ class TournamentCreateForm(forms.ModelForm):
     class Meta:
         model = Tournament
         fields = '__all__'
-        exclude = ["time_create", "author"]
+        exclude = ["time_create", "author", 'is_closed', 'result']
         widgets = {
             'date_start': forms.widgets.DateInput(attrs={'type': 'date'}),
             'date_end': forms.widgets.DateInput(attrs={'type': 'date'}),
@@ -100,13 +100,11 @@ class TournamentCreateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
-
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['discipline'].widget.attrs.update({'class': 'form-select'})
         self.fields['type'].widget.attrs.update({'class': 'form-select'})
         self.fields['description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['location'].widget.attrs.update({'class': 'form-control', 'cols': 20, 'rows': 3})
-        self.fields['result'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['prize'].widget.attrs.update({'class': 'form-control'})
 
 
@@ -186,7 +184,38 @@ class TournamentStageCreateForm(forms.ModelForm):
     class Meta:
         model = Stage
         fields = '__all__'
-        exclude = ["time_create", "author", "stage_type"]
+        exclude = ["time_create", "author", "stage_type", 'result', 'is_closed']
+        widgets = {
+            'date_start': forms.widgets.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+            'date_end': forms.widgets.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
+        }
+
+    def __init__(self, *args, **kwargs):
+        """
+        Обновление стилей формы под Bootstrap
+        """
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
+
+        self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['tournament'].widget.attrs.update({'class': 'form-select'})
+        self.fields['discipline'].widget.attrs.update({'class': 'form-select'})
+        self.fields['type'].widget.attrs.update({'class': 'form-select'})
+        self.fields['description'].widget.attrs.update({'class': 'form-control'})
+        self.fields['location'].widget.attrs.update({'class': 'form-control', 'cols': 20, 'rows': 3})
+        self.fields['prize'].widget.attrs.update({'class': 'form-control'})
+
+
+class StageCreateForm(forms.ModelForm):
+    """
+    Форма добавления этапов для турнира на сайте
+    """
+
+    class Meta:
+        model = Stage
+        fields = '__all__'
+        exclude = ["time_create", "author", "stage_type", 'result', 'is_closed']
         widgets = {
             'date_start': forms.widgets.DateInput(attrs={'type': 'date'}),
             'date_end': forms.widgets.DateInput(attrs={'type': 'date'}),
@@ -201,23 +230,22 @@ class TournamentStageCreateForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
-        self.fields['is_closed'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['tournament'].widget.attrs.update({'class': 'form-select'})
         self.fields['discipline'].widget.attrs.update({'class': 'form-select'})
         self.fields['type'].widget.attrs.update({'class': 'form-select'})
         self.fields['description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['location'].widget.attrs.update({'class': 'form-control', 'cols': 20, 'rows': 3})
-        self.fields['result'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['prize'].widget.attrs.update({'class': 'form-control'})
 
 
-class StageUpdateForm(TournamentStageCreateForm):
+class StageUpdateForm(StageCreateForm):
     """
     Форма обновления турнира на сайте
     """
 
     class Meta:
         model = Stage
-        fields = TournamentStageCreateForm.Meta.fields
+        fields = StageCreateForm.Meta.fields
         exclude = ["time_create", "author", "stage_type"]
         widgets = {
             'date_start': forms.widgets.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
@@ -243,7 +271,7 @@ class StageUpdateForm(TournamentStageCreateForm):
 
 class StageDocumentCreateForm(forms.ModelForm):
     """
-    Форма добавления документов для турнира на сайте
+    Форма добавления документов для этапа турнира на сайте
     """
 
     class Meta:
@@ -295,7 +323,6 @@ class TournamentCloseForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
 
-        self.fields['is_closed'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['result'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
 
 

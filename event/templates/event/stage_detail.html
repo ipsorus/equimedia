@@ -46,7 +46,7 @@
 				<span class="p-2 mt-6" style="font-weight: 700; font-size: 1.7rem;">Этап завершен</span>
 			{% else %}
 				{% if item.prize %}
-					<span class="p-2 mt-6" style="font-weight: 700; font-size: 1.7rem;">Призовой фонд: {{ item.prize }}</span>
+					<span class="p-2 mt-6" style="font-weight: 700; font-size: 1.7rem;">Призовой фонд: {{ item.prize|safe }}</span>
 				{% endif %}
 			{% endif %}
 		</div>
@@ -100,6 +100,9 @@
 										</div>
 
 										{{ item.description|safe }}
+										{% if item.result %}
+										{{ item.result|safe }}
+										{% endif %}
 
 										<div class="section mb-0" style="background-color: rgba(126, 150, 128,0.2); padding: 10px;">
 											<div class="text-center text-title"><h4>Документы</h4></div>
@@ -134,7 +137,6 @@
 												{% endif %}
 											</div>
 										</div>
-										{% if item.is_closed %}
 										<div class="section mb-0" style="background-color: rgba(126, 150, 128,0.2); padding: 10px;">
 											<div class="text-center text-title"><h4>Документы с результатами этапа турнира</h4></div>
 											<div class="container p-4">
@@ -168,7 +170,6 @@
 												{% endif %}
 											</div>
 										</div>
-										{% endif %}
 										<!-- Post Single - Content End -->
 
 									</div>

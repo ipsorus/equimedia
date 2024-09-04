@@ -88,8 +88,8 @@
                         {% if profile.user.get_full_name %} <li class="py-2 text-larger">Имя и фамилия: <strong>{{ profile.user.get_full_name }}</strong></li>{% endif %}
                         <li class="py-2 text-larger">Заходил:  <strong>{{ profile.user.last_login }}</strong></li>
                         <li class="py-2 text-larger">Email: <strong>{{ profile.user.email }}</strong></li>
-                        <li class="py-2 text-larger">Дата рождения: <strong>{{ profile.birth_date }}</strong></li>
-                        <li class="py-2 text-larger">О себе: <strong>{{ profile.bio }}</strong></li>
+                        {% if profile.birth_date %}<li class="py-2 text-larger">Дата рождения: <strong>{{ profile.birth_date }}</strong></li>{% endif %}
+                        {% if profile.bio %}<li class="py-2 text-larger">О себе: <strong>{{ profile.bio }}</strong></li>{% endif %}
                     </ul>
                 </div>
             </div>

@@ -13,7 +13,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 from event.forms import EventUpdateForm, EventCreateForm, EventDocumentCreateForm, TournamentDocumentCreateForm, \
     TournamentCreateForm, TournamentUpdateForm, TournamentStageCreateForm, StageUpdateForm, StageDocumentCreateForm, \
-    TournamentCloseForm, TournamentDocumentCloseForm, StageDocumentCloseForm, StageCloseForm
+    TournamentCloseForm, TournamentDocumentCloseForm, StageDocumentCloseForm, StageCloseForm, StageCreateForm
 from event.models import Event, Tournament, Stage, EventDocument, TournamentDocument, StageDocument, \
     TournamentCloseDocument, StageCloseDocument
 from services.mixins import AuthorRequiredMixin
@@ -315,8 +315,6 @@ class TournamentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = 'Турнир был успешно добавлен'
 
     def get_context_data(self, **kwargs):
-        # we need to overwrite get_context_data
-        # to make sure that our formset is rendered
         data = super(TournamentCreateView, self).get_context_data(**kwargs)
         data['title'] = 'Добавление турнира на сайт'
 
@@ -332,19 +330,54 @@ class TournamentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         context = self.get_context_data()
         documents = context['document_form']
         stages = context['stage_form']
+
+        with transaction.atomic():
+            form.instance.author = self.request.user
+            self.object = form.save()
+            if documents.is_valid() and stages.is_valid():
+                documents.instance = self.object
+                stages.instance = self.object
+                documents.save()
+                stages.save()
+        return super(TournamentCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('tournament_detail_url', kwargs={'tournament_id': self.object.pk})
+
+
+class StageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """
+    Представление: создание этапа турнира на сайте
+    """
+    model = Stage
+    template_name = 'event/tournament-stage-create.html'
+    form_class = StageCreateForm
+    login_url = 'main'
+    success_message = 'Этап был успешно добавлен'
+
+    def get_context_data(self, **kwargs):
+        data = super(StageCreateView, self).get_context_data(**kwargs)
+        data['title'] = 'Добавление этапа турнира на сайт'
+
+        if self.request.POST:
+            data["document_form"] = StageDocumentFormset(self.request.POST, self.request.FILES)
+        else:
+            data["document_form"] = StageDocumentFormset()
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        documents = context['document_form']
         with transaction.atomic():
             form.instance.author = self.request.user
             self.object = form.save()
             if documents.is_valid():
                 documents.instance = self.object
                 documents.save()
-            if stages.is_valid():
-                stages.instance = self.object
-                stages.save()
-        return super(TournamentCreateView, self).form_valid(form)
+        return super(StageCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('tournament_detail_url', kwargs={'tournament_id': self.object.pk})
+        return reverse_lazy('tournament_detail_url', kwargs={'tournament_id': self.object.tournament.pk})
 
 
 class TournamentUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -364,21 +397,28 @@ class TournamentUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessa
         if self.request.POST:
             data["document_form"] = TournamentDocumentFormset(self.request.POST, self.request.FILES,
                                                               instance=self.object)
+            data["document_close_form"] = TournamentCloseDocumentFormset(self.request.POST, self.request.FILES,
+                                                                         instance=self.object)
             data["stage_form"] = StageFormset(self.request.POST, self.request.FILES, instance=self.object)
         else:
             data["document_form"] = TournamentDocumentFormset(instance=self.object)
+            data["document_close_form"] = TournamentCloseDocumentFormset(instance=self.object)
             data["stage_form"] = StageFormset(instance=self.object)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
         documents = context["document_form"]
+        documents_close = context["document_close_form"]
         stages = context['stage_form']
         with transaction.atomic():
             self.object = form.save()
             if documents.is_valid():
                 documents.instance = self.object
                 documents.save()
+            if documents_close.is_valid():
+                documents_close.instance = self.object
+                documents_close.save()
             if stages.is_valid():
                 stages.instance = self.object
                 stages.save()
@@ -421,18 +461,24 @@ class StageUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMix
         if self.request.POST:
             data["document_form"] = StageDocumentFormset(self.request.POST, self.request.FILES,
                                                          instance=self.object)
+            data["document_stage_close_form"] = StageCloseDocumentFormset(self.request.POST, self.request.FILES,
+                                                                          instance=self.object)
         else:
             data["document_form"] = StageDocumentFormset(instance=self.object)
+            data["document_stage_close_form"] = StageCloseDocumentFormset(instance=self.object)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
         documents = context["document_form"]
+        documents_close = context["document_stage_close_form"]
         with transaction.atomic():
             self.object = form.save()
-            if documents.is_valid():
+            if documents.is_valid() and documents_close.is_valid():
                 documents.instance = self.object
+                documents_close.instance = self.object
                 documents.save()
+                documents_close.save()
 
         return super(StageUpdateView, self).form_valid(form)
 

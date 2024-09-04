@@ -71,10 +71,12 @@ background-color: #1d6172 !important;
 							{{ contacts_settings.address }}
 						</span>
 						</address>
+						{% if contacts_settings.phone1 %}
 						<span class="fw-light">Телефон:</span><br>
 						<span class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone1 }}</span><br><br>
 						{% if contacts_settings.phone2 %}
 						<span class="h6 text-white ls-1 fw-normal">{{ contacts_settings.phone2 }}</span><br><br>
+						{% endif %}
 						{% endif %}
 
 						<span class="fw-light">Email:</span><br>

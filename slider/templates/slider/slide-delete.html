@@ -38,11 +38,11 @@ background-color: #712121 !important;
                       <form method="post">
                         {% csrf_token %}
                         <div class="alert alert-warning" role="alert">
-                            <i class="fas fa-info-circle"></i> Вы собираетесь удалить видео: <strong>{{ post.title }}</strong>, Вы подтверждаете свое действие?
+                            <i class="fas fa-info-circle"></i> Вы собираетесь удалить слайд: <strong>{{ post.title }}</strong>, Вы подтверждаете свое действие?
                         </div>
                         <div class="d-grid gap-2 d-md-block mt-2">
-                            <button type="submit" class="btn btn-danger">Удалить запись</button>
-                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Отменить удаление</a>
+                            <button type="submit" class="btn btn-danger">Удалить слайд</button>
+                            <a href="{% url 'main' %}" class="btn btn-primary">Отменить удаление</a>
                         </div>
                     </form>
                   </div>

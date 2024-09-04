@@ -46,7 +46,7 @@ class TournamentCloseDocumentInline(admin.TabularInline):
     model = TournamentCloseDocument
 
 
-class TournamentDocumentsInline(admin.StackedInline):
+class TournamentDocumentsInline(admin.TabularInline):
     extra = 0
     model = TournamentDocument
 

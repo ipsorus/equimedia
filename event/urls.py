@@ -3,7 +3,7 @@ from django.urls import path
 
 from . import views
 from .views import EventCreateView, EventUpdateView, EventDeleteView, TournamentCreateView, TournamentUpdateView, \
-    TournamentDeleteView, StageUpdateView, StageDeleteView, TournamentCloseView, StageCloseView
+    TournamentDeleteView, StageUpdateView, StageDeleteView, TournamentCloseView, StageCloseView, StageCreateView
 
 urlpatterns = [
     path('event/<int:event_id>/', views.event_detail, name='event_detail_url'),
@@ -19,6 +19,7 @@ urlpatterns = [
     path('event/<int:pk>/update/', EventUpdateView.as_view(), name='event_update_url'),
     path('event/<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete_url'),
     path('tournaments/create/', TournamentCreateView.as_view(), name='tournament_create'),
+    path('tournaments/stage/create', StageCreateView.as_view(), name='stage_create_url'),
     path('tournaments/<int:pk>/update/', TournamentUpdateView.as_view(), name='tournament_update_url'),
     path('tournaments/<int:pk>/delete/', TournamentDeleteView.as_view(), name='tournament_delete_url'),
     path('tournaments/<int:pk>/close/', TournamentCloseView.as_view(), name='tournament_close_url'),

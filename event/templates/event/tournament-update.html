@@ -100,6 +100,28 @@ background-color: #e99c34 !important;
                                 </div>
                             </div>
                             <div class="clear mb-5"></div>
+
+                            <div class="row justify-content-center p-3" style="background-color: rgba(126, 150, 128,0.2);">
+                                <div class="text-center text-title"><h3>Документы по результатам турнира</h3></div>
+                                <div id="form_set_close" class="row col-12 justify-content-center align-items-center">
+                                    {{ document_close_form.management_form }}
+                                      {% for form in document_close_form %}
+                                        <div class="form-widget row shadow bg-light border mb-3 p-4 inline {{ document_close_form.prefix }}">
+
+                                        {% for field in form.visible_fields %}
+                                            <div class="row mb-2">
+                                                <div class="col-md-3"><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+                                                <div class="col-md-8">{% render_field field %}</div>
+                                            </div>
+                                        {% endfor %}
+                                        {% for hidden in form.hidden_fields %}
+                                           {{ hidden }}
+                                        {% endfor %}
+                                        </div>
+                                      {% endfor %}
+                                </div>
+                            </div>
+                            <div class="clear mb-5"></div>
                             <div class="row justify-content-center p-3" style="background-color: rgba(70, 130, 180,0.2);">
                                 <div class="text-center text-title"><h3>Этапы турнира</h3></div>
                                 <div id="form_set_stage" class="row col-12 justify-content-center align-items-center">
@@ -150,6 +172,18 @@ background-color: #e99c34 !important;
 		});
 
 		jQuery(function() {
+				jQuery(".inline.{{ document_close_form.prefix }}").formset({
+						prefix: "{{ document_close_form.prefix }}", // The form prefix for your django formset
+						addCssClass: "btn btn-secondary w-100 rounded-1 m-0 size-lg mt-4 fadeInUp animated inline-form-add", // CSS class applied to the add link
+						deleteCssClass: "button button-red rounded-1 m-0 size-lg mt-4 button-border button-reveal", // CSS class applied to the delete link
+						addText: 'Добавить документ', // Text for the add link
+						deleteText: '<i class="bi-trash"></i><span>Удалить документ</span>', // Text for the delete link
+						formCssClass: 'inline-form', // CSS class applied to each form in a formset
+						hideLastAddForm: true,
+				})
+		});
+
+		jQuery(function() {
 				jQuery(".inline.{{ stage_form.prefix }}").formset({
 						prefix: "{{ stage_form.prefix }}", // The form prefix for your django formset
 						addCssClass: "btn btn-secondary w-100 rounded-1 m-0 size-lg mt-4 fadeInUp animated inline-form-add", // CSS class applied to the add link
@@ -160,6 +194,7 @@ background-color: #e99c34 !important;
                         hideLastAddForm: true,
 				})
 		});
+
 </script>
 {% endblock %}
 

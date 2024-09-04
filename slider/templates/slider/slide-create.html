@@ -35,10 +35,9 @@ background-color: #336576 !important;
         <div class="container mw-md">
             <div class="row col-mb-30 gutter-50">
                   <div class="col-md-12 p-4" style="border: 1px solid #ccc; border-radius: 5px; background-color: #fff; box-shadow: 0 0 40px rgba(0,0,0,.09)">
-                      <form method="post" action="{% url 'news_post_create' %}" enctype="multipart/form-data">
+                      <form method="post" action="{% url 'slide_create' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                           {{ form.media }}
-
                         <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
                               {% for error in form.non_field_errors %}
                                 <div class="alert alert-danger .alert-dismissible" role="alert">
@@ -51,10 +50,6 @@ background-color: #336576 !important;
 
                             <div class="row justify-content-center p-2">
                                 <div class="row col-12 justify-content-center align-items-center">
-                                    <div class="row mb-4">
-                                      <div class="col-md-3"><label class="form-check-label" for="for_slider" style="color: green; font-weight: 600;">Добавить эту новость в слайдер?</label></div>
-                                      <div class="col-md-8"><input class="form-check-input" style="border: medium solid green;" name="slide" type="checkbox" id="for_slider"></div>
-                                    </div>
                                 {% for field in form.visible_fields %}
                                     <div class="row mb-2">
                                         <div class="col-md-3"><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>
@@ -70,8 +65,8 @@ background-color: #336576 !important;
                               </div>
                             </div>
                         <div class="d-grid gap-2 d-md-block mt-2">
-                           <button type="submit" class="btn button button-green rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-check-circle"></i><span>Добавить запись</span></button>
-                            <a href="{% url 'news_list_url' %}" class="btn button button-red rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-x-circle"></i><span>Отмена</span></a>
+                           <button type="submit" class="btn button button-green rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-check-circle"></i><span>Добавить слайд</span></button>
+                            <a href="{% url 'main' %}" class="btn button button-red rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-x-circle"></i><span>Отмена</span></a>
 
                         </div>
                      </form>

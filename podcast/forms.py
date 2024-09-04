@@ -1,6 +1,5 @@
 from django import forms
 
-from news.models import NewsPost, Comment
 from podcast.models import Video
 
 
@@ -22,7 +21,8 @@ class VideoCreateForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
-        self.fields['short'].widget.attrs.update({'class': 'form-control'})
+        self.fields['short'].widget.attrs.update({'class': 'form-control', 'cols': 20, 'rows': 3})
+        self.fields['video_link'].widget.attrs.update({'class': 'form-control', 'cols': 20, 'rows': 3})
         self.fields['short'].required = False
 
 
@@ -42,5 +42,6 @@ class VideoUpdateForm(VideoCreateForm):
         super().__init__(*args, **kwargs)
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
-        self.fields['short'].widget.attrs.update({'class': 'form-control'})
+        self.fields['video_link'].widget.attrs.update({'class': 'form-control', 'cols': 20, 'rows': 3})
+        self.fields['short'].widget.attrs.update({'class': 'form-control', 'cols': 20, 'rows': 3})
         self.fields['short'].required = False

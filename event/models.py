@@ -133,7 +133,7 @@ class TournamentCloseDocument(models.Model):
 
 
 class Stage(models.Model):
-    tournament = models.ForeignKey(Tournament, null=True, blank=True, on_delete=models.PROTECT, related_name="stages", verbose_name=_('Турнир'))
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="stages", verbose_name=_('Турнир'))
     stage_type = models.CharField(max_length=100, default='Соревнования', verbose_name=_('Тип соревнования'))
     type = models.ForeignKey(ContestType, on_delete=models.PROTECT, max_length=100, verbose_name=_('Уровень соревнования'))
     title = models.CharField(max_length=200, db_index=True, verbose_name=_("Название этапа турнира"))

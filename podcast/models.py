@@ -46,16 +46,38 @@ class Video(models.Model):
             models.Index(fields=['-time_create'])
         ]
 
+    # def get_cleaned_url(self):
+    #     src_pattern = re.compile(r'<iframe.*?src="(.*?)"')
+    #     src_match = src_pattern.search(str(self.video_link))
+    #
+    #     if src_match:
+    #         src_value = src_match.group(1)
+    #         url = src_value.replace('embed/', '?v=')
+    #         return url
+    #     else:
+    #         return self.video_link
+
     def get_cleaned_url(self):
         src_pattern = re.compile(r'<iframe.*?src="(.*?)"')
         src_match = src_pattern.search(str(self.video_link))
 
         if src_match:
             src_value = src_match.group(1)
-            url = src_value.replace('embed/', '?v=')
-            return url
+            if 'vk.com' in src_value:
+                return src_value
+            else:
+                src_value = src_value.replace('embed/', '?v=')
+                return src_value
         else:
-            return self.video_link
+            pattern = r"^(https?://)?(www\.)?(youtube\.com|youtu\.be|vk\.com)/(watch\?v=|\?v=|video\?z=video|video|live\/)?([^&]+)"
+            result = re.findall(pattern, str(self.video_link))
+            if 'vk' in str(self.video_link):
+                res = result[0][-1].split('_')
+                return f'https://vk.com/video_ext.php?oid={res[0]}&id={res[1]}&hd=1&autoplay=0'
+            elif 'yout' in str(self.video_link):
+                return f'https://www.youtube.com/?v={result[0][-1]}'
+            else:
+                return self.video_link
 
 
 class VideoSettings(SingletonModel):

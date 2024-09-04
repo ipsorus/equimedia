@@ -24,7 +24,6 @@
 }
 
 :root .dark {
-	--cnvs-themecolor: #fff;
 	--cnvs-themecolor-footer: #1d6172;
 	--cnvs-themecolor-rgb: 255, 255, 255;
 	--cnvs-header-bg: var(--cnvs-custom-themecolor);
@@ -1293,18 +1292,18 @@ background-color: transparent !important;
         min-height: 520px;
     }
     .slider-caption h2, .slider-caption .h2 {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
         letter-spacing: 0;
         text-transform: none;
-        font-weight: 500;
-        line-height: 50px;
-        margin-bottom: 14px;
+        font-weight: 300;
+        line-height: 25px;
+        margin-bottom: 10px;
     }
 
     .slider-caption p {
-        font-size: 1.5rem;
-        margin-top: 2.2rem;
-        margin-bottom: 0.75rem;
+        font-size: 1.3rem;
+        margin-top: 2.0rem;
+        margin-bottom: 0.5rem;
     }
     .main-slider__content {
         padding-top: 100px;

@@ -39,7 +39,10 @@
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'news_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать новость</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'article_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать статью</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'tournament_create' %}"><i class="bi-calendar2-event me-2"></i>Добавить турнир</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'stage_create_url' %}"><i class="bi-calendar2-event me-2"></i>Добавить этап турнира</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'event_create' %}"><i class="bi-calendar2-event me-2"></i>Добавить событие</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'video_create' %}"><i class="bi-collection-play me-2"></i>Добавить видео/подкаст</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'slide_create' %}"><i class="fa-solid fa-photo-video me-2"></i>Добавить слайд</a>
                             {% endif %}
                             <div class="dropdown-divider"></div>
                             <form class="mb-0" method="post" action="{% url 'logout' %}">

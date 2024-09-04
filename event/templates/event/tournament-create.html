@@ -91,7 +91,7 @@ background-color: #336576 !important;
                              <div class="clear mb-5"></div>
                           <div class="row justify-content-center p-3" style="background-color: rgba(126, 150, 128,0.2);">
                                 <div class="text-center text-title"><h3>Добавить документы к турниру</h3></div>
-                                <div id="form_set" class="row col-12 justify-content-center align-items-center">
+                                <div id="form_set_doc" class="row col-12 justify-content-center align-items-center">
                                     {{ document_form.management_form }}
                                       {% for form in document_form %}
                                         <div class="form-widget row shadow bg-light border mb-3 p-4 inline {{ document_form.prefix }}">
@@ -112,7 +112,7 @@ background-color: #336576 !important;
                           <div class="clear mb-5"></div>
                           <div class="row justify-content-center p-3" style="background-color: rgba(70, 130, 180,0.2);">
                                 <div class="text-center text-title"><h3>Добавить этапы к турниру</h3></div>
-                                <div id="form_set_stage" class="row col-12 justify-content-center align-items-center">
+                                <div id="form_set" class="row col-12 justify-content-center align-items-center">
                                     {{ stage_form.management_form }}
                                       {% for form in stage_form %}
                                         <div class="form-widget row shadow bg-light border mb-3 p-4 inline {{ stage_form.prefix }}">

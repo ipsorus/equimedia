@@ -6,20 +6,33 @@
 {% endblock %}
 {% block content %}
 <style>
-.bg-color-title, .bg-color-title #header-wrap {
-background-color: #e99c34 !important;
-}
-
 .price-features {
 	border: 1px solid var(--cnvs-themecolor);
 	border-radius: 10px;
 }
 
+.price-features > div { padding: 60px; }
 
 .price-features .iconlist li {
 	margin-bottom: 10px;
 	font-size: 16px;
 }
+
+.bg-color-title, .bg-color-title #header-wrap {
+background-color: #336576 !important;
+}
+.form-group > label.error {
+	display: block !important;
+	text-transform: none;
+}
+
+.form-group input.valid ~ label.error,
+.form-group input[type="text"] ~ label.error,
+.form-group input[type="email"] ~ label.error,
+.form-group input[type="number"] ~ label.error,
+.form-group select ~ label.error,
+.form-group textarea ~ label.error { display: none !important; }
+
 </style>
 <!-- Page Title
 ============================================= -->
@@ -33,8 +46,7 @@ background-color: #e99c34 !important;
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
-					<li class="breadcrumb-item"><a href="{% url 'calendar_page' %}">События</a></li>
-					<li class="breadcrumb-item active" aria-current="page">{{ title|truncatechars:100 }}</li>
+					<li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
 				</ol>
 			</nav>
 		</div>
@@ -46,11 +58,11 @@ background-color: #e99c34 !important;
     <div class="content-wrap" style="background-color: #f3f3f3;">
         <div class="container mw-md">
             <div class="row col-mb-30 gutter-50">
-                  <div class="col-md-12" style="border: 1px solid #ccc; border-radius: 5px; background-color: #fff; box-shadow: 0 0 40px rgba(0,0,0,.09)">
+                  <div class="col-md-12 p-4" style="border: 1px solid #ccc; border-radius: 5px; background-color: #fff; box-shadow: 0 0 40px rgba(0,0,0,.09)">
                       <form method="post" action="" enctype="multipart/form-data">
                         {% csrf_token %}
                           {{ form.media }}
-                        <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+                            <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
                               {% for error in form.non_field_errors %}
                                 <div class="alert alert-danger .alert-dismissible" role="alert">
                                     <div class="text-left">
@@ -59,9 +71,8 @@ background-color: #e99c34 !important;
                                   </div>
                               {% endfor %}
                             </div>
-
-                            <div class="row justify-content-center p-2" style="background-color: rgba(176, 196, 222,0.2);">
-                              <div class="text-center text-title"><h3>Основные данные события</h3></div>
+                          <div class="row justify-content-center p-2" style="background-color: rgba(176, 196, 222,0.2);">
+                              <div class="text-center text-title"><h3>Основные данные этапа турнира</h3></div>
                                 <div class="row col-12 justify-content-center align-items-center">
                             {% for field in form.visible_fields %}
                                 <div class="row mb-2">
@@ -78,10 +89,9 @@ background-color: #e99c34 !important;
                           </div>
                           </div>
                              <div class="clear mb-5"></div>
-
-                            <div class="row justify-content-center p-3" style="background-color: rgba(126, 150, 128,0.2);">
-                                <div class="text-center text-title"><h3>Документы к событию</h3></div>
-                                <div id="form_set" class="row col-12 justify-content-center align-items-center">
+                          <div class="row justify-content-center p-3" style="background-color: rgba(126, 150, 128,0.2);">
+                                <div class="text-center text-title"><h3>Добавить документы к этапу турнира</h3></div>
+                                <div id="form_set_doc" class="row col-12 justify-content-center align-items-center">
                                     {{ document_form.management_form }}
                                       {% for form in document_form %}
                                         <div class="form-widget row shadow bg-light border mb-3 p-4 inline {{ document_form.prefix }}">
@@ -99,30 +109,10 @@ background-color: #e99c34 !important;
                                       {% endfor %}
                                 </div>
                             </div>
-                          <div class="clear mb-5"></div>
-                            <div class="row justify-content-center p-3" style="background-color: rgba(126, 150, 128,0.2);">
-                                <div class="text-center text-title"><h3>Документы по результатам этапа турнира</h3></div>
-                                <div id="close_form_set" class="row col-12 justify-content-center align-items-center">
-                                    {{ document_stage_close_form.management_form }}
-                                      {% for form in document_stage_close_form %}
-                                        <div class="form-widget row shadow bg-light border mb-3 p-4 inline {{ document_stage_close_form.prefix }}">
 
-                                        {% for field in form.visible_fields %}
-                                            <div class="row mb-2">
-                                                <div class="col-md-3"><label for="{{ field.id_for_label }}">{{ field.label }}</label></div>
-                                                <div class="col-md-8">{% render_field field %}</div>
-                                            </div>
-                                        {% endfor %}
-                                        {% for hidden in form.hidden_fields %}
-                                           {{ hidden }}
-                                        {% endfor %}
-                                        </div>
-                                      {% endfor %}
-                                </div>
-                            </div>
                         <div class="d-grid gap-2 d-md-block mt-2">
-                           <button type="submit" class="btn button button-green rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-check-circle"></i><span>Обновить запись</span></button>
-                            <a href="{% url 'stage_detail_url' tournament_id=item.tournament.pk stage_id=item.pk %}" class="btn button button-red rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="fa-solid fa-cancel"></i><span>Отмена</span></a>
+                           <button type="submit" class="btn button button-green rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-check-circle"></i><span>Добавить запись</span></button>
+                            <a href="{% url 'tournaments' %}" class="btn button button-red rounded-1 button-border m-0 size-lg mt-4 button-reveal"><i class="bi-x-circle"></i><span>Отмена</span></a>
                         </div>
                      </form>
                   </div>
@@ -140,17 +130,6 @@ background-color: #e99c34 !important;
 		jQuery(function() {
 				jQuery(".inline.{{ document_form.prefix }}").formset({
 						prefix: "{{ document_form.prefix }}", // The form prefix for your django formset
-						addCssClass: "btn btn-secondary w-100 rounded-1 m-0 size-lg mt-4 fadeInUp animated inline-form-add", // CSS class applied to the add link
-						deleteCssClass: "button button-red rounded-1 m-0 size-lg mt-4 button-border button-reveal", // CSS class applied to the delete link
-						addText: 'Добавить документ', // Text for the add link
-						deleteText: '<i class="bi-trash"></i><span>Удалить документ</span>', // Text for the delete link
-						formCssClass: 'inline-form', // CSS class applied to each form in a formset
-						hideLastAddForm: true,
-				})
-		});
-		jQuery(function() {
-				jQuery(".inline.{{ document_stage_close_form.prefix }}").formset({
-						prefix: "{{ document_stage_close_form.prefix }}", // The form prefix for your django formset
 						addCssClass: "btn btn-secondary w-100 rounded-1 m-0 size-lg mt-4 fadeInUp animated inline-form-add", // CSS class applied to the add link
 						deleteCssClass: "button button-red rounded-1 m-0 size-lg mt-4 button-border button-reveal", // CSS class applied to the delete link
 						addText: 'Добавить документ', // Text for the add link
