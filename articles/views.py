@@ -8,6 +8,7 @@ from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
 from articles.forms import ArticlePostCreateForm, ArticlePostUpdateForm, CommentCreateForm
+from articles.mixins import ViewCountMixin
 from articles.models import Article, Comment, Rating
 from el_pagination.decorators import page_template
 from services.mixins import AuthorRequiredMixin
@@ -28,7 +29,7 @@ def articles_section(request,
     return render(request, template, context)
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(ViewCountMixin, DetailView):
     model = Article
     template_name = 'articles/article-single.html'
     context_object_name = 'post'

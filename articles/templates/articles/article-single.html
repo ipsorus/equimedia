@@ -65,7 +65,7 @@
                                 <div class="card border-default mb-4">
                                     <div class="card-body py-2">
                                         <div class="row align-items-center justify-content-between fs-6">
-                                            <div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ post.time_create }} <i class="bi-three-dots-vertical"></i> <a href="#comments"><i class="uil uil-comments-alt"></i> {{ post.comments_article.count }}</a></div>
+                                            <div class="col-md-auto text-muted"><i class="uil uil-schedule"></i> {{ post.time_create }} <i class="px-1 bi-three-dots-vertical"></i> <a href="#comments"><i class="uil uil-comments-alt"></i> {{ post.comments_article.count }}</a><i class="px-1 bi-three-dots-vertical"></i><i class="bi-eye"></i> {{ post.get_view_count }}</div>
 
                                             <div class="col-md-auto">
                                                 <div class="d-flex">

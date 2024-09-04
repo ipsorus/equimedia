@@ -28,7 +28,7 @@ class BlogPost(models.Model):
             """
             Список статей (SQL запрос с фильтрацией для страницы списка статей)
             """
-            return self.get_queryset().select_related('author').prefetch_related('ratings').filter(is_published=True)
+            return self.get_queryset().select_related('author').prefetch_related('ratings', 'views_blog').filter(is_published=True)
 
         def detail(self):
             """
@@ -39,20 +39,20 @@ class BlogPost(models.Model):
                 .prefetch_related('comments', 'comments__author', 'comments__author__profile', 'ratings') \
                 .filter(is_published=True)
 
-    title = models.CharField(verbose_name='Заголовок', max_length=255)
-    content = CKEditor5Field(verbose_name='Содержание поста')
+    title = models.CharField(verbose_name=_('Заголовок'), max_length=255)
+    content = CKEditor5Field(verbose_name=_('Содержание поста'))
     thumbnail = models.ImageField(
-        verbose_name='Обложка поста',
+        verbose_name=_('Обложка поста'),
         blank=True,
         upload_to='images/thumbnails/%Y/%m/%d/',
         validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))]
     )
-    is_published = models.BooleanField(default=False, verbose_name="Публикация новости")
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время добавления')
-    time_update = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
-    author = models.ForeignKey(to=User, verbose_name='Автор', on_delete=models.SET_DEFAULT, related_name='author_posts',
+    is_published = models.BooleanField(default=False, verbose_name=_("Публикация новости"))
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name=_('Время добавления'))
+    time_update = models.DateTimeField(auto_now=True, verbose_name=_('Время обновления'))
+    author = models.ForeignKey(to=User, verbose_name=_('Автор'), on_delete=models.SET_DEFAULT, related_name='author_posts',
                                default=1)
-    updater = models.ForeignKey(to=User, verbose_name='Обновил', on_delete=models.SET_NULL, null=True,
+    updater = models.ForeignKey(to=User, verbose_name=_('Обновил'), on_delete=models.SET_NULL, null=True,
                                 related_name='updater_posts', blank=True)
 
     objects = BlogPostManager()
@@ -91,6 +91,30 @@ class BlogPost(models.Model):
     def get_sum_rating(self):
         return sum([rating.value for rating in self.ratings.all()])
 
+    def get_view_count(self):
+        """
+        Возвращает количество просмотров для данной статьи блога
+        """
+        return self.views_blog.count()
+
+
+class ViewCount(models.Model):
+    """
+    Модель просмотров для блогов
+    """
+    blog = models.ForeignKey('BlogPost', on_delete=models.CASCADE, related_name='views_blog')
+    ip_address = models.GenericIPAddressField(verbose_name=_('IP адрес'))
+    viewed_on = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата просмотра'))
+
+    class Meta:
+        ordering = ('-viewed_on',)
+        indexes = [models.Index(fields=['-viewed_on'])]
+        verbose_name = 'Просмотр'
+        verbose_name_plural = 'Просмотры'
+
+    def __str__(self):
+        return self.blog.title
+
 
 class Comment(MPTTModel):
     """
@@ -102,14 +126,14 @@ class Comment(MPTTModel):
         ('draft', 'Черновик')
     )
 
-    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, verbose_name='Запись блога', related_name='comments')
-    author = models.ForeignKey(User, verbose_name='Автор комментария', on_delete=models.CASCADE,
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, verbose_name=_('Запись блога'), related_name='comments')
+    author = models.ForeignKey(User, verbose_name=_('Автор комментария'), on_delete=models.CASCADE,
                                related_name='comments_author')
-    content = models.TextField(verbose_name='Текст комментария', max_length=3000)
-    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
-    time_update = models.DateTimeField(verbose_name='Время обновления', auto_now=True)
-    status = models.CharField(choices=STATUS_OPTIONS, default='published', verbose_name='Статус поста', max_length=10)
-    parent = TreeForeignKey('self', verbose_name='Родительский комментарий', null=True, blank=True,
+    content = models.TextField(verbose_name=_('Текст комментария'), max_length=3000)
+    time_create = models.DateTimeField(verbose_name=_('Время добавления'), auto_now_add=True)
+    time_update = models.DateTimeField(verbose_name=_('Время обновления'), auto_now=True)
+    status = models.CharField(choices=STATUS_OPTIONS, default='published', verbose_name=_('Статус поста'), max_length=10)
+    parent = TreeForeignKey('self', verbose_name=_('Родительский комментарий'), null=True, blank=True,
                             related_name='children', on_delete=models.CASCADE)
 
     class MTTMeta:

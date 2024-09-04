@@ -59,6 +59,30 @@ class NewsPost(models.Model):
     def get_sum_rating(self):
         return sum([rating.value for rating in self.news_ratings.all()])
 
+    def get_view_count(self):
+        """
+        Возвращает количество просмотров для данной статьи
+        """
+        return self.views_news.count()
+
+
+class ViewCount(models.Model):
+    """
+    Модель просмотров для статей
+    """
+    news = models.ForeignKey('NewsPost', on_delete=models.CASCADE, related_name='views_news')
+    ip_address = models.GenericIPAddressField(verbose_name=_('IP адрес'))
+    viewed_on = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата просмотра'))
+
+    class Meta:
+        ordering = ('-viewed_on',)
+        indexes = [models.Index(fields=['-viewed_on'])]
+        verbose_name = 'Просмотр'
+        verbose_name_plural = 'Просмотры'
+
+    def __str__(self):
+        return self.news.title
+
 
 class Comment(MPTTModel):
     """
@@ -158,11 +182,11 @@ class Rating(models.Model):
     """
     Модель рейтинга: Лайк - Дизлайк
     """
-    post = models.ForeignKey(to=NewsPost, verbose_name='Статья', on_delete=models.CASCADE, related_name='news_ratings')
-    user = models.ForeignKey(to=User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True, null=True, related_name='news_user')
-    value = models.IntegerField(verbose_name='Значение', choices=[(1, 'Нравится'), (-1, 'Не нравится')])
-    time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
-    ip_address = models.GenericIPAddressField(verbose_name='IP Адрес')
+    post = models.ForeignKey(to=NewsPost, verbose_name=_('Статья'), on_delete=models.CASCADE, related_name='news_ratings')
+    user = models.ForeignKey(to=User, verbose_name=_('Пользователь'), on_delete=models.CASCADE, blank=True, null=True, related_name='news_user')
+    value = models.IntegerField(verbose_name=_('Значение'), choices=[(1, 'Нравится'), (-1, 'Не нравится')])
+    time_create = models.DateTimeField(verbose_name=_('Время добавления'), auto_now_add=True)
+    ip_address = models.GenericIPAddressField(verbose_name=_('IP Адрес'))
 
     class Meta:
         unique_together = ('post', 'ip_address')

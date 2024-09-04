@@ -43,6 +43,7 @@
                                         <ul>
                                             <li><i class="uil uil-schedule"></i> {{ n.time_create }}</li>
                                             <li><i class="uil uil-comments-alt"></i> {{ n.comments_news.count }}</li>
+                                            <li><i class="bi-eye"></i> {{ n.get_view_count }}</li>
                                         </ul>
                                     </div>
                                     <div class="entry-title">
@@ -79,7 +80,8 @@
                                 </div>
                                 <div class="entry-meta">
                                     <ul>
-                                        <li>{{ n.time_create }}</li>
+                                        <li><i class="uil uil-schedule"></i> {{ n.time_create|date:"d.m.Y" }}</li>
+                                        <li><i class="bi-eye"></i> {{ n.get_view_count }}</li>
                                     </ul>
                                 </div>
                                 <div class="entry-title title-xs text-transform-none">

@@ -8,6 +8,7 @@ from django.views import View
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
 from news.forms import NewsPostUpdateForm, NewsPostCreateForm, CommentCreateForm
+from news.mixins import ViewCountMixin
 from news.models import NewsPost, Comment, Rating
 from el_pagination.decorators import page_template
 from services.mixins import AuthorRequiredMixin
@@ -32,7 +33,7 @@ def news_section(request,
     return render(request, template, context)
 
 
-class NewsPostDetailView(DetailView):
+class NewsPostDetailView(ViewCountMixin, DetailView):
     model = NewsPost
     template_name = 'news/news-single.html'
     context_object_name = 'post'

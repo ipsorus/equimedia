@@ -31,6 +31,7 @@
                                 </ul>
                             </div>
                             <ul class="entry-icons d-none d-sm-block">
+                                <li><i class="bi-eye"></i><span>{{ post.get_view_count }}</span></li>
                                 <li><i class="bi-heart"></i><span>{{ post.get_sum_rating }}</span></li>
                                 <li><i class="bi-chat"></i><span>{{ post.comments.count }}</span></li>
                             </ul>

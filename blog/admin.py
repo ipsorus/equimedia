@@ -3,7 +3,7 @@ from django.db import ProgrammingError
 
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import Comment, BlogPost, BannerBlogSidebar, BannerBlogSidebar2, BlogSettings, Rating
+from .models import Comment, BlogPost, BannerBlogSidebar, BannerBlogSidebar2, BlogSettings, Rating, ViewCount
 
 
 @admin.register(Comment)
@@ -84,6 +84,11 @@ class BannerBlogSidebar2Admin(admin.ModelAdmin):
 
 class RatingsAdmin(admin.ModelAdmin):
     model = Rating
+
+
+@admin.register(ViewCount)
+class ViewCountAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(BannerBlogSidebar, BannerBlogSidebarAdmin)

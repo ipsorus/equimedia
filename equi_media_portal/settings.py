@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'django.contrib.sitemaps',
 
     'account.apps.AccountConfig',
     'event.apps.EventConfig',
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
     'bootstrap_modal_forms',
     'widget_tweaks',
     'sorl.thumbnail',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
@@ -196,8 +198,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    # 'users.authentication.EmailAuthBackend',
+    'equi_media_portal.backends.UserModelBackend'
 ]
+
 
 LOGIN_URL = 'main'
 LOGOUT_URL = 'main'

@@ -23,7 +23,7 @@
             {% if post.image %}<img src="{{ post.image.url }}" alt="">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}
         </div>
         <div class="portfolio-desc">
-            <span class="mb-2">{{ post.time_create }}</span>
+            <span class="mb-2"><i class="uil uil-schedule"></i> {{ post.time_create|date:"d.m.y" }}<i class="bi-three-dots-vertical px-2"></i><i class="bi-eye"></i> {{ post.get_view_count }}</span>
             <h5><a href="{{ post.get_absolute_url }}" class="stretched-link color-underline">{{ post.title }}</a></h5>
         </div>
     </div>

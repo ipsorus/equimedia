@@ -104,19 +104,21 @@ class CustomAuthenticationForm(AuthenticationForm):
         """
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields['username'].widget.attrs['placeholder'] = 'Логин пользователя'
-            self.fields['password'].widget.attrs['placeholder'] = 'Пароль пользователя'
-            self.fields['username'].widget.attrs.update({
-                'id': "border-form-username",
-                'autocomplete': 'off'
-            })
-            self.fields['password'].widget.attrs.update({
-                'id': "border-form-password",
-                'autocomplete': 'new-password'
-            })
             self.fields[field].widget.attrs.update({
                 'class': 'form-control border-form-control px-1 rounded-0',
             })
+
+        self.fields['username'].widget.attrs['placeholder'] = 'Логин пользователя'
+        self.fields['password'].widget.attrs['placeholder'] = 'Пароль пользователя'
+        self.fields['username'].widget.attrs.update({
+            'id': "border-form-username",
+            'autocomplete': 'off',
+        })
+        self.fields['password'].widget.attrs.update({
+            'id': "border-form-password",
+            'autocomplete': 'new-password'
+        })
+        self.fields['username'].label = 'E-mail или Логин'
 
 
 class UserLoginForm(AuthenticationForm):
@@ -130,13 +132,13 @@ class UserLoginForm(AuthenticationForm):
         """
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields['username'].widget.attrs['placeholder'] = 'Логин пользователя'
-            self.fields['password'].widget.attrs['placeholder'] = 'Пароль пользователя'
-            self.fields['username'].label = 'Логин'
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
                 'autocomplete': 'new-password'
             })
+        self.fields['username'].widget.attrs['placeholder'] = 'Логин пользователя'
+        self.fields['password'].widget.attrs['placeholder'] = 'Пароль пользователя'
+        self.fields['username'].label = 'Логин'
 
 
 class UserPasswordChangeForm(PasswordChangeForm):

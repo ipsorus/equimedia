@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 from el_pagination.views import AjaxListView
 from services.mixins import AuthorRequiredMixin
 from services.utils import get_client_ip
+from .mixins import ViewCountMixin
 from .models import Comment, BlogPost, Rating
 from .forms import CommentCreateForm, BlogPostUpdateForm, BlogPostCreateForm
 
@@ -34,7 +35,7 @@ class BlogPostListView(AjaxListView):
         return context
 
 
-class BlogPostDetailView(DetailView):
+class BlogPostDetailView(ViewCountMixin, DetailView):
     model = BlogPost
     template_name = 'blog/post_detail.html'
     context_object_name = 'post'

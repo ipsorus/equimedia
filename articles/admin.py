@@ -4,7 +4,7 @@ from django.db import ProgrammingError
 from mptt.admin import DraggableMPTTAdmin
 
 from articles.models import Article, BannerArticleSideBar1, BannerArticleSideBar2, BannerArticleBetweenArticles, \
-    ArticlesSettings, Comment, Rating
+    ArticlesSettings, Comment, Rating, ViewCount
 from slider.models import Slider
 
 
@@ -118,6 +118,11 @@ class BannerArticleBetweenArticlesAdmin(admin.ModelAdmin):
 
 class RatingsAdmin(admin.ModelAdmin):
     model = Rating
+
+
+@admin.register(ViewCount)
+class ViewCountAdmin(admin.ModelAdmin):
+    pass
 
 
 admin.site.register(Rating, RatingsAdmin)
