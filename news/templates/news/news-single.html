@@ -87,8 +87,8 @@
                                                             data-scrollto="#cnvs-article-share"><i class="bi-share"></i>
                                                     </button>
                                                     {% if post.author.id == user.id or user.is_superuser or user.is_staff%}
-                                                    <button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ post.get_update_url }}"><i class="bi-pencil-square"></i></a></button>
-                                                    <button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ post.get_delete_url }}"><i class="bi-x-circle"></i></a></button>
+                                                    <button type="button" class="font-size-plus btn btn-outline-warning border-0 ms-1"><a href="{{ post.get_update_url }}"><i class="bi-pencil-square"></i></a></button>
+                                                    <button type="button" class="font-size-plus btn btn-outline-danger border-0 ms-1"><a href="{{ post.get_delete_url }}"><i class="bi-x-circle"></i></a></button>
                                                     {% endif %}
                                                 </div>
                                             </div>

@@ -88,9 +88,9 @@
 
 															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1" data-scrollto="#cnvs-article-share"><i class="bi-share"></i></button>
 															{% if item.author.id == user.id or user.is_superuser or user.is_staff %}
-															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_update_url }}" title="Редактировать турнир"><i class="bi-pencil-square"></i></a></button>
-															<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_delete_url }}" title="Удалить турнир"><i class="bi-x-circle"></i></a></button>
-															{% if not item.is_closed %}<button type="button" class="font-size-plus btn btn-outline-secondary border-contrast-200 h-bg-contrast-200 h-text-contrast-900 border-0 ms-1"><a href="{{ item.get_close_url }}" title="Завершить турнир"><i class="bi-check-circle"></i></a></button>{% endif %}
+															<button type="button" class="font-size-plus btn btn-outline-warning border-0 ms-1"><a href="{{ item.get_update_url }}" title="Редактировать турнир"><i class="bi-pencil-square"></i></a></button>
+															<button type="button" class="font-size-plus btn btn-outline-danger border-0 ms-1"><a href="{{ item.get_delete_url }}" title="Удалить турнир"><i class="bi-x-circle"></i></a></button>
+															{% if not item.is_closed %}<button type="button" class="font-size-plus btn btn-outline-success border-0 ms-1"><a href="{{ item.get_close_url }}" title="Завершить турнир"><i class="bi-check-circle"></i></a></button>{% endif %}
 															{% endif %}
 														</div>
 													</div>
