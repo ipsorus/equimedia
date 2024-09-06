@@ -163,7 +163,7 @@ class UserRegisterView(UserIsNotAuthenticated, CreateView):
         current_site = Site.objects.get_current().domain
         send_mail(
             'Подтвердите свой электронный адрес',
-            f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: {current_site}{activation_url}',
+            f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: https://{current_site}{activation_url}',
             settings.SERVER_EMAIL,
             [user.email],
             fail_silently=False,
@@ -254,7 +254,7 @@ class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView
 
 
 class UserConfirmEmailView(View):
-    def get(self, request, uidb64, token):
+    def get(self, request, uidb64, token, backends='django.contrib.auth.backends.ModelBackend'):
         try:
             uid = urlsafe_base64_decode(uidb64)
             user = User.objects.get(pk=uid)
@@ -264,7 +264,7 @@ class UserConfirmEmailView(View):
         if user is not None and default_token_generator.check_token(user, token):
             user.is_active = True
             user.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('email_confirmed')
         else:
             return redirect('email_confirmation_failed')
