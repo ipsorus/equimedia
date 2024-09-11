@@ -16,7 +16,7 @@ from event.forms import EventUpdateForm, EventCreateForm, EventDocumentCreateFor
     TournamentCloseForm, TournamentDocumentCloseForm, StageDocumentCloseForm, StageCloseForm, StageCreateForm
 from event.models import Event, Tournament, Stage, EventDocument, TournamentDocument, StageDocument, \
     TournamentCloseDocument, StageCloseDocument
-from services.mixins import AuthorRequiredMixin
+from services.mixins import AuthorRequiredMixin, AdminRequiredMixin
 from django.forms.models import inlineformset_factory
 
 
@@ -191,7 +191,7 @@ EventDocumentFormset = inlineformset_factory(
 )
 
 
-class EventCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class EventCreateView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
     Представление: создание материалов на сайте
     """
@@ -228,7 +228,7 @@ class EventCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return reverse_lazy('event_detail_url', kwargs={'event_id': self.object.pk})
 
 
-class EventUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
+class EventUpdateView(AdminRequiredMixin, LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: обновление материала на сайте
     """
@@ -262,7 +262,7 @@ class EventUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMix
         return reverse_lazy('event_detail_url', kwargs={'event_id': self.object.pk})
 
 
-class EventDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
+class EventDeleteView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     Представление: удаления материала
     """
@@ -304,7 +304,7 @@ StageCloseDocumentFormset = inlineformset_factory(
 )
 
 
-class TournamentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class TournamentCreateView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
     Представление: создание материалов на сайте
     """
@@ -345,7 +345,7 @@ class TournamentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return reverse_lazy('tournament_detail_url', kwargs={'tournament_id': self.object.pk})
 
 
-class StageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class StageCreateView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
     Представление: создание этапа турнира на сайте
     """
@@ -380,7 +380,7 @@ class StageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return reverse_lazy('tournament_detail_url', kwargs={'tournament_id': self.object.tournament.pk})
 
 
-class TournamentUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
+class TournamentUpdateView(AdminRequiredMixin, LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: обновление турнира на сайте
     """
@@ -428,7 +428,7 @@ class TournamentUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessa
         return reverse_lazy('tournament_detail_url', kwargs={'tournament_id': self.object.pk})
 
 
-class TournamentDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
+class TournamentDeleteView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     Представление: удаления турнира
     """
@@ -444,7 +444,7 @@ class TournamentDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView)
         return context
 
 
-class StageUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
+class StageUpdateView(AdminRequiredMixin, LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: обновление этапа турнира на сайте
     """
@@ -487,7 +487,7 @@ class StageUpdateView(LoginRequiredMixin, AuthorRequiredMixin, SuccessMessageMix
                             kwargs={'tournament_id': self.object.tournament.pk, 'stage_id': self.object.pk})
 
 
-class StageDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
+class StageDeleteView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     Представление: удаления турнира
     """
@@ -503,7 +503,7 @@ class StageDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
         return context
 
 
-class TournamentCloseView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class TournamentCloseView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: завершение турнира на сайте
     """
@@ -543,7 +543,7 @@ class TournamentCloseView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse_lazy('tournament_detail_url', kwargs={'tournament_id': self.object.pk})
 
 
-class StageCloseView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class StageCloseView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: завершение этапа турнира на сайте
     """

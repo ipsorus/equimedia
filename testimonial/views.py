@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
+from services.email import send_testimonial_email_message
 from services.utils import get_client_ip
 from testimonial.forms import TestimonialCreateForm
 from testimonial.models import Testimonial
@@ -33,4 +34,8 @@ class TestimonialCreateView(SuccessMessageMixin, CreateView):
                 testimonial.author = self.request.user
             else:
                 testimonial.author = testimonial.author
+
+            subject = 'Новый отзыв на сайте'
+            send_testimonial_email_message(subject, testimonial.email, testimonial.content, testimonial.ip_address,
+                                           testimonial.author)
         return super().form_valid(form)

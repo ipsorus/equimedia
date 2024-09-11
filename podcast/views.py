@@ -7,7 +7,7 @@ from django.views.generic import DeleteView, UpdateView, CreateView
 from el_pagination.decorators import page_template
 from podcast.forms import VideoCreateForm, VideoUpdateForm
 from podcast.models import Video
-from services.mixins import AuthorRequiredMixin
+from services.mixins import AuthorRequiredMixin, AdminRequiredMixin
 
 
 def is_ajax(request):
@@ -27,7 +27,7 @@ def video_section(request,
     return render(request, template, context)
 
 
-class VideoCreateView(LoginRequiredMixin, CreateView):
+class VideoCreateView(AdminRequiredMixin, LoginRequiredMixin, CreateView):
     """
     Представление: создание материалов на сайте
     """
@@ -50,7 +50,7 @@ class VideoCreateView(LoginRequiredMixin, CreateView):
         return reverse_lazy('video_list_url')
 
 
-class VideoUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
+class VideoUpdateView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: обновления материала на сайте
     """
@@ -75,7 +75,7 @@ class VideoUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse_lazy('video_list_url')
 
 
-class VideoDeleteView(AuthorRequiredMixin, DeleteView):
+class VideoDeleteView(AdminRequiredMixin, AuthorRequiredMixin, DeleteView):
     """
     Представление: удаления материала
     """

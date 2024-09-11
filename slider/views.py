@@ -1,18 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView, UpdateView, CreateView
-
-from el_pagination.decorators import page_template
-from podcast.forms import VideoCreateForm, VideoUpdateForm
-from podcast.models import Video
-from services.mixins import AuthorRequiredMixin
+from services.mixins import AdminRequiredMixin
 from slider.forms import SliderCreateForm, SliderUpdateForm
 from slider.models import Slider
 
 
-class SliderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class SliderCreateView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
     Представление: создание материалов на сайте
     """
@@ -35,7 +30,7 @@ class SliderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return reverse_lazy('main')
 
 
-class SliderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class SliderUpdateView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: обновления слайда на сайте
     """
@@ -48,7 +43,7 @@ class SliderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = f'Обновление записи: {self.object.title}'
+        context['title'] = f'Обновление слайда: {self.object.title}'
         return context
 
     def form_valid(self, form):
@@ -59,7 +54,7 @@ class SliderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse_lazy('main')
 
 
-class SliderDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class SliderDeleteView(AdminRequiredMixin, LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     Представление: удаления слайда
     """

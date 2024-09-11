@@ -11,7 +11,7 @@ from news.forms import NewsPostUpdateForm, NewsPostCreateForm, CommentCreateForm
 from news.mixins import ViewCountMixin
 from news.models import NewsPost, Comment, Rating
 from el_pagination.decorators import page_template
-from services.mixins import AuthorRequiredMixin
+from services.mixins import AuthorRequiredMixin, AdminRequiredMixin
 from services.utils import get_client_ip
 from slider.models import Slider
 
@@ -64,7 +64,7 @@ class NewsPostDetailView(ViewCountMixin, DetailView):
         return context
 
 
-class NewsPostCreateView(LoginRequiredMixin, CreateView):
+class NewsPostCreateView(AdminRequiredMixin, LoginRequiredMixin, CreateView):
     """
     Представление: создание материалов на сайте
     """
@@ -92,7 +92,7 @@ class NewsPostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class NewsPostUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
+class NewsPostUpdateView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление: обновления материала на сайте
     """
@@ -114,7 +114,7 @@ class NewsPostUpdateView(AuthorRequiredMixin, SuccessMessageMixin, UpdateView):
         return super().form_valid(form)
 
 
-class NewsPostDeleteView(AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
+class NewsPostDeleteView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     Представление: удаления материала
     """

@@ -3,7 +3,7 @@ from itertools import chain
 from operator import attrgetter
 
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -64,13 +64,17 @@ def index(request):
     return render(request, 'portal/index.html', data)
 
 
+def redirect_to_home(request):
+    return redirect('http://127.0.0.1:8000/')
+
+
 def tr_handler404(request, exception):
     """
     Обработка ошибки 404
     """
     return render(request=request, template_name='portal/errors/404.html', status=404, context={
         'title': 'Страница не найдена: 404',
-        'error_message': 'К сожалению эта страница не найдена или она перемещена',
+        'error_message': 'К сожалению, эта страница не найдена или она перемещена',
     })
 
 

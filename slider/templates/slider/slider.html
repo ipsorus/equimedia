@@ -233,21 +233,6 @@
                 </div>
                 {% endif %}
                 {% endfor %}
-                <!--            <div class="swiper-slide">-->
-                <!--            <div class="container">-->
-                <!--                <div class="slider-caption">-->
-                <!--                    <h2>Видео-слайд #2</h2>-->
-                <!--                    <p>Можно использовать загруженное на youtube видео</p>-->
-                <!--                    <div>-->
-                <!--                        <a href="block-slider-7-vertical.html" class="mt-6 border-width-2 button button-large button-offset button-light bg-white text-dark rounded" target="_blank">Смотреть</a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--            </div>-->
-                <!--            <div class="video-wrap">-->
-                <!--                <div class="yt-bg-player" data-quality="hd1080" data-start="19" data-mute="true" data-volume="1" data-stop="52" data-video="https://youtu.be/BAs61JQ3ciQ"></div>-->
-                <!--                <div class="video-overlay" style="background: rgba(0,0,0,0.4);"></div>-->
-                <!--            </div>-->
-                <!--            </div>-->
             </div>
             {% if slider_settings.pagination_dots %}
             <!-- If we need pagination -->
@@ -311,5 +296,31 @@
         {% endif %}
     </div>
 </section>
+{% block js %}
+<script src="{% static 'portal/js/plugins.min.js' %}"></script>
+<script>
+	jQuery(window).on( 'load', function(){
+		var cssVarSpeed = getComputedStyle(document.querySelector('.swiper-pagination'));
+		var swiperSpeed = (cssVarSpeed.getPropertyValue('--cnvs-swiper-autoplay-speed')).split('ms');
 
-
+		var swiper = new Swiper('.swiper', {
+			slidesPerView: '1',
+			loop: true,
+			disableOnInteraction: false,
+			effect: "fade",
+			autoplay: {
+				delay: Number( swiperSpeed[0] ),
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: 'true',
+				type: 'bullets',
+				renderBullet: function (index, className) {
+					return '<span class="' + className + '">' + '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"></svg>' + '</span>';
+				}
+			}
+		});
+	});
+</script>
+{% endblock %}

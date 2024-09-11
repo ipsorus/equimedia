@@ -18,3 +18,17 @@ def send_contact_email_message(subject, email, content, ip, user_id):
     })
     email = EmailMessage(subject, message, settings.SERVER_EMAIL, [settings.EMAIL_ADMIN])
     email.send(fail_silently=False)
+
+
+def send_testimonial_email_message(subject, email, content, ip, author):
+    """
+    Function to send testimonial form email
+    """
+    message = render_to_string('testimonial/email/testimonial_email_send.html', {
+        'email': email,
+        'content': content,
+        'ip': ip,
+        'user': author,
+    })
+    email = EmailMessage(subject, message, settings.SERVER_EMAIL, [settings.EMAIL_ADMIN])
+    email.send(fail_silently=False)

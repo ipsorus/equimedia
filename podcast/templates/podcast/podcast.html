@@ -1,4 +1,5 @@
 {% load static %}
+{% block content %}
 <div id="section-about" class="lazy section my-0 mt-0 entered lazy-loaded"
      style="padding: 0px 0; background-color:rgb(29, 97, 114);">
 <div class="section bg-transparent my-0 pb-1">
@@ -42,3 +43,23 @@
     </div>
 </div>
 </div>
+<script>
+	// Owl Carousel Scripts
+	jQuery(window).on( 'load', function(){
+		jQuery('#oc-videos').owlCarousel({
+			items: 1,
+			margin: 30,
+			nav: true,
+			navText: ['<i class="bi-arrow-left"></i>','<i class="bi-arrow-right"></i>'],
+			dots: false,
+			smartSpeed: 300,
+			stagePadding: 60,
+			responsive:{
+				768: { stagePadding: 100, margin: 30, items: 1 },
+				991: { stagePadding: 100, margin: 40, smartSpeed: 400, items: 2 },
+				1200: { stagePadding: 100, margin: 40, smartSpeed: 400, items: 2}
+			},
+		});
+	});
+</script>
+{% endblock %}

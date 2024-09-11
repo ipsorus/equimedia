@@ -1394,3 +1394,22 @@ background-color: transparent !important;
   color: #c02942;
   border-color: #c02942;
 }
+
+
+.ck-content .table {
+    float: left;
+    width: 550px;
+    height: 450px;
+}
+
+.ck-content .table table {
+    border-style: dashed;
+    border-color: hsl(90, 75%, 60%);
+    border-width: 3px;
+}
+
+.ck-content .table table td {
+    text-align: center;
+    vertical-align: bottom;
+    padding: 10px
+}

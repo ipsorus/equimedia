@@ -134,6 +134,7 @@
 										</table>
 										{% endif %}
 
+
 										<div class="section mb-0" style="background-color: rgba(126, 150, 128,0.2); padding: 10px;">
 											<div class="text-center text-title"><h4>Документы</h4></div>
 											<div class="container p-4">
@@ -167,6 +168,20 @@
 												{% endif %}
 											</div>
 										</div>
+
+										{% if item.result %}
+										<div class="row col-mb-50 mt-5">
+											<div class="col-md-12">
+												<div class="card">
+													<div class="card-header text-center mb-0"><h4>Результаты турнира</h4></div>
+													<div class="card-body">
+														<p class="card-text">{{ item.result|safe }}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										{% endif %}
+
 										<div class="section mb-0" style="background-color: rgba(126, 150, 128,0.2); padding: 10px;">
 											<div class="text-center text-title"><h4>Документы с результатами турнира</h4></div>
 											<div class="container p-4">
