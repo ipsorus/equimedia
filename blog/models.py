@@ -47,7 +47,7 @@ class BlogPost(models.Model):
         upload_to='images/thumbnails/%Y/%m/%d/',
         validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))]
     )
-    is_published = models.BooleanField(default=False, verbose_name=_("Публикация новости"))
+    is_published = models.BooleanField(default=False, verbose_name=_("Опубликовать запись"))
     time_create = models.DateTimeField(auto_now_add=True, verbose_name=_('Время добавления'))
     time_update = models.DateTimeField(auto_now=True, verbose_name=_('Время обновления'))
     author = models.ForeignKey(to=User, verbose_name=_('Автор'), on_delete=models.SET_DEFAULT, related_name='author_posts',

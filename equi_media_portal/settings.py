@@ -244,27 +244,27 @@ LANGUAGES = [
 PER_PAGE = 9
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True
-#
-# EMAIL_HOST_USER = 'ipsorus@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'ovbgwvlbwfnrugho'
-#
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-# SERVER_EMAIL = EMAIL_HOST_USER
-# EMAIL_ADMIN = EMAIL_HOST_USER
-
-EMAIL_HOST = 'smtp.beget.com'
+EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 
-EMAIL_HOST_USER = 'info@equimedia.ru'
-EMAIL_HOST_PASSWORD = '8aEuV4&qvo4P'
+EMAIL_HOST_USER = 'ipsorus@yandex.ru'
+EMAIL_HOST_PASSWORD = 'ovbgwvlbwfnrugho'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
+
+# EMAIL_HOST = 'smtp.beget.com'
+# EMAIL_PORT = 465
+# EMAIL_USE_SSL = True
+#
+# EMAIL_HOST_USER = 'info@equimedia.ru'
+# EMAIL_HOST_PASSWORD = '8aEuV4&qvo4P'
+#
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# SERVER_EMAIL = EMAIL_HOST_USER
+# EMAIL_ADMIN = EMAIL_HOST_USER
 
 
 customColorPalette = [

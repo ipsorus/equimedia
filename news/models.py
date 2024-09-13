@@ -43,7 +43,10 @@ class NewsPost(models.Model):
         super().save(*args, **kwargs)
 
         if self.__thumbnail != self.image and self.image:
-            image_compress(self.image.path, width=1920, height=1080)
+            if self.slider:
+                image_compress(self.image.path, width=3840, height=2400)
+            else:
+                image_compress(self.image.path, width=1920, height=1080)
 
     def __str__(self):
         return f'Дата создания: {self.time_create} - {self.title}'

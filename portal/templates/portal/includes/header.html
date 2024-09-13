@@ -30,12 +30,25 @@
                     <div class="header-misc-icon top-account">
                         <a href="#" data-bs-toggle="dropdown" data-bs-offset="0,20" data-bs-auto-close="true" aria-haspopup="true" aria-expanded="false"><i class="i-plain bi-person-circle"></i></a>
                         <div class="dropdown-menu dropdown-menu-end px-2 m-0">
-                            {% if user.is_superuser or user.is_staff %}
+                            {% if user.is_superuser %}
                             <a class="dropdown-item py-2 h-bg-tranparent" href="/admin" target="_blank"><i class="bi-gear me-2"></i>Админпанель</a>
                             {% endif %}
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{{ user.profile.get_absolute_url }}"><i class="bi-person me-2"></i>Профиль</a>
+                            {% if 'Судьи' in user.groups.all.0.name %}
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'news_post_create' %}"><i class="bi-pencil-square me-2"></i>ТЕСТ</a>
+                            {% endif %}
+                            {% if 'Редакторы' in user.groups.all.0.name %}
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'post_create' %}"><i class="bi-pencil-square me-2"></i>Написать в блог</a>
-                            {% if user.is_superuser or user.is_staff %}
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'news_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать новость</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'article_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать статью</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'video_create' %}"><i class="bi-collection-play me-2"></i>Добавить видео/подкаст</a>
+                            {% endif %}
+                            {% if not user.is_superuser and not user.is_staff %}
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'post_create' %}"><i class="bi-pencil-square me-2"></i>Написать в блог</a>
+                            {% endif %}
+                            {% if user.is_superuser%}
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{{ user.profile.get_absolute_url }}"><i class="bi-person me-2"></i>Профиль</a>
+                            <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'post_create' %}"><i class="bi-pencil-square me-2"></i>Написать в блог</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'news_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать новость</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'article_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать статью</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'tournament_create' %}"><i class="bi-calendar2-event me-2"></i>Добавить турнир</a>

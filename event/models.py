@@ -94,7 +94,7 @@ class Tournament(models.Model):
             image_compress(self.image.path, width=1920, height=1080)
 
     def __str__(self):
-        return f'{self.title, self.date_start}'
+        return f'Турнир: {self.title}, Дата начала: {self.date_start}'
 
     class Meta:
         verbose_name = _('Турнир')
@@ -112,7 +112,7 @@ class TournamentDocument(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'Документ: {self.title}, {self.tournament}'
 
     def extension(self):
         name, extension = os.path.splitext(self.file.name)
@@ -130,7 +130,7 @@ class TournamentCloseDocument(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'Документ с результатами турнира: {self.title}, {self.tournament}'
 
     def extension(self):
         name, extension = os.path.splitext(self.file.name)
@@ -175,7 +175,7 @@ class Stage(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.title, self.date_start}'
+        return f'Этап: {self.title} для {self.tournament}'
 
     class Meta:
         verbose_name = _('Этап турнира')
@@ -193,7 +193,7 @@ class StageDocument(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'Документ: {self.title}, {self.stage}'
 
     def extension(self):
         name, extension = os.path.splitext(self.file.name)
@@ -211,7 +211,7 @@ class StageCloseDocument(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'Документ с результатами этапа: {self.title}, {self.stage}'
 
     def extension(self):
         name, extension = os.path.splitext(self.file.name)
@@ -256,7 +256,7 @@ class Event(models.Model):
             image_compress(self.image.path, width=1920, height=1080)
 
     def __str__(self):
-        return f'{self.title, self.date_start}'
+        return f'Мероприятие: {self.title}, Дата начала: {self.date_start}'
 
     class Meta:
         verbose_name = _('Событие')
@@ -274,7 +274,7 @@ class EventDocument(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'Документ к мероприятию: {self.title}. {self.event}'
 
     def extension(self):
         name, extension = os.path.splitext(self.file.name)

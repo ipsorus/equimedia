@@ -8,10 +8,24 @@ from equi_media_portal.utils import image_compress
 
 
 class Slider(models.Model):
+    POSITION_X_OPTIONS = (
+        ('center', 'По центру'),
+        ('right', 'Справа'),
+        ('left', 'Слева')
+    )
+
+    POSITION_Y_OPTIONS = (
+        ('center', 'По центру'),
+        ('top', 'По верху'),
+        ('bottom', 'По низу')
+    )
+
     title = models.CharField(max_length=150, db_index=True, verbose_name=_("Заголовок слайда"))
     url = models.CharField(max_length=350, verbose_name=_("Ссылка в слайде"))
     additional_content = models.TextField(max_length=250, blank=True, verbose_name=_("Дополнительный текст слайда"))
     poster = models.ImageField(upload_to='media/slider/poster/%Y/%m/%d', verbose_name=_("Обложка слайда"))
+    position_x = models.CharField(choices=POSITION_X_OPTIONS, default='center', verbose_name=_('Выравнивание по горизонтали'), max_length=10)
+    position_y = models.CharField(choices=POSITION_Y_OPTIONS, default='center', verbose_name=_('Выравнивание по вертикали'), max_length=10)
     video = models.FileField(upload_to='media/slider/video/%Y/%m/%d', blank=True, verbose_name=_("Видео слайд"))
     time_create = models.DateTimeField(auto_now_add=True, verbose_name=_("Дата создания слайда"))
     time_update = models.DateTimeField(auto_now=True, verbose_name=_("Дата обновления слайда"))

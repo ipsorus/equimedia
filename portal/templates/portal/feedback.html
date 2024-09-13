@@ -94,7 +94,7 @@ background-color: #1d6172 !important;
 					<div class="p-4">
 						<div class="quick-contact-widget">
 							<h3 class="text-capitalize ls-1 fw-normal">Напишите нам</h3>
-							<form method="post" action="{% url 'feedback' %}">
+							<form method="post" action="{% url 'contacts' %}">
 								{% csrf_token %}
 								{{ form.as_p }}
 								{% for hidden in form.hidden_fields %}

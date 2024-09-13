@@ -119,7 +119,7 @@ class StaticSitemap(Sitemap):
     """
 
     def items(self):
-        return ['feedback', 'main', 'articles_list_url', 'posts_list_url', 'calendar_page', 'tournaments',
+        return ['contacts', 'main', 'articles_list_url', 'posts_list_url', 'calendar_page', 'tournaments',
                 'news_list_url', 'video_list_url']
 
     def location(self, item):
