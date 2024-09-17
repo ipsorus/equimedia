@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'slider.apps.SliderConfig',
     'testimonial.apps.TestimonialConfig',
     'blog.apps.BlogConfig',
+    'broadcast.apps.BroadcastConfig',
     'podcast.apps.PodcastConfig',
     'django_ckeditor_5',
     'el_pagination',
@@ -122,6 +123,8 @@ TEMPLATES = [
 
                 'blog.context_processors.blog_advertisement_settings',
                 'blog.context_processors.blog_settings',
+
+                'broadcast.context_processors.broadcast_settings',
 
                 'portal.context_processors.contacts_settings',
                 'portal.context_processors.about_us_settings',
@@ -201,10 +204,8 @@ AUTHENTICATION_BACKENDS = [
     'equi_media_portal.backends.UserModelBackend'
 ]
 
-
 LOGIN_URL = 'main'
 LOGOUT_URL = 'main'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -330,6 +331,18 @@ CKEDITOR_5_CONFIGS = {
                 "alignRight",
                 "alignCenter",
             ],
+        },
+        "link": {
+            "decorators": {
+                "isExternal": {
+                    "mode": 'manual',
+                    "label": 'Open in a new tab',
+                    "attributes": {
+                        "target": '_blank',
+                        "rel": 'nofollow'
+                    }
+                }
+            }
         },
         "table": {
             "contentToolbar": [

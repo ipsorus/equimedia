@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 {% if user.is_superuser or user.is_staff%}
-                <div class="entry-icons d-sm-block mb-1">
+                <div class="entry-icons d-sm-block mb-1 px-1">
                         <a href="{{ video.get_update_url }}" class="font-size-plus btn btn-outline-success border-0 ms-1" title="Изменить видео"><i class="bi-pencil-square"></i></a>
                         <a href="{{ video.get_delete_url }}" class="font-size-plus btn btn-outline-danger border-0 ms-1" title="Удалить видео"><i class="bi-x-circle"></i></a>
                 </div>

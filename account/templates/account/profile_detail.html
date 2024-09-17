@@ -21,7 +21,7 @@
                     <img src="{{ profile.avatar.url }}" alt="{{ profile }}" class="rounded-circle me-3 border border-width-3 border-white" width="120" height="120">
                     <div>
                         <h2 class="h1 border-bottom border-dark border-width-4" style="font-weight: 800">{{ profile.user.username }}</h2>
-                        {% if user.is_superuser or user.is_staff %}
+                        {% if profile.user.is_superuser or profile.user.is_staff %}
                             <p class="mb-0">Роль: <strong>{% translate 'Администрация сайта' %}</strong></p>
                         {% else %}
                             <p class="mb-0">Роль: <strong>Посетитель сайта</strong></p>

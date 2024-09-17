@@ -19,7 +19,7 @@
 				<li class="menu-item"><a class="menu-link" href="{% url 'tournaments' %}"><div>Турниры</div></a></li>
 			</ul>
 		</li>
-        <li class="menu-item"><a class="menu-link" href="#">Трансляции <div class="menu-live-center"><div class="ml-circle ml-pulse ml-dot"></div></div></a></li>
+        <li class="menu-item"><a class="menu-link" href="{% url 'broadcast_url' %}">Трансляции <div class="menu-live-center"><div class="ml-circle ml-pulse ml-dot"></div></div></a></li>
         <li class="menu-item"><a class="menu-link" href="{% url 'contacts' %}">Контакты</a></li>
         {% if about_us_settings.show_page %}<li class="menu-item"><a class="menu-link" href="{% url 'about_us' %}">{{ about_us_settings.title_about_us }}</a></li>{% endif %}
     </ul>

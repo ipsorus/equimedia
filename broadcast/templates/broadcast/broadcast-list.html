@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	<title>{{ title }}{% if site_settings.alter_title %} - {{ site_settings.alter_title }}{% endif %}</title>
+{% endblock %}
+{% block content %}
+<style>
+.bg-color-title, .bg-color-title #header-wrap {
+background-color: #336576 !important;
+}
+.color-underline {
+	background-image: linear-gradient(rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3), rgba(var(--cnvs-themecolor-rgb, 243, 152, 135), 0.3));
+	background-repeat: no-repeat;
+	background-size: 0 8px;
+	background-position: 0 82%;
+	padding: 0 2px 2px 0;
+	transition: background .6s cubic-bezier(.19,1,.22,1);
+}
+.color-underline:hover { background-size: 100% 8px; }
+
+.button-border-icon {
+    background-color: transparent !important;
+}
+
+.button-border-icon i {
+    margin-right: 0;
+    border-radius: 50%;
+    border: 1px solid #DDD;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: transparent !important;
+}
+
+.button-border-icon span {
+    margin-left: 0.75rem;
+}
+
+@media screen and (max-width: 767.98px) {
+    .heading-block h3 {
+        font-size: 1.2rem;
+    }
+   }
+</style>
+
+<!-- Page Title
+		============================================= -->
+<section class="page-title bg-color-title dark">
+    <div class="container">
+        <div class="page-title-row">
+
+            <div class="page-title-content">
+                <h1>{{ broadcast_settings.page_title }}</h1>
+                <span>{{ broadcast_settings.sub_title_broadcast_page }}</span>
+            </div>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'main' %}">Главная</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ broadcast_settings.page_title }}</li>
+                </ol>
+            </nav>
+
+        </div>
+    </div>
+</section><!-- .page-title end -->
+<!-- Content
+		============================================= -->
+
+<section id="content">
+    <div class="content-wrap">
+        <div class="container">
+            {% for broadcast in broadcasts %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="col-sm-12" style="background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0, 0.8)), url('{% if broadcast.image %}{{ broadcast.image.url }}{% else %}{% static 'portal/images/broadcast/broadcast.webp' %}{% endif %}') center center no-repeat; background-size: cover; padding: 80px;">
+						<div class="d-flex align-items-start flex-column" style="height: 350px;">
+							<div class="mb-auto heading-block border-bottom-0 dark">
+								<h3>{{ broadcast.title }}</h3>
+							</div>
+                            {% if broadcast.show_broadcast %}
+							<a class="button button-border-icon px-0 mx-0" href="{{ broadcast.get_cleaned_url }}" data-lightbox="iframe"><i class="bi-play"></i><span>Смотреть трансляцию</span></a>
+                            {% else %}
+                            <span class="dark" style="font-size: 1.4rem;">Трансляция завершена, либо еще не началась</span>
+                            {% endif %}
+
+						</div>
+
+					</div>
+                        <div class="entry-meta">
+                            <ul>
+                                <li><i class="bi-clock"></i>{{ broadcast.time_update }}</li>
+                                {% if user.is_superuser or user.is_staff%}
+                                <li>
+                                    <a href="{{ broadcast.get_update_url }}" class="font-size-plus btn btn-outline-success border-0 ms-1" style="color:#000;" title="Изменить трансляцию"><i class="bi-pencil-square"></i></a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        {% if not forloop.last %}
+                        <div class="divider"></div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section><!-- #content end -->
+
+{% endblock %}
