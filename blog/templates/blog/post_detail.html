@@ -10,7 +10,7 @@
 <!-- Page Title
 		============================================= -->
 <section class="page-title dark page-title-parallax parallax scroll-detect page-title-center">
-	<img src="{{ post.thumbnail.url }}" class="parallax-bg">
+	{% if post.thumbnail %}<img src="{{ post.thumbnail.url }}" class="parallax-bg">{% endif %}
 	<div class="container">
 		<div class="page-title-row">
 
@@ -46,11 +46,12 @@
 								<!-- Single Post
 								============================================= -->
 								<div class="entry">
-									<!-- Entry Image
+									{% if post.thumbnail %}<!-- Entry Image
 									============================================= -->
 									<div class="entry-image">
 										<img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
 									</div><!-- .entry-image end -->
+									{% endif %}
 
 									<!-- Entry Content
 									============================================= -->

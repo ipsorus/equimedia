@@ -53,15 +53,13 @@
                 <nav class="page-menu-nav">
                     <ul class="page-menu-container">
                         <li class="page-menu-item current"><a href="{{ profile.get_absolute_url }}"><div>Профиль</div></a></li>
-                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'profile_blog_list' %}"><div>Записи в блоге</div></a></li>{% endif %}
-                        {% if profile.user.id == user.id %}
+                        <li class="page-menu-item"><a href="{% url 'profile_blog_list' slug=profile.slug %}"><div>Записи в блоге</div></a></li>
                         {% if user.is_superuser or user.is_staff %}
-                        <li class="page-menu-item"><a href="{% url 'profile_news_list' %}"><div>Опубликованные новости</div></a></li>
-                        <li class="page-menu-item"><a href="{% url 'profile_articles_list' %}"><div>Опубликованные статьи</div></a></li>
+                        <li class="page-menu-item"><a href="{% url 'profile_news_list' slug=profile.slug %}"><div>Опубликованные новости</div></a></li>
+                        <li class="page-menu-item"><a href="{% url 'profile_articles_list' slug=profile.slug %}"><div>Опубликованные статьи</div></a></li>
                         {% endif %}
-                        {% endif %}
-                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'profile_edit' %}"><div>Редактировать</div></a></li>{% endif %}
-                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'password_change' %}"><div>Изменить пароль</div></a></li>{% endif %}
+                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'profile_edit' slug=profile.slug %}"><div>Редактировать</div></a></li>{% endif %}
+                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'password_change' slug=profile.slug %}"><div>Изменить пароль</div></a></li>{% endif %}
 
                     </ul>
                 </nav>

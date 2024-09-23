@@ -339,7 +339,9 @@ CKEDITOR_5_CONFIGS = {
                     "label": 'Open in a new tab',
                     "attributes": {
                         "target": '_blank',
-                        "rel": 'nofollow'
+                        "rel": 'nofollow',
+                        "class": 'text-decoration-underline',
+                        "style": 'color: #4c99e6; font-weight: 500;'
                     }
                 }
             }

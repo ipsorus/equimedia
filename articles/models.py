@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
@@ -16,7 +17,10 @@ User = get_user_model()
 class Article(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name=_("Заголовок статьи"))
     content = CKEditor5Field(blank=True, verbose_name=_("Содержание статьи"))
-    image = models.ImageField(upload_to='media/articles/%Y/%m/%d', blank=True, verbose_name=_("Постер для статьи"))
+    image = models.ImageField(
+        upload_to='media/articles/%Y/%m/%d',
+        validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))],
+        verbose_name=_("Постер для статьи"))
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False, verbose_name=_("Публикация статьи"))

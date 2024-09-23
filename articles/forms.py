@@ -27,15 +27,14 @@ class ArticlePostCreateForm(forms.ModelForm):
         self.fields['content'].required = False
 
 
-class ArticlePostUpdateForm(forms.ModelForm):
+class ArticlePostUpdateForm(ArticlePostCreateForm):
     """
     Форма обновления статьи на сайте
     """
 
     class Meta:
         model = Article
-        fields = '__all__'
-        exclude = ['author', 'slider']
+        fields = ArticlePostCreateForm.Meta.fields
 
     def __init__(self, *args, **kwargs):
         """
@@ -46,6 +45,7 @@ class ArticlePostUpdateForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
 
         self.fields['is_published'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['slider'].widget.attrs.update({'class': 'form-check-input'})
         self.fields['content'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
         self.fields['content'].required = False
 

@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.base import ContentFile
 from django.db import ProgrammingError
 from mptt.admin import DraggableMPTTAdmin
 
@@ -22,17 +24,82 @@ class CommentAdminPage(DraggableMPTTAdmin):
 class NewsAdmin(admin.ModelAdmin):
     model = NewsPost
 
-    def save_model(self, request, obj, form, change):
-        super().save_model(request, obj, form, change)
+    def delete_model(self, request, obj):
         try:
+            slide = Slider.objects.get(news_id=obj.id)
+        except ObjectDoesNotExist:
+            slide = False
+
+        obj.delete()
+
+        if slide:
+            slide.delete()
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            try:
+                slide = Slider.objects.get(news_id=obj.id)
+            except ObjectDoesNotExist:
+                slide = False
+
+            obj.delete()
+
+            if slide:
+                slide.delete()
+
+    def save_model(self, request, obj, form, change):
+
+        if change:
+            o = self.model.objects.get(pk=obj.id)
+            try:
+                slide = Slider.objects.get(news_id=obj.id)
+            except ObjectDoesNotExist:
+                slide = False
+
             if obj.slider:
-                slide = Slider.objects.create(title=obj.title,
-                                              poster=obj.image,
-                                              is_published=True,
-                                              url=obj.get_absolute_url())
-                slide.save()
-        except:
-            pass
+                if o.slider and slide:
+                    super().save_model(request, obj, form, change)
+                    slide.title = obj.title
+
+                    file = ContentFile(obj.image.read())
+                    file.name = obj.image.name.split('/')[-1]
+                    slide.poster = file
+
+                    slide.save()
+                else:
+                    super().save_model(request, obj, form, change)
+                    try:
+                        file = ContentFile(obj.image.read())
+                        file.name = obj.image.name.split('/')[-1]
+                        slide = Slider.objects.create(title=obj.title,
+                                                      poster=file,
+                                                      is_published=True,
+                                                      url=obj.get_absolute_url(),
+                                                      news_id=obj.id)
+                        slide.save()
+                    except:
+                        pass
+            else:
+                super().save_model(request, obj, form, change)
+                if slide:
+                    try:
+                        slide.delete()
+                    except:
+                        pass
+        else:
+            super().save_model(request, obj, form, change)
+            if obj.slider:
+                try:
+                    file = ContentFile(obj.image.read())
+                    file.name = obj.image.name.split('/')[-1]
+                    slide = Slider.objects.create(title=obj.title,
+                                                  poster=file,
+                                                  is_published=True,
+                                                  url=obj.get_absolute_url(),
+                                                  news_id=obj.id)
+                    slide.save()
+                except:
+                    pass
 
 
 class NewsSettingsAdmin(admin.ModelAdmin):

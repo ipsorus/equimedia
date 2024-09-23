@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.base import ContentFile
 from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -80,11 +82,17 @@ class ArticlePostCreateView(AdminRequiredMixin, LoginRequiredMixin, CreateView):
             self.object = form.save()
 
             if self.object.slider:
-                slide = Slider.objects.create(title=self.object.title,
-                                              poster=self.object.image,
-                                              is_published=True,
-                                              url=self.object.get_absolute_url())
-                slide.save()
+                try:
+                    file = ContentFile(self.object.image.read())
+                    file.name = self.object.image.name.split('/')[-1]
+                    slide = Slider.objects.create(title=self.object.title,
+                                                  poster=file,
+                                                  is_published=True,
+                                                  url=self.object.get_absolute_url(),
+                                                  article_id=self.object.id)
+                    slide.save()
+                except:
+                    pass
         return super().form_valid(form)
 
 
@@ -105,9 +113,48 @@ class ArticlePostUpdateView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMess
         return context
 
     def form_valid(self, form):
-        # form.instance.updater = self.request.user
-        form.save()
-        return super().form_valid(form)
+        with transaction.atomic():
+            form.instance.author = self.request.user
+            self.object = form.save()
+
+            original_article = self.model.objects.get(pk=self.object.id)
+            try:
+                slide = Slider.objects.get(article_id=self.object.id)
+            except ObjectDoesNotExist:
+                slide = False
+
+            if self.object.slider:
+                if original_article.slider and slide:
+                    slide.title = self.object.title
+
+                    file = ContentFile(self.object.image.read())
+                    file.name = self.object.image.name.split('/')[-1]
+                    slide.poster = file
+
+                    slide.save()
+
+                    return super().form_valid(form)
+                else:
+                    try:
+                        file = ContentFile(self.object.image.read())
+                        file.name = self.object.image.name.split('/')[-1]
+                        slide = Slider.objects.create(title=self.object.title,
+                                                      poster=file,
+                                                      is_published=True,
+                                                      url=self.object.get_absolute_url(),
+                                                      article_id=self.object.id)
+                        slide.save()
+                    except:
+                        pass
+
+                    return super().form_valid(form)
+            else:
+                if slide:
+                    try:
+                        slide.delete()
+                    except:
+                        pass
+                return super().form_valid(form)
 
 
 class ArticlePostDeleteView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -123,7 +170,20 @@ class ArticlePostDeleteView(AdminRequiredMixin, AuthorRequiredMixin, SuccessMess
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = f'Удаление записи: {self.object.title}'
+
         return context
+
+    def form_valid(self, form):
+        try:
+            slide = Slider.objects.get(article_id=self.object.id)
+        except ObjectDoesNotExist:
+            slide = False
+        if slide:
+            try:
+                slide.delete()
+            except:
+                pass
+        return super().form_valid(form)
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):

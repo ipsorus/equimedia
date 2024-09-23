@@ -17,7 +17,7 @@
             {% for post in blogs %}
             <!-- Post Article -->
             <div class="entry mb-0"
-                 style="background: url('{{ post.thumbnail.url }}') center center; background-size: cover; height: 400px;">
+                 style="{% if post.thumbnail %}background: url('{{ post.thumbnail.url }}') center center; background-size: cover; height: 400px;{% else %}background-color: #1d6172; height: 400px; {% endif %}">
                 <div class="bg-overlay">
                     <div class="bg-overlay-content text-overlay-mask dark desc-sm align-items-end justify-content-start p-4">
                         <div class="position-relative w-100">
@@ -44,7 +44,7 @@
         <div class="m-auto col-md-10 border-0">
             <div class="text-center mb-5">
                 <a href="{% url 'posts_list_url' %}"
-                   class="w-auto btn button-border m-0 mt-5 button button-large button-rounded px-4 button-light button-white fadeInUp animated"
+                   class="w-auto btn button-border m-0 mt-5 button button-large button-rounded px-4 button-dirtygreen fadeInUp animated"
                    type="button"><i class="bi-arrow-right"></i><span class="flex-grow">Перейти в раздел</span></a>
             </div>
         </div>

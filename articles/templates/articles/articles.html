@@ -38,8 +38,10 @@
                         <article class="entry border-bottom-0 mb-0">
                             <div class="entry-image">
                                 {% if a.image %}
-                                <a href="{{ a.get_absolute_url }}"><img src="{{ a.image.url }}" alt="{{ a.title }}"></a>
+                                <a href="{{ a.get_absolute_url }}"><img src="{{ a.image.url }}" alt="{{ a.title }}">
+                                {% else %}<img src="{% static 'portal/images/no_image.png' %}" alt="Image">
                                 {% endif %}
+                                </a>
                             </div>
                             <div class="entry-meta">
                                 <ul>

@@ -47,7 +47,7 @@
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'post_create' %}"><i class="bi-pencil-square me-2"></i>Написать в блог</a>
                             {% endif %}
                             {% if user.is_superuser%}
-                            <a class="dropdown-item py-2 h-bg-tranparent" href="{{ user.profile.get_absolute_url }}"><i class="bi-person me-2"></i>Профиль</a>
+<!--                            <a class="dropdown-item py-2 h-bg-tranparent" href="{{ user.profile.get_absolute_url }}"><i class="bi-person me-2"></i>Профиль</a>-->
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'post_create' %}"><i class="bi-pencil-square me-2"></i>Написать в блог</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'news_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать новость</a>
                             <a class="dropdown-item py-2 h-bg-tranparent" href="{% url 'article_post_create' %}"><i class="bi-pencil-square me-2"></i>Написать статью</a>

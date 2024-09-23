@@ -8,15 +8,15 @@ from .views import ProfileUpdateView, ProfileDetailView, UserRegisterView, UserL
     ProfileDetailBlogsView, ProfileDetailNewsView, ProfileDetailArticlesView
 
 urlpatterns = [
-    path('user/edit/', ProfileUpdateView.as_view(), name='profile_edit'),
+    path('user/<str:slug>/edit/', ProfileUpdateView.as_view(), name='profile_edit'),
+    path('user/<str:slug>/articles/', ProfileDetailArticlesView.as_view(), name='profile_articles_list'),
+    path('user/<str:slug>/blogs/', ProfileDetailBlogsView.as_view(), name='profile_blog_list'),
+    path('user/<str:slug>/news/', ProfileDetailNewsView.as_view(), name='profile_news_list'),
     path('user/<str:slug>/', ProfileDetailView.as_view(), name='profile_detail'),
-    path('user/blogs', ProfileDetailBlogsView.as_view(), name='profile_blog_list'),
-    path('user/news', ProfileDetailNewsView.as_view(), name='profile_news_list'),
-    path('user/articles', ProfileDetailArticlesView.as_view(), name='profile_articles_list'),
     path('register/', UserRegisterView.as_view(), name='register'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(), name='logout'),
-    path('password-change/', UserPasswordChangeView.as_view(), name='password_change'),
+    path('user/<str:slug>/password-change/', UserPasswordChangeView.as_view(), name='password_change'),
     path('password-reset/', UserForgotPasswordView.as_view(), name='password_reset'),
     path('set-new-password/<uidb64>/<token>/', UserPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('email-confirmation-sent/', EmailConfirmationSentView.as_view(), name='email_confirmation_sent'),

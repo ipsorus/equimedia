@@ -5,11 +5,11 @@ from django.contrib.auth.views import LogoutView, PasswordChangeView, PasswordRe
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
-from django.views.generic import DetailView, UpdateView, CreateView, TemplateView
+from django.views.generic import DetailView, UpdateView, CreateView, TemplateView, ListView
 from django.db import transaction
 from django.urls import reverse_lazy
 
@@ -41,63 +41,78 @@ class ProfileDetailView(DetailView):
         return context
 
 
-class ProfileDetailBlogsView(DetailView):
+class ProfileDetailBlogsView(ListView):
     """
     Представление для просмотра записей блога, созданных пользователем
     """
-    model = Profile
-    context_object_name = 'profile'
+    model = BlogPost
     template_name = 'account/profile_blog_list.html'
-    queryset = model.objects.all().select_related('user')
-
-    def get_object(self, queryset=None):
-        return self.request.user.profile
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        blog_posts = BlogPost.objects.filter(author=self.object.user, is_published=True)
+        user = get_object_or_404(Profile, slug=self.kwargs.get('slug'))
+        blog_posts = self.model.objects.all().filter(author=user.pk, is_published=True)
         context['blogs'] = blog_posts
-        context['title'] = f'Записи блогов, созданные пользователем: {self.object.user.username}'
+        context['title'] = f'Записи блогов, созданные пользователем: {user.slug}'
+        context['profile'] = user
         return context
 
 
-class ProfileDetailNewsView(DetailView):
+class ProfileDetailNewsView(ListView):
     """
     Представление для просмотра записей новостей, созданных пользователем
     """
-    model = Profile
-    context_object_name = 'profile'
+    model = NewsPost
+    # context_object_name = 'profile'
     template_name = 'account/profile_news_list.html'
-    queryset = model.objects.all().select_related('user')
+    # queryset = model.objects.all().select_related('user')
 
-    def get_object(self, queryset=None):
-        return self.request.user.profile
+    # def get_object(self, queryset=None):
+    #     return self.request.user.profile
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     news_posts = NewsPost.objects.filter(author=self.object.user, is_published=True)
+    #     context['news'] = news_posts
+    #     context['title'] = f'Записи новостей, созданные пользователем: {self.object.user.username}'
+    #     return context
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        news_posts = NewsPost.objects.filter(author=self.object.user, is_published=True)
+        user = get_object_or_404(Profile, slug=self.kwargs.get('slug'))
+        news_posts = self.model.objects.all().filter(author=user.pk, is_published=True)
         context['news'] = news_posts
-        context['title'] = f'Записи новостей, созданные пользователем: {self.object.user.username}'
+        context['title'] = f'Записи новостей, созданные пользователем: {user.slug}'
+        context['profile'] = user
         return context
 
 
-class ProfileDetailArticlesView(DetailView):
+class ProfileDetailArticlesView(ListView):
     """
     Представление для просмотра записей статей, созданных пользователем
     """
-    model = Profile
-    context_object_name = 'profile'
+    model = Article
+    # context_object_name = 'profile'
     template_name = 'account/profile_articles_list.html'
-    queryset = model.objects.all().select_related('user')
+    # queryset = model.objects.all().select_related('user')
 
-    def get_object(self, queryset=None):
-        return self.request.user.profile
+    # def get_object(self, queryset=None):
+    #     return self.request.user.profile
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     articles_posts = Article.objects.filter(author=self.object.user, is_published=True)
+    #     context['articles'] = articles_posts
+    #     context['title'] = f'Записи статей, созданные пользователем: {self.object.user.username}'
+    #     return context
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        articles_posts = Article.objects.filter(author=self.object.user, is_published=True)
+        user = get_object_or_404(Profile, slug=self.kwargs.get('slug'))
+        articles_posts = self.model.objects.all().filter(author=user.pk, is_published=True)
         context['articles'] = articles_posts
-        context['title'] = f'Записи статей, созданные пользователем: {self.object.user.username}'
+        context['title'] = f'Записи статей, созданные пользователем: {user.slug}'
+        context['profile'] = user
         return context
 
 

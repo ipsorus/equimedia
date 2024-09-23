@@ -32,6 +32,8 @@ class Slider(models.Model):
     is_published = models.BooleanField(default=False, verbose_name=_("Публикация слайда"))
     is_video = models.BooleanField(default=False, verbose_name=_("Слайд с видео-контентом"))
     third_party_site = models.BooleanField(default=False, verbose_name=_("Ссылка на сторонний сайт, откроется в новом окне"))
+    news_id = models.CharField(max_length=32, blank=True, verbose_name=_("ID новости для слайда"))
+    article_id = models.CharField(max_length=32, blank=True, verbose_name=_("ID статьи для слайда"))
 
     def get_update_url(self):
         return reverse('slide_update_url', kwargs={'pk': self.id})

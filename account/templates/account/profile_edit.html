@@ -20,11 +20,12 @@
                     <img src="{{ profile.avatar.url }}" alt="{{ profile }}" class="rounded-circle me-3 border border-width-3 border-white" width="120" height="120">
                     <div>
                         <h2 class="h1 border-bottom border-dark border-width-4" style="font-weight: 800">{{ profile.user.username }}</h2>
-                        {% if user.is_superuser or user.is_staff %}
+                        {% if profile.user.is_superuser or profile.user.is_staff %}
                             <p class="mb-0">Роль: <strong>Администрация сайта</strong></p>
                         {% else %}
                             <p class="mb-0">Роль: <strong>Посетитель сайта</strong></p>
                         {% endif %}
+                        <p class="mb-0">Заходил: {{ profile.user.last_login }} | {% if profile.is_online %}Онлайн{% else %}Не в сети{% endif %}</p>
                     </div>
                 </div>
             </div>
@@ -50,15 +51,13 @@
                 <nav class="page-menu-nav">
                     <ul class="page-menu-container">
                         <li class="page-menu-item"><a href="{{ profile.get_absolute_url }}"><div>Профиль</div></a></li>
-                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'profile_blog_list' %}"><div>Записи в блоге</div></a></li>{% endif %}
-                        {% if profile.user.id == user.id %}
+                        <li class="page-menu-item"><a href="{% url 'profile_blog_list' slug=profile.slug %}"><div>Записи в блоге</div></a></li>
                         {% if user.is_superuser or user.is_staff %}
-                        <li class="page-menu-item"><a href="{% url 'profile_news_list' %}"><div>Опубликованные новости</div></a></li>
-                        <li class="page-menu-item"><a href="{% url 'profile_articles_list' %}"><div>Опубликованные статьи</div></a></li>
+                        <li class="page-menu-item"><a href="{% url 'profile_news_list' slug=profile.slug %}"><div>Опубликованные новости</div></a></li>
+                        <li class="page-menu-item"><a href="{% url 'profile_articles_list' slug=profile.slug %}"><div>Опубликованные статьи</div></a></li>
                         {% endif %}
-                        {% endif %}
-                        {% if profile.user.id == user.id %}<li class="page-menu-item current"><a href="{% url 'profile_edit' %}"><div>Редактировать</div></a></li>{% endif %}
-                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'password_change' %}"><div>Изменить пароль</div></a></li>{% endif %}
+                        {% if profile.user.id == user.id %}<li class="page-menu-item current"><a href="{% url 'profile_edit' slug=profile.slug %}"><div>Редактировать</div></a></li>{% endif %}
+                        {% if profile.user.id == user.id %}<li class="page-menu-item"><a href="{% url 'password_change' slug=profile.slug %}"><div>Изменить пароль</div></a></li>{% endif %}
                     </ul>
                 </nav>
 
