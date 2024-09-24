@@ -32,3 +32,17 @@ def send_testimonial_email_message(subject, email, content, ip, author):
     })
     email = EmailMessage(subject, message, settings.SERVER_EMAIL, [settings.EMAIL_ADMIN])
     email.send(fail_silently=False)
+
+
+def send_blog_email_message(subject, title, url, ip, author):
+    """
+    Function to send blog form email
+    """
+    message = render_to_string('blog/email/blog_email_send.html', {
+        'title': title,
+        'url': url,
+        'ip': ip,
+        'user': author,
+    })
+    email = EmailMessage(subject, message, settings.SERVER_EMAIL, [settings.EMAIL_ADMIN])
+    email.send(fail_silently=False)

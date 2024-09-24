@@ -9,7 +9,7 @@
 <div class="entry col-12">
     <div class="grid-inner">
         <div class="entry-image">
-            <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+            {% if post.thumbnail %}<img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">{% else %}<img src="{% static 'portal/images/no_image.png' %}" alt="Image">{% endif %}
         </div>
         <div class="entry-title">
             <h3><a href="{{ post.get_absolute_url }}" class="stretched-link color-underline">{{ post.title }}</a></h3>

@@ -1,6 +1,7 @@
 import random
 from itertools import chain
 
+from django.contrib.sites.models import Site
 from django.db.models import Q
 from django.http import JsonResponse
 from django.views import View
@@ -11,6 +12,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 
 from el_pagination.views import AjaxListView
+from services.email import send_blog_email_message
 from services.mixins import AuthorRequiredMixin
 from services.utils import get_client_ip
 from .mixins import ViewCountMixin
@@ -91,7 +93,13 @@ class BlogPostCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.save()
+        self.object = form.save()
+
+        ip_address = get_client_ip(self.request)
+        current_site = Site.objects.get_current().domain
+        subject = 'Новая запись блога на сайте'
+        send_blog_email_message(subject, title=self.object.title, url=f'https://{current_site}{self.object.get_absolute_url()}', ip=ip_address, author=self.object.author)
+
         return super().form_valid(form)
 
 
