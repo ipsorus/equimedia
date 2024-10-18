@@ -1,3 +1,4 @@
+from broadcast.models import Broadcast
 from .models import SiteSettings, ContactsSettings, AboutUsSettings, SocialsSettings
 
 
@@ -15,3 +16,17 @@ def about_us_settings(request):
 
 def socials_settings(request):
     return {'social_settings': SocialsSettings.load()}
+
+
+def broadcast_statuses(request):
+    broadcasts = Broadcast.objects.filter().values('show_broadcast')
+    print(broadcasts)
+
+    for st in broadcasts:
+        print(st)
+    result = any([broadcast_status['show_broadcast'] for broadcast_status in broadcasts])
+
+    if result:
+        return {'status': True}
+    else:
+        return {'status': False}

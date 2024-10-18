@@ -79,9 +79,9 @@
                                 <div class="entry-image">
                                     <a href="{{ a.get_absolute_url }}">{% if a.image %}<img src="{{ a.image.url }}" alt="Image">{% else %}<img src="{% static 'portal/images/no_image.webp' %}" alt="Image">{% endif %}</a>
                                 </div>
-                                                                <div class="entry-meta">
+                                <div class="entry-meta">
                                     <ul>
-                                        <li><i class="uil uil-schedule"></i> {{ a.time_create|date:"d.m.y" }}</li>
+                                        <li><i class="uil uil-schedule"></i> {{ a.time_create|date:"d b Y" }}</li>
                                         <li><i class="bi-eye"></i> {{ a.get_view_count }}</li>
                                     </ul>
                                 </div>

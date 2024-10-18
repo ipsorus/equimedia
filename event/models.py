@@ -62,7 +62,7 @@ class Tournament(models.Model):
     date_start = models.DateField(verbose_name=_("Дата начала"))
     date_end = models.DateField(verbose_name=_("Дата окончания"))
     result = CKEditor5Field(max_length=1000, blank=True, verbose_name=_("Результаты турнира"))
-    prize = CKEditor5Field(max_length=300, blank=True, verbose_name=_("Призовой фонд"))
+    prize = models.TextField(max_length=300, blank=True, verbose_name=_("Призовой фонд"))
     description = CKEditor5Field(blank=True, verbose_name=_("Описание и условия турнира"))
     is_published = models.BooleanField(default=False, verbose_name=_("Опубликовать запись"))
     is_closed = models.BooleanField(default=False, verbose_name=_("Турнир завершен"))

@@ -27,7 +27,7 @@
                             <div class="entry-meta no-separator">
                                 <ul>
                                     <li><i class="bi-person-circle"></i><a href="{{ post.author.profile.get_absolute_url }}">{{ post.author.username }}</a></li>
-                                    <li><i class="bi-clock"></i>{{ post.time_create }}</li>
+                                    <li><i class="bi-clock"></i>{{ post.time_create|date:"d b Y H:i" }}</li>
                                 </ul>
                             </div>
                             <ul class="entry-icons d-none d-sm-block">

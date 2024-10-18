@@ -17,7 +17,7 @@ from articles.models import Article
 from blog.models import BlogPost
 from equi_media_portal import settings
 from news.models import NewsPost
-from services.mixins import UserIsNotAuthenticated
+from services.mixins import UserIsNotAuthenticated, UserProfileAuthorRequiredMixin
 from .models import Profile
 from .forms import UserUpdateForm, ProfileUpdateForm, UserRegisterForm, UserPasswordChangeForm, \
     CustomAuthenticationForm, UserForgotPasswordForm, UserSetNewPasswordForm
@@ -116,7 +116,7 @@ class ProfileDetailArticlesView(ListView):
         return context
 
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(UserProfileAuthorRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     Представление для редактирования профиля
     """
@@ -124,6 +124,7 @@ class ProfileUpdateView(UpdateView):
     form_class = ProfileUpdateForm
     template_name = 'account/profile_edit.html'
     success_message = 'Ваш профиль обновлен'
+    # login_url = 'main'
 
     def get_object(self, queryset=None):
         return self.request.user.profile

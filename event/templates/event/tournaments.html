@@ -63,7 +63,7 @@ background-color: #336576 !important;
                             </div>
                             {% endif %}
                             <div class="mb-3"><span style="color:blue; font-weight: 400;">{% if t.date_start|date:"m" == t.date_end|date:"m" %}
-                                                    {{ t.date_start|date:"d" }} - {{ t.date_end }}
+                                                    {{ t.date_start|date:"j" }} - {{ t.date_end }}
                                                 {% else %}
                                                     {{ t.date_start }} - {{ t.date_end }}
                                                 {% endif %}</span>
@@ -117,7 +117,7 @@ background-color: #336576 !important;
                                                 style="font-size:13px; font-weight: 400;">{{ forloop.counter }}.</span>
                                             <span style="color:blue;" class="font-primary ms-2">{% if stage.date_end %}
                                                 {% if stage.date_start|date:"m" == stage.date_end|date:"m" %}
-                                                    {{ stage.date_start|date:"d" }} - {{ stage.date_end }}
+                                                    {{ stage.date_start|date:"j" }} - {{ stage.date_end }}
                                                 {% else %}
                                                     {{ stage.date_start }} - {{ stage.date_end }}
                                                 {% endif %}

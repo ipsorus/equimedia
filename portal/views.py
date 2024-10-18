@@ -43,9 +43,9 @@ def index(request):
     future_result_list = sorted(list(chain(future_stages, future_tournaments, future_events)),
                                 key=attrgetter('date_start'))[:5]
 
-    past_stages = Stage.objects.filter(is_published=True, date_start__lt=current_date)
-    past_tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_start__lt=current_date)
-    past_events = Event.objects.filter(is_published=True, date_start__lt=current_date)
+    past_stages = Stage.objects.filter(is_published=True, date_end__lt=current_date)
+    past_tournaments = Tournament.objects.filter(is_published=True, stages__isnull=True, date_end__lt=current_date)
+    past_events = Event.objects.filter(is_published=True, date_end__lt=current_date)
     past_result_list = sorted(list(chain(past_stages, past_tournaments, past_events)), key=attrgetter('date_start'))[:5]
 
     data = {

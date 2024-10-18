@@ -4,6 +4,19 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 
 
+class UserProfileAuthorRequiredMixin(AccessMixin):
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'Изменение профиля доступно только владельцу учетной записи')
+            return self.handle_no_permission()
+        if request.user.is_authenticated:
+            if request.user != self.get_object().user:
+                messages.error(request, 'Изменение профиля доступно только владельцу учетной записи')
+                return redirect('main')
+        return super().dispatch(request, *args, **kwargs)
+
+
 class AuthorRequiredMixin(AccessMixin):
 
     def dispatch(self, request, *args, **kwargs):

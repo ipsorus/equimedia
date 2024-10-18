@@ -129,6 +129,7 @@ TEMPLATES = [
                 'portal.context_processors.contacts_settings',
                 'portal.context_processors.about_us_settings',
                 'portal.context_processors.socials_settings',
+                'portal.context_processors.broadcast_statuses',
 
                 'podcast.context_processors.video_settings',
 
